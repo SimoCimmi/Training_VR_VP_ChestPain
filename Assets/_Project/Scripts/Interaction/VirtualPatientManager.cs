@@ -71,23 +71,35 @@ public class VirtualPatientManager : MonoBehaviour
 
     private string EstraiTuplaCasuale()
     {
+        // Controlla se il file CSV esiste, altrimenti lancia un'eccezione
         if (!File.Exists(datasetPath))
             throw new FileNotFoundException($"File non trovato: {datasetPath}");
 
+        // Legge tutte le righe del file CSV in un array di stringhe
         var lines = File.ReadAllLines(datasetPath);
+
+        // Verifica che il file contenga almeno una riga di intestazioni e una di dati
         if (lines.Length < 2)
             throw new Exception("Dataset vuoto o invalido.");
 
+        // Crea un generatore di numeri casuali
         var random = new System.Random();
+
+        // La prima riga del CSV contiene le intestazioni delle colonne
         string[] headers = lines[0].Split(',');
+
+        // Seleziona una riga casuale dal dataset (escludendo l'intestazione)
         string[] values = lines[random.Next(1, lines.Length)].Split(',');
 
+        // Costruisce una stringa leggibile con ogni coppia intestazione-valore
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < headers.Length; i++)
             sb.AppendLine($"{headers[i]}: {values[i]}");
 
+        // Ritorna la stringa finale formattata
         return sb.ToString();
     }
+
 
     private string CreaPromptCompleto(string patientData)
     {

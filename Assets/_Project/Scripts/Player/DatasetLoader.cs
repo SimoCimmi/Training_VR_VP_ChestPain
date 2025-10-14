@@ -62,7 +62,7 @@ public class DatasetLoader : MonoBehaviour
 
                 pazienti.Add(c);
 
-                Debug.Log($"Paziente OK - ID: {c.SEQN}, Sesso: {(c.RIAGENDR == 1 ? "M" : "F")}, Età: {c.RIDAGEYR}, BMI: {c.BMXBMI:F1}");
+                Debug.Log($"Paziente OK - ID: {c.SEQN}, Sesso: {(c.RIAGENDR == 1 ? "M" : "F")}, Etï¿½: {c.RIDAGEYR}, BMI: {c.BMXBMI:F1}");
             }
             catch (Exception ex)
             {
