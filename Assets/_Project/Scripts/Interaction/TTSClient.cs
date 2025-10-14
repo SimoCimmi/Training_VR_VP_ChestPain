@@ -9,8 +9,17 @@ public class TTSClient : MonoBehaviour
 {
     // URL del server XTTS locale
     [SerializeField] private string ttsUrl = "http://127.0.0.1:5003/tts";
-   
+
     [SerializeField] private AudioSource audioSource;  // AudioSource di Unity che riprodurrà l'audio generato
+
+
+    [Serializable]  //Utilizzato per la creazione del file Json da passare XTTS
+    private class TtsRequest
+    {
+        public string text;
+        public string speaker;
+    }
+
 
     private static readonly HttpClient client = new HttpClient
     {
@@ -18,7 +27,8 @@ public class TTSClient : MonoBehaviour
     };   // HttpClient statico per riutilizzare la connessione e non aprire più socket
 
     public async Task RiproduciVoce(string testo)   // Metodo principale per inviare testo a XTTS e riprodurre l'audio risultante
-    {
+    {   
+        Debug.Log("Inizio riproduzione voce dell'LLM.");
         if (string.IsNullOrWhiteSpace(testo))   // Controlla se il testo è vuoto o contiene solo spazi
         {
             Debug.LogWarning("Testo vuoto, impossibile generare TTS.");
@@ -28,9 +38,20 @@ public class TTSClient : MonoBehaviour
         try
         {
             // Costruzione del JSON da inviare al server XTTS
+            /*
             var json = "{\"text\":\"" + testo + "\",\"speaker\":\"Eugenio Mataracı\"}";
             var content = new StringContent(json, Encoding.UTF8, "application/json");
+            */
 
+            var payload = new TtsRequest
+            {
+                text = testo,
+                speaker = "Eugenio Mataracı"
+            };
+            var json = JsonUtility.ToJson(payload);
+            var content = new StringContent(json, Encoding.UTF8, "application/json");
+
+            Debug.Log("Invio JSON a XTTS: " + json);
             var response = await client.PostAsync(ttsUrl, content); // Invio della richiesta POST al server XTTS
 
             if (!response.IsSuccessStatusCode)
@@ -47,6 +68,7 @@ public class TTSClient : MonoBehaviour
         {
             Debug.LogError("Errore durante la richiesta a XTTS: " + ex.Message);
         }
+        Debug.Log("Fine riproduzione voce dell'LLM.");
     }
 
     // Converte i byte ricevuti in un AudioClip e lo riproduce tramite AudioSource

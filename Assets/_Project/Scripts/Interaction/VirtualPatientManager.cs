@@ -60,8 +60,8 @@ public class VirtualPatientManager : MonoBehaviour
 
 
             //PAssa la risposat a XTTS per la sintesi vocale
-            FindObjectOfType<TTSClient>().RiproduciVoce(risposta);
-            Debug.Log("Fine riproduzione voce dell'LLM.");
+            //.3FindObjectOfType<TTSClient>().RiproduciVoce(risposta);
+            
         }
         catch (Exception ex)
         {
@@ -193,12 +193,12 @@ public class VirtualPatientManager : MonoBehaviour
         }
 
         // Invia il testo dell’utente all’LLM per generare una risposta
-        string risposta = await InviaPromptALM(userText);
+        string risposta = await InviaPromptALM(userText  +  " (Rispondi con una risposta molto breve ed in italiano)");
 
         Debug.Log($"Risposta LLM: {risposta}");
 
         if (ttsClient != null)
-            await ttsClient.RiproduciVoce(risposta + " (Rispondi con una risposta molto breve)");
+            await ttsClient.RiproduciVoce(risposta);
         else
             Debug.LogWarning("TTSClient non assegnato in Inspector.");
     }

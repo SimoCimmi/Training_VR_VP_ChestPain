@@ -23,11 +23,11 @@ model_name = "tts_models/multilingual/multi-dataset/xtts_v2"
 tts = TTS(model_name, gpu=use_gpu)
 
 # testi di prova
-text_it = "Ciao, sono un paziente virtuale per il training medico"
-text_en = "Hello, I am a virtual patient for medical training."
+text_it = "Mi dispiace, non capisco!"
+#text_en = "Hello, I am a virtual patient for medical training."
 
 out_it = "xtts_output_it.wav"
-out_en = "xtts_output_en.wav"
+#out_en = "xtts_output_en.wav"
 
 print("Generazione (italiano)...")
 tts.tts_to_file(
@@ -36,7 +36,7 @@ tts.tts_to_file(
     speaker="Eugenio Mataracı",   # speaker predefinito
     language="it"
 )
-
+'''
 print("Generazione (english)...")
 tts.tts_to_file(
     text=text_en,
@@ -44,7 +44,7 @@ tts.tts_to_file(
     speaker="Andrew Chipper",
     language="en"
 )
-
+'''
 
 # riproduce con simpleaudio (se installato)
 try:
