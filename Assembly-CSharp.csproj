@@ -49,6 +49,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\_Project\Scripts\Player\DiagnosiManager.cs" />
+    <Compile Include="Assets\_Project\Scripts\Interaction\VoiceRecorder\SavWav.cs" />
     <Compile Include="Assets\@PaulosCreations\RunesAndPortals\Demo\RotatorTool.cs" />
     <Compile Include="Assets\@PaulosCreations\RunesAndPortals\Vortex\Scripts\Vortex_Controller.cs" />
     <Compile Include="Assets\DenysAlmaral\CityPeople-FREE\Scripts\CityPeople.cs" />
@@ -59,6 +60,7 @@
     <Compile Include="Assets\_Project\Scripts\Player\CartellaClinica.cs" />
     <Compile Include="Assets\_Project\Scripts\Player\Paziente.cs" />
     <Compile Include="Assets\@PaulosCreations\RunesAndPortals\PortalGate_Simple\Script\Portal_Controller.cs" />
+    <Compile Include="Assets\_Project\Scripts\Interaction\VoiceRecorder\VoiceRecorder.cs" />
     <Compile Include="Assets\_Project\Scripts\Interaction\TTSClient.cs" />
     <Compile Include="Assets\@PaulosCreations\RunesAndPortals\RuneStone\Script\Runestone_Controller.cs" />
     <Compile Include="Assets\_Project\Scripts\Player\SpawnPaziente.cs" />

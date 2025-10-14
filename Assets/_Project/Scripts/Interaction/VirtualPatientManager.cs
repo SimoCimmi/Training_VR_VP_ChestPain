@@ -61,6 +61,7 @@ public class VirtualPatientManager : MonoBehaviour
 
             //PAssa la risposat a XTTS per la sintesi vocale
             FindObjectOfType<TTSClient>().RiproduciVoce(risposta);
+            Debug.Log("Fine riproduzione voce dell'LLM.");
         }
         catch (Exception ex)
         {
@@ -113,17 +114,17 @@ public class VirtualPatientManager : MonoBehaviour
 
                 sb.AppendLine("Alla fine di questo messaggio, rispondi con: \"Sono pronto a rispondere alle domande del medico.\"");
         */
-        sb.AppendLine("Ciao, come stai? (Rispondi con una risposta breve)");
+        sb.AppendLine("Ciao, come stai? (Rispondi con una risposta molto breve)");
         return sb.ToString();
     }
 
     private async Task<string> InviaPromptALM(string prompt)
     {
-        Debug.Log($"Prompt: {prompt}");
+        Debug.Log($"Prompt del giocatore inviato all'LLM: {prompt}");
 
         using (HttpClient client = new HttpClient())
         {
-            string systemPrompt = "Sei un paziente virtuale in una simulazione medica. Rispondi come una persona reale rispettando i dati clinici.";
+            string systemPrompt = "Devi simulare un paziente.";
 
             // Creazione oggetti per il JSON
             var requestObj = new ChatCompletionRequest
@@ -180,5 +181,28 @@ public class VirtualPatientManager : MonoBehaviour
         public string role;
         public string content;
     }
+
+    public async void ProcessUserSpeech(string userText)
+    {
+        Debug.Log($"[VirtualPatientManager] Testo ricevuto da Whisper: {userText}");
+
+        if (string.IsNullOrWhiteSpace(userText))
+        {
+            Debug.LogWarning("Testo vuoto o nullo dalla trascrizione Whisper.");
+            return;
+        }
+
+        // Invia il testo dell’utente all’LLM per generare una risposta
+        string risposta = await InviaPromptALM(userText);
+
+        Debug.Log($"Risposta LLM: {risposta}");
+
+        if (ttsClient != null)
+            await ttsClient.RiproduciVoce(risposta + " (Rispondi con una risposta molto breve)");
+        else
+            Debug.LogWarning("TTSClient non assegnato in Inspector.");
+    }
+
+
 
 }

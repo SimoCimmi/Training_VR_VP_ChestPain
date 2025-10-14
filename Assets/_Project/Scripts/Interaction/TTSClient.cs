@@ -12,7 +12,10 @@ public class TTSClient : MonoBehaviour
    
     [SerializeField] private AudioSource audioSource;  // AudioSource di Unity che riprodurrà l'audio generato
 
-    private static readonly HttpClient client = new HttpClient();   // HttpClient statico per riutilizzare la connessione e non aprire più socket
+    private static readonly HttpClient client = new HttpClient
+    {
+        Timeout = TimeSpan.FromSeconds(100)
+    };   // HttpClient statico per riutilizzare la connessione e non aprire più socket
 
     public async Task RiproduciVoce(string testo)   // Metodo principale per inviare testo a XTTS e riprodurre l'audio risultante
     {

@@ -23,7 +23,7 @@ def stt():
         temp_path = os.path.join(os.getcwd(), "temp.wav")
         audio_file.save(temp_path)
 
-        result = model.transcribe(temp_path, language='en')
+        result = model.transcribe(temp_path, language='it')
         os.remove(temp_path)
         return jsonify({"text": result["text"]})
 
