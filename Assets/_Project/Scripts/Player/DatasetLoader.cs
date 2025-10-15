@@ -19,7 +19,7 @@ public class DatasetLoader : MonoBehaviour
         string[] righe = file.text.Split('\n');
         Debug.Log($"Righe totali nel file: {righe.Length}");
 
-        
+        int indicePazienti = 1;
         for (int i = 1; i < righe.Length; i++)
         {
             if (string.IsNullOrWhiteSpace(righe[i])) continue;
@@ -64,7 +64,8 @@ public class DatasetLoader : MonoBehaviour
 
                 pazienti.Add(c);
 
-                Debug.Log($"Paziente OK - ID: {c.SEQN}, Sesso: {(c.RIAGENDR == 1 ? "M" : "F")}, Eta: {c.RIDAGEYR}, BMI: {c.BMXBMI:F1}");
+                Debug.Log($"{indicePazienti} - Paziente OK - ID: {c.SEQN}, Sesso: {(c.RIAGENDR == 1 ? "M" : "F")}, Eta: {c.RIDAGEYR}, BMI: {c.BMXBMI:F1}");
+                indicePazienti++;
             }
             catch (Exception ex)
             {

@@ -36,9 +36,22 @@ public class SpawnPaziente : MonoBehaviour
         }
 
         // 3. Seleziona dati casuali da lista pazienti
-        int indiceDati = Random.Range(0, datasetLoader.pazienti.Count);
+        int indiceDati = 1;//Random.Range(0, datasetLoader.pazienti.Count);
         CartellaClinica dati = datasetLoader.pazienti[indiceDati];
 
+        Debug.Log(" PAZIENTI TRA CUI SCEGLIERE");
+        for (int i = 0; i < datasetLoader.pazienti.Count; i++)
+        {
+            Debug.Log($"datasetLoader.pazienti[{i}] = {datasetLoader.pazienti[i].SEQN}");
+        }
+        
+        /* Va da:
+        - datasetLoader.pazienti[0] = 0
+        fino a 10 sono tutti a 0 per poi da
+        - datasetLoader.pazienti[10] = 130378
+        fino a 
+        - datasetLoader.pazienti[3492] = 142309
+        */
 
         //3.1 Avvia paziente virtuale (LLM)    
         Debug.Log($"[SpawnPaziente] - virtualPatientManager = {virtualPatientManager}");
