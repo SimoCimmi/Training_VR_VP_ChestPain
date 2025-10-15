@@ -34,14 +34,14 @@ public class VirtualPatientManager : MonoBehaviour
     public async void CreaPazienteVirtuale(CartellaClinica cartellaClinica)
     {
         Debug.Log(" Creazione paziente virtuale in corso...");
-        Debug.Log($"Paziente generato Cartella Clinica: ID {cartellaClinica.SEQN}, Sesso: {(cartellaClinica.RIAGENDR == 1 ? "M" : "F")}, Età: {cartellaClinica.RIDAGEYR}, BMI: {cartellaClinica.BMXBMI:F1}");
+        Debug.Log($"Paziente generato Cartella Clinica: ID {cartellaClinica.SEQN}, Sesso: {(cartellaClinica.RIAGENDR == 1 ? "M" : "F")}, Età: {cartellaClinica.RIDAGEYR}, BMI: {cartellaClinica.BMXBMI:F1}, Glucosio: {cartellaClinica.LBXGLU} mg/dL, Insulina: {cartellaClinica.LBXIN} µU/mL, Colesterolo Totale: {cartellaClinica.LBXTC} mg/dL, Pressione Arteriosa (PAD680): {cartellaClinica.PAD680} mmHg, Pressione Arteriosa (PAD800): {cartellaClinica.PAD800} mmHg, Pressione Arteriosa (PAD820): {cartellaClinica.PAD820} mmHg, Abitudine al fumo (WHQ070): {cartellaClinica.WHQ070}, Anni di istruzione (DMDEDUC2): {cartellaClinica.DMDEDUC2}, Reddito famigliare (INDFMPIR): {cartellaClinica.INDFMPIR}");
         try
         {
             // Estrai tupla casuale dal CSV
-            string patientData = EstraiTuplaCasuale();
+            //string patientData = EstraiTuplaCasuale();
 
             // Crea prompt completo
-            string fullPrompt = CreaPromptCompleto(patientData);
+            string fullPrompt = CreaPromptCompleto(cartellaClinica);
 
             // Invia al modello
             string risposta = await InviaPromptALM(fullPrompt);
@@ -69,7 +69,7 @@ public class VirtualPatientManager : MonoBehaviour
         }
     }
 
-    private string EstraiTuplaCasuale()
+   /* private string EstraiTuplaCasuale()
     {
         // Controlla se il file CSV esiste, altrimenti lancia un'eccezione
         if (!File.Exists(datasetPath))
@@ -98,12 +98,14 @@ public class VirtualPatientManager : MonoBehaviour
 
         // Ritorna la stringa finale formattata
         return sb.ToString();
-    }
+    }*/
 
 
-    private string CreaPromptCompleto(string patientData)
+    private string CreaPromptCompleto(CartellaClinica cartellaClinica)
     {
         StringBuilder sb = new StringBuilder();
+        
+        sb.AppendLine($"Utilizzando i seguenti dati: SEQN: {cartellaClinica.SEQN}, Sesso: {(cartellaClinica.RIDAGEYR == 1 ? "M" : "F")}, Età: {cartellaClinica.RIDAGEYR}, BMI: {cartellaClinica.BMXBMI:F1}, Glucosio: {cartellaClinica.LBXGLU} mg/dL, Insulina: {cartellaClinica.LBXIN} µU/mL, Colesterolo Totale: {cartellaClinica.LBXTC} mg/dL, Pressione Arteriosa (PAD680): {cartellaClinica.PAD680} mmHg, Pressione Arteriosa (PAD800): {cartellaClinica.PAD800} mmHg, Pressione Arteriosa (PAD820): {cartellaClinica.PAD820} mmHg, Abitudine al fumo (WHQ070): {cartellaClinica.WHQ070}, Anni di istruzione (DMDEDUC2): {cartellaClinica.DMDEDUC2}, Reddito famigliare (INDFMPIR): {cartellaClinica.INDFMPIR}, rispondi alla seguente domanda: ");
         /*
                 sb.AppendLine("SYSTEM PROMPT:");
                 sb.AppendLine("Sei un paziente virtuale all’interno di una simulazione medica.");
@@ -126,7 +128,7 @@ public class VirtualPatientManager : MonoBehaviour
 
                 sb.AppendLine("Alla fine di questo messaggio, rispondi con: \"Sono pronto a rispondere alle domande del medico.\"");
         */
-        sb.AppendLine("Ciao, come stai? (Rispondi con una risposta molto breve)");
+        sb.AppendLine("Ciao, quale è il tuo valore di Glucosio? (Rispondi con una risposta molto breve)");
         return sb.ToString();
     }
 
