@@ -49,30 +49,30 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\_Project\Scripts\Player\DiagnosiManager.cs" />
-    <Compile Include="Assets\_Project\Scripts\Interaction\VoiceRecorder\SavWav.cs" />
     <Compile Include="Assets\@PaulosCreations\RunesAndPortals\Demo\RotatorTool.cs" />
     <Compile Include="Assets\@PaulosCreations\RunesAndPortals\Vortex\Scripts\Vortex_Controller.cs" />
     <Compile Include="Assets\DenysAlmaral\CityPeople-FREE\Scripts\CityPeople.cs" />
     <Compile Include="Assets\grabVisualFeedback.cs" />
+    <Compile Include="Assets\_Project\Scripts\Player\TTSClient.cs" />
     <Compile Include="Assets\_Project\Scripts\Player\DatasetLoader.cs" />
     <Compile Include="Assets\DenysAlmaral\CityPeople-FREE\Demo_Scenes\Scripts\DemoCamera.cs" />
     <Compile Include="Assets\@PaulosCreations\RunesAndPortals\Demo\Demo_Controller.cs" />
     <Compile Include="Assets\_Project\Scripts\Player\CartellaClinica.cs" />
     <Compile Include="Assets\_Project\Scripts\Player\Paziente.cs" />
     <Compile Include="Assets\@PaulosCreations\RunesAndPortals\PortalGate_Simple\Script\Portal_Controller.cs" />
-    <Compile Include="Assets\_Project\Scripts\Interaction\VoiceRecorder\VoiceRecorder.cs" />
-    <Compile Include="Assets\_Project\Scripts\Interaction\TTSClient.cs" />
     <Compile Include="Assets\@PaulosCreations\RunesAndPortals\RuneStone\Script\Runestone_Controller.cs" />
     <Compile Include="Assets\_Project\Scripts\Player\SpawnPaziente.cs" />
     <Compile Include="Assets\@PaulosCreations\RunesAndPortals\Rift\Scripts\Rift_Controller.cs" />
     <Compile Include="Assets\_Project\Scripts\Player\CartellaUI.cs" />
+    <Compile Include="Assets\_Project\Scripts\Player\VoiceRecorder\VoiceRecorder.cs" />
     <Compile Include="Assets\TutorialInfo\Scripts\Readme.cs" />
+    <Compile Include="Assets\_Project\Scripts\Player\VirtualPatientManager.cs" />
     <Compile Include="Assets\@PaulosCreations\RunesAndPortals\PortalGate\Scripts\PortalGate_Controller.cs" />
     <Compile Include="Assets\_Project\Scripts\Interaction\DoctorTips.cs" />
     <Compile Include="Assets\_Project\Scripts\Interaction\LevaPortaleTrigger.cs" />
-    <Compile Include="Assets\_Project\Scripts\Interaction\VirtualPatientManager.cs" />
     <Compile Include="Assets\@PaulosCreations\RunesAndPortals\PortalRound\Script\PortalRound_Controller.cs" />
     <Compile Include="Assets\SimpleLever.cs" />
+    <Compile Include="Assets\_Project\Scripts\Player\VoiceRecorder\SavWav.cs" />
     <Compile Include="Assets\_Project\Scripts\Player\PazienteMovimento.cs" />
   </ItemGroup>
   <ItemGroup>

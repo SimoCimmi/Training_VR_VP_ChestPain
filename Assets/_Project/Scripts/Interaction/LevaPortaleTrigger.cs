@@ -9,9 +9,6 @@ public class LevaPortaleTrigger : MonoBehaviour
     [Header("Script spawn paziente")]
     [SerializeField] private SpawnPaziente spawnPazienteScript;
 
-    [Header("Script collegato a LM Studio")]
-    [SerializeField] private VirtualPatientManager virtualPatientManager;
-
     [Header("Impostazioni leva")]
     [SerializeField] private float sogliaAccensione = 60f;
     [SerializeField] private float sogliaSpegnimento = 80f;
@@ -49,14 +46,7 @@ public class LevaPortaleTrigger : MonoBehaviour
             if (spawnPazienteScript != null)
                 spawnPazienteScript.AttivaPortale();
 
-            // Avvia paziente virtuale (LLM)    
-            Debug.Log($"[LevaPortaleTrigger] - virtualPatientManager = {virtualPatientManager}");
-            if (virtualPatientManager != null)
-            {
-                Debug.Log("[LevaPortaleTrigger] - Chiamo CreaPazienteVirtuale()");
-                virtualPatientManager.CreaPazienteVirtuale();
-
-            }
+            
             portaleAttivo = true;
             prontoPerRiattivare = false;
         }

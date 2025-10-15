@@ -31,10 +31,10 @@ public class VirtualPatientManager : MonoBehaviour
         public MessageToSend[] messages;
     }
 
-    public async void CreaPazienteVirtuale()
+    public async void CreaPazienteVirtuale(CartellaClinica cartellaClinica)
     {
         Debug.Log(" Creazione paziente virtuale in corso...");
-
+        Debug.Log($"Paziente generato Cartella Clinica: ID {cartellaClinica.SEQN}, Sesso: {(cartellaClinica.RIAGENDR == 1 ? "M" : "F")}, Età: {cartellaClinica.RIDAGEYR}, BMI: {cartellaClinica.BMXBMI:F1}");
         try
         {
             // Estrai tupla casuale dal CSV

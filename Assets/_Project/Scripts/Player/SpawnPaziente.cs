@@ -13,6 +13,10 @@ public class SpawnPaziente : MonoBehaviour
     [SerializeField] private DatasetLoader datasetLoader;
     [SerializeField] private DiagnosiManager diagnosiManager;
 
+
+    [Header("Script collegato a LM Studio")]
+    [SerializeField] private VirtualPatientManager virtualPatientManager;
+
     private GameObject pazienteCorrente;
 
     public void AttivaPortale()
@@ -34,6 +38,16 @@ public class SpawnPaziente : MonoBehaviour
         // 3. Seleziona dati casuali da lista pazienti
         int indiceDati = Random.Range(0, datasetLoader.pazienti.Count);
         CartellaClinica dati = datasetLoader.pazienti[indiceDati];
+
+
+        //3.1 Avvia paziente virtuale (LLM)    
+        Debug.Log($"[SpawnPaziente] - virtualPatientManager = {virtualPatientManager}");
+        if (virtualPatientManager != null)
+        {
+            Debug.Log("[SpawnPaziente] - Chiamo CreaPazienteVirtuale(dati)");
+            virtualPatientManager.CreaPazienteVirtuale(dati);
+
+        }
 
         // 4. Sceglie prefab in base al sesso
         GameObject prefabScelto = null;

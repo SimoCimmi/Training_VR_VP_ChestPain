@@ -1338,8 +1338,8 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 1885256240}
-  m_Resource: {fileID: 1885256240}
+  m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -2601,6 +2601,7 @@ GameObject:
   m_Component:
   - component: {fileID: 425654785}
   - component: {fileID: 425654784}
+  - component: {fileID: 425654786}
   m_Layer: 0
   m_Name: spawnPaziente
   m_TagString: Untagged
@@ -2632,6 +2633,7 @@ MonoBehaviour:
   puntoArrivo: {fileID: 414146128}
   datasetLoader: {fileID: 218098913}
   diagnosiManager: {fileID: 1172912123}
+  virtualPatientManager: {fileID: 425654786}
 --- !u!4 &425654785
 Transform:
   m_ObjectHideFlags: 0
@@ -2647,6 +2649,22 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+--- !u!114 &425654786
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 425654783}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed4d5c9d8ced26447b06ac874b463c7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  datasetPath: Assets/_Project/Resources/Dataset/Clean_filteredDataset.csv
+  lmStudioUrl: http://127.0.0.1:1234/v1/chat/completions
+  modelName: meta-llama-3-8b-instruct
+  ttsClient: {fileID: 292028349}
 --- !u!4 &436183773 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3615181327127093672, guid: 3461c8d14bc13bb4384505ad2b8b974f, type: 3}
@@ -8855,7 +8873,6 @@ MonoBehaviour:
   portalPrefab: {fileID: 8722104469372487538, guid: a7eff1b4621ab2648b54410059213e1e, type: 3}
   spawnPoint: {fileID: 1249824450}
   spawnPazienteScript: {fileID: 425654784}
-  virtualPatientManager: {fileID: 685572713}
   sogliaAccensione: 60
   sogliaSpegnimento: 80
   asseRotazione: 0
@@ -11037,34 +11054,6 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 1049140577}
   m_SourcePrefab: {fileID: 100100000, guid: c2f17a2926fbc774d990dd6e286d4fad, type: 3}
---- !u!83 &1885256240
-AudioClip:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: TTS_Audio
-  m_LoadType: 0
-  m_Channels: 1
-  m_Frequency: 24000
-  m_BitsPerSample: 32
-  m_Length: 0
-  m_IsTrackerFormat: 0
-  m_Ambisonic: 0
-  m_SubsoundIndex: 0
-  m_PreloadAudioData: 1
-  m_LoadInBackground: 0
-  m_Legacy3D: 0
-  m_Resource:
-    m_Source: 
-    m_Offset: 0
-    m_Size: 0
-  m_CompressionFormat: 0
-  m_EditorResource:
-    m_Source: 
-    m_Offset: 0
-    m_Size: 0
-  m_EditorCompressionFormat: 0
 --- !u!1 &1901018304
 GameObject:
   m_ObjectHideFlags: 0
