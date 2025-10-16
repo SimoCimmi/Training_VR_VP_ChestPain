@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Globalization;
 
+
+
 public class DatasetLoader : MonoBehaviour
 {
     public List<CartellaClinica> pazienti = new List<CartellaClinica>();
@@ -74,5 +76,16 @@ public class DatasetLoader : MonoBehaviour
         }
 
         Debug.Log($"Totale pazienti caricati: {pazienti.Count}");
+
+        SpawnPaziente spawnPaziente = FindObjectOfType<SpawnPaziente>();
+        if(spawnPaziente != null)
+        {
+            spawnPaziente.InizializzaDopoCaricamento();
+        }
+        else
+        {
+            Debug.LogWarning("[DatasetLoader] Nessun SpawnPaziente trovato nella scena per inizializzare il dataset.");
+        }
+
     }
 }
