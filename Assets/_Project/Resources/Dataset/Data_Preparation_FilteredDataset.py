@@ -3,26 +3,33 @@
 #1. Aprire cmd
 #2. Posizionarsi nella cartella in cui si trova Data_Preparation_FilteredDataset.py
 #3. Lanciare: python Data_Preparation_FilteredDataset.py
-
+import os
 import pandas as pd
 
-# r serve per evitare che Python interpreta \T come una sequenza di escape.
-cds = pd.read_csv(r"C:\Training_VR_VP\Assets\_Project\Resources\Dataset\filteredDataset.csv")
-#print(fds.head())
-#print(ds["WHQ070"].head(5))
+#Usiamo un dataset strutturato
 
 pd.set_option('display.max_columns', None)  
 #None significa nessun limite sul numero di colonne mostrate.
 # Mostra tutte le colonne
 
+#Creazione path dinamico per leggere il file csv
+base_dir = os.path.dirname(__file__)
+path_origin_cvs = os.path.join(base_dir, 'filteredDataset.csv')
 
+df = pd.read_csv(path_origin_cvs)
+print(f"Numero di righe del datset: {len(df)}")
+
+
+cds = pd.read_csv(path_origin_cvs)
+
+#print(ds["WHQ070"].head(5))
 
 #print(cds["RIDAGEYR"].to_string())
 
 
 #CONVERSIONE DEI DATI IN FORMATO PIU' SEMPLICE DA LEGGERE
 
-cds["DIQ010"] = cds["DIQ010"].map({1:"Si", 2:"No", 3:"Borderline"}).astype(str)  #DIQ010 – Diagnosi di diabete dal medico:
+cds["DIQ010"] = cds["DIQ010"].map({1:"Yes", 2:"No", 3:"Borderline"}).astype(str)  #DIQ010 – Diagnosi di diabete dal medico:
 #LBXGLU – Glucosio a digiuno (mg/dL):
 #LBXIN – Livello di insulina:
 #LBDHDD – Colesterolo HDL ("buono")
@@ -30,29 +37,37 @@ cds["DIQ010"] = cds["DIQ010"].map({1:"Si", 2:"No", 3:"Borderline"}).astype(str) 
 
 cds["WHQ070"] = cds["WHQ070"].map({1:"Yes", 2: "No"}).astype(str)  #WHQ070 – Ha provato a perdere peso nell’ultimo anno:
 
-#Se il valore della colonna è 80, sostituiscilo con la stringa "Dagli 80 in poi" altrimenti lascia il valore che trovi.
-cds["RIDAGEYR"] = cds["RIDAGEYR"].map(lambda x: "Dagli 80 in poi" if x == 80 else x).astype(str) #RIDAGEYR – Eta' (anni)
+#Se il valore della colonna è 80, sostituiscilo con la stringa "Dagli 80 in su" (From 80 and up) altrimenti lascia il valore che trovi.
+cds["RIDAGEYR"] = cds["RIDAGEYR"].map(lambda x: "From 80 and up" if x == 80 else x).astype(str) #RIDAGEYR – Eta' (anni)
 
 
-cds["RIAGENDR"] = cds["RIAGENDR"].map({1:"Maschio", 2:"Femmina"}).astype(str) #RIAGENDR – Genere
+cds["RIAGENDR"] = cds["RIAGENDR"].map({1:"Male", 2:"Female"}).astype(str) #RIAGENDR – Genere (Male = Maschio, Female = Femmina)
+
 
 cds["RIDRETH1"] = cds["RIDRETH1"].map({
-    1: "Messicano-Americano",
+    1: "Mexican American",
+    2: "Other Hispanic",
+    3: "Non-Hispanic White",
+    4: "Non-Hispanic Black",
+    5: "Other/Multi-Racial"
+}).astype(str)  # Origine etnica
+''' 
+    1:Messicano-Americano",
     2: "Altro ispanico",
     3: "Bianco non ispanico",
     4: "Nero non ispanico",
     5: "Altro/Multirazziale"
-}).astype(str)  # Origine etnica
+'''
 
 cds["DMDEDUC2"] = cds["DMDEDUC2"].map({
-    1: "Meno della terza media",
-    2: "Scuola media / superiore senza diploma",
-    3: "Diploma superiore o equivalente",
-    4: "Universita' (alcuni corsi o laurea breve)",
-    5: "Laurea o superiore"
+    1: "Less than 9th grade",
+    2: "9-11th grade / 12th grade with no diploma",
+    3: "High school graduate / GED or equivalent",
+    4: "Some college or AA degree",
+    5: "College graduate or above"
 }).astype(str)  # Livello di istruzione (solo adulti 20+)
 
-# I valori 7, 9 e . erano indicati come missing, quindi li gestiamo
+# I valori 7, 9 e . erano indicati come missing, quindi li gestiamo settandoli a pd.NA (valore nullo)
 cds["DMDEDUC2"] = cds["DMDEDUC2"].replace(["7", "9", "."], pd.NA)
 cds["WHQ070"] = cds["WHQ070"].replace(["7", "9", "."], pd.NA)
 cds["PAD680"] = cds["PAD680"].replace([7777, 9999, "."], pd.NA)
@@ -63,8 +78,8 @@ cds["INDFMPIR"] = cds["INDFMPIR"].replace(["."], pd.NA)
 # Attivita' fisica: non categoriali ma gestiamo i missing gia' sopra
 
 # Rapporto reddito/famiglia
-# I valori numerici rimangono, ma possiamo sostituire 5 con un’etichetta testuale
-cds["INDFMPIR"] = cds["INDFMPIR"].map({5: "maggiore o uguale di 5"}).astype(str)  # Rapporto reddito/famiglia rispetto soglia poverta'
+# I valori numerici rimangono, ma possiamo sostituire 5 con un’etichetta testuale, lo sostituiamo con Value greater/equal to 5 (Valore maggiore o uguale a 5)
+cds["INDFMPIR"] = cds["INDFMPIR"].map({5: "Value greater/equal to 5"}).astype(str)  # Rapporto reddito/famiglia rispetto soglia poverta'
 
 
 
@@ -77,7 +92,6 @@ Seleziona la colonna DIQ010 e tramite il metodo replace() sostituisce i valori:
 - "9"  un altro codice per dati mancanti
 - "."  spesso usato per rappresentare missing value nei dataset esportati da software statistici
 Tutti questi valori vengono sostituiti con pd.NA, che è il tipo di Pandas per i missing values (equivalente a NaN).
-
 '''
 # Storia del peso e istruzione
 cds["DMDEDUC2"] = cds["DMDEDUC2"].replace([7, 9, "."], pd.NA)
@@ -98,57 +112,57 @@ for col in ["LBXGLU", "LBXIN", "LBDHDD", "LBXTC", "BMXWT", "BMXHT", "BMXBMI"]:
     cds[col] = pd.to_numeric(cds[col], errors="coerce")  # converte '.' in NaN
 
 
-
-# RINOMINA LE COLONNE
+# RENAME COLUMNS
 cds = cds.rename(columns={
 
-    # Diabete
-    "DIQ010": "Diagnosi_diabete_positiva",                # DIQ010 – Diagnosi di diabete
+    # Diabetes
+    "DIQ010": "Diabetes_diagnosis_positive",                # DIQ010 – Diabetes diagnosis positive (Diagnosi di diabete positiva)
 
-    # Esami clinici
-    "LBXGLU": "Glucosio_a_digiuno",             # LBXGLU – Glucosio a digiuno
-    "LBXIN": "Livello_di_insulina",             # LBXIN – Livello di insulina
-    "LBDHDD": "Colesterolo_HDL",                # LBDHDD – Colesterolo HDL
-    "LBXTC": "Colesterolo_totale",              # LBXTC – Colesterolo totale
+    # Clinical exams
+    "LBXGLU": "Fasting_glucose",                            # LBXGLU – Fasting glucose (Glucosio a digiuno)
+    "LBXIN": "Insulin_level",                               # LBXIN – Insulin level (Livello di insulina)
+    "LBDHDD": "HDL_cholesterol",                            # LBDHDD – HDL cholesterol (Colesterolo HDL)
+    "LBXTC": "Total_cholesterol",                           # LBXTC – Total cholesterol (Colesterolo totale)
 
-    # Misure corporee
-    "BMXWT": "Peso_kg",                          # BMXWT – Peso (kg)
-    "BMXHT": "Altezza_cm",                       # BMXHT – Altezza (cm)
-    "BMXBMI": "BMI",                             # BMXBMI – Indice di massa corporea (BMI)
+    # Body measurements
+    "BMXWT": "Weight_kg",                                   # BMXWT – Weight (kg) (Peso in kg)
+    "BMXHT": "Height_cm",                                   # BMXHT – Height (cm) (Altezza in cm)
+    "BMXBMI": "BMI",                                        # BMXBMI – Body Mass Index (Indice di massa corporea - BMI)
 
+    # Diet
+    "DR1TKCAL": "Total_calories_kcal",                      # DR1TKCAL – Total calories (Calorie totali in kcal)
+    "DR1TPROT": "Protein_g",                                # DR1TPROT – Protein (g) (Proteine in grammi)
+    "DR1TCARB": "Carbohydrates_g",                          # DR1TCARB – Carbohydrates (g) (Carboidrati in grammi)
+    "DR1TSUGR": "Total_sugars_g",                           # DR1TSUGR – Total sugars (g) (Zuccheri totali in grammi)
+    "DR1TFIBE": "Dietary_fiber_g",                          # DR1TFIBE – Dietary fiber (g) (Fibre alimentari in grammi)
+    "DR1TTFAT": "Total_fat_g",                              # DR1TTFAT – Total fat (g) (Grassi totali in grammi)
+    "DR1TSFAT": "Saturated_fat_g",                          # DR1TSFAT – Saturated fat (g) (Grassi saturi in grammi)
 
-    # Dieta
-    "DR1TKCAL": "Calorie_totali_kcal",            # Calorie totali (kcal)
-    "DR1TPROT": "Proteine_g",                     # Proteine (g)
-    "DR1TCARB": "Carboidrati_g",                  # Carboidrati (g)
-    "DR1TSUGR": "Zuccheri_totali_g",              # Zuccheri totali (g)
-    "DR1TFIBE": "Fibre_alimentari_g",             # Fibre alimentari (g)
-    "DR1TTFAT": "Grassi_totali_g",                # Grassi totali (g)
-    "DR1TSFAT": "Grassi_saturi_g",                # Grassi saturi (g)
+    # Physical activity
+    "PAD680": "Daily_sedentary_minutes",                    # PAD680 – Daily sedentary minutes (Minuti sedentari giornalieri)
+    "PAD800": "Moderate_activity_minutes",                  # PAD800 – Moderate activity minutes (Minuti di attività moderata)
+    "PAD820": "Vigorous_activity_minutes",                  # PAD820 – Vigorous activity minutes (Minuti di attività vigorosa)
 
-    # Attivita' fisica
-    "PAD680": "Minuti_sedentari_giornalieri",     # Minuti giornalieri sedentari
-    "PAD800": "Minuti_attivita_moderata",         # Minuti giornalieri attività moderate
-    "PAD820": "Minuti_attivita_vigorosa",         # Minuti attività vigorosa per sessione
+    # Weight history
+    "WHQ070": "Tried_to_lose_weight_in_the_past_year",      # WHQ070 – Tried to lose weight in the past year (Ha provato a perdere peso nell’ultimo anno)   
 
-    # Storia del peso
-    "WHQ070": "Ha_provato_a_perdere_peso",        # Ha provato a perdere peso nell’ultimo anno
-
-    # Demografia
-    "RIDAGEYR": "Eta",                            # Età (anni)
-    "RIAGENDR": "Genere",                         # Genere
-    "RIDRETH1": "Origine_etnica",                 # Origine etnica
-    "DMDEDUC2": "Livello_istruzione",             # Livello di istruzione (solo adulti 20+)
-    "INDFMPIR": "Rapporto_reddito_famiglia",      # Rapporto reddito/famiglia rispetto alla soglia di povertà
+    # Demographics
+    "RIDAGEYR": "Age",                                      # RIDAGEYR – Age (Età in anni)
+    "RIAGENDR": "Gender",                                   # RIAGENDR – Gender (Genere)
+    "RIDRETH1": "Ethnic_origin",                            # RIDRETH1 – Ethnic origin (Origine etnica)
+    "DMDEDUC2": "Education_level",                          # DMDEDUC2 – Education level (Livello di istruzione - solo adulti 20+)
+    "INDFMPIR": "Family_income_to_poverty_ratio",           # INDFMPIR – Family income-to-poverty ratio (Rapporto reddito/famiglia rispetto alla soglia di povertà)
 })
 
-print(cds.head(50))
+
+print(cds.head(5))
 
 #print(df.read_csv(r"C:\Training_VR_VP\Assets\_Project\Resources\Dataset\filteredDataset.csv"))
 
 
 #Esportazione del dataset pulito:
-cds.to_csv(r"C:\Training_VR_VP\Assets\_Project\Resources\Dataset\Clean_filteredDataset.csv", index=False) 
+path_destination_csv = os.path.join(base_dir, 'Clean_filteredDataset.csv')
+cds.to_csv(path_destination_csv, index=False) 
 #Ogni DataFrame ha un indice (numeri da 0 a N-1 per le righe).
 # Se non metti index=False, il CSV salverebbe anche questa colonna “extra” con i numeri delle righe.
 
