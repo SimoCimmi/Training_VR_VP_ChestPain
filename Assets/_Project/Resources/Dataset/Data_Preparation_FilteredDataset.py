@@ -151,7 +151,7 @@ cds = cds.rename(columns={
     "RIAGENDR": "Gender",                                   # RIAGENDR – Gender (Genere)
     "RIDRETH1": "Ethnic_origin",                            # RIDRETH1 – Ethnic origin (Origine etnica)
     "DMDEDUC2": "Education_level",                          # DMDEDUC2 – Education level (Livello di istruzione - solo adulti 20+)
-    "INDFMPIR": "Family_income_to_poverty_ratio",           # INDFMPIR – Family income-to-poverty ratio (Rapporto reddito/famiglia rispetto alla soglia di povertà)
+    "INDFMPIR": "Income_family_ratio_compared_to_the_poverty_line",           # INDFMPIR – Income/family ratio compared to the poverty line (Rapporto reddito/famiglia rispetto alla soglia di povertà)
 })
 
 
