@@ -37,14 +37,14 @@ cds["DMDEDUC2"] = cds["DMDEDUC2"].map({
 # -----------------------------
 # GESTIONE VALORI SPECIALI / MISSING
 # -----------------------------
-cds["DIQ010"].replace(["7", "9", "."], pd.NA, inplace=True)
-cds["DMDEDUC2"].replace([7, 9, "."], pd.NA, inplace=True)
-cds["WHQ070"].replace([7, 9, "."], pd.NA, inplace=True)
-cds["PAD680"].replace([7777, 9999, "."], pd.NA, inplace=True)
-cds["PAD800"].replace([7777, 9999, "."], pd.NA, inplace=True)
-cds["PAD820"].replace([7777, 9999, "."], pd.NA, inplace=True)
-cds["INDFMPIR"].replace(["."], pd.NA, inplace=True)
-cds["INDFMPIR"].replace(5, "Value greater/equal to 5", inplace=True)
+cds["DIQ010"] = cds["DIQ010"].replace(["7", "9", "."], pd.NA)
+cds["DMDEDUC2"] = cds["DMDEDUC2"].replace([7, 9, "."], pd.NA)
+cds["WHQ070"] = cds["WHQ070"].replace([7, 9, "."], pd.NA)
+cds["PAD680"] = cds["PAD680"].replace([7777, 9999, "."], pd.NA)
+cds["PAD800"] = cds["PAD800"].replace([7777, 9999, "."], pd.NA)
+cds["PAD820"] = cds["PAD820"].replace([7777, 9999, "."], pd.NA)
+cds["INDFMPIR"] = cds["INDFMPIR"].replace(["."], pd.NA)
+cds["INDFMPIR"] = cds["INDFMPIR"].replace(5, "Value greater/equal to 5")
 
 # Esami clinici e misure corporee
 for col in ["LBXGLU", "LBXIN", "LBDHDD", "LBXTC", "BMXWT", "BMXHT", "BMXBMI"]:
@@ -52,20 +52,30 @@ for col in ["LBXGLU", "LBXIN", "LBDHDD", "LBXTC", "BMXWT", "BMXHT", "BMXBMI"]:
 
 # Sostituzione 0 in Weight, Height, BMI con NaN
 for col in ['BMXWT', 'BMXHT', 'BMXBMI']:
-    cds[col].replace(0, pd.NA, inplace=True)
+    cds[col] = cds[col].replace(0, pd.NA)
 
-# -----------------------------
-# DATA CLEANING: Sostituzione mediana per attività fisica
-# -----------------------------
-for col in ["PAD680", "PAD800", "PAD820"]:
-    mediana = cds[col].median(skipna=True)
-    cds[col].fillna(mediana, inplace=True)
-    print(f"Sostituiti valori mancanti in {col} con la mediana: {mediana}")
 
 # -----------------------------
 # CHECK valori mancanti
 # -----------------------------
-print("Numero di valori mancanti per colonna dopo la pulizia:\n", cds.isna().sum())
+print("Numero di valori mancanti per colonna prima della pulizia:\n", cds.isna().sum())
+
+# -----------------------------
+# DATA CLEANING: 
+# -----------------------------
+
+
+# Rimozione righe con DIQ010 mancante (non deduciibile come positivo o negativo)
+cds = cds.dropna(subset=["DIQ010"])
+
+#Sostituzione mediana per PAD680, PAD800, PAD820
+for col in ["PAD680", "PAD800", "PAD820"]:
+    cds[col] = pd.to_numeric(cds[col], errors="coerce") # garantisce tipo numerico
+    mediana = cds[col].median(skipna=True)
+    cds[col] = cds[col].fillna(mediana)
+    print(f"Sostituiti valori mancanti in {col} con la mediana: {mediana}")
+
+
 
 # -----------------------------
 # ANALISI PAD800 vs PAD820
@@ -86,31 +96,32 @@ print(f"Numero di righe con PAD800 > PAD820: {countPAD800} > {countPAD820}")
 # RENAME COLUMNS
 # -----------------------------
 cds.rename(columns={
-    "DIQ010": "Diabetes_diagnosis_positive",
-    "LBXGLU": "Fasting_glucose",
-    "LBXIN": "Insulin_level",
-    "LBDHDD": "HDL_cholesterol",
-    "LBXTC": "Total_cholesterol",
-    "BMXWT": "Weight_kg",
-    "BMXHT": "Height_cm",
-    "BMXBMI": "BMI",
-    "DR1TKCAL": "Total_calories_kcal",
-    "DR1TPROT": "Protein_g",
-    "DR1TCARB": "Carbohydrates_g",
-    "DR1TSUGR": "Total_sugars_g",
-    "DR1TFIBE": "Dietary_fiber_g",
-    "DR1TTFAT": "Total_fat_g",
-    "DR1TSFAT": "Saturated_fat_g",
-    "PAD680": "Daily_sedentary_minutes",
-    "PAD800": "Moderate_activity_minutes",
-    "PAD820": "Vigorous_activity_minutes",
-    "WHQ070": "Tried_to_lose_weight_in_the_past_year",
-    "RIDAGEYR": "Age",
-    "RIAGENDR": "Gender",
-    "RIDRETH1": "Ethnic_origin",
-    "DMDEDUC2": "Education_level",
-    "INDFMPIR": "Income_family_ratio_compared_to_the_poverty_line"
-}, inplace=True)
+    "DIQ010": "Diabetes_diagnosis_positive",                    # Diagnosi di diabete positiva
+    "LBXGLU": "Fasting_glucose",                                # Glucosio a digiuno
+    "LBXIN": "Insulin_level",                                   # Livello di insulina
+    "LBDHDD": "HDL_cholesterol",                                # Colesterolo HDL
+    "LBXTC": "Total_cholesterol",                               # Colesterolo totale
+    "BMXWT": "Weight_kg",                                       # Peso (kg)
+    "BMXHT": "Height_cm",                                       # Altezza (cm)
+    "BMXBMI": "BMI",                                            # Indice di massa corporea (BMI)
+    "DR1TKCAL": "Total_calories_kcal",                          # Calorie totali (kcal)
+    "DR1TPROT": "Protein_g",                                    # Proteine (g)
+    "DR1TCARB": "Carbohydrates_g",                              # Carboidrati (g)
+    "DR1TSUGR": "Total_sugars_g",                               # Zuccheri totali (g)
+    "DR1TFIBE": "Dietary_fiber_g",                              # Fibre alimentari (g)
+    "DR1TTFAT": "Total_fat_g",                                  # Grassi totali (g)
+    "DR1TSFAT": "Saturated_fat_g",                              # Grassi saturi (g)
+    "PAD680": "Daily_sedentary_minutes",                        # Minuti sedentari giornalieri
+    "PAD800": "Moderate_activity_minutes",                      # Minuti di attività moderata
+    "PAD820": "Vigorous_activity_minutes",                      # Minuti di attività intensa
+    "WHQ070": "Tried_to_lose_weight_in_the_past_year",          # Ha cercato di perdere peso nell’ultimo anno
+    "RIDAGEYR": "Age",                                          # Età
+    "RIAGENDR": "Gender",                                       # Genere
+    "RIDRETH1": "Ethnic_origin",                                # Origine etnica
+    "DMDEDUC2": "Education_level",                              # Livello di istruzione
+    "INDFMPIR": "Income_family_ratio_compared_to_the_poverty_line"  # Rapporto reddito familiare rispetto alla soglia di povertà
+})
+
 
 # -----------------------------
 # Esportazione CSV pulito
@@ -119,4 +130,13 @@ path_destination_csv = os.path.join(base_dir, 'Clean_filteredDataset.csv')
 cds.to_csv(path_destination_csv, index=False)
 
 print("Dataset pulito esportato in Clean_filteredDataset.csv")
-print(cds.head(20))
+#print(cds.head(20))
+
+# -----------------------------
+# CHECK valori mancanti
+# -----------------------------
+print("Numero di valori mancanti per colonna dopo la pulizia:\n", cds.isna().sum())
+
+print("Numero di righe con valori nulli: ", cds["DIQ010"].isna().sum())
+righeNull = cds[cds["DIQ010"].isna()]
+print(righeNull)

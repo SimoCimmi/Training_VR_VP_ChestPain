@@ -1,4 +1,4 @@
-SEQN,Diabetes_diagnosis_positive,Fasting_glucose,Insulin_level,Weight_kg,Height_cm,BMI,HDL_cholesterol,Total_cholesterol,Total_calories_kcal,Protein_g,Carbohydrates_g,Total_sugars_g,Dietary_fiber_g,Total_fat_g,Saturated_fat_g,Daily_sedentary_minutes,Moderate_activity_minutes,Vigorous_activity_minutes,Tried_to_lose_weight_in_the_past_year,Age,Gender,Ethnic_origin,Education_level,Income_family_ratio_compared_to_the_poverty_line
+SEQN,DIQ010,LBXGLU,LBXIN,BMXWT,BMXHT,BMXBMI,LBDHDD,LBXTC,DR1TKCAL,DR1TPROT,DR1TCARB,DR1TSUGR,DR1TFIBE,DR1TTFAT,DR1TSFAT,PAD680,PAD800,PAD820,WHQ070,RIDAGEYR,RIAGENDR,RIDRETH1,DMDEDUC2,INDFMPIR
 130378.0,No,113.0,15.53,86.9,179.5,27.0,45.0,264.0,1740.0,80.46000000000001,169.66000000000005,43.71,10.1,55.07000000000001,21.0,360.0,45.0,45.0,Yes,43.0,Male,Other/Multi-Racial,College graduate or above,Value greater/equal to 5
 130379.0,No,99.0,19.91,101.8,174.2,33.5,60.0,214.0,2741.0,86.44999999999999,314.86000000000007,113.58,29.6,67.18000000000002,14.544,480.0,45.0,45.0,No,66.0,Male,Non-Hispanic White,College graduate or above,Value greater/equal to 5
 130380.0,Yes,156.0,16.33,69.4,152.9,29.7,49.0,187.0,1995.0,69.86,281.67,114.66,21.1,65.37999999999998,26.936000000000003,240.0,20.0,0.0,Yes,44.0,Female,Other Hispanic,High school graduate / GED or equivalent,1.41
@@ -1985,7 +1985,6 @@ SEQN,Diabetes_diagnosis_positive,Fasting_glucose,Insulin_level,Weight_kg,Height_
 137218.0,No,106.0,4.89,82.7,188.4,23.3,57.0,161.0,1526.0,101.21,148.15,42.84,18.9,45.49,9.647999999999998,360.0,60.0,15.0,No,39.0,Male,Non-Hispanic White,College graduate or above,0.0
 137220.0,No,97.0,6.02,77.5,183.7,23.0,48.0,175.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,360.0,30.0,0.0,No,64.0,Male,Non-Hispanic White,Some college or AA degree,0.0
 137224.0,No,117.0,13.04,76.1,159.8,29.8,49.0,227.0,1281.0,65.82000000000001,139.31,80.45,9.0,51.620000000000005,21.518,360.0,120.0,0.0,Yes,53.0,Female,Other/Multi-Racial,Some college or AA degree,0.0
-137231.0,,94.0,5.65,52.1,181.9,15.7,53.0,111.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,540.0,0.0,0.0,No,18.0,Male,Non-Hispanic White,,2.74
 137232.0,No,96.0,3.94,65.8,167.8,23.4,99.0,233.0,1267.0,43.78,42.78,6.5,2.1,16.95,5.3020000000000005,240.0,30.0,0.0,No,61.0,Male,Non-Hispanic Black,High school graduate / GED or equivalent,1.4
 137237.0,No,91.0,6.19,76.2,174.4,25.1,90.0,179.0,1620.0,56.96,247.01,69.39,18.2,47.03999999999999,14.099,600.0,120.0,0.0,Yes,19.0,Female,Non-Hispanic White,,0.18
 137239.0,No,110.0,13.84,107.9,174.1,35.6,54.0,164.0,1646.0,52.06,162.83,61.3,9.7,87.25999999999999,31.005000000000003,600.0,240.0,0.0,Yes,79.0,Male,Non-Hispanic White,College graduate or above,Value greater/equal to 5
