@@ -82,6 +82,9 @@ cds["INDFMPIR"] = cds["INDFMPIR"].replace(["."], pd.NA)
 cds["INDFMPIR"] = cds["INDFMPIR"].map({5: "Value greater/equal to 5"}).astype(str)  # Rapporto reddito/famiglia rispetto soglia poverta'
 
 
+#################
+# DATA CLEANING #
+#################
 
 # GESTIONE MISSING / VALORI SPECIALI
 
@@ -110,6 +113,110 @@ cds["INDFMPIR"] = cds["INDFMPIR"].replace(["."], pd.NA)
 #errors="coerce" dice a Pandas: Se un valore non può essere convertito in numero (es. "." o stringhe non numeriche), sostituiscilo con NaN.
 for col in ["LBXGLU", "LBXIN", "LBDHDD", "LBXTC", "BMXWT", "BMXHT", "BMXBMI"]:
     cds[col] = pd.to_numeric(cds[col], errors="coerce")  # converte '.' in NaN
+
+
+
+#Gestione valori mancanti:
+
+print("Numero di valori mancanti per colonna prima della pulizia :\n ", cds.isna().sum() )
+cds.isna()
+
+
+# PAD680 – Daily sedentary minutes (Minuti sedentari giornalieri)
+# PAD800 – Moderate activity minutes (Minuti di attività moderata)
+# PAD820 – Vigorous activity minutes (Minuti di attività vigorosa)
+
+countPAD800 = 0
+countPAD820 = 0
+for index, row in cds.iterrows():
+    pad800 = row["PAD800"]
+    pad820 = row["PAD820"]
+    if(pd.notna(pad800) and pd.notna(pad820)):
+        if (row["PAD800"] > row["PAD820"]):
+            countPAD800 += 1
+        else:
+            countPAD820 += 1
+    #Ci dice che i Minuti di attività moderata (PAD800) sono maggiori dei Minuti di attività vigorosa (PAD820).
+print(f"Numero di righe con PAD800 > PAD820: {countPAD800} > {countPAD820}")
+
+'''for index, row in cds.iterrows():
+    if pd.isna(row["PAD820"]):
+        print(f"Tupla con PAD820 mancante (riga {index}):")
+        print(row.to_dict())'''
+
+
+for col in ["PAD680"]:
+    mediana = cds[col].median(skipna=True)  # Calcola la mediana ignorando i valori NaN
+print(f"Mediana di PAD680: {mediana}")
+
+for col in ["PAD680"]:
+    if(cds[col].isna().any()): #.any() restituisce True se almeno un valore è NaN
+        cds[col] = mediana  # Sostituisce i valori NaN con la mediana calcolata
+        print(f"Sostituiti valori mancanti in {col} con la mediana: {mediana}")
+
+
+
+for col in ["PAD800"]:
+    mediana = cds[col].median(skipna=True)  # Calcola la mediana ignorando i valori NaN
+print(f"Mediana di PAD800: {mediana}")
+
+for col in ["PAD800"]:
+    if(cds[col].isna().any()): #.any() restituisce True se almeno un valore è NaN
+        cds[col] = mediana  # Sostituisce i valori NaN con la mediana calcolata
+        print(f"Sostituiti valori mancanti in {col} con la mediana: {mediana}")    
+
+
+
+for col in ["PAD820"]:
+    mediana = cds[col].median(skipna=True)  # Calcola la mediana ignorando i valori NaN
+print(f"Mediana di {col}: {mediana}")
+
+        
+for col in ["PAD820"]:
+    if(cds[col].isna().any()): #.any() restituisce True se almeno un valore è NaN
+        cds[col] = mediana  # Sostituisce i valori NaN con la mediana calcolata
+        print(f"Sostituiti valori mancanti in {col} con la mediana: {mediana}")   
+
+
+'''for col in ["PAD680"]:
+    media = cds[col].mean(skipna=True)  # Calcola la media ignorando i valori NaN
+print(f"Media di {col}: {media}")   
+#Scarta la media perchè influenzata dai valori estremi (outlier)
+'''
+
+        
+print("Numero di valori mancanti per colonna dopo la pulizia :\n ", cds.isna().sum() )
+cds.isna()
+
+'''
+    if(row["PAD820"] is pd.NA):
+        print(cds.loc[index]) 
+    
+    if row["PAD800"] is pd.NA and row["PAD820"] is pd.NA:
+            print(f"Relazione tra valori mancanti in PAD680 e PAD800 o PAD820 - Riga {index}")    
+
+
+
+    if row["PAD680"] is pd.NA:
+        print(f"Valori mancanti - Riga {index}, Colonna {col}")
+    if row["PAD800"] is pd.NA:
+        print(f"--Valori mancanti - Riga {index}, Colonna {col}")
+    if row["PAD820"] is pd.NA:
+        print(f"++++Valori mancanti - Riga {index}, Colonna {col}")
+'''
+
+
+
+
+'''
+print(f"PAD800:")
+for value in cds["PAD800"]:
+    print(value)
+'''
+
+
+
+
 
 
 # RENAME COLUMNS
@@ -155,7 +262,7 @@ cds = cds.rename(columns={
 })
 
 
-print(cds.head(5))
+#print(cds.head(5)) #Mostra le prime 5 righe del DataFrame cds dopo le modifiche.
 
 #print(df.read_csv(r"C:\Training_VR_VP\Assets\_Project\Resources\Dataset\filteredDataset.csv"))
 
