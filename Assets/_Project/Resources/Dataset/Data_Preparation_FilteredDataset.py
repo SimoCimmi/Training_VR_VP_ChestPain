@@ -1,6 +1,7 @@
 import os
 import pandas as pd
 import numpy as np
+import random
 
 # Visualizza tutte le colonne
 pd.set_option('display.max_columns', None)
@@ -253,12 +254,75 @@ cds.drop(columns=[
 # -----------------------------
 # IMPUTAZIONE WHQ070 ovvero Ha cercato di perdere peso nell’ultimo anno (Tried_to_lose_weight_in_the_past_year)
 # -----------------------------
-
+#Si utilizza la BMI per dedurre se una persona ha cercato di perdere peso nell'ultimo anno, con probabilità più alta se la BMI è elevata.
+def impute_try_to_lose(row):
+    if(pd.isna(row["WHQ070"])):
+        bmi = row["BMXBMI"]
+        if pd.notna(bmi):
+            if bmi > 25:
+                # 80% di probabilità di aver provato a perdere peso
+                return "Yes" if random.random() < 0.8 else "No"
+            else:
+                # 30% di probabilità di aver provato a perdere peso
+                return "Yes" if random.random() < 0.3 else "No"
+        else:
+            # Se BMI mancante, assegna casualmente (Precedentemente la BMI è stata imputata, quindi questo caso non si dovrebbe verificare)
+            return random.choice(["Yes", "No"])
+    else:
+        return row["WHQ070"]
+    
+# Applica la funzione al dataframe
+cds["WHQ070"] = cds.apply(impute_try_to_lose, axis=1)
 
 
 print("Numero di valori WHQ070 null:", cds["WHQ070"].isna().sum())
 
 
+# -----------------------------
+# IMPUTAZIONE DMDEDUC2 ovvero Education_level (Education_level )
+# -----------------------------
+imputazioniGruppo = 0
+imputazioniGlobali = 0
+
+def impute_education_age_gender(row):
+    global imputazioniGruppo,   imputazioniGlobali
+    
+    if pd.isna(row["DMDEDUC2"]):
+        group = cds[
+            (cds["Age_group"] == row["Age_group"]) &
+            (cds["RIAGENDR"] == row["RIAGENDR"]) 
+        ]["DMDEDUC2"].dropna()
+
+        print(f"Riga SEQN={row['SEQN']}")
+        print(f"Age_group={row['Age_group']}, Gender={row['RIAGENDR']}")
+        print(f"Numero valori disponibili nel gruppo per l'imputazione: {len(group)}")
+
+        if len(group) > 0:
+            chosen_value = np.random.choice(group.values)
+            print(f"Imputazione scelta dal gruppo: {chosen_value}")
+            imputazioniGruppo += 1
+            return chosen_value
+        else:
+            # Fallback: scegli random da tutto il dataset
+            chosen_value_global = np.random.choice(cds["DMDEDUC2"].dropna().values)
+            print(f"Imputazione scelta globalmente: {chosen_value_global}")
+            imputazioniGlobali += 1
+            return chosen_value_global
+    else:
+        return row["DMDEDUC2"]
+    
+cds["Age_group"] = pd.cut(
+        cds["RIDAGEYR"].astype(float),
+        bins=[0,18,30,45,60,75,1000],
+        labels=["<18","18-29","30-44","45-59","60-74","75+"],
+        right=False
+    )  
+cds["DMDEDUC2"] = cds.apply(impute_education_age_gender, axis=1)
+cds.drop(columns=["Age_group"], inplace=True)
+
+# Stampa contatori
+print(f"DMDEDUC2(Education_level)- Numero imputazioni dal gruppo stratificato: {imputazioniGruppo}")
+print(f"DMDEDUC2(Education_level) - Numero imputazioni globali: {imputazioniGlobali}")
 # -----------------------------
 # CONVERSIONE DATI CATEGORICAL
 # -----------------------------
