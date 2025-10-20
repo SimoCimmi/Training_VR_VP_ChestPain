@@ -336,11 +336,11 @@ cds.rename(columns={
     "DIQ010": "Diabetes_diagnosis_positive",                    # Diagnosi di diabete positiva
     "LBXGLU": "Fasting_glucose",                                # Glucosio a digiuno
     "LBXIN": "Insulin_level",                                   # Livello di insulina
-    "LBDHDD": "HDL_cholesterol",                                # Colesterolo HDL
-    "LBXTC": "Total_cholesterol",                               # Colesterolo totale
     "BMXWT": "Weight_kg",                                       # Peso (kg)
     "BMXHT": "Height_cm",                                       # Altezza (cm)
     "BMXBMI": "BMI",                                            # Indice di massa corporea (BMI)
+    "LBDHDD": "HDL_cholesterol",                                # Colesterolo HDL
+    "LBXTC": "Total_cholesterol",                               # Colesterolo totale
     "DR1TKCAL": "Total_calories_kcal",                          # Calorie totali (kcal)
     "DR1TPROT": "Protein_g",                                    # Proteine (g)
     "DR1TCARB": "Carbohydrates_g",                              # Carboidrati (g)
@@ -373,7 +373,7 @@ print("Dataset pulito esportato in Clean_filteredDataset.csv")
 # CHECK valori mancanti
 # -----------------------------
 print("Numero di valori mancanti per colonna dopo la pulizia:\n", cds.isna().sum())
+print("Numero di righe del dataset pulito: ", len(cds))
 
 
-
-#print(cds.head(5))
+print(cds.head(5))

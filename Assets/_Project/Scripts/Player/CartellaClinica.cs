@@ -4,7 +4,7 @@ using System.Runtime.CompilerServices;
 public class CartellaClinica
 {
     public float SEQN;
-    public int DIQ010;
+    public string DIQ010;
     public float LBXGLU;
     public float LBXIN;
     public float BMXWT;
@@ -22,10 +22,10 @@ public class CartellaClinica
     public float PAD680;
     public float PAD800;
     public float PAD820;
-    public float WHQ070;
-    public float RIDAGEYR;
-    public int RIAGENDR;
-    public float RIDRETH1;
-    public float DMDEDUC2;
+    public string WHQ070;
+    public float RIDAGEYR;  //Si potrebbe impostare come intero
+    public string RIAGENDR;
+    public string RIDRETH1;
+    public string DMDEDUC2;
     public float INDFMPIR;
 }

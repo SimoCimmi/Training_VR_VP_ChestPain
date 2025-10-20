@@ -8,7 +8,7 @@ using UnityEngine;
 public class VirtualPatientManager : MonoBehaviour
 {
     [Header("Percorso Dataset CSV")]
-    [SerializeField] private string datasetPath = "Assets/_Project/Resources/Dataset/Clean_filteredDataset.csv";
+    //[SerializeField] private string datasetPath = "Assets/_Project/Resources/Dataset/Clean_filteredDataset.csv";
 
     [Header("LM Studio API")]
     [SerializeField] private string lmStudioUrl = "http://127.0.0.1:1234/v1/chat/completions";  //completions (Completamento delle chat): Invia una cronologia delle chat al modello per prevedere la prossima risposta dell'assistente

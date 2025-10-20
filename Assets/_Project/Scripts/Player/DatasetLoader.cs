@@ -11,7 +11,7 @@ public class DatasetLoader : MonoBehaviour
 
     void Start()
     {
-        TextAsset file = Resources.Load<TextAsset>("filteredDataset");
+        TextAsset file = Resources.Load<TextAsset>("Dataset\\Clean_filteredDataset");
         if (file == null)
         {
             Debug.LogError("File non trovato in Resources.");
@@ -39,7 +39,7 @@ public class DatasetLoader : MonoBehaviour
                 CartellaClinica c = new CartellaClinica();
 
                 c.SEQN = float.Parse(col[0], CultureInfo.InvariantCulture);
-                c.DIQ010 = Convert.ToInt32(float.Parse(col[1], CultureInfo.InvariantCulture));
+                c.DIQ010 = col[1].Trim(); // rimuove spazi o newline
                 c.LBXGLU = float.Parse(col[2], CultureInfo.InvariantCulture);
                 c.LBXIN = float.Parse(col[3], CultureInfo.InvariantCulture);
                 c.BMXWT = float.Parse(col[4], CultureInfo.InvariantCulture);
@@ -58,11 +58,15 @@ public class DatasetLoader : MonoBehaviour
                 c.PAD800 = float.Parse(col[17], CultureInfo.InvariantCulture);
                 c.PAD820 = float.Parse(col[18], CultureInfo.InvariantCulture);
                 c.WHQ070 = float.Parse(col[19], CultureInfo.InvariantCulture);
+                
                 c.RIDAGEYR = float.Parse(col[20], CultureInfo.InvariantCulture);
-                c.RIAGENDR = Convert.ToInt32(float.Parse(col[21], CultureInfo.InvariantCulture));
-                c.RIDRETH1 = float.Parse(col[22], CultureInfo.InvariantCulture);
-                c.DMDEDUC2 = float.Parse(col[23], CultureInfo.InvariantCulture);
-                c.INDFMPIR = float.Parse(col[24], CultureInfo.InvariantCulture);
+
+                c.RIAGENDR = col[21].Trim();
+                c.RIDRETH1 = col[22].Trim();
+                c.DMDEDUC2 = col[23].Trim();
+                c.INDFMPIR = col[24].Trim();
+
+                
 
                 pazienti.Add(c);
 
