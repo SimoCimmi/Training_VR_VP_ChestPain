@@ -1,4 +1,4 @@
-SEQN,DIQ010,LBXGLU,LBXIN,BMXWT,BMXHT,BMXBMI,LBDHDD,LBXTC,DR1TKCAL,DR1TPROT,DR1TCARB,DR1TSUGR,DR1TFIBE,DR1TTFAT,DR1TSFAT,PAD680,PAD800,PAD820,WHQ070,RIDAGEYR,RIAGENDR,RIDRETH1,DMDEDUC2,INDFMPIR
+SEQN,Diabetes_diagnosis_positive,Fasting_glucose,Insulin_level,Weight_kg,Height_cm,BMI,HDL_cholesterol,Total_cholesterol,Total_calories_kcal,Protein_g,Carbohydrates_g,Total_sugars_g,Dietary_fiber_g,Total_fat_g,Saturated_fat_g,Daily_sedentary_minutes,Moderate_activity_minutes,Vigorous_activity_minutes,Tried_to_lose_weight_in_the_past_year,Age,Gender,Ethnic_origin,Education_level,Income_family_ratio_compared_to_the_poverty_line
 130378.0,No,113.0,15.53,86.9,179.5,27.0,45.0,264.0,1740.0,80.46000000000001,169.66000000000005,43.71,10.1,55.07000000000001,21.0,360.0,45.0,45.0,Yes,43.0,Male,Other/Multi-Racial,College graduate or above,Value greater/equal to 5
 130379.0,No,99.0,19.91,101.8,174.2,33.5,60.0,214.0,2741.0,86.44999999999999,314.86000000000007,113.58,29.6,67.18000000000002,14.544,480.0,45.0,45.0,No,66.0,Male,Non-Hispanic White,College graduate or above,Value greater/equal to 5
 130380.0,Yes,156.0,16.33,69.4,152.9,29.7,49.0,187.0,1995.0,69.86,281.67,114.66,21.1,65.37999999999998,26.936000000000003,240.0,20.0,0.0,Yes,44.0,Female,Other Hispanic,High school graduate / GED or equivalent,1.41
@@ -6,7 +6,7 @@ SEQN,DIQ010,LBXGLU,LBXIN,BMXWT,BMXHT,BMXBMI,LBDHDD,LBXTC,DR1TKCAL,DR1TPROT,DR1TC
 130394.0,No,88.0,7.2,76.7,177.3,24.4,48.0,183.0,1613.0,75.05999999999999,207.2,64.46000000000001,19.7,55.44,23.639,420.0,45.0,30.0,No,51.0,Male,Non-Hispanic White,College graduate or above,Value greater/equal to 5
 130396.0,No,104.0,4.11,65.6,154.9,27.3,68.0,214.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,240.0,20.0,0.0,No,56.0,Female,Non-Hispanic White,Some college or AA degree,4.82
 130398.0,No,107.0,9.81,73.1,159.5,28.7,41.0,189.0,1109.0,32.42,195.5,82.65,24.700000000000006,12.95,2.045,60.0,120.0,60.0,No,47.0,Male,Mexican American,High school graduate / GED or equivalent,1.67
-130402.0,No,73.0,6.52,,,,54.0,135.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,840.0,60.0,60.0,Yes,26.0,Female,Non-Hispanic White,College graduate or above,Value greater/equal to 5
+130402.0,No,73.0,6.52,67.9,162.8,25.4,54.0,135.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,840.0,60.0,60.0,Yes,26.0,Female,Non-Hispanic White,College graduate or above,Value greater/equal to 5
 130404.0,No,100.0,7.9,75.9,171.8,25.7,53.0,179.0,1879.0,62.49,170.05,30.05,11.8,105.0,27.694,120.0,50.0,30.0,Yes,73.0,Female,Non-Hispanic White,Some college or AA degree,4.42
 130408.0,No,89.0,6.67,55.0,160.2,21.4,82.0,169.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,120.0,45.0,45.0,No,From 80 and up,Male,Non-Hispanic Black,9-11th grade / 12th grade with no diploma,1.02
 130413.0,No,95.0,8.82,75.5,144.6,36.1,56.0,217.0,1275.0,46.95,165.14,49.75,13.2,48.02,13.538,60.0,50.0,0.0,No,67.0,Female,Other Hispanic,9-11th grade / 12th grade with no diploma,0.05
@@ -14,7 +14,7 @@ SEQN,DIQ010,LBXGLU,LBXIN,BMXWT,BMXHT,BMXBMI,LBDHDD,LBXTC,DR1TKCAL,DR1TPROT,DR1TC
 130418.0,No,96.0,13.47,93.2,174.2,30.7,41.0,155.0,1357.0,7.81,236.57,178.43,3.9,45.17,13.786,5.397605346934028e-79,45.0,0.0,No,53.0,Male,Non-Hispanic White,High school graduate / GED or equivalent,0.2
 130420.0,No,98.0,17.38,95.1,166.3,34.4,32.0,219.0,756.0,36.44,91.43,35.39,3.3,26.570000000000004,8.809000000000001,360.0,45.0,0.0,Yes,18.0,Male,Non-Hispanic White,,1.02
 130422.0,No,98.0,7.33,77.5,170.0,26.8,43.0,165.0,2104.0,72.67,196.62,87.02,18.4,118.26999999999998,37.005,240.0,45.0,300.0,No,66.0,Male,Non-Hispanic White,Some college or AA degree,3.82
-130424.0,No,87.0,7.27,,,,47.0,165.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,420.0,60.0,30.0,No,19.0,Female,Non-Hispanic White,,0.0
+130424.0,No,87.0,7.27,67.9,162.8,25.4,47.0,165.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,420.0,60.0,30.0,No,19.0,Female,Non-Hispanic White,,0.0
 130429.0,No,101.0,9.56,34.4,150.2,15.2,64.0,214.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,,14.0,Male,Non-Hispanic White,,3.42
 130433.0,No,102.0,12.8,47.2,165.2,17.3,60.0,169.0,1927.0,28.96,305.26,162.79000000000002,10.000000000000002,69.46000000000001,21.513,0.0,0.0,0.0,,14.0,Female,Non-Hispanic White,,Value greater/equal to 5
 130435.0,No,115.0,8.61,67.4,169.0,23.6,46.0,116.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,No,17.0,Male,Other/Multi-Racial,,Value greater/equal to 5
@@ -214,7 +214,7 @@ SEQN,DIQ010,LBXGLU,LBXIN,BMXWT,BMXHT,BMXBMI,LBDHDD,LBXTC,DR1TKCAL,DR1TPROT,DR1TC
 131059.0,No,106.0,6.48,77.2,165.8,28.1,57.0,164.0,2543.0,118.95999999999998,302.36,122.71,23.7,88.33999999999999,22.984,600.0,60.0,60.0,Yes,70.0,Male,Other/Multi-Racial,College graduate or above,Value greater/equal to 5
 131065.0,No,108.0,8.17,73.2,161.4,28.1,46.0,156.0,761.0,23.16,70.61000000000001,48.18000000000001,6.7,43.1,8.864,180.0,20.0,0.0,No,65.0,Male,Non-Hispanic White,High school graduate / GED or equivalent,1.37
 131073.0,Yes,125.0,201.58,123.9,174.8,40.5,37.0,135.0,2229.0,100.07999999999998,268.73,63.21999999999999,18.0,83.53,23.602000000000004,720.0,120.0,0.0,Yes,63.0,Male,Non-Hispanic White,Some college or AA degree,Value greater/equal to 5
-131076.0,Yes,122.0,7.63,74.7,,,72.0,198.0,2320.0,98.27,256.39,110.14,18.500000000000004,102.25,31.068,600.0,15.0,0.0,Yes,75.0,Male,Mexican American,High school graduate / GED or equivalent,3.47
+131076.0,Yes,122.0,7.63,74.7,171.8,28.1,72.0,198.0,2320.0,98.27,256.39,110.14,18.500000000000004,102.25,31.068,600.0,15.0,0.0,Yes,75.0,Male,Mexican American,High school graduate / GED or equivalent,3.47
 131077.0,No,122.0,15.61,92.6,169.5,32.2,71.0,240.0,7782.0,167.79,685.87,170.86,40.60000000000001,424.07,119.219,600.0,30.0,0.0,No,47.0,Male,Non-Hispanic Black,Some college or AA degree,3.22
 131083.0,No,118.0,31.07,98.6,155.7,40.7,56.0,176.0,1862.0,28.96,274.95000000000005,197.98000000000005,3.9,42.5,14.36,240.0,0.0,0.0,Yes,52.0,Female,Other Hispanic,9-11th grade / 12th grade with no diploma,1.18
 131085.0,No,119.0,15.73,81.9,173.3,27.3,53.0,158.0,1831.0,59.38999999999999,226.17,122.29,19.6,51.31,12.87,120.0,60.0,60.0,No,From 80 and up,Male,Non-Hispanic White,College graduate or above,2.32
@@ -297,7 +297,7 @@ SEQN,DIQ010,LBXGLU,LBXIN,BMXWT,BMXHT,BMXBMI,LBDHDD,LBXTC,DR1TKCAL,DR1TPROT,DR1TC
 131392.0,No,94.0,5.45,81.8,182.2,24.6,78.0,210.0,6273.0,192.33999999999995,780.5599999999998,295.4200000000001,70.49999999999999,276.68000000000006,84.49299999999998,240.0,60.0,60.0,Yes,59.0,Male,Non-Hispanic White,College graduate or above,Value greater/equal to 5
 131397.0,Yes,131.0,11.5,83.1,176.8,26.6,41.0,245.0,1721.0,62.16,148.04,45.370000000000005,7.600000000000001,78.09,25.9,360.0,20.0,30.0,No,66.0,Male,Non-Hispanic White,Some college or AA degree,Value greater/equal to 5
 131401.0,No,84.0,46.07,65.5,163.4,24.5,55.0,203.0,1693.0,75.88,204.17,81.61,24.9,68.08,18.055000000000003,360.0,45.0,15.0,Yes,35.0,Female,Other/Multi-Racial,College graduate or above,0.0
-131403.0,No,105.0,6.15,,162.5,,90.0,251.0,1244.0,41.44,85.98,31.07,6.300000000000001,40.8,18.286,60.0,0.0,45.0,Yes,63.0,Female,Non-Hispanic White,Some college or AA degree,Value greater/equal to 5
+131403.0,No,105.0,6.15,74.1,162.5,28.9,90.0,251.0,1244.0,41.44,85.98,31.07,6.300000000000001,40.8,18.286,60.0,0.0,45.0,Yes,63.0,Female,Non-Hispanic White,Some college or AA degree,Value greater/equal to 5
 131410.0,No,97.0,9.41,65.8,161.3,25.3,74.0,233.0,1571.0,60.84,131.74,38.12,11.8,90.08,30.971000000000004,240.0,60.0,15.0,No,59.0,Female,Non-Hispanic White,Some college or AA degree,Value greater/equal to 5
 131412.0,No,79.0,18.37,58.6,166.9,21.0,47.0,140.0,3141.0,109.37,359.74,95.38,20.8,83.35,20.267,360.0,0.0,0.0,No,21.0,Female,Non-Hispanic Black,High school graduate / GED or equivalent,1.71
 131414.0,No,102.0,13.1,87.8,190.1,24.3,35.0,190.0,3072.0,100.1,338.42,186.83,27.6,154.62,44.608,180.0,60.0,45.0,No,43.0,Male,Non-Hispanic White,College graduate or above,4.33
@@ -320,7 +320,7 @@ SEQN,DIQ010,LBXGLU,LBXIN,BMXWT,BMXHT,BMXBMI,LBDHDD,LBXTC,DR1TKCAL,DR1TPROT,DR1TC
 131483.0,No,101.0,5.51,64.6,164.0,24.0,66.0,253.0,1828.0,90.8,129.47,47.23,12.999999999999998,107.78,33.81100000000001,180.0,60.0,30.0,No,53.0,Female,Non-Hispanic White,Some college or AA degree,4.82
 131491.0,No,85.0,8.89,85.2,181.5,25.9,53.0,184.0,1913.0,60.49000000000001,334.26,178.91,19.800000000000004,37.59000000000001,10.618,180.0,30.0,30.0,Yes,52.0,Male,Non-Hispanic White,College graduate or above,Value greater/equal to 5
 131495.0,No,100.0,5.63,61.9,154.2,26.0,76.0,194.0,954.0,44.49,115.12,38.54,14.4,18.3,5.957999999999999,120.0,60.0,60.0,No,70.0,Female,Non-Hispanic White,College graduate or above,Value greater/equal to 5
-131499.0,Borderline,130.0,4.9,,,,59.0,195.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,480.0,15.0,0.0,Yes,55.0,Female,Other/Multi-Racial,College graduate or above,Value greater/equal to 5
+131499.0,Borderline,130.0,4.9,79.5,161.35,30.2,59.0,195.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,480.0,15.0,0.0,Yes,55.0,Female,Other/Multi-Racial,College graduate or above,Value greater/equal to 5
 131501.0,No,91.0,7.66,103.6,177.3,33.0,42.0,184.0,3095.0,100.0,177.96,56.88999999999999,27.1,149.04,37.218,120.0,0.0,120.0,Yes,21.0,Male,Non-Hispanic White,High school graduate / GED or equivalent,Value greater/equal to 5
 131507.0,No,158.0,87.76,92.2,153.4,39.2,64.0,256.0,1377.0,47.52,185.6,102.58,10.1,51.04,17.195,180.0,3.0,0.0,Yes,61.0,Female,Other Hispanic,High school graduate / GED or equivalent,1.78
 131510.0,No,87.0,7.09,54.6,153.4,23.2,43.0,116.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,300.0,0.0,0.0,No,61.0,Female,Non-Hispanic White,High school graduate / GED or equivalent,0.0
@@ -440,7 +440,7 @@ SEQN,DIQ010,LBXGLU,LBXIN,BMXWT,BMXHT,BMXBMI,LBDHDD,LBXTC,DR1TKCAL,DR1TPROT,DR1TC
 131922.0,No,101.0,3.7,91.5,169.0,32.0,43.0,209.0,3591.0,194.08,473.73,96.83,34.6,99.61,30.844,720.0,20.0,20.0,Yes,38.0,Male,Other Hispanic,College graduate or above,0.55
 131926.0,No,110.0,6.14,87.9,180.2,27.1,58.0,229.0,2794.0,112.86,295.4,147.98,13.8,132.29,35.553999999999995,180.0,30.0,0.0,No,59.0,Male,Non-Hispanic White,Some college or AA degree,4.83
 131928.0,No,100.0,4.65,68.9,162.1,26.2,41.0,253.0,2632.0,108.18,279.67,123.21000000000002,16.099999999999998,123.12,40.76100000000001,420.0,70.0,10.0,No,62.0,Male,Mexican American,College graduate or above,3.91
-131930.0,No,100.0,15.82,,,,61.0,179.0,2031.0,92.23,187.27,48.67,25.000000000000004,102.47,28.569,60.0,60.0,45.0,Yes,26.0,Female,Mexican American,Some college or AA degree,0.68
+131930.0,No,100.0,15.82,67.9,162.8,25.4,61.0,179.0,2031.0,92.23,187.27,48.67,25.000000000000004,102.47,28.569,60.0,60.0,45.0,Yes,26.0,Female,Mexican American,Some college or AA degree,0.68
 131936.0,No,97.0,5.99,70.2,150.4,31.0,54.0,122.0,1101.0,43.510000000000005,134.96,52.33,7.6,43.45,11.934,300.0,60.0,0.0,No,From 80 and up,Female,Non-Hispanic White,High school graduate / GED or equivalent,2.87
 131938.0,No,99.0,21.94,100.9,165.8,36.7,37.0,229.0,2447.0,93.67999999999998,296.04,98.69,14.4,98.43,37.079,840.0,30.0,0.0,Yes,22.0,Female,Non-Hispanic White,Some college or AA degree,0.0
 131939.0,No,89.0,5.32,63.6,172.2,21.4,91.0,199.0,2704.0,61.4,262.6,126.74,25.4,133.81,37.259,420.0,60.0,0.0,No,67.0,Female,Non-Hispanic White,College graduate or above,Value greater/equal to 5
@@ -502,7 +502,7 @@ SEQN,DIQ010,LBXGLU,LBXIN,BMXWT,BMXHT,BMXBMI,LBDHDD,LBXTC,DR1TKCAL,DR1TPROT,DR1TC
 132149.0,Yes,227.0,15.76,124.0,183.9,36.7,54.0,172.0,1456.0,65.59,181.32,76.32999999999998,17.699999999999996,54.150000000000006,19.253000000000004,360.0,60.0,0.0,Yes,73.0,Male,Other/Multi-Racial,High school graduate / GED or equivalent,3.28
 132150.0,No,99.0,5.6,89.4,182.4,26.9,49.0,245.0,1548.0,73.67999999999999,154.85000000000002,35.95999999999999,30.3,72.89999999999999,20.263,480.0,60.0,50.0,Yes,56.0,Male,Non-Hispanic White,College graduate or above,Value greater/equal to 5
 132167.0,No,88.0,4.44,97.6,149.5,43.7,57.0,238.0,796.0,24.82,107.65,43.59,9.0,29.05,13.686,300.0,0.0,0.0,Yes,55.0,Female,Other Hispanic,High school graduate / GED or equivalent,0.0
-132169.0,Yes,164.0,5.42,,164.0,,42.0,111.0,2461.0,103.36,210.66000000000005,92.99,16.7,132.99,33.691,720.0,90.0,60.0,No,From 80 and up,Male,Non-Hispanic White,College graduate or above,3.08
+132169.0,Yes,164.0,5.42,82.5,164.0,28.1,42.0,111.0,2461.0,103.36,210.66000000000005,92.99,16.7,132.99,33.691,720.0,90.0,60.0,No,From 80 and up,Male,Non-Hispanic White,College graduate or above,3.08
 132180.0,No,98.0,8.18,79.1,164.4,29.3,63.0,209.0,2664.0,154.52,267.07000000000005,115.75,14.4,109.69,38.02799999999999,240.0,30.0,30.0,Yes,51.0,Female,Non-Hispanic White,College graduate or above,Value greater/equal to 5
 132181.0,Yes,186.0,7.01,93.6,183.0,27.9,57.0,182.0,1787.0,84.41999999999999,165.1,52.05,11.500000000000002,71.46000000000001,25.813,660.0,45.0,45.0,Yes,55.0,Male,Non-Hispanic White,College graduate or above,Value greater/equal to 5
 132186.0,No,104.0,5.65,86.9,152.2,37.5,86.0,179.0,1467.0,72.23,133.93,32.239999999999995,10.0,60.040000000000006,17.131,300.0,10.0,0.0,Yes,From 80 and up,Female,Non-Hispanic White,Some college or AA degree,0.0
@@ -781,7 +781,7 @@ SEQN,DIQ010,LBXGLU,LBXIN,BMXWT,BMXHT,BMXBMI,LBDHDD,LBXTC,DR1TKCAL,DR1TPROT,DR1TC
 133079.0,No,89.0,4.05,47.1,167.6,16.8,39.0,153.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,,14.0,Male,Other/Multi-Racial,,Value greater/equal to 5
 133080.0,No,104.0,9.27,87.4,179.9,27.0,51.0,215.0,2093.0,87.88999999999997,234.0,79.82,11.0,88.00000000000001,25.714,360.0,30.0,30.0,Yes,38.0,Male,Mexican American,College graduate or above,Value greater/equal to 5
 133082.0,No,93.0,8.17,52.6,149.7,23.5,54.0,182.0,1432.0,41.79,151.87999999999997,36.98,19.5,74.63,19.58900000000001,180.0,45.0,30.0,Yes,37.0,Female,Non-Hispanic White,College graduate or above,2.83
-133084.0,No,85.0,13.28,,,,84.0,205.0,1384.0,51.88,215.92000000000004,65.01,13.8,23.31,4.865,420.0,0.0,0.0,Yes,63.0,Male,Non-Hispanic Black,College graduate or above,0.0
+133084.0,No,85.0,13.28,86.4,174.25,28.45,84.0,205.0,1384.0,51.88,215.92000000000004,65.01,13.8,23.31,4.865,420.0,0.0,0.0,Yes,63.0,Male,Non-Hispanic Black,College graduate or above,0.0
 133093.0,No,96.0,3.65,53.3,154.2,22.4,74.0,211.0,1203.0,31.03,116.59,31.360000000000003,17.5,53.870000000000005,15.961,180.0,40.0,60.0,Yes,61.0,Female,Other Hispanic,College graduate or above,Value greater/equal to 5
 133098.0,No,107.0,10.14,108.4,178.1,34.2,51.0,188.0,2234.0,69.1,154.13,94.3,14.2,149.48999999999998,34.017,480.0,45.0,0.0,No,71.0,Male,Other/Multi-Racial,College graduate or above,2.21
 133101.0,No,122.0,36.94,175.1,179.7,54.2,49.0,89.0,2091.0,71.16,223.58,58.89,10.6,102.18,35.11,780.0,60.0,0.0,Yes,45.0,Male,Non-Hispanic White,Some college or AA degree,1.52
@@ -851,7 +851,7 @@ SEQN,DIQ010,LBXGLU,LBXIN,BMXWT,BMXHT,BMXBMI,LBDHDD,LBXTC,DR1TKCAL,DR1TPROT,DR1TC
 133317.0,No,96.0,10.98,85.0,183.5,25.2,53.0,229.0,2570.0,137.65,324.8299999999999,143.01000000000002,15.8,68.53999999999999,24.392,240.0,30.0,15.0,No,41.0,Male,Non-Hispanic White,College graduate or above,Value greater/equal to 5
 133318.0,No,110.0,6.81,64.7,165.1,23.7,66.0,254.0,2708.0,69.99,387.98,134.23,25.0,78.91000000000001,26.79,360.0,0.0,0.0,No,63.0,Male,Non-Hispanic White,Some college or AA degree,2.85
 133320.0,No,87.0,3.9,115.7,188.0,32.7,63.0,210.0,1661.0,80.35,86.55000000000001,39.76,9.8,85.02999999999999,33.55,300.0,60.0,20.0,Yes,47.0,Male,Non-Hispanic White,College graduate or above,Value greater/equal to 5
-133322.0,Yes,123.0,8.37,,,,43.0,150.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,480.0,0.0,0.0,No,From 80 and up,Female,Non-Hispanic Black,9-11th grade / 12th grade with no diploma,0.0
+133322.0,Yes,123.0,8.37,69.55,158.2,28.2,43.0,150.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,480.0,0.0,0.0,No,From 80 and up,Female,Non-Hispanic Black,9-11th grade / 12th grade with no diploma,0.0
 133324.0,No,106.0,8.76,55.9,156.5,22.8,66.0,155.0,1391.0,50.330000000000005,144.24,57.18000000000001,8.5,68.53999999999999,26.959,240.0,0.0,0.0,No,63.0,Female,Non-Hispanic White,Some college or AA degree,3.82
 133325.0,No,107.0,10.9,98.3,185.5,28.6,52.0,201.0,1639.0,96.08,47.45,19.37,11.300000000000002,120.44,35.92000000000001,360.0,45.0,0.0,Yes,40.0,Male,Mexican American,College graduate or above,Value greater/equal to 5
 133334.0,No,96.0,6.81,90.4,167.8,32.1,43.0,182.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,240.0,0.0,0.0,No,75.0,Male,Non-Hispanic White,Some college or AA degree,Value greater/equal to 5
@@ -867,7 +867,7 @@ SEQN,DIQ010,LBXGLU,LBXIN,BMXWT,BMXHT,BMXBMI,LBDHDD,LBXTC,DR1TKCAL,DR1TPROT,DR1TC
 133369.0,Borderline,112.0,8.36,54.1,162.6,20.5,66.0,228.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,300.0,15.0,180.0,Yes,63.0,Female,Other/Multi-Racial,College graduate or above,Value greater/equal to 5
 133370.0,No,99.0,12.46,59.2,164.7,21.8,57.0,174.0,777.0,26.23,119.47,21.09,14.3,22.02,6.658,600.0,30.0,0.0,Yes,26.0,Female,Non-Hispanic White,College graduate or above,2.21
 133373.0,No,67.0,8.06,57.7,170.8,19.8,60.0,145.0,2302.0,108.4,285.72,131.66,44.0,82.64999999999999,23.524,180.0,90.0,30.0,No,24.0,Female,Non-Hispanic White,College graduate or above,0.0
-133374.0,Yes,129.0,8.06,,160.9,,41.0,210.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,420.0,20.0,0.0,No,From 80 and up,Male,Non-Hispanic White,Some college or AA degree,Value greater/equal to 5
+133374.0,Yes,129.0,8.06,82.5,160.9,28.1,41.0,210.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,420.0,20.0,0.0,No,From 80 and up,Male,Non-Hispanic White,Some college or AA degree,Value greater/equal to 5
 133378.0,No,80.0,5.96,73.2,162.3,27.8,58.0,149.0,1614.0,83.34999999999998,135.42999999999998,55.66,6.299999999999999,82.41000000000003,25.654,300.0,20.0,40.0,Yes,18.0,Female,Non-Hispanic White,,0.44
 133380.0,No,106.0,8.33,64.9,152.7,27.8,94.0,262.0,2058.0,71.49000000000001,187.63,111.34,19.2,85.14999999999999,23.425,480.0,0.0,0.0,Yes,69.0,Female,Non-Hispanic White,College graduate or above,Value greater/equal to 5
 133388.0,No,92.0,9.28,92.3,183.6,27.4,32.0,136.0,1985.0,57.51999999999999,246.76,124.42,6.9,84.59,33.842,480.0,0.0,0.0,No,32.0,Male,Other/Multi-Racial,Some college or AA degree,3.67
@@ -977,7 +977,7 @@ SEQN,DIQ010,LBXGLU,LBXIN,BMXWT,BMXHT,BMXBMI,LBDHDD,LBXTC,DR1TKCAL,DR1TPROT,DR1TC
 133718.0,No,111.0,14.53,91.8,174.0,30.3,44.0,197.0,3283.0,93.37,352.72,157.5,22.8,171.84999999999997,50.729,420.0,60.0,0.0,Yes,40.0,Male,Mexican American,College graduate or above,Value greater/equal to 5
 133725.0,No,96.0,16.0,81.7,163.5,30.6,41.0,241.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,360.0,30.0,0.0,Yes,60.0,Female,Non-Hispanic White,College graduate or above,2.92
 133727.0,No,97.0,4.23,77.2,177.2,24.6,45.0,136.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,300.0,90.0,10.0,No,19.0,Male,Non-Hispanic White,,Value greater/equal to 5
-133728.0,Borderline,99.0,3.03,,,,66.0,153.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,90.0,120.0,0.0,No,72.0,Male,Other/Multi-Racial,9-11th grade / 12th grade with no diploma,1.93
+133728.0,Borderline,99.0,3.03,86.4,174.25,28.45,66.0,153.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,90.0,120.0,0.0,No,72.0,Male,Other/Multi-Racial,9-11th grade / 12th grade with no diploma,1.93
 133731.0,No,98.0,5.47,86.7,177.3,27.6,41.0,138.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,50.0,60.0,60.0,Yes,31.0,Male,Mexican American,College graduate or above,0.86
 133732.0,No,89.0,66.41,98.3,158.5,39.1,36.0,132.0,2152.0,57.81,306.79,113.11,31.5,77.58999999999999,30.012000000000004,180.0,120.0,0.0,No,27.0,Female,Other Hispanic,Less than 9th grade,0.23
 133733.0,No,85.0,8.02,58.7,152.8,25.1,52.0,184.0,3275.0,81.13,510.65,300.82000000000005,31.7,110.22,43.332,600.0,45.0,0.0,No,56.0,Female,Non-Hispanic White,High school graduate / GED or equivalent,0.72
@@ -1046,7 +1046,7 @@ SEQN,DIQ010,LBXGLU,LBXIN,BMXWT,BMXHT,BMXBMI,LBDHDD,LBXTC,DR1TKCAL,DR1TPROT,DR1TC
 133986.0,No,109.0,7.18,84.3,182.9,25.2,55.0,190.0,2407.0,103.05,132.98999999999998,28.06,9.4,161.69000000000003,55.623,540.0,60.0,30.0,No,53.0,Male,Non-Hispanic White,College graduate or above,Value greater/equal to 5
 133992.0,No,94.0,6.32,64.2,162.5,24.3,54.0,157.0,1256.0,51.93000000000001,98.52,46.28,9.7,72.72999999999999,23.082,120.0,45.0,0.0,No,47.0,Female,Other Hispanic,College graduate or above,0.0
 133997.0,No,93.0,18.36,60.3,174.7,19.8,59.0,154.0,1966.0,44.73,228.24,116.55,8.599999999999998,98.46,28.833,0.0,0.0,0.0,,13.0,Female,Other/Multi-Racial,,4.27
-133998.0,No,104.0,3.43,54.3,,,159.0,257.0,750.0,38.83,83.59,40.44,9.3,17.28,4.112,180.0,0.0,0.0,No,76.0,Female,Non-Hispanic White,College graduate or above,3.11
+133998.0,No,104.0,3.43,54.3,158.2,28.2,159.0,257.0,750.0,38.83,83.59,40.44,9.3,17.28,4.112,180.0,0.0,0.0,No,76.0,Female,Non-Hispanic White,College graduate or above,3.11
 134005.0,No,96.0,19.68,115.5,172.0,39.0,41.0,137.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,,14.0,Male,Other Hispanic,,1.51
 134010.0,No,101.0,12.53,67.2,157.2,27.2,57.0,193.0,2204.0,76.28,284.13000000000005,113.89,14.2,84.93,24.441,660.0,30.0,0.0,No,71.0,Female,Non-Hispanic White,College graduate or above,Value greater/equal to 5
 134012.0,Yes,293.0,3.56,57.3,173.6,19.0,79.0,180.0,1959.0,61.56999999999999,251.29,89.10000000000001,16.9,69.94,21.895,300.0,0.0,0.0,No,51.0,Female,Non-Hispanic White,High school graduate / GED or equivalent,4.64
@@ -1064,7 +1064,7 @@ SEQN,DIQ010,LBXGLU,LBXIN,BMXWT,BMXHT,BMXBMI,LBDHDD,LBXTC,DR1TKCAL,DR1TPROT,DR1TC
 134048.0,No,101.0,15.57,83.1,176.0,26.8,60.0,175.0,1017.0,39.09,138.29000000000002,27.01,6.199999999999999,33.59,9.903,180.0,60.0,60.0,Yes,18.0,Female,Non-Hispanic White,,Value greater/equal to 5
 134050.0,Borderline,113.0,17.41,156.1,183.8,46.2,58.0,196.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,540.0,0.0,0.0,Yes,49.0,Male,Non-Hispanic White,High school graduate / GED or equivalent,3.6
 134051.0,No,100.0,14.49,81.8,152.7,35.1,51.0,172.0,918.0,36.18,116.1,63.73,15.7,37.59,10.509,480.0,30.0,0.0,Yes,41.0,Female,Non-Hispanic White,College graduate or above,Value greater/equal to 5
-134052.0,Yes,103.0,12.13,,,,51.0,148.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,180.0,5.0,0.0,No,77.0,Female,Non-Hispanic White,College graduate or above,Value greater/equal to 5
+134052.0,Yes,103.0,12.13,69.55,158.2,28.2,51.0,148.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,180.0,5.0,0.0,No,77.0,Female,Non-Hispanic White,College graduate or above,Value greater/equal to 5
 134053.0,No,104.0,6.06,71.5,172.1,24.1,63.0,137.0,3661.0,154.15,280.37,45.52,20.9,214.43,49.782,300.0,240.0,120.0,Yes,18.0,Male,Other/Multi-Racial,,Value greater/equal to 5
 134054.0,No,92.0,7.2,59.4,155.6,24.5,64.0,160.0,1707.0,57.78,218.23,112.86,17.299999999999997,66.5,20.292,240.0,15.0,0.0,No,60.0,Female,Non-Hispanic White,Some college or AA degree,0.0
 134055.0,Yes,174.0,131.67,77.5,167.6,27.6,51.0,159.0,405.0,12.8,50.65,16.8,3.2,18.59,3.798,300.0,0.0,0.0,No,55.0,Female,Non-Hispanic White,High school graduate / GED or equivalent,0.1
@@ -1150,7 +1150,7 @@ SEQN,DIQ010,LBXGLU,LBXIN,BMXWT,BMXHT,BMXBMI,LBDHDD,LBXTC,DR1TKCAL,DR1TPROT,DR1TC
 134332.0,No,95.0,9.98,105.8,161.0,40.8,47.0,117.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,180.0,120.0,120.0,Yes,29.0,Female,Other Hispanic,Some college or AA degree,0.0
 134337.0,Yes,145.0,27.3,100.4,160.4,39.0,46.0,159.0,2426.0,37.36,302.98,131.6,20.3,121.42,49.426,300.0,0.0,0.0,No,69.0,Female,Non-Hispanic White,Some college or AA degree,1.72
 134341.0,Yes,103.0,16.59,76.5,162.9,28.8,84.0,253.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,180.0,30.0,30.0,No,59.0,Female,Other/Multi-Racial,Some college or AA degree,0.0
-134342.0,No,81.0,2.37,,161.3,,64.0,215.0,571.0,19.709999999999997,110.63,49.84,11.499999999999998,5.28,0.7889999999999999,720.0,30.0,30.0,Yes,64.0,Female,Non-Hispanic Black,9-11th grade / 12th grade with no diploma,0.98
+134342.0,No,81.0,2.37,74.1,161.3,28.9,64.0,215.0,571.0,19.709999999999997,110.63,49.84,11.499999999999998,5.28,0.7889999999999999,720.0,30.0,30.0,Yes,64.0,Female,Non-Hispanic Black,9-11th grade / 12th grade with no diploma,0.98
 134346.0,No,91.0,4.38,53.2,160.3,20.7,50.0,95.0,463.0,14.93,47.32,31.64,1.7999999999999998,23.83,10.693,0.0,0.0,0.0,,13.0,Male,Non-Hispanic Black,,0.3
 134354.0,No,101.0,14.19,118.5,175.6,38.4,55.0,153.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,90.0,40.0,0.0,Yes,50.0,Male,Non-Hispanic Black,Some college or AA degree,Value greater/equal to 5
 134357.0,No,92.0,8.42,31.6,150.5,14.0,61.0,165.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,,15.0,Female,Other/Multi-Racial,,Value greater/equal to 5
@@ -1162,7 +1162,7 @@ SEQN,DIQ010,LBXGLU,LBXIN,BMXWT,BMXHT,BMXBMI,LBDHDD,LBXTC,DR1TKCAL,DR1TPROT,DR1TC
 134388.0,No,92.0,3.69,64.4,162.9,24.3,78.0,205.0,1733.0,46.61000000000001,190.49,73.72,19.899999999999995,74.08,23.782,240.0,120.0,60.0,Yes,65.0,Female,Mexican American,Some college or AA degree,2.03
 134389.0,No,105.0,6.69,82.5,170.7,28.3,60.0,224.0,1594.0,65.30999999999999,162.93999999999997,89.06000000000002,23.8,75.57000000000001,25.441000000000003,300.0,60.0,0.0,Yes,69.0,Female,Non-Hispanic White,College graduate or above,4.64
 134398.0,No,85.0,5.6,69.7,160.2,27.2,60.0,135.0,2772.0,69.96,212.74,74.19,20.1,131.76,26.256,240.0,15.0,0.0,No,76.0,Female,Other Hispanic,Some college or AA degree,1.37
-134399.0,No,105.0,4.64,,,,62.0,239.0,1022.0,69.39,17.55,8.59,1.4,74.35,17.956,5.397605346934028e-79,30.0,20.0,Yes,57.0,Female,Other Hispanic,Some college or AA degree,0.0
+134399.0,No,105.0,4.64,79.5,161.35,30.2,62.0,239.0,1022.0,69.39,17.55,8.59,1.4,74.35,17.956,5.397605346934028e-79,30.0,20.0,Yes,57.0,Female,Other Hispanic,Some college or AA degree,0.0
 134402.0,No,97.0,16.96,66.2,174.6,21.7,58.0,187.0,1554.0,72.61,152.99999999999997,19.05,12.699999999999998,70.20999999999998,11.792,0.0,0.0,0.0,,15.0,Male,Other Hispanic,,3.0
 134403.0,No,127.0,14.7,96.4,166.0,35.0,58.0,177.0,2688.0,109.28,325.0,158.26000000000002,30.9,110.95000000000002,27.695,300.0,30.0,0.0,Yes,68.0,Female,Other/Multi-Racial,Some college or AA degree,4.82
 134404.0,No,99.0,8.98,67.6,154.1,28.5,54.0,235.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,420.0,60.0,30.0,Yes,52.0,Female,Non-Hispanic White,Some college or AA degree,Value greater/equal to 5
@@ -1345,7 +1345,7 @@ SEQN,DIQ010,LBXGLU,LBXIN,BMXWT,BMXHT,BMXBMI,LBDHDD,LBXTC,DR1TKCAL,DR1TPROT,DR1TC
 135060.0,No,129.0,8.22,69.9,169.5,24.3,48.0,167.0,2223.0,72.44,249.97,107.76,15.799999999999995,104.06000000000002,41.721,600.0,0.0,0.0,No,From 80 and up,Male,Non-Hispanic White,College graduate or above,1.72
 135077.0,No,101.0,7.05,66.8,161.8,25.5,57.0,210.0,1108.0,61.8,87.57000000000001,14.49,10.6,58.48,18.878,180.0,90.0,90.0,No,From 80 and up,Female,Non-Hispanic Black,College graduate or above,2.61
 135078.0,No,94.0,14.1,64.1,163.2,24.1,42.0,136.0,2868.0,105.62,470.32,46.92,46.6,69.41999999999999,16.87,0.0,0.0,0.0,No,17.0,Female,Non-Hispanic White,,0.0
-135084.0,No,104.0,7.24,,,,54.0,191.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,60.0,0.0,15.0,Yes,50.0,Female,Non-Hispanic Black,9-11th grade / 12th grade with no diploma,0.0
+135084.0,No,104.0,7.24,79.5,161.35,30.2,54.0,191.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,60.0,0.0,15.0,Yes,50.0,Female,Non-Hispanic Black,9-11th grade / 12th grade with no diploma,0.0
 135090.0,No,111.0,13.62,63.2,157.4,25.5,55.0,200.0,876.0,37.080000000000005,129.04,52.69,19.4,25.05,8.84,240.0,30.0,60.0,Yes,70.0,Female,Other/Multi-Racial,College graduate or above,2.33
 135092.0,No,104.0,5.81,86.4,172.2,29.1,40.0,161.0,3148.0,148.66,348.27,151.54000000000002,50.8,134.67999999999998,42.29600000000001,60.0,0.0,0.0,No,64.0,Male,Other Hispanic,Less than 9th grade,0.08
 135094.0,No,102.0,39.88,96.2,175.6,31.2,41.0,142.0,2322.0,55.00000000000001,278.16,172.18,13.3,83.74,29.723000000000003,840.0,60.0,60.0,No,34.0,Male,Non-Hispanic White,College graduate or above,Value greater/equal to 5
@@ -1432,7 +1432,7 @@ SEQN,DIQ010,LBXGLU,LBXIN,BMXWT,BMXHT,BMXBMI,LBDHDD,LBXTC,DR1TKCAL,DR1TPROT,DR1TC
 135376.0,No,96.0,16.27,88.5,167.0,31.7,36.0,174.0,3068.0,236.26,177.19,114.66,18.8,156.86,58.016000000000005,360.0,90.0,60.0,Yes,29.0,Male,Mexican American,College graduate or above,3.42
 135381.0,No,94.0,20.03,65.5,187.9,18.6,75.0,242.0,2481.0,112.93,246.35,149.88,5.099999999999999,116.56000000000002,36.681,720.0,45.0,30.0,No,23.0,Male,Non-Hispanic Black,College graduate or above,0.58
 135384.0,No,88.0,2.44,54.4,161.2,20.9,86.0,201.0,1334.0,49.61000000000001,138.39,54.34,10.5,35.24000000000001,9.361,480.0,45.0,60.0,Yes,60.0,Female,Non-Hispanic White,College graduate or above,3.16
-135385.0,No,112.0,14.02,,190.5,,67.0,190.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,360.0,0.0,0.0,No,56.0,Male,Non-Hispanic Black,Some college or AA degree,0.58
+135385.0,No,112.0,14.02,88.8,190.5,29.0,67.0,190.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,360.0,0.0,0.0,No,56.0,Male,Non-Hispanic Black,Some college or AA degree,0.58
 135388.0,No,89.0,3.25,60.5,160.9,23.4,56.0,151.0,1707.0,83.87,172.48,93.68999999999998,2.8,73.74000000000001,19.432,360.0,30.0,60.0,No,29.0,Female,Non-Hispanic Black,College graduate or above,3.77
 135389.0,No,98.0,6.48,50.8,153.4,21.6,79.0,161.0,1439.0,37.010000000000005,218.14,85.99,15.9,48.36,14.048,360.0,90.0,120.0,No,27.0,Female,Other/Multi-Racial,College graduate or above,Value greater/equal to 5
 135391.0,No,115.0,3.72,79.7,176.7,25.5,39.0,127.0,1412.0,68.9,153.53,57.330000000000005,15.9,60.62000000000001,17.806,300.0,30.0,0.0,No,65.0,Male,Mexican American,College graduate or above,1.64
@@ -1513,7 +1513,7 @@ SEQN,DIQ010,LBXGLU,LBXIN,BMXWT,BMXHT,BMXBMI,LBDHDD,LBXTC,DR1TKCAL,DR1TPROT,DR1TC
 135661.0,Borderline,167.0,8.24,85.1,175.9,27.5,41.0,364.0,1706.0,69.63999999999999,234.66,114.46,17.799999999999997,57.06,13.353,300.0,180.0,60.0,Yes,59.0,Male,Non-Hispanic White,Some college or AA degree,3.26
 135663.0,No,98.0,12.87,66.2,154.0,27.9,60.0,168.0,2041.0,61.85,225.33,115.07,20.4,103.13,22.32,480.0,45.0,0.0,Yes,62.0,Female,Non-Hispanic Black,College graduate or above,Value greater/equal to 5
 135665.0,Yes,94.0,12.23,78.7,151.7,34.2,36.0,134.0,824.0,63.28,75.05,43.43,2.7,29.73,10.394,180.0,0.0,0.0,No,65.0,Female,Mexican American,High school graduate / GED or equivalent,0.58
-135668.0,No,107.0,10.31,,,,64.0,263.0,1733.0,84.89,185.64,122.93,10.0,72.45,20.491,600.0,30.0,0.0,Yes,61.0,Female,Non-Hispanic White,College graduate or above,1.18
+135668.0,No,107.0,10.31,74.1,160.2,28.9,64.0,263.0,1733.0,84.89,185.64,122.93,10.0,72.45,20.491,600.0,30.0,0.0,Yes,61.0,Female,Non-Hispanic White,College graduate or above,1.18
 135669.0,No,101.0,11.66,102.7,173.4,34.2,35.0,200.0,2932.0,107.6,346.3900000000001,201.91000000000005,14.7,126.08,51.513,600.0,60.0,60.0,No,37.0,Male,Non-Hispanic White,College graduate or above,3.6
 135671.0,No,86.0,6.63,69.6,167.0,25.0,44.0,104.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,120.0,60.0,30.0,Yes,36.0,Female,Non-Hispanic Black,Some college or AA degree,1.78
 135675.0,No,107.0,5.3,94.1,184.0,27.8,47.0,114.0,2374.0,128.8,166.67,47.46000000000001,29.700000000000003,141.53,25.885,480.0,90.0,0.0,No,74.0,Male,Non-Hispanic White,High school graduate / GED or equivalent,2.21
@@ -1593,7 +1593,7 @@ SEQN,DIQ010,LBXGLU,LBXIN,BMXWT,BMXHT,BMXBMI,LBDHDD,LBXTC,DR1TKCAL,DR1TPROT,DR1TC
 135914.0,No,86.0,12.22,96.7,167.6,34.4,41.0,235.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,540.0,120.0,0.0,Yes,63.0,Female,Non-Hispanic White,College graduate or above,4.53
 135919.0,No,92.0,5.72,93.1,165.6,33.9,74.0,244.0,1807.0,113.15,73.71,40.53,8.299999999999999,118.94,49.64999999999999,90.0,0.0,0.0,Yes,62.0,Female,Non-Hispanic White,College graduate or above,3.04
 135920.0,No,94.0,8.56,84.8,163.7,31.6,52.0,157.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,480.0,60.0,30.0,Yes,40.0,Female,Non-Hispanic Black,Some college or AA degree,0.0
-135921.0,No,82.0,3.65,100.4,,,54.0,128.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,120.0,5.0,0.0,Yes,44.0,Female,Other Hispanic,College graduate or above,0.0
+135921.0,No,82.0,3.65,100.4,162.9,28.4,54.0,128.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,120.0,5.0,0.0,Yes,44.0,Female,Other Hispanic,College graduate or above,0.0
 135927.0,No,103.0,14.16,109.5,186.7,31.4,42.0,147.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,600.0,180.0,0.0,No,40.0,Male,Non-Hispanic White,College graduate or above,0.0
 135929.0,Yes,171.0,5.82,70.7,164.9,26.0,72.0,187.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,120.0,30.0,0.0,No,73.0,Female,Other/Multi-Racial,College graduate or above,1.91
 135930.0,No,101.0,2.57,59.9,164.1,22.2,66.0,187.0,1886.0,86.65,216.43,102.18,11.5,74.60000000000001,29.639000000000006,300.0,60.0,30.0,No,59.0,Female,Non-Hispanic White,College graduate or above,Value greater/equal to 5
@@ -1625,7 +1625,7 @@ SEQN,DIQ010,LBXGLU,LBXIN,BMXWT,BMXHT,BMXBMI,LBDHDD,LBXTC,DR1TKCAL,DR1TPROT,DR1TC
 136012.0,Yes,262.0,17.39,61.6,177.2,19.6,29.0,173.0,260.0,4.01,55.88,39.43,1.1,2.34,0.652,120.0,0.0,0.0,No,73.0,Male,Other Hispanic,Less than 9th grade,0.0
 136014.0,No,96.0,3.6,89.7,177.1,28.6,43.0,125.0,3782.0,129.12,526.2099999999999,285.42,24.2,132.29000000000002,47.217,300.0,120.0,5.0,No,20.0,Male,Non-Hispanic White,High school graduate / GED or equivalent,0.65
 136025.0,No,90.0,5.75,64.0,163.3,24.0,50.0,196.0,1357.0,43.78,170.55,56.61000000000001,13.6,55.85000000000001,13.928,360.0,0.0,0.0,No,42.0,Female,Non-Hispanic White,College graduate or above,3.55
-136035.0,No,103.0,7.92,98.7,,,58.0,188.0,2236.0,93.03000000000002,230.82,112.31,11.7,105.23,24.636,600.0,0.0,0.0,Yes,From 80 and up,Male,Non-Hispanic White,High school graduate / GED or equivalent,1.97
+136035.0,No,103.0,7.92,98.7,171.8,28.1,58.0,188.0,2236.0,93.03000000000002,230.82,112.31,11.7,105.23,24.636,600.0,0.0,0.0,Yes,From 80 and up,Male,Non-Hispanic White,High school graduate / GED or equivalent,1.97
 136039.0,No,90.0,8.53,73.8,154.6,30.9,48.0,196.0,1897.0,84.16999999999999,198.38,97.15999999999998,17.599999999999998,87.3,26.105,60.0,0.0,0.0,Yes,36.0,Female,Mexican American,Less than 9th grade,1.22
 136040.0,No,131.0,15.65,71.9,149.4,32.2,54.0,225.0,2289.0,94.06,307.2900000000001,128.51999999999998,33.7,78.32000000000001,27.906,420.0,60.0,60.0,No,41.0,Female,Non-Hispanic White,College graduate or above,Value greater/equal to 5
 136046.0,No,91.0,8.82,85.4,159.9,33.4,75.0,185.0,2164.0,80.69,245.14,142.13,20.1,96.43,38.127,600.0,60.0,50.0,Yes,67.0,Female,Other Hispanic,Some college or AA degree,2.73
@@ -1869,7 +1869,7 @@ SEQN,DIQ010,LBXGLU,LBXIN,BMXWT,BMXHT,BMXBMI,LBDHDD,LBXTC,DR1TKCAL,DR1TPROT,DR1TC
 136854.0,No,91.0,2.25,73.6,177.4,23.4,71.0,168.0,2526.0,117.55,316.48999999999995,171.02999999999997,20.0,68.67999999999999,25.513,120.0,0.0,0.0,No,36.0,Male,Non-Hispanic Black,Some college or AA degree,0.0
 136855.0,No,89.0,5.0,47.0,162.8,17.7,70.0,173.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,120.0,15.0,15.0,No,20.0,Female,Other/Multi-Racial,High school graduate / GED or equivalent,3.22
 136859.0,No,94.0,4.19,96.1,176.2,31.0,41.0,161.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,180.0,60.0,60.0,No,27.0,Male,Other/Multi-Racial,Some college or AA degree,Value greater/equal to 5
-136865.0,Yes,205.0,34.84,125.1,,,43.0,129.0,2057.0,85.95,179.54999999999998,75.92,14.1,111.4,42.205000000000005,720.0,0.0,0.0,No,72.0,Male,Non-Hispanic White,High school graduate / GED or equivalent,4.41
+136865.0,Yes,205.0,34.84,125.1,174.25,28.45,43.0,129.0,2057.0,85.95,179.54999999999998,75.92,14.1,111.4,42.205000000000005,720.0,0.0,0.0,No,72.0,Male,Non-Hispanic White,High school graduate / GED or equivalent,4.41
 136868.0,No,101.0,9.58,70.9,150.1,31.5,32.0,176.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,60.0,0.0,No,41.0,Male,Non-Hispanic Black,Less than 9th grade,0.0
 136870.0,Yes,106.0,18.37,119.9,163.9,44.6,58.0,178.0,2052.0,61.6,261.07,162.07999999999998,7.3,85.27000000000001,27.336,720.0,0.0,0.0,No,53.0,Female,Non-Hispanic Black,Some college or AA degree,1.59
 136872.0,No,107.0,13.76,89.0,159.8,34.9,54.0,204.0,3727.0,162.17000000000004,334.98,182.14,7.7,191.46000000000004,80.175,360.0,120.0,60.0,No,26.0,Male,Non-Hispanic White,High school graduate / GED or equivalent,3.3
@@ -1958,7 +1958,7 @@ SEQN,DIQ010,LBXGLU,LBXIN,BMXWT,BMXHT,BMXBMI,LBDHDD,LBXTC,DR1TKCAL,DR1TPROT,DR1TC
 137123.0,No,98.0,3.23,79.5,178.5,25.0,64.0,157.0,2175.0,79.61000000000001,294.44,170.45,9.8,78.92,30.507,120.0,60.0,0.0,No,68.0,Male,Non-Hispanic White,High school graduate / GED or equivalent,3.04
 137125.0,No,80.0,3.21,57.5,158.9,22.8,80.0,184.0,1637.0,101.98,134.38000000000002,37.0,14.6,76.35000000000001,24.273000000000003,480.0,150.0,60.0,No,42.0,Female,Non-Hispanic Black,College graduate or above,Value greater/equal to 5
 137126.0,No,108.0,24.59,100.9,174.6,33.1,37.0,97.0,1668.0,79.02000000000001,128.0,38.17,7.6,76.36999999999999,20.543,480.0,0.0,120.0,No,68.0,Male,Non-Hispanic Black,High school graduate / GED or equivalent,1.3
-137128.0,No,120.0,23.9,,167.7,,37.0,258.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,360.0,60.0,60.0,Yes,25.0,Female,Non-Hispanic White,Some college or AA degree,Value greater/equal to 5
+137128.0,No,120.0,23.9,67.9,167.7,25.4,37.0,258.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,360.0,60.0,60.0,Yes,25.0,Female,Non-Hispanic White,Some college or AA degree,Value greater/equal to 5
 137130.0,No,92.0,4.97,69.6,183.2,20.7,47.0,125.0,1477.0,61.92,177.56,72.86,8.399999999999999,58.61,22.239,0.0,0.0,0.0,Yes,16.0,Male,Other Hispanic,,1.15
 137136.0,No,117.0,11.1,95.0,177.0,30.3,41.0,131.0,3075.0,105.68,261.49,91.37,18.4,159.71,58.087,540.0,45.0,60.0,Yes,71.0,Male,Non-Hispanic White,College graduate or above,Value greater/equal to 5
 137138.0,Borderline,112.0,12.31,135.6,178.7,42.5,47.0,112.0,3715.0,181.31,212.55,47.54,22.5,200.11,56.407,480.0,180.0,0.0,No,70.0,Male,Non-Hispanic White,College graduate or above,1.06
@@ -1967,7 +1967,7 @@ SEQN,DIQ010,LBXGLU,LBXIN,BMXWT,BMXHT,BMXBMI,LBDHDD,LBXTC,DR1TKCAL,DR1TPROT,DR1TC
 137147.0,No,103.0,5.43,53.5,164.4,19.8,60.0,159.0,1724.0,61.99,230.82,105.91,10.0,60.7,25.6,0.0,0.0,0.0,,15.0,Male,Non-Hispanic White,,1.85
 137149.0,No,85.0,15.08,66.0,170.6,22.7,63.0,195.0,2136.0,85.29999999999998,242.7,85.06000000000002,20.8,91.97,23.581000000000003,600.0,30.0,0.0,Yes,33.0,Female,Non-Hispanic Black,College graduate or above,Value greater/equal to 5
 137153.0,No,106.0,28.65,71.3,161.3,27.4,24.0,134.0,2133.0,75.91,267.72,139.45,15.999999999999996,86.66000000000003,36.25600000000001,120.0,30.0,0.0,No,67.0,Female,Non-Hispanic White,Some college or AA degree,3.46
-137155.0,No,88.0,8.77,,,,32.0,130.0,3470.0,95.93,487.29,293.22,22.2,129.76,47.947,600.0,0.0,0.0,No,22.0,Male,Non-Hispanic White,High school graduate / GED or equivalent,1.77
+137155.0,No,88.0,8.77,80.25,176.25,25.75,32.0,130.0,3470.0,95.93,487.29,293.22,22.2,129.76,47.947,600.0,0.0,0.0,No,22.0,Male,Non-Hispanic White,High school graduate / GED or equivalent,1.77
 137157.0,No,103.0,30.62,95.6,166.5,34.5,57.0,192.0,2387.0,87.96,214.91000000000005,73.05,12.5,99.67,45.044,720.0,60.0,0.0,Yes,47.0,Female,Non-Hispanic White,Some college or AA degree,4.22
 137184.0,No,92.0,33.14,117.3,174.6,38.5,33.0,190.0,3268.0,86.88000000000002,441.37000000000006,165.53,15.8,131.07000000000002,32.56,420.0,60.0,30.0,No,38.0,Male,Mexican American,College graduate or above,3.86
 137186.0,Yes,123.0,14.31,114.2,160.2,44.5,46.0,130.0,2357.0,77.74,225.98999999999995,124.47000000000004,13.1,130.56,44.389,600.0,0.0,0.0,Yes,79.0,Female,Non-Hispanic White,College graduate or above,4.61
@@ -2028,7 +2028,7 @@ SEQN,DIQ010,LBXGLU,LBXIN,BMXWT,BMXHT,BMXBMI,LBDHDD,LBXTC,DR1TKCAL,DR1TPROT,DR1TC
 137351.0,No,86.0,8.65,79.8,161.3,30.7,49.0,184.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,15.0,30.0,0.0,Yes,41.0,Female,Other Hispanic,High school graduate / GED or equivalent,0.0
 137353.0,Yes,165.0,33.2,100.7,177.0,32.1,39.0,159.0,374.0,13.7,34.15,6.99,2.2,20.31,6.326,180.0,30.0,0.0,Yes,69.0,Male,Non-Hispanic Black,9-11th grade / 12th grade with no diploma,0.7
 137354.0,No,111.0,8.2,60.2,157.1,24.4,54.0,143.0,978.0,80.85000000000001,76.51,39.75,6.9,39.88,14.915,600.0,240.0,0.0,Yes,68.0,Female,Non-Hispanic White,Some college or AA degree,0.0
-137360.0,No,93.0,3.92,,,,75.0,203.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,180.0,0.0,0.0,Yes,41.0,Female,Other Hispanic,Some college or AA degree,1.01
+137360.0,No,93.0,3.92,74.65,162.9,28.4,75.0,203.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,180.0,0.0,0.0,Yes,41.0,Female,Other Hispanic,Some college or AA degree,1.01
 137369.0,No,89.0,9.2,63.2,166.9,22.7,83.0,206.0,3376.0,128.33,340.11,144.07000000000002,34.6,173.31,51.49900000000001,0.0,0.0,0.0,,15.0,Female,Mexican American,,2.09
 137370.0,No,121.0,24.08,75.8,172.7,25.4,63.0,166.0,1338.0,42.78000000000001,212.16,69.65,33.300000000000004,38.4,11.606000000000002,360.0,60.0,0.0,No,73.0,Male,Other/Multi-Racial,College graduate or above,2.33
 137374.0,No,87.0,7.67,56.8,164.7,20.9,60.0,193.0,3058.0,108.03,339.67,154.61999999999998,22.5,141.43999999999997,62.913,600.0,60.0,0.0,Yes,25.0,Female,Non-Hispanic White,Some college or AA degree,0.97
@@ -2090,7 +2090,7 @@ SEQN,DIQ010,LBXGLU,LBXIN,BMXWT,BMXHT,BMXBMI,LBDHDD,LBXTC,DR1TKCAL,DR1TPROT,DR1TC
 137548.0,No,108.0,12.01,70.5,157.8,28.3,38.0,263.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,60.0,60.0,0.0,Yes,33.0,Male,Other Hispanic,Less than 9th grade,1.99
 137550.0,No,103.0,9.03,96.8,179.2,30.1,57.0,221.0,2799.0,118.4,204.4,93.68,21.4,84.69000000000001,19.282000000000004,240.0,180.0,45.0,Yes,56.0,Male,Non-Hispanic White,Some college or AA degree,4.23
 137552.0,Yes,104.0,4.99,89.1,175.7,28.9,46.0,208.0,2555.0,149.11,211.13,61.63,19.7,123.12,51.642,360.0,45.0,0.0,Yes,64.0,Male,Non-Hispanic White,High school graduate / GED or equivalent,1.93
-137557.0,No,88.0,3.5,,,,52.0,180.0,721.0,26.4,139.11,82.38999999999999,16.2,8.52,2.576,180.0,45.0,60.0,No,19.0,Female,Non-Hispanic White,,0.66
+137557.0,No,88.0,3.5,67.9,162.8,25.4,52.0,180.0,721.0,26.4,139.11,82.38999999999999,16.2,8.52,2.576,180.0,45.0,60.0,No,19.0,Female,Non-Hispanic White,,0.66
 137564.0,No,106.0,13.8,111.0,181.2,33.8,40.0,177.0,3378.0,172.43,245.13,21.16,37.7,138.34,54.937000000000005,480.0,0.0,0.0,No,51.0,Male,Non-Hispanic White,Some college or AA degree,Value greater/equal to 5
 137566.0,No,95.0,10.95,44.7,159.6,17.5,47.0,120.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,480.0,120.0,0.0,No,19.0,Female,Non-Hispanic Black,,1.42
 137568.0,No,80.0,5.21,76.7,185.4,22.3,61.0,180.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,120.0,1.0,0.0,No,24.0,Male,Non-Hispanic Black,College graduate or above,0.0
@@ -2246,7 +2246,7 @@ SEQN,DIQ010,LBXGLU,LBXIN,BMXWT,BMXHT,BMXBMI,LBDHDD,LBXTC,DR1TKCAL,DR1TPROT,DR1TC
 138086.0,No,96.0,2.84,63.2,177.2,20.1,58.0,170.0,2791.0,99.48,330.0800000000001,113.91,29.2,121.94,38.38,180.0,45.0,0.0,No,63.0,Male,Non-Hispanic White,High school graduate / GED or equivalent,Value greater/equal to 5
 138087.0,No,104.0,6.12,76.5,177.4,24.3,58.0,156.0,2450.0,103.15,208.5,60.49999999999999,27.5,136.76,30.561,300.0,25.0,60.0,Yes,73.0,Male,Non-Hispanic White,College graduate or above,Value greater/equal to 5
 138090.0,No,85.0,15.39,76.7,176.7,24.6,55.0,219.0,1931.0,75.37000000000002,267.03000000000003,205.18,11.4,63.7,20.899,540.0,120.0,20.0,Yes,37.0,Male,Non-Hispanic White,Some college or AA degree,0.65
-138092.0,No,119.0,18.15,,153.7,,71.0,210.0,1683.0,33.540000000000006,198.73,116.13,13.2,84.73,20.155,240.0,40.0,0.0,Yes,72.0,Female,Non-Hispanic White,College graduate or above,4.82
+138092.0,No,119.0,18.15,74.1,153.7,28.9,71.0,210.0,1683.0,33.540000000000006,198.73,116.13,13.2,84.73,20.155,240.0,40.0,0.0,Yes,72.0,Female,Non-Hispanic White,College graduate or above,4.82
 138097.0,Yes,102.0,7.16,122.1,172.8,40.9,43.0,121.0,1549.0,52.11,244.37000000000003,122.35,18.4,40.5,16.240000000000002,180.0,30.0,20.0,Yes,78.0,Male,Non-Hispanic Black,9-11th grade / 12th grade with no diploma,0.0
 138101.0,Yes,199.0,111.93,70.9,144.7,33.9,35.0,119.0,1854.0,81.01,198.68,116.49,16.8,84.06,39.352,300.0,60.0,0.0,No,74.0,Female,Other Hispanic,9-11th grade / 12th grade with no diploma,2.87
 138102.0,No,82.0,5.53,66.4,168.3,23.4,74.0,208.0,3174.0,86.05999999999999,341.1,155.85,20.3,149.78000000000003,54.215,360.0,20.0,0.0,Yes,30.0,Female,Non-Hispanic White,College graduate or above,0.0
@@ -2277,7 +2277,7 @@ SEQN,DIQ010,LBXGLU,LBXIN,BMXWT,BMXHT,BMXBMI,LBDHDD,LBXTC,DR1TKCAL,DR1TPROT,DR1TC
 138181.0,No,93.0,6.93,62.7,148.2,28.5,74.0,261.0,3038.0,99.48999999999998,424.8700000000001,94.56,53.900000000000006,108.15,28.594,180.0,45.0,0.0,Yes,67.0,Female,Other/Multi-Racial,College graduate or above,Value greater/equal to 5
 138184.0,No,105.0,7.82,81.7,166.4,29.5,70.0,188.0,2365.0,112.21,181.85,58.72,9.5,132.57999999999998,46.06499999999999,360.0,30.0,90.0,Yes,76.0,Male,Non-Hispanic White,High school graduate / GED or equivalent,Value greater/equal to 5
 138188.0,No,104.0,18.26,128.2,160.8,49.6,48.0,208.0,2259.0,66.18,257.3,99.07,17.2,112.32,32.799,600.0,30.0,0.0,Yes,73.0,Female,Non-Hispanic White,College graduate or above,Value greater/equal to 5
-138190.0,No,107.0,14.17,,154.8,,52.0,129.0,938.0,27.380000000000003,107.21,54.28,16.599999999999998,47.16,13.988,420.0,10.0,0.0,Yes,From 80 and up,Female,Non-Hispanic White,9-11th grade / 12th grade with no diploma,1.7
+138190.0,No,107.0,14.17,69.55,154.8,28.2,52.0,129.0,938.0,27.380000000000003,107.21,54.28,16.599999999999998,47.16,13.988,420.0,10.0,0.0,Yes,From 80 and up,Female,Non-Hispanic White,9-11th grade / 12th grade with no diploma,1.7
 138191.0,No,101.0,4.14,75.3,176.3,24.2,49.0,231.0,1152.0,50.51,129.76999999999998,35.29,14.300000000000002,49.02000000000001,21.682,480.0,60.0,60.0,No,55.0,Male,Non-Hispanic White,College graduate or above,Value greater/equal to 5
 138192.0,No,87.0,7.24,52.7,157.1,21.4,50.0,146.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,300.0,0.0,0.0,No,19.0,Female,Non-Hispanic White,,0.45
 138193.0,Borderline,120.0,8.8,78.5,145.8,36.9,45.0,162.0,570.0,34.68,55.260000000000005,15.26,5.1,22.67,7.467,720.0,0.0,0.0,Yes,From 80 and up,Female,Other Hispanic,Less than 9th grade,0.05
@@ -2317,7 +2317,7 @@ SEQN,DIQ010,LBXGLU,LBXIN,BMXWT,BMXHT,BMXBMI,LBDHDD,LBXTC,DR1TKCAL,DR1TPROT,DR1TC
 138339.0,Borderline,89.0,31.06,79.0,157.5,31.8,47.0,197.0,2484.0,76.81000000000002,286.6600000000001,161.67,13.0,117.71999999999996,40.402,480.0,30.0,0.0,Yes,40.0,Female,Other/Multi-Racial,College graduate or above,3.28
 138340.0,No,93.0,11.03,58.6,164.7,21.6,48.0,88.0,1961.0,55.09,306.27000000000004,145.70999999999998,16.9,61.19999999999999,18.234,0.0,0.0,0.0,,12.0,Male,Other/Multi-Racial,,Value greater/equal to 5
 138341.0,No,93.0,8.26,79.5,156.6,32.4,57.0,195.0,842.0,44.59,64.72,27.45,13.1,46.89,14.234,240.0,20.0,0.0,Yes,58.0,Female,Non-Hispanic White,Some college or AA degree,Value greater/equal to 5
-138342.0,No,98.0,6.03,,,,59.0,158.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,480.0,30.0,60.0,No,22.0,Female,Other/Multi-Racial,Some college or AA degree,Value greater/equal to 5
+138342.0,No,98.0,6.03,67.9,162.8,25.4,59.0,158.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,480.0,30.0,60.0,No,22.0,Female,Other/Multi-Racial,Some college or AA degree,Value greater/equal to 5
 138350.0,No,91.0,4.95,51.3,166.7,18.5,63.0,132.0,2073.0,50.26,256.32,112.2,12.9,94.57,36.828,600.0,90.0,120.0,No,27.0,Female,Non-Hispanic White,College graduate or above,Value greater/equal to 5
 138353.0,Yes,121.0,5.14,46.2,148.2,21.0,65.0,125.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1200.0,0.0,0.0,No,From 80 and up,Female,Other Hispanic,9-11th grade / 12th grade with no diploma,1.81
 138359.0,No,96.0,37.89,103.1,171.7,35.0,41.0,174.0,2410.0,48.86,342.93,146.98,12.6,96.72000000000004,30.618,600.0,90.0,0.0,Yes,20.0,Female,Non-Hispanic White,High school graduate / GED or equivalent,1.89
@@ -2344,7 +2344,7 @@ SEQN,DIQ010,LBXGLU,LBXIN,BMXWT,BMXHT,BMXBMI,LBDHDD,LBXTC,DR1TKCAL,DR1TPROT,DR1TC
 138422.0,No,148.0,16.14,135.1,175.4,43.9,44.0,163.0,1974.0,92.56,72.43,32.6,3.7,115.62999999999998,47.82600000000001,180.0,0.0,0.0,Yes,78.0,Male,Non-Hispanic White,College graduate or above,Value greater/equal to 5
 138423.0,Yes,197.0,8.02,62.1,159.7,24.3,52.0,148.0,2084.0,89.59,234.2,95.61,9.9,86.73,40.869,360.0,30.0,0.0,No,From 80 and up,Male,Mexican American,9-11th grade / 12th grade with no diploma,2.28
 138424.0,No,101.0,12.07,77.7,178.2,24.5,50.0,132.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,840.0,45.0,0.0,No,65.0,Male,Non-Hispanic Black,College graduate or above,4.05
-138435.0,No,89.0,2.83,,,,66.0,126.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,120.0,0.0,0.0,No,40.0,Female,Non-Hispanic Black,High school graduate / GED or equivalent,0.27
+138435.0,No,89.0,2.83,74.65,162.9,28.4,66.0,126.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,120.0,0.0,0.0,No,40.0,Female,Non-Hispanic Black,High school graduate / GED or equivalent,0.27
 138439.0,No,104.0,6.47,73.0,168.3,25.8,56.0,188.0,1404.0,23.290000000000006,192.54,135.29,18.6,64.56,11.605,300.0,31.0,0.0,No,69.0,Male,Non-Hispanic White,Some college or AA degree,0.88
 138443.0,Yes,142.0,20.12,109.7,168.5,38.6,43.0,189.0,2211.0,75.99,249.96,86.96000000000001,11.1,80.63,33.938,360.0,10.0,0.0,Yes,45.0,Female,Other/Multi-Racial,College graduate or above,1.13
 138444.0,No,111.0,10.44,88.7,183.9,26.2,42.0,121.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,540.0,0.0,0.0,No,64.0,Male,Other Hispanic,Some college or AA degree,1.03
@@ -2502,7 +2502,7 @@ SEQN,DIQ010,LBXGLU,LBXIN,BMXWT,BMXHT,BMXBMI,LBDHDD,LBXTC,DR1TKCAL,DR1TPROT,DR1TC
 138998.0,No,110.0,12.29,96.0,172.5,32.3,47.0,184.0,1440.0,52.26999999999999,226.96,124.25,12.4,36.81,7.836,300.0,60.0,60.0,Yes,71.0,Male,Non-Hispanic Black,High school graduate / GED or equivalent,3.99
 138999.0,No,116.0,31.09,115.2,167.0,41.3,42.0,156.0,2021.0,66.78,199.1,64.96,13.599999999999998,107.54,35.09,360.0,0.0,0.0,Yes,72.0,Male,Non-Hispanic White,College graduate or above,Value greater/equal to 5
 139001.0,No,96.0,6.09,42.9,153.1,18.3,53.0,238.0,1771.0,122.81999999999998,163.02,86.29,3.7,68.77,19.122,480.0,0.0,0.0,No,64.0,Female,Other Hispanic,High school graduate / GED or equivalent,0.52
-139008.0,Yes,193.0,15.12,,,,44.0,115.0,2413.0,108.21,249.08,53.43000000000001,12.8,110.7,52.973,720.0,0.0,0.0,No,65.0,Female,Non-Hispanic White,Some college or AA degree,1.71
+139008.0,Yes,193.0,15.12,74.1,160.2,28.9,44.0,115.0,2413.0,108.21,249.08,53.43000000000001,12.8,110.7,52.973,720.0,0.0,0.0,No,65.0,Female,Non-Hispanic White,Some college or AA degree,1.71
 139011.0,No,77.0,16.64,68.6,165.6,25.0,35.0,63.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,180.0,60.0,30.0,Yes,26.0,Female,Non-Hispanic Black,Some college or AA degree,0.0
 139013.0,No,96.0,24.47,72.5,150.8,31.9,47.0,192.0,1979.0,57.23,204.58,108.88,22.7,106.36,20.244,360.0,60.0,15.0,Yes,22.0,Female,Non-Hispanic White,High school graduate / GED or equivalent,Value greater/equal to 5
 139020.0,No,91.0,6.82,77.2,167.7,27.5,48.0,118.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,,12.0,Male,Non-Hispanic White,,Value greater/equal to 5
@@ -2662,7 +2662,7 @@ SEQN,DIQ010,LBXGLU,LBXIN,BMXWT,BMXHT,BMXBMI,LBDHDD,LBXTC,DR1TKCAL,DR1TPROT,DR1TC
 139533.0,No,93.0,13.25,173.4,168.0,61.4,49.0,141.0,1830.0,79.76,132.42000000000002,29.849999999999994,14.099999999999998,108.18,32.997,480.0,30.0,0.0,Yes,40.0,Female,Other/Multi-Racial,High school graduate / GED or equivalent,0.0
 139538.0,No,98.0,10.46,50.8,157.2,20.6,43.0,155.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,,14.0,Male,Other Hispanic,,0.79
 139539.0,No,109.0,5.99,62.6,148.7,28.3,54.0,280.0,607.0,13.24,86.92,24.680000000000003,5.0,23.96,6.921,300.0,40.0,20.0,Yes,67.0,Female,Non-Hispanic White,9-11th grade / 12th grade with no diploma,4.17
-139541.0,No,92.0,21.3,,,,69.0,145.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,,12.0,Female,Non-Hispanic Black,,1.44
+139541.0,No,92.0,21.3,58.85,160.5,22.8,69.0,145.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,,12.0,Female,Non-Hispanic Black,,1.44
 139546.0,No,88.0,11.02,84.2,185.5,24.5,35.0,160.0,2339.0,74.35,224.15,141.79000000000002,5.800000000000001,131.33,29.219999999999995,480.0,120.0,30.0,No,19.0,Male,Non-Hispanic Black,,1.91
 139548.0,Yes,117.0,6.08,67.2,164.1,25.0,70.0,135.0,852.0,20.77,132.41,64.07,10.1,26.540000000000003,8.994,480.0,0.0,0.0,No,77.0,Female,Non-Hispanic White,High school graduate / GED or equivalent,1.82
 139551.0,No,100.0,13.78,109.7,179.9,33.9,53.0,188.0,2618.0,68.55999999999999,240.63,101.43000000000002,24.2,141.59,34.161,240.0,120.0,0.0,Yes,73.0,Male,Non-Hispanic White,College graduate or above,Value greater/equal to 5
@@ -2836,7 +2836,7 @@ SEQN,DIQ010,LBXGLU,LBXIN,BMXWT,BMXHT,BMXBMI,LBDHDD,LBXTC,DR1TKCAL,DR1TPROT,DR1TC
 140174.0,Borderline,239.0,13.92,101.1,163.4,37.9,48.0,137.0,1460.0,53.7,170.99,36.8,13.500000000000002,63.97000000000001,23.638,300.0,10.0,0.0,No,61.0,Female,Non-Hispanic Black,High school graduate / GED or equivalent,0.79
 140181.0,No,152.0,30.39,107.8,181.6,32.7,57.0,144.0,1318.0,28.06,98.19,54.55,12.9,28.17,12.213,720.0,15.0,30.0,Yes,53.0,Male,Non-Hispanic White,College graduate or above,1.66
 140183.0,No,93.0,9.84,59.0,158.4,23.5,54.0,148.0,2271.0,77.19000000000001,252.85,69.10000000000001,31.7,106.55,37.07599999999999,0.0,0.0,0.0,No,16.0,Female,Mexican American,,1.62
-140185.0,No,88.0,4.86,,161.2,,67.0,219.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,120.0,60.0,0.0,Yes,47.0,Female,Non-Hispanic Black,College graduate or above,Value greater/equal to 5
+140185.0,No,88.0,4.86,79.5,161.2,30.2,67.0,219.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,120.0,60.0,0.0,Yes,47.0,Female,Non-Hispanic Black,College graduate or above,Value greater/equal to 5
 140187.0,No,100.0,9.97,78.2,158.8,31.0,51.0,198.0,748.0,32.5,116.09,17.340000000000003,5.4,17.590000000000003,3.152,300.0,120.0,0.0,Yes,40.0,Female,Other/Multi-Racial,College graduate or above,Value greater/equal to 5
 140189.0,No,90.0,6.48,59.8,159.8,23.4,99.0,205.0,2043.0,88.36,187.66,87.8,13.0,104.26,36.795,180.0,60.0,0.0,No,From 80 and up,Female,Non-Hispanic White,Some college or AA degree,1.23
 140191.0,No,89.0,11.49,58.7,164.1,21.8,79.0,178.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,No,16.0,Female,Other/Multi-Racial,,3.42
@@ -2922,7 +2922,7 @@ SEQN,DIQ010,LBXGLU,LBXIN,BMXWT,BMXHT,BMXBMI,LBDHDD,LBXTC,DR1TKCAL,DR1TPROT,DR1TC
 140498.0,Yes,117.0,19.22,74.6,150.1,33.1,35.0,229.0,2620.0,115.49,237.01,100.05,15.4,136.29,43.557,720.0,60.0,60.0,Yes,56.0,Female,Other Hispanic,College graduate or above,2.87
 140499.0,No,100.0,24.85,110.7,155.1,46.0,49.0,173.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,420.0,5.0,15.0,Yes,57.0,Female,Non-Hispanic Black,9-11th grade / 12th grade with no diploma,0.99
 140505.0,No,109.0,9.25,113.6,161.1,43.8,48.0,154.0,1285.0,47.18999999999999,167.3,86.71,12.7,48.26,12.557,720.0,60.0,0.0,Yes,53.0,Female,Non-Hispanic White,College graduate or above,Value greater/equal to 5
-140506.0,Yes,76.0,11.86,,,,34.0,81.0,1008.0,34.63999999999999,86.33999999999999,37.92999999999999,8.2,61.59,13.489,720.0,0.0,0.0,No,From 80 and up,Male,Non-Hispanic White,9-11th grade / 12th grade with no diploma,0.0
+140506.0,Yes,76.0,11.86,82.5,171.8,28.1,34.0,81.0,1008.0,34.63999999999999,86.33999999999999,37.92999999999999,8.2,61.59,13.489,720.0,0.0,0.0,No,From 80 and up,Male,Non-Hispanic White,9-11th grade / 12th grade with no diploma,0.0
 140508.0,No,97.0,10.04,109.5,176.5,35.1,39.0,193.0,2706.0,70.7,434.49,227.22000000000003,40.3,85.21000000000001,22.599,600.0,45.0,30.0,Yes,27.0,Male,Non-Hispanic White,College graduate or above,Value greater/equal to 5
 140509.0,Yes,104.0,11.16,81.8,151.7,35.5,73.0,156.0,1694.0,43.98,278.11,76.84,16.8,45.91,11.898,360.0,120.0,45.0,Yes,68.0,Female,Non-Hispanic White,High school graduate / GED or equivalent,0.86
 140511.0,No,108.0,13.31,86.8,174.8,28.4,69.0,156.0,3398.0,103.65999999999998,353.52,148.32,16.4,179.81,60.23199999999999,240.0,45.0,30.0,No,From 80 and up,Male,Non-Hispanic White,9-11th grade / 12th grade with no diploma,0.0
@@ -2993,7 +2993,7 @@ SEQN,DIQ010,LBXGLU,LBXIN,BMXWT,BMXHT,BMXBMI,LBDHDD,LBXTC,DR1TKCAL,DR1TPROT,DR1TC
 140711.0,No,85.0,3.41,65.1,161.6,24.9,60.0,152.0,1917.0,65.88000000000001,223.04,99.26,43.5,63.67000000000001,17.04,420.0,120.0,60.0,,58.0,Male,Non-Hispanic White,Some college or AA degree,2.14
 140714.0,Yes,145.0,4.51,75.1,171.2,25.6,38.0,84.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,180.0,60.0,60.0,No,63.0,Male,Non-Hispanic White,High school graduate / GED or equivalent,4.1
 140720.0,No,130.0,31.56,81.5,155.8,33.6,48.0,207.0,605.0,24.82,84.41,34.91,6.1,19.19,4.127000000000001,480.0,0.0,0.0,Yes,61.0,Female,Non-Hispanic White,High school graduate / GED or equivalent,0.46
-140721.0,No,96.0,6.26,29.5,,,48.0,213.0,1810.0,54.08,230.33,102.39,14.6,76.56,18.814,0.0,0.0,0.0,,12.0,Male,Other/Multi-Racial,,Value greater/equal to 5
+140721.0,No,96.0,6.26,29.5,170.65,21.9,48.0,213.0,1810.0,54.08,230.33,102.39,14.6,76.56,18.814,0.0,0.0,0.0,,12.0,Male,Other/Multi-Racial,,Value greater/equal to 5
 140724.0,No,112.0,10.17,106.5,175.8,34.5,41.0,221.0,3941.0,169.03,332.61,71.88000000000001,21.8,188.4,58.094,180.0,0.0,0.0,Yes,46.0,Male,Non-Hispanic White,High school graduate / GED or equivalent,0.0
 140730.0,No,90.0,3.86,78.0,180.2,24.0,43.0,154.0,2574.0,88.28,342.4,127.9,22.4,64.26,18.688,360.0,60.0,0.0,Yes,65.0,Male,Non-Hispanic White,College graduate or above,Value greater/equal to 5
 140735.0,No,91.0,11.57,87.7,168.0,31.1,62.0,227.0,1947.0,84.23,264.18,92.83,27.700000000000003,61.7,17.585,600.0,60.0,0.0,Yes,38.0,Male,Non-Hispanic White,College graduate or above,Value greater/equal to 5
@@ -3026,7 +3026,7 @@ SEQN,DIQ010,LBXGLU,LBXIN,BMXWT,BMXHT,BMXBMI,LBDHDD,LBXTC,DR1TKCAL,DR1TPROT,DR1TC
 140832.0,No,95.0,12.44,88.0,157.2,35.6,48.0,273.0,1620.0,37.8,209.25000000000003,70.80000000000001,18.6,71.13000000000001,16.136999999999997,240.0,120.0,0.0,Yes,60.0,Female,Other/Multi-Racial,Some college or AA degree,2.45
 140833.0,No,117.0,10.57,71.6,154.6,30.0,54.0,242.0,1668.0,63.28000000000001,207.19,121.08000000000004,16.5,68.44999999999999,16.385,180.0,20.0,0.0,Yes,62.0,Female,Non-Hispanic White,College graduate or above,2.3
 140834.0,No,59.0,1.13,73.1,161.6,28.0,66.0,263.0,1180.0,39.27,89.33,36.02,25.9,77.52999999999999,17.794999999999995,120.0,60.0,60.0,Yes,73.0,Female,Non-Hispanic White,Some college or AA degree,Value greater/equal to 5
-140835.0,No,97.0,6.46,,,,51.0,160.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,Yes,17.0,Male,Non-Hispanic White,,2.03
+140835.0,No,97.0,6.46,65.9,170.65,21.9,51.0,160.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,Yes,17.0,Male,Non-Hispanic White,,2.03
 140838.0,No,98.0,7.99,96.6,167.2,34.6,46.0,169.0,1533.0,38.67999999999999,178.31,72.55000000000001,14.700000000000005,77.69,32.064,480.0,0.0,0.0,Yes,From 80 and up,Male,Non-Hispanic White,High school graduate / GED or equivalent,2.38
 140851.0,No,96.0,6.58,98.5,183.2,29.3,56.0,213.0,1351.0,57.60000000000001,146.46,49.81999999999999,7.300000000000001,59.2,16.873,300.0,60.0,60.0,Yes,26.0,Male,Non-Hispanic White,College graduate or above,1.01
 140854.0,No,92.0,4.13,56.3,165.6,20.5,82.0,216.0,1780.0,64.57000000000001,151.18,79.38,14.4,83.42,13.742,180.0,60.0,20.0,No,64.0,Female,Non-Hispanic White,College graduate or above,Value greater/equal to 5
@@ -3106,7 +3106,7 @@ SEQN,DIQ010,LBXGLU,LBXIN,BMXWT,BMXHT,BMXBMI,LBDHDD,LBXTC,DR1TKCAL,DR1TPROT,DR1TC
 141088.0,No,111.0,11.13,83.6,172.7,28.0,44.0,223.0,645.0,29.38,62.54,28.07,5.8,31.21,9.085,540.0,0.0,0.0,No,58.0,Female,Non-Hispanic White,Some college or AA degree,0.72
 141089.0,Yes,142.0,10.08,53.9,156.8,21.9,59.0,200.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,30.0,240.0,60.0,No,54.0,Female,Other/Multi-Racial,Less than 9th grade,1.42
 141090.0,No,98.0,7.15,63.7,185.1,18.6,62.0,136.0,2060.0,57.06,271.93999999999994,127.94,18.4,85.06000000000002,25.357000000000003,0.0,0.0,0.0,No,17.0,Male,Non-Hispanic White,,Value greater/equal to 5
-141092.0,No,120.0,29.43,,,,54.0,143.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,240.0,0.0,0.0,No,18.0,Female,Non-Hispanic Black,,0.0
+141092.0,No,120.0,29.43,67.9,162.8,25.4,54.0,143.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,240.0,0.0,0.0,No,18.0,Female,Non-Hispanic Black,,0.0
 141095.0,No,95.0,7.56,65.7,165.6,24.0,41.0,176.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,120.0,120.0,0.0,No,38.0,Female,Other Hispanic,Less than 9th grade,0.0
 141096.0,No,87.0,6.3,59.0,162.4,22.4,62.0,187.0,1155.0,55.43,61.49,20.450000000000003,7.1,76.78,20.217,120.0,30.0,30.0,Yes,34.0,Female,Non-Hispanic White,College graduate or above,0.0
 141100.0,No,89.0,24.98,142.6,170.3,49.2,61.0,169.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,240.0,30.0,30.0,Yes,56.0,Male,Non-Hispanic White,Some college or AA degree,Value greater/equal to 5
@@ -3239,7 +3239,7 @@ SEQN,DIQ010,LBXGLU,LBXIN,BMXWT,BMXHT,BMXBMI,LBDHDD,LBXTC,DR1TKCAL,DR1TPROT,DR1TC
 141512.0,No,104.0,14.72,74.6,167.7,26.5,48.0,153.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,Yes,17.0,Male,Non-Hispanic White,,1.0
 141514.0,No,89.0,2.66,59.8,134.2,33.2,79.0,196.0,1116.0,105.93,117.38,48.36,16.5,26.82,5.742,360.0,0.0,0.0,No,73.0,Female,Non-Hispanic White,College graduate or above,2.15
 141525.0,No,95.0,7.42,84.0,163.6,31.4,54.0,165.0,1979.0,93.03,258.53,132.06,32.2,66.92999999999999,27.185,420.0,45.0,0.0,Yes,31.0,Female,Non-Hispanic White,College graduate or above,4.37
-141526.0,No,104.0,8.0,,,,48.0,174.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,300.0,60.0,30.0,Yes,39.0,Male,Non-Hispanic White,High school graduate / GED or equivalent,1.99
+141526.0,No,104.0,8.0,86.1,176.4,27.6,48.0,174.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,300.0,60.0,30.0,Yes,39.0,Male,Non-Hispanic White,High school graduate / GED or equivalent,1.99
 141527.0,No,100.0,16.18,88.0,186.3,25.4,60.0,152.0,2022.0,83.21999999999998,286.65,125.62,19.8,61.52,16.219,0.0,0.0,0.0,No,17.0,Male,Non-Hispanic White,,Value greater/equal to 5
 141529.0,Yes,348.0,6.35,68.3,149.2,30.7,38.0,355.0,1535.0,52.88,254.20000000000005,119.44,21.599999999999994,36.8,9.768,180.0,30.0,0.0,No,48.0,Female,Mexican American,Less than 9th grade,0.0
 141535.0,No,95.0,5.07,66.9,174.0,22.1,48.0,128.0,1496.0,39.94,176.4,47.33,9.8,69.87,19.445,180.0,60.0,120.0,No,18.0,Male,Non-Hispanic Black,,0.3
@@ -3282,7 +3282,7 @@ SEQN,DIQ010,LBXGLU,LBXIN,BMXWT,BMXHT,BMXBMI,LBDHDD,LBXTC,DR1TKCAL,DR1TPROT,DR1TC
 141678.0,No,95.0,9.4,98.8,180.7,30.3,37.0,171.0,4449.0,85.55000000000001,806.72,650.5600000000001,11.4,102.84,38.574,480.0,0.0,0.0,No,55.0,Male,Non-Hispanic White,High school graduate / GED or equivalent,0.96
 141681.0,No,91.0,7.04,52.8,150.8,23.2,64.0,231.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,30.0,60.0,90.0,No,39.0,Female,Other Hispanic,Less than 9th grade,0.01
 141684.0,No,106.0,13.75,84.1,164.8,31.0,65.0,197.0,1626.0,64.16,181.03,53.28,15.2,71.48,20.085,240.0,60.0,0.0,Yes,54.0,Female,Non-Hispanic White,Some college or AA degree,3.02
-141687.0,No,94.0,22.89,108.5,,,42.0,127.0,1331.0,41.92,140.27999999999997,60.77,7.300000000000001,66.7,20.334,360.0,0.0,0.0,No,From 80 and up,Male,Non-Hispanic White,High school graduate / GED or equivalent,3.04
+141687.0,No,94.0,22.89,108.5,171.8,28.1,42.0,127.0,1331.0,41.92,140.27999999999997,60.77,7.300000000000001,66.7,20.334,360.0,0.0,0.0,No,From 80 and up,Male,Non-Hispanic White,High school graduate / GED or equivalent,3.04
 141689.0,Yes,181.0,21.24,76.7,164.9,28.2,46.0,317.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,120.0,0.0,0.0,No,49.0,Female,Non-Hispanic White,College graduate or above,Value greater/equal to 5
 141691.0,No,115.0,112.83,108.3,160.1,42.3,48.0,232.0,1485.0,85.38000000000002,142.23,27.73,10.9,62.56999999999999,24.474,600.0,0.0,0.0,Yes,55.0,Female,Other Hispanic,College graduate or above,Value greater/equal to 5
 141694.0,No,121.0,13.07,72.6,164.4,26.9,39.0,220.0,2012.0,137.39,169.22000000000003,84.01,19.1,74.03999999999999,30.704,300.0,15.0,0.0,Yes,74.0,Male,Non-Hispanic White,College graduate or above,3.55
@@ -3340,7 +3340,7 @@ SEQN,DIQ010,LBXGLU,LBXIN,BMXWT,BMXHT,BMXBMI,LBDHDD,LBXTC,DR1TKCAL,DR1TPROT,DR1TC
 141875.0,Borderline,110.0,29.52,94.2,171.3,32.1,39.0,191.0,2526.0,166.88000000000002,96.12000000000002,39.57,10.3,163.07999999999998,73.926,540.0,45.0,30.0,Yes,54.0,Female,Non-Hispanic White,Some college or AA degree,Value greater/equal to 5
 141877.0,No,99.0,11.72,53.8,161.3,20.7,38.0,106.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,,14.0,Female,Non-Hispanic White,,0.65
 141878.0,No,104.0,12.18,88.6,182.3,26.7,48.0,130.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,120.0,720.0,60.0,No,19.0,Male,Non-Hispanic White,,2.41
-141879.0,No,102.0,23.89,,,,54.0,122.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,300.0,0.0,60.0,Yes,78.0,Male,Non-Hispanic White,High school graduate / GED or equivalent,3.96
+141879.0,No,102.0,23.89,82.5,171.8,28.1,54.0,122.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,300.0,0.0,60.0,Yes,78.0,Male,Non-Hispanic White,High school graduate / GED or equivalent,3.96
 141882.0,Yes,132.0,28.6,132.6,176.0,42.8,39.0,136.0,211.0,4.21,42.5,4.77,2.9000000000000004,2.21,0.287,60.0,60.0,60.0,No,60.0,Male,Non-Hispanic White,9-11th grade / 12th grade with no diploma,0.69
 141884.0,No,105.0,6.57,82.8,173.4,27.5,72.0,214.0,1894.0,115.29000000000002,203.23999999999995,85.69999999999999,15.5,48.44000000000001,16.055,300.0,45.0,30.0,Yes,47.0,Female,Non-Hispanic White,College graduate or above,Value greater/equal to 5
 141885.0,No,128.0,31.81,68.9,146.1,32.3,56.0,137.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,180.0,60.0,60.0,No,70.0,Female,Other/Multi-Racial,9-11th grade / 12th grade with no diploma,0.0
@@ -3356,7 +3356,7 @@ SEQN,DIQ010,LBXGLU,LBXIN,BMXWT,BMXHT,BMXBMI,LBDHDD,LBXTC,DR1TKCAL,DR1TPROT,DR1TC
 141921.0,No,101.0,7.11,69.1,160.0,27.0,66.0,242.0,1147.0,39.97,147.66,61.05,13.7,45.25,16.769000000000002,720.0,0.0,0.0,No,64.0,Female,Non-Hispanic White,High school graduate / GED or equivalent,0.63
 141922.0,No,105.0,3.86,61.4,157.1,24.9,52.0,258.0,1163.0,23.380000000000003,173.19,124.73999999999997,4.5,43.42,17.670999999999996,180.0,120.0,120.0,No,74.0,Female,Other/Multi-Racial,Some college or AA degree,1.8
 141923.0,No,96.0,10.98,80.9,159.2,31.9,72.0,218.0,945.0,33.83,115.91,44.05,7.6,39.05,20.36500000000001,900.0,60.0,40.0,Yes,37.0,Female,Non-Hispanic White,College graduate or above,Value greater/equal to 5
-141926.0,Yes,88.0,4.27,,,,69.0,163.0,1426.0,85.73,127.89,52.29,8.9,64.66,23.245999999999995,240.0,30.0,0.0,No,65.0,Male,Non-Hispanic White,Some college or AA degree,3.29
+141926.0,Yes,88.0,4.27,86.4,174.25,28.45,69.0,163.0,1426.0,85.73,127.89,52.29,8.9,64.66,23.245999999999995,240.0,30.0,0.0,No,65.0,Male,Non-Hispanic White,Some college or AA degree,3.29
 141928.0,No,98.0,48.16,99.0,167.4,35.3,40.0,109.0,708.0,8.03,103.66,59.76,3.1,30.51,9.744,420.0,10.0,30.0,Yes,18.0,Female,Other Hispanic,,0.0
 141933.0,No,99.0,21.88,86.4,182.8,25.9,38.0,195.0,1820.0,63.080000000000005,300.71,121.18,16.299999999999997,39.470000000000006,11.496,600.0,60.0,30.0,No,34.0,Male,Non-Hispanic White,Some college or AA degree,Value greater/equal to 5
 141938.0,No,79.0,5.95,77.9,181.7,23.6,67.0,169.0,3170.0,107.21,301.91,145.49,12.6,157.45999999999998,57.124,480.0,30.0,0.0,No,37.0,Male,Non-Hispanic Black,College graduate or above,4.78

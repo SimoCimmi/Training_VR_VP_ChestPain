@@ -18,7 +18,7 @@ print(f"Numero di righe del dataset: {len(cds)}")
 # -----------------------------
 cds["DIQ010"] = cds["DIQ010"].map({1:"Yes", 2:"No", 3:"Borderline"})
 cds["WHQ070"] = cds["WHQ070"].map({1:"Yes", 2:"No"})
-cds["RIDAGEYR"] = cds["RIDAGEYR"].map(lambda x: "From 80 and up" if x == 80 else x)
+
 cds["RIAGENDR"] = cds["RIAGENDR"].map({1:"Male", 2:"Female"})
 cds["RIDRETH1"] = cds["RIDRETH1"].map({
     1: "Mexican American",
@@ -133,14 +133,137 @@ print("Numero di righe con almeno 2 valore mancante:", count_null)
 
 '''
 
-# Helper: creare gruppi di età (esempio decade) per stratificare
-# L'idea è che la mediana di peso/altezza/BMI può variare per età e genere
-cds["Age_group"] = pd.cut(cds["RIDAGEYR"].astype(float),
-                          bins=[0,18,30,45,60,75,1000],
-                          labels=["<18","18-29","30-44","45-59","60-74","75+"],
-                          right=False)
+# -----------------------------
+# IMPUTAZIONE BMI, PESO E ALTEZZA 
+# -----------------------------
+
+# Converti altezza in metri per i calcoli
+cds["BMXHT_m"] = cds["BMXHT"] / 100.0
+
+# Salva valori originali e crea flag per imputazioni
+for col in ["BMXWT", "BMXHT", "BMXBMI"]:
+    cds[f"{col}_original"] = cds[col]      # valore originale
+    cds[f"{col}_imputed"] = False          # flag se imputato
+
+# Funzione per stampare le imputazioni
+def print_imputation(seqn, col, old, new):
+    print(f"Riga SEQN={seqn} | {col} imputato: {old} -> {new}")
+
+# -----------------------------
+# Imputaazioni sfruttando la seguente formula e le sue derivate sostituisco i valori mancanti di di peso, altezza e BMI::
+#    altezza (m) = sqrt( peso (kg) / BMI )
+#    peso (kg) = altezza^2 * BMI
+#    BMI = peso (kg) / altezza^2 (m) 
 
 
+# -----------------------------
+# Step 1: Imputazione BMI quando mancante ma peso e altezza presenti
+# Formula: BMI = peso (kg) / altezza^2 (m)
+# Condizione: BMI mancante, ma peso e altezza disponibili
+mask_bmi_missing = cds["BMXBMI"].isna() & cds["BMXWT"].notna() & cds["BMXHT_m"].notna()
+for idx in cds[mask_bmi_missing].index:
+    old = cds.at[idx, "BMXBMI"]  # valore originale (NaN)
+    # Calcolo BMI usando peso e altezza
+    new = round(cds.at[idx, "BMXWT"] / (cds.at[idx, "BMXHT_m"] ** 2), 2)
+    cds.at[idx, "BMXBMI"] = new             # aggiorna BMI
+    cds.at[idx, "BMXBMI_imputed"] = True    # segna come imputato
+    print_imputation(cds.at[idx, "SEQN"], "BMXBMI", old, new)
+
+# -----------------------------
+# Step 2: Imputazione peso quando mancante ma altezza e BMI presenti
+# Formula: peso (kg) = altezza^2 (m) * BMI
+# Condizione: peso mancante, ma altezza e BMI disponibili
+mask_wt_missing = cds["BMXWT"].isna() & cds["BMXBMI"].notna() & cds["BMXHT_m"].notna()
+for idx in cds[mask_wt_missing].index:
+    old = cds.at[idx, "BMXWT"]  # valore originale (NaN)
+    # Calcolo peso usando altezza e BMI
+    new = round(cds.at[idx, "BMXBMI"] * (cds.at[idx, "BMXHT_m"] ** 2),2)
+    cds.at[idx, "BMXWT"] = new             # aggiorna peso
+    cds.at[idx, "BMXWT_imputed"] = True    # segna come imputato
+    print_imputation(cds.at[idx, "SEQN"], "BMXWT", old, new)
+
+# -----------------------------
+# Step 3: Imputazione altezza quando mancante ma peso e BMI presenti
+# Formula: altezza (m) = sqrt( peso (kg) / BMI )
+# Condizione: altezza mancante, ma peso e BMI disponibili
+mask_ht_missing = cds["BMXHT"].isna() & cds["BMXBMI"].notna() & cds["BMXWT"].notna()
+for idx in cds[mask_ht_missing].index:
+    old = cds.at[idx, "BMXHT"]  # valore originale (NaN)
+    # Calcolo altezza in metri
+    new_m = round((cds.at[idx, "BMXWT"] / cds.at[idx, "BMXBMI"]) ** 0.5, 2)
+    new_cm = new_m * 100        # converti in cm
+    cds.at[idx, "BMXHT_m"] = new_m       # salva altezza in metri temporanea
+    cds.at[idx, "BMXHT"] = new_cm        # aggiorna altezza in cm
+    cds.at[idx, "BMXHT_imputed"] = True  # segna come imputato
+    print_imputation(cds.at[idx, "SEQN"], "BMXHT", old, new_cm)
+
+    print_imputation(cds.at[idx, "SEQN"], "BMXHT", old, new_cm)
+
+# -----------------------------
+# Step 4: Imputazione stratificata per età e genere
+# -----------------------------
+cds["Age_group"] = pd.cut(
+    cds["RIDAGEYR"].astype(float),
+    bins=[0,18,30,45,60,75,1000],
+    labels=["<18","18-29","30-44","45-59","60-74","75+"],
+    right=False
+)
+
+def stratified_fillna(df, col, group_cols):
+    """Riempi NaN con mediana stratificata e stampa imputazioni."""
+    # Risolvo il FutureWarning impostando observed=True
+    median_series = df.groupby(group_cols, observed=True)[col].median()
+
+    for idx, row in df[df[col].isna()].iterrows():
+        key = tuple(row[g] for g in group_cols)
+        if key in median_series.index:
+            old = df.at[idx, col]
+            new_val = round(median_series.loc[key], 2)
+            df.at[idx, col] = new_val
+            print(f"Riga SEQN={row['SEQN']} | {col} imputato con mediana stratificata: {new_val}")
+    return df
+
+group_cols = ["Age_group", "RIAGENDR"]
+for col in ["BMXWT", "BMXHT", "BMXBMI"]:
+    cds = stratified_fillna(cds, col, group_cols)
+
+# -----------------------------
+# Step 5: Fallback mediana globale se ancora NaN
+# -----------------------------
+for col in ["BMXWT", "BMXHT", "BMXBMI"]:
+    mask_global = cds[col].isna()
+    median_global = round(cds[col].median(skipna=True), 2)
+    for idx in cds[mask_global].index:
+        old = cds.at[idx, col]
+        cds.at[idx, col] = median_global
+        print(f"Riga SEQN={cds.at[idx,'SEQN']} | {col} imputato con mediana globale: {median_global}")
+
+# -----------------------------
+# Pulizia finale: rimuovo colonne temporanee
+# -----------------------------
+cds.drop(columns=[
+    "BMXHT_m",
+    "BMXWT_original", "BMXWT_imputed",
+    "BMXHT_original", "BMXHT_imputed",
+    "BMXBMI_original", "BMXBMI_imputed",
+    "Age_group"
+], inplace=True)
+
+
+# -----------------------------
+# IMPUTAZIONE WHQ070 ovvero Ha cercato di perdere peso nell’ultimo anno (Tried_to_lose_weight_in_the_past_year)
+# -----------------------------
+
+
+
+print("Numero di valori WHQ070 null:", cds["WHQ070"].isna().sum())
+
+
+# -----------------------------
+# CONVERSIONE DATI CATEGORICAL
+# -----------------------------
+
+cds["RIDAGEYR"] = cds["RIDAGEYR"].map(lambda x: "From 80 and up" if x == 80 else x)
 
 # -----------------------------
 # RENAME COLUMNS
@@ -170,7 +293,7 @@ cds.rename(columns={
     "RIDRETH1": "Ethnic_origin",                                # Origine etnica
     "DMDEDUC2": "Education_level",                              # Livello di istruzione
     "INDFMPIR": "Income_family_ratio_compared_to_the_poverty_line"  # Rapporto reddito familiare rispetto alla soglia di povertà
-})
+}, inplace=True)
 
 
 # -----------------------------
@@ -187,8 +310,6 @@ print("Dataset pulito esportato in Clean_filteredDataset.csv")
 # -----------------------------
 print("Numero di valori mancanti per colonna dopo la pulizia:\n", cds.isna().sum())
 
-print("Numero di righe con valori nulli: ", cds["DIQ010"].isna().sum())
-righeNull = cds[cds["DIQ010"].isna()]
-print(righeNull)
+
 
 #print(cds.head(5))
