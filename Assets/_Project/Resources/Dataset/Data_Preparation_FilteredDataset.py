@@ -1,5 +1,6 @@
 import os
 import pandas as pd
+import numpy as np
 
 # Visualizza tutte le colonne
 pd.set_option('display.max_columns', None)
@@ -75,8 +76,6 @@ for col in ["PAD680", "PAD800", "PAD820"]:
     cds[col] = cds[col].fillna(mediana)
     print(f"Sostituiti valori mancanti in {col} con la mediana: {mediana}")
 
-
-
 # -----------------------------
 # ANALISI PAD800 vs PAD820
 # -----------------------------
@@ -91,6 +90,57 @@ for _, row in cds.iterrows():
         else:
             countPAD820 += 1
 print(f"Numero di righe con PAD800 > PAD820: {countPAD800} > {countPAD820}")
+
+
+'''
+Non utilizzata dato che mancano 2 valori su 3 in tutte le righe non consentento il suo utilizzo
+
+Sostituisco i valori mancanti di di peso, altezza e BMI utilizzando le formule seguenti:
+    
+    altezza (m) = sqrt( peso (kg) / BMI )
+    peso (kg) = altezza^2 * BMI
+    BMI = peso (kg) / altezza^2 (m) 
+
+
+for i, row in cds.iterrows():
+    peso = row["BMXWT"]
+    altezza = row["BMXHT"]
+    bmi = row["BMXBMI"]
+
+    altezza_m = altezza / 100 if pd.notna(altezza) else pd.NA  # Converti cm a m se non è NaN
+
+
+    #Caso - Calcolo altezza se peso e BMI sono noti
+    if(pd.isna(altezza) and pd.notna(peso) and pd.notna(bmi)):
+        altezza_m = np.sqrt(peso/bmi)
+        cds.ai[i, "BMXHT"] = altezza_m * 100  # Converti m a cm
+    
+    #Caso - Calcolo peso se altezza e BMI sono noti
+    if(pd.isna(peso) and pd.notna(altezza_m) and pd.notna(bmi)):
+        cds.ai[i, "BMXWT"] = bmi * (altezza_m ** 2)
+
+    #Caso - Calcolo BMI se peso e altezza sono noti
+    if(pd.isna(bmi) and pd.notna(peso) and pd.notna(altezza_m)):
+        cds.ai[i, "BMXBMI"] = peso / (altezza_m ** 2)
+    
+
+print("\nDopo la stima dei valori mancanti di peso, altezza e BMI:")
+mask = cds[["BMXWT", "BMXHT", "BMXBMI"]].isna().any(axis=1) #per ogni riga (axis=1) valuta se almeno una colonna tra le tre è True (ovvero NaN).
+righe_null = cds.loc[mask, ["SEQN", "BMXWT", "BMXHT", "BMXBMI"]]
+print(righe_null)
+count_null = (cds[["BMXWT", "BMXHT", "BMXBMI"]].isna().sum(axis=1) >= 2).sum()
+print("Numero di righe con almeno 2 valore mancante:", count_null)
+
+'''
+
+# Helper: creare gruppi di età (esempio decade) per stratificare
+# L'idea è che la mediana di peso/altezza/BMI può variare per età e genere
+cds["Age_group"] = pd.cut(cds["RIDAGEYR"].astype(float),
+                          bins=[0,18,30,45,60,75,1000],
+                          labels=["<18","18-29","30-44","45-59","60-74","75+"],
+                          right=False)
+
+
 
 # -----------------------------
 # RENAME COLUMNS
@@ -140,3 +190,5 @@ print("Numero di valori mancanti per colonna dopo la pulizia:\n", cds.isna().sum
 print("Numero di righe con valori nulli: ", cds["DIQ010"].isna().sum())
 righeNull = cds[cds["DIQ010"].isna()]
 print(righeNull)
+
+#print(cds.head(5))
