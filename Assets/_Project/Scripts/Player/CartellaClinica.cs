@@ -23,7 +23,7 @@ public class CartellaClinica
     public float PAD800;
     public float PAD820;
     public string WHQ070;
-    public float RIDAGEYR;  //Si potrebbe impostare come intero
+    public string RIDAGEYR;  //Si potrebbe impostare come intero
     public string RIAGENDR;
     public string RIDRETH1;
     public string DMDEDUC2;

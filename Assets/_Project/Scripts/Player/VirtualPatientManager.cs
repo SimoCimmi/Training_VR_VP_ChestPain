@@ -105,7 +105,7 @@ public class VirtualPatientManager : MonoBehaviour
     {
         StringBuilder sb = new StringBuilder();
         
-        sb.AppendLine($"Utilizzando i seguenti dati: SEQN: {cartellaClinica.SEQN}, Sesso: {(cartellaClinica.RIDAGEYR == 1 ? "M" : "F")}, Età: {cartellaClinica.RIDAGEYR}, BMI: {cartellaClinica.BMXBMI:F1}, Glucosio: {cartellaClinica.LBXGLU} mg/dL, Insulina: {cartellaClinica.LBXIN} µU/mL, Colesterolo Totale: {cartellaClinica.LBXTC} mg/dL, Pressione Arteriosa (PAD680): {cartellaClinica.PAD680} mmHg, Pressione Arteriosa (PAD800): {cartellaClinica.PAD800} mmHg, Pressione Arteriosa (PAD820): {cartellaClinica.PAD820} mmHg, Abitudine al fumo (WHQ070): {cartellaClinica.WHQ070}, Anni di istruzione (DMDEDUC2): {cartellaClinica.DMDEDUC2}, Reddito famigliare (INDFMPIR): {cartellaClinica.INDFMPIR}, rispondi alla seguente domanda: ");
+        sb.AppendLine($"Utilizzando i seguenti dati: SEQN: {cartellaClinica.SEQN}, Sesso: {cartellaClinica.RIDAGEYR}, Età: {cartellaClinica.RIDAGEYR}, BMI: {cartellaClinica.BMXBMI:F1}, Glucosio: {cartellaClinica.LBXGLU} mg/dL, Insulina: {cartellaClinica.LBXIN} µU/mL, Colesterolo Totale: {cartellaClinica.LBXTC} mg/dL, Pressione Arteriosa (PAD680): {cartellaClinica.PAD680} mmHg, Pressione Arteriosa (PAD800): {cartellaClinica.PAD800} mmHg, Pressione Arteriosa (PAD820): {cartellaClinica.PAD820} mmHg, Abitudine al fumo (WHQ070): {cartellaClinica.WHQ070}, Anni di istruzione (DMDEDUC2): {cartellaClinica.DMDEDUC2}, Reddito famigliare (INDFMPIR): {cartellaClinica.INDFMPIR}, rispondi alla seguente domanda: ");
         /*
                 sb.AppendLine("SYSTEM PROMPT:");
                 sb.AppendLine("Sei un paziente virtuale all’interno di una simulazione medica.");

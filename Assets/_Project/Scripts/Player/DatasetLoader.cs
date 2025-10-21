@@ -11,6 +11,7 @@ public class DatasetLoader : MonoBehaviour
 
     void Start()
     {
+        pazienti.Clear();
         TextAsset file = Resources.Load<TextAsset>("Dataset\\Clean_filteredDataset");
         if (file == null)
         {
@@ -23,14 +24,19 @@ public class DatasetLoader : MonoBehaviour
 
         int indicePazienti = 1;
         for (int i = 1; i < righe.Length; i++)
-        {
-            if (string.IsNullOrWhiteSpace(righe[i])) continue;
+        {   
+            if (string.IsNullOrWhiteSpace(righe[i]))
+            {
+                Debug.Log($"Riga {i} saltata perché vuota o solo spazi.");
+                continue;
+            }
 
             string[] col = righe[i].Split(',');
 
             if (col.Length < 25)
             {
                 Debug.LogWarning($"Riga {i + 1} ha solo {col.Length} colonne.");
+                indicePazienti++;
                 continue;
             }
 
@@ -60,7 +66,7 @@ public class DatasetLoader : MonoBehaviour
                 
                 c.WHQ070 = col[19].Trim();
                 
-                c.RIDAGEYR = float.Parse(col[20], CultureInfo.InvariantCulture);
+                c.RIDAGEYR = col[20];
 
                 c.RIAGENDR = col[21].Trim();
                 c.RIDRETH1 = col[22].Trim();
@@ -70,8 +76,9 @@ public class DatasetLoader : MonoBehaviour
 
                 pazienti.Add(c);
 
-                Debug.Log($"{indicePazienti} - Paziente OK - ID: {c.SEQN}");
+                Debug.Log($"pazienti.Count={pazienti.Count} - i = {i} - Paziente OK - ID: {c.SEQN}");
                 indicePazienti++;
+                
             }
             catch (Exception ex)
             {

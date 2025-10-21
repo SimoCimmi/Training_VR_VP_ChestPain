@@ -1,6 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
-
+using System.Globalization;
 
 public class SpawnPaziente : MonoBehaviour
 {
@@ -112,7 +112,21 @@ public class SpawnPaziente : MonoBehaviour
 
         // 4. Sceglie prefab in base al sesso
         GameObject prefabScelto = null;
-        if (dati.RIDAGEYR < 16 && pazientiBambiniPrefab.Length > 0)
+
+        //Gestione dell'età vista come una stringa
+        float eta = 0f;
+
+        if (!float.TryParse(dati.RIDAGEYR, NumberStyles.Float, CultureInfo.InvariantCulture, out eta))
+        {
+            // Se la conversione fallisce (es. "From 80 and up"), assegni 80
+            if (dati.RIDAGEYR.Contains("80"))
+                eta = 80f;
+            else
+                eta = -1f; // valore speciale per "età sconosciuta"
+        }
+
+
+        if (eta < 16 && pazientiBambiniPrefab.Length > 0)
         {
             prefabScelto = pazientiBambiniPrefab[Random.Range(0, pazientiBambiniPrefab.Length)];
         }
