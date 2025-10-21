@@ -1338,8 +1338,8 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
-  m_Resource: {fileID: 0}
+  m_audioClip: {fileID: 796181431}
+  m_Resource: {fileID: 796181431}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -2661,7 +2661,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed4d5c9d8ced26447b06ac874b463c7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  datasetPath: Assets/_Project/Resources/Dataset/Clean_filteredDataset.csv
   lmStudioUrl: http://127.0.0.1:1234/v1/chat/completions
   modelName: meta-llama-3-8b-instruct
   ttsClient: {fileID: 292028349}
@@ -3604,7 +3603,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed4d5c9d8ced26447b06ac874b463c7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  datasetPath: Assets/_Project/Resources/Dataset/Clean_filteredDataset.csv
   lmStudioUrl: http://127.0.0.1:1234/v1/chat/completions
   modelName: mistral:7b-instruct
   ttsClient: {fileID: 292028349}
@@ -4236,6 +4234,34 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7420932954599747970, guid: b2baa11c7e87fe941afe32f3c50cc082, type: 3}
   m_PrefabInstance: {fileID: 833708624}
   m_PrefabAsset: {fileID: 0}
+--- !u!83 &796181431
+AudioClip:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: TTS_Audio
+  m_LoadType: 0
+  m_Channels: 1
+  m_Frequency: 24000
+  m_BitsPerSample: 32
+  m_Length: 0
+  m_IsTrackerFormat: 0
+  m_Ambisonic: 0
+  m_SubsoundIndex: 0
+  m_PreloadAudioData: 1
+  m_LoadInBackground: 0
+  m_Legacy3D: 0
+  m_Resource:
+    m_Source: 
+    m_Offset: 0
+    m_Size: 0
+  m_CompressionFormat: 0
+  m_EditorResource:
+    m_Source: 
+    m_Offset: 0
+    m_Size: 0
+  m_EditorCompressionFormat: 0
 --- !u!1 &804460651
 GameObject:
   m_ObjectHideFlags: 0
@@ -6793,7 +6819,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pannello: {fileID: 862567099}
   txtID: {fileID: 722406326}
-  "txtEt\xE0": {fileID: 99170672}
+  txtEta: {fileID: 99170672}
   txtSesso: {fileID: 457639872}
   txtBMI: {fileID: 744831014}
   txtGlucosio: {fileID: 1809363484}

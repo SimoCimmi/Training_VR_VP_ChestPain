@@ -57,7 +57,8 @@ public class DatasetLoader : MonoBehaviour
                 c.PAD680 = float.Parse(col[16], CultureInfo.InvariantCulture);
                 c.PAD800 = float.Parse(col[17], CultureInfo.InvariantCulture);
                 c.PAD820 = float.Parse(col[18], CultureInfo.InvariantCulture);
-                c.WHQ070 = float.Parse(col[19], CultureInfo.InvariantCulture);
+                
+                c.WHQ070 = col[19].Trim();
                 
                 c.RIDAGEYR = float.Parse(col[20], CultureInfo.InvariantCulture);
 
@@ -66,11 +67,10 @@ public class DatasetLoader : MonoBehaviour
                 c.DMDEDUC2 = col[23].Trim();
                 c.INDFMPIR = col[24].Trim();
 
-                
 
                 pazienti.Add(c);
 
-                Debug.Log($"{indicePazienti} - Paziente OK - ID: {c.SEQN}, Sesso: {(c.RIAGENDR == 1 ? "M" : "F")}, Eta: {c.RIDAGEYR}, BMI: {c.BMXBMI:F1}");
+                Debug.Log($"{indicePazienti} - Paziente OK - ID: {c.SEQN}");
                 indicePazienti++;
             }
             catch (Exception ex)

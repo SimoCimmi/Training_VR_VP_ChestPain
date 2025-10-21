@@ -27,5 +27,5 @@ public class CartellaClinica
     public string RIAGENDR;
     public string RIDRETH1;
     public string DMDEDUC2;
-    public float INDFMPIR;
+    public string INDFMPIR;
 }

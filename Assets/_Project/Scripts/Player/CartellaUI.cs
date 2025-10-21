@@ -6,7 +6,7 @@ public class CartellaUI : MonoBehaviour
     public static CartellaUI Instance;
 
     public GameObject pannello;
-    public TMP_Text txtID, txtEtà, txtSesso, txtBMI, txtGlucosio, txtInsulina;
+    public TMP_Text txtID, txtEta, txtSesso, txtBMI, txtGlucosio, txtInsulina;
 
     private void Awake()
     {
@@ -19,11 +19,11 @@ public class CartellaUI : MonoBehaviour
         pannello.SetActive(true);
 
         txtID.text = $"ID: {c.SEQN}";
-        txtEtà.text = $"Età: {c.RIDAGEYR}";
-        txtSesso.text = $"Sesso: {(c.RIAGENDR == 1 ? "Maschio" : "Femmina")}";
+        txtEta.text = $"Age: {c.RIDAGEYR}";
+        txtSesso.text = $"Gender: {c.RIAGENDR}";
         txtBMI.text = $"BMI: {c.BMXBMI:F1}";
-        txtGlucosio.text = $"Glucosio: {c.LBXGLU:F1} mg/dL";
-        txtInsulina.text = $"Insulina: {c.LBXIN:F1} mg/dL";
+        txtGlucosio.text = $"Fasting glucose: {c.LBXGLU:F1} mg/dL";
+        txtInsulina.text = $"Insulin level: {c.LBXIN:F1} ÂµU/mL";;
     }
 
     public void Nascondi()

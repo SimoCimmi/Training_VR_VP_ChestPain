@@ -118,11 +118,11 @@ public class SpawnPaziente : MonoBehaviour
         }
         else
         {
-            if (dati.RIAGENDR == 1 && prefabMaschio.Length > 0)
+            if (dati.RIAGENDR == "Male" && prefabMaschio.Length > 0)
             {
                 prefabScelto = prefabMaschio[Random.Range(0, prefabMaschio.Length)];
             }
-            else if (dati.RIAGENDR == 2 && prefabFemmina.Length > 0)
+            else if (dati.RIAGENDR == "Female" && prefabFemmina.Length > 0)
             {
                 prefabScelto = prefabFemmina[Random.Range(0, prefabFemmina.Length)];
             }

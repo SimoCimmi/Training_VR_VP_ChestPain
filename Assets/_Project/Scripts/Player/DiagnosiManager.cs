@@ -37,8 +37,24 @@ public class DiagnosiManager : MonoBehaviour
             Debug.LogWarning("[DiagnosiManager] Nessun paziente impostato!");
             return;
         }
+        bool corretta;
+        switch (sceltaUtente)
+        {
+            case 1:
+                corretta = pazienteCorrente.DIQ010 == "Yes";
+                break;
+            case 2:
+                corretta = pazienteCorrente.DIQ010 == "No";
+                break;
+            case 3:
+                corretta = pazienteCorrente.DIQ010 == "Borderline";
+                break;
+            default:
+                corretta = false;
+            break;
 
-        bool corretta = sceltaUtente == pazienteCorrente.DIQ010;
+        }
+
 
         punteggio += corretta ? 1 : -1;
         diagnosiEseguite += 1;
@@ -101,7 +117,7 @@ public class DiagnosiManager : MonoBehaviour
         motivi.Add($"Età: {p.RIDAGEYR} anni");
 
         // Sesso
-        string sesso = p.RIAGENDR == 1 ? "Maschio" : p.RIAGENDR == 2 ? "Femmina" : "Non specificato";
+        string sesso = p.RIAGENDR;
         motivi.Add($"Sesso: {sesso}");
 
         // Glucosio a digiuno
@@ -131,13 +147,30 @@ public class DiagnosiManager : MonoBehaviour
             motivi.Add($"BMI nella norma: {p.BMXBMI:F1}");
 
         // Etichetta finale in base alla previsione
+        string conclusione;
+        switch (p.DIQ010)
+        {
+            case "Yes":
+                conclusione = "Il paziente è DIABETICO. Fattori che supportano la diagnosi:";
+                break;
+            case "No":
+                conclusione = "Il paziente NON ha il diabete. Parametri analizzati:";
+                break;
+            case "Borderline":
+                conclusione = "Il paziente è in una condizione BORDERLINE. Possibili segnali di rischio:";
+                break;
+            default:
+                conclusione = "Diagnosi sconosciuta. Parametri disponibili:";
+            break;
+
+        }/*
         string conclusione = p.DIQ010 switch
         {
             1 => "Il paziente è DIABETICO. Fattori che supportano la diagnosi:",
             2 => "Il paziente NON ha il diabete. Parametri analizzati:",
             3 => "Il paziente è in una condizione BORDERLINE. Possibili segnali di rischio:",
             _ => "Diagnosi sconosciuta. Parametri disponibili:"
-        };
+        };*/
 
         return conclusione + "\n" + string.Join("\n", motivi);
     }

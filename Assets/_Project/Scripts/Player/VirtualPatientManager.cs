@@ -34,7 +34,7 @@ public class VirtualPatientManager : MonoBehaviour
     public async void CreaPazienteVirtuale(CartellaClinica cartellaClinica)
     {
         Debug.Log(" Creazione paziente virtuale in corso...");
-        Debug.Log($"Paziente generato Cartella Clinica: ID {cartellaClinica.SEQN}, Sesso: {(cartellaClinica.RIAGENDR == 1 ? "M" : "F")}, Età: {cartellaClinica.RIDAGEYR}, BMI: {cartellaClinica.BMXBMI:F1}, Glucosio: {cartellaClinica.LBXGLU} mg/dL, Insulina: {cartellaClinica.LBXIN} µU/mL, Colesterolo Totale: {cartellaClinica.LBXTC} mg/dL, Pressione Arteriosa (PAD680): {cartellaClinica.PAD680} mmHg, Pressione Arteriosa (PAD800): {cartellaClinica.PAD800} mmHg, Pressione Arteriosa (PAD820): {cartellaClinica.PAD820} mmHg, Abitudine al fumo (WHQ070): {cartellaClinica.WHQ070}, Anni di istruzione (DMDEDUC2): {cartellaClinica.DMDEDUC2}, Reddito famigliare (INDFMPIR): {cartellaClinica.INDFMPIR}");
+        Debug.Log($"Paziente generato Cartella Clinica: ID {cartellaClinica.SEQN}, Diabaetico: {cartellaClinica.DIQ010}, Sesso: {cartellaClinica.RIAGENDR}, Età: {cartellaClinica.RIDAGEYR}, BMI: {cartellaClinica.BMXBMI:F1}, Glucosio: {cartellaClinica.LBXGLU} mg/dL, Insulina: {cartellaClinica.LBXIN} µU/mL, Colesterolo Totale: {cartellaClinica.LBXTC} mg/dL, Pressione Arteriosa (PAD680): {cartellaClinica.PAD680} mmHg, Pressione Arteriosa (PAD800): {cartellaClinica.PAD800} mmHg, Pressione Arteriosa (PAD820): {cartellaClinica.PAD820} mmHg, Abitudine al fumo (WHQ070): {cartellaClinica.WHQ070}, Anni di istruzione (DMDEDUC2): {cartellaClinica.DMDEDUC2}, Reddito famigliare (INDFMPIR): {cartellaClinica.INDFMPIR}");
         try
         {
             // Estrai tupla casuale dal CSV
