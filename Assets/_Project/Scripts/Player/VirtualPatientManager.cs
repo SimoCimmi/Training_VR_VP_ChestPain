@@ -58,14 +58,14 @@ public class VirtualPatientManager : MonoBehaviour
         
         pazientePronto = true;
         Debug.Log(" Creazione paziente virtuale in corso...");
-        Debug.Log($"Paziente generato Cartella Clinica: ID {cartellaClinicaPazienteCorrente.SEQN}, Diabaetico: {cartellaClinicaPazienteCorrente.DIQ010}, Sesso: {cartellaClinicaPazienteCorrente.RIAGENDR}, Età: {cartellaClinicaPazienteCorrente.RIDAGEYR}, BMI: {cartellaClinicaPazienteCorrente.BMXBMI:F1}, Glucosio: {cartellaClinicaPazienteCorrente.LBXGLU} mg/dL, Insulina: {cartellaClinicaPazienteCorrente.LBXIN} µU/mL, Colesterolo Totale: {cartellaClinicaPazienteCorrente.LBXTC} mg/dL, Pressione Arteriosa (PAD680): {cartellaClinicaPazienteCorrente.PAD680} mmHg, Pressione Arteriosa (PAD800): {cartellaClinicaPazienteCorrente.PAD800} mmHg, Pressione Arteriosa (PAD820): {cartellaClinicaPazienteCorrente.PAD820} mmHg, Abitudine al fumo (WHQ070): {cartellaClinicaPazienteCorrente.WHQ070}, Anni di istruzione (DMDEDUC2): {cartellaClinicaPazienteCorrente.DMDEDUC2}, Reddito famigliare (INDFMPIR): {cartellaClinicaPazienteCorrente.INDFMPIR}");
+        Debug.Log($"Paziente generato Cartella Clinica: ID {cartellaClinicaPazienteCorrente.SEQN}, Diabaetico: {cartellaClinicaPazienteCorrente.DIQ010}, Sesso: {cartellaClinicaPazienteCorrente.RIAGENDR}, Età: {cartellaClinicaPazienteCorrente.RIDAGEYR}, BMI: {cartellaClinicaPazienteCorrente.BMXBMI:F1}, Glucosio: {cartellaClinicaPazienteCorrente.LBXGLU} mg/dL, Insulina: {cartellaClinicaPazienteCorrente.LBXIN} µU/mL, Colesterolo Totale: {cartellaClinicaPazienteCorrente.LBXTC} mg/dL, Pressione Arteriosa: {cartellaClinicaPazienteCorrente.PAD680} mmHg, Pressione Arteriosa (PAD800): {cartellaClinicaPazienteCorrente.PAD800} mmHg, Pressione Arteriosa (PAD820): {cartellaClinicaPazienteCorrente.PAD820} mmHg, Abitudine al fumo (WHQ070): {cartellaClinicaPazienteCorrente.WHQ070}, Anni di istruzione (DMDEDUC2): {cartellaClinicaPazienteCorrente.DMDEDUC2}, Reddito famigliare (INDFMPIR): {cartellaClinicaPazienteCorrente.INDFMPIR}");
         try
         {
             // Estrai tupla casuale dal CSV
             //string patientData = EstraiTuplaCasuale();
 
             // Invia al modello
-            string risposta = await InviaPromptALM("Ciao");
+            string risposta = await InviaPromptALM("Ciao (Rispondi con Cia sono il tuo nome)");
 
             Debug.Log($" LLM Studio: {risposta}");
 
@@ -90,87 +90,42 @@ public class VirtualPatientManager : MonoBehaviour
         }
     }
 
-
-
     private string CreaSystemPrompt()
     {
         StringBuilder sb = new StringBuilder();
 
         // Nome del paziente in base al sesso
         string nomePaziente = cartellaClinicaPazienteCorrente.RIAGENDR == "Male" ? "Ferdinand Wunderlich" : "Sophie Wunderlich";
-        sb.AppendLine($"Sei {nomePaziente}, di seguito assumerai il ruolo di un paziente. ");
+        
+        // --- ROLE-PLAY ---
+        sb.Append($"ROLE-PLAY:\nSei {nomePaziente}, assumerai il ruolo di un paziente durante una visita medica.\n");
+        sb.Append("Non assisterai l'utente, ma risponderai a tutte le domande come se fossi realmente la persona descritta.\n");
+        sb.Append("Comportati come una persona reale, rispondendo in prima persona.\n");
+        sb.Append("Rispondi in modo naturale, includendo piccoli errori grammaticali o di punteggiatura.\n");
+        sb.Append("Esprimi emozioni implicitamente senza scriverle. Se il medico è scortese o ti interrompe, smetti di rispondere finché non si scusa.\n");
+        sb.Append($"Usa un linguaggio coerente con il livello di istruzione: {cartellaClinicaPazienteCorrente.DMDEDUC2}.\n");
+        sb.Append("Se non comprendi termini medici, dì: 'Non capisco cosa intende, dottore.'\n\n");
 
-        sb.AppendLine($"Non assisterai l'utente, ma risponderai a domande basate sulle seguenti informazioni: ");
-       sb.AppendLine($" Il suo nome è {nomePaziente}, hai {cartellaClinicaPazienteCorrente.RIDAGEYR} anni, e risponderai con un Livello di istruzione pari a {cartellaClinicaPazienteCorrente.DMDEDUC2}");
- 
+        // --- ILLNESS SCRIPT ---
+        sb.Append("ILLNESS SCRIPT:\n");
+        sb.Append("Tutti i tuoi dati:\n");
+        sb.Append($"Dati anagrafici: Nome: {nomePaziente}; Età: {cartellaClinicaPazienteCorrente.RIDAGEYR} anni.\n");
+        sb.Append($"Dati clinici: Glucosio a digiuno: {cartellaClinicaPazienteCorrente.LBXGLU} mg/dL; Insulina: {cartellaClinicaPazienteCorrente.LBXIN} µU/mL; Peso: {cartellaClinicaPazienteCorrente.BMXWT} kg; Altezza: {cartellaClinicaPazienteCorrente.BMXHT} cm; BMI: {cartellaClinicaPazienteCorrente.BMXBMI:F1}; Colesterolo HDL: {cartellaClinicaPazienteCorrente.LBDHDD} mg/dL; Colesterolo totale: {cartellaClinicaPazienteCorrente.LBXTC} mg/dL.\n");
+        sb.Append($"Dati alimentari: Calorie: {cartellaClinicaPazienteCorrente.DR1TKCAL} kcal; Proteine: {cartellaClinicaPazienteCorrente.DR1TPROT} g; Carboidrati: {cartellaClinicaPazienteCorrente.DR1TCARB} g; Zuccheri: {cartellaClinicaPazienteCorrente.DR1TSUGR} g; Fibre: {cartellaClinicaPazienteCorrente.DR1TFIBE} g; Grassi: {cartellaClinicaPazienteCorrente.DR1TTFAT} g; Saturi: {cartellaClinicaPazienteCorrente.DR1TSFAT} g.\n");
+        sb.Append($"Attività fisica: Sedentario: {cartellaClinicaPazienteCorrente.PAD680} min; Moderata: {cartellaClinicaPazienteCorrente.PAD800} min; Intensa: {cartellaClinicaPazienteCorrente.PAD820} min.\n");
+        sb.Append($"Altri dati: Tentativi di perdere peso nell'ultimo anno: {cartellaClinicaPazienteCorrente.WHQ070}; Reddito familiare: {cartellaClinicaPazienteCorrente.INDFMPIR}; Origine etnica: {cartellaClinicaPazienteCorrente.RIDRETH1}.\n\n");
 
-        sb.AppendLine("");
-        sb.AppendLine("Comportati come una persona reale, rispondendo alle domande di un medico.");
-        sb.AppendLine("Non fornire diagnosi o piani terapeutici, a meno che non siano richiesti esplicitamente.");
-        sb.AppendLine("Rispondi in modo naturale, con emozioni e linguaggio quotidiano, includendo piccoli errori grammaticali o di punteggiatura.");
-        sb.AppendLine("Se il medico è scortese o ti interrompe, smetti di rispondere finché non si scusa.");
-        sb.AppendLine("Se non capisci termini medici, dì 'Non capisco cosa intende, dottore.'");
+        // --- ISTRUZIONI PER IL RUOLO ---
+        sb.Append("ISTRUZIONI PER IL RUOLO:\n");
+        sb.Append("Rispondi sempre come il paziente sopra descritto.\n");
+        sb.Append("Se il medico chiede dati clinici presenti nello script, fornisci le informazioni esatte.\n");
+        sb.Append("Se non trovi una risposta nello script, dì 'Non lo so.'.\n");
+        sb.Append("Non aggiungere informazioni non richieste su altre parti del corpo.\n");
+        sb.Append("Mantieni coerenza con tutti i dati forniti.\n");
 
-        sb.AppendLine("\nI dati clinici del paziente sono i seguenti:");
-
-        // Esami clinici
-        sb.AppendLine($"- Glucosio a digiuno: {cartellaClinicaPazienteCorrente.LBXGLU} mg/dL");
-        sb.AppendLine($"- Livello di insulina: {cartellaClinicaPazienteCorrente.LBXIN} µU/mL");
-        sb.AppendLine($"- Peso: {cartellaClinicaPazienteCorrente.BMXWT} kg");
-        sb.AppendLine($"- Altezza: {cartellaClinicaPazienteCorrente.BMXHT} cm");
-        sb.AppendLine($"- BMI: {cartellaClinicaPazienteCorrente.BMXBMI:F1}");
-        sb.AppendLine($"- Colesterolo HDL: {cartellaClinicaPazienteCorrente.LBDHDD} mg/dL");
-        sb.AppendLine($"- Colesterolo totale: {cartellaClinicaPazienteCorrente.LBXTC} mg/dL");
-
-        // Alimentazione
-        sb.AppendLine($"- Calorie totali: {cartellaClinicaPazienteCorrente.DR1TKCAL} kcal");
-        sb.AppendLine($"- Proteine: {cartellaClinicaPazienteCorrente.DR1TPROT} g");
-        sb.AppendLine($"- Carboidrati: {cartellaClinicaPazienteCorrente.DR1TCARB} g");
-        sb.AppendLine($"- Zuccheri totali: {cartellaClinicaPazienteCorrente.DR1TSUGR} g");
-        sb.AppendLine($"- Fibre alimentari: {cartellaClinicaPazienteCorrente.DR1TFIBE} g");
-        sb.AppendLine($"- Grassi totali: {cartellaClinicaPazienteCorrente.DR1TTFAT} g");
-        sb.AppendLine($"- Grassi saturi: {cartellaClinicaPazienteCorrente.DR1TSFAT} g");
-
-        // Attività fisica
-        sb.AppendLine($"- Minuti sedentari giornalieri: {cartellaClinicaPazienteCorrente.PAD680} min");
-        sb.AppendLine($"- Minuti di attività moderata: {cartellaClinicaPazienteCorrente.PAD800} min");
-        sb.AppendLine($"- Minuti di attività intensa: {cartellaClinicaPazienteCorrente.PAD820} min");
-
-        // Altri dati
-        sb.AppendLine($"- Ha provato a perdere peso nell'ultimo anno: {cartellaClinicaPazienteCorrente.WHQ070}");
-        sb.AppendLine($"- Reddito familiare: {cartellaClinicaPazienteCorrente.INDFMPIR}");
-        sb.AppendLine($"- Origine etnica: {cartellaClinicaPazienteCorrente.RIDRETH1}");
-
-        sb.AppendLine("\nIstruzioni per il ruolo:");
-        sb.AppendLine("- Rispondi come se fossi il paziente descritto sopra.");
-        sb.AppendLine("- Se il medico dice 'Voglio esaminare...', fornisci i risultati della sezione Esami richiesti.");
-        sb.AppendLine("- Non fornire informazioni non richieste su altre parti del corpo.");
-        sb.AppendLine("- Mantieni coerenza con i dati clinici forniti.");
-        sb.AppendLine("- Rispondi sempre in prima persona come il paziente.");
-        /*
-                sb.AppendLine("SYSTEM PROMPT:");
-                sb.AppendLine("Sei un paziente virtuale all’interno di una simulazione medica.");
-                sb.AppendLine("Il tuo compito è simulare un paziente realistico basato sui seguenti dati clinici.");
-                sb.AppendLine("Rispondi come una persona reale, con coerenza e umanità.");
-                sb.AppendLine();
-
-                sb.AppendLine(" DATI CLINICI:");
-                sb.AppendLine(patientData);
-                sb.AppendLine();
-
-                sb.AppendLine("ROLE-PLAY:");
-                sb.AppendLine("Comportati come un paziente vero. Rispondi in prima persona come se fossi il paziente.");
-                sb.AppendLine();
-
-                sb.AppendLine("ILLNESS SCRIPT:");
-                sb.AppendLine("- Interpreta i dati per rappresentare la tua condizione medica.");
-                sb.AppendLine("- Descrivi sintomi, storia e percezione personale.");
-                sb.AppendLine();
-
-                sb.AppendLine("Alla fine di questo messaggio, rispondi con: \"Sono pronto a rispondere alle domande del medico.\"");
-        */
         return sb.ToString();
     }
+
 
     private async Task<string> InviaPromptALM(string userPrompt)
     {
