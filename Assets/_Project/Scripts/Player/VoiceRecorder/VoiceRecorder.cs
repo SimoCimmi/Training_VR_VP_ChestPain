@@ -8,27 +8,21 @@ public class VoiceRecorder : MonoBehaviour
     [Header("Server Whisper")]
     [SerializeField] private string whisperUrl = "http://127.0.0.1:5004/stt";
 
-
     [Header("Push-To-Talk Setting")]
-    [SerializeField] private KeyCode pushToTalkKey = KeyCode.Space; //tasto tastiera
-    //[SerializeField] private string joystickButtonName = "JoystickButton4"; //tasto joistick
+    [SerializeField] private KeyCode pushToTalkKey = KeyCode.Z; // adesso usa il tasto Z
 
     private AudioClip recordedClip;
     private bool isRecording = false;
 
     void Update()
     {
+        // Avvia registrazione quando premi Z
         if (Input.GetKeyDown(pushToTalkKey))
             StartRecording();
 
+        // Ferma registrazione quando rilasci Z
         if (Input.GetKeyUp(pushToTalkKey))
             StopRecordingAndSend();
-
-        //Controllo input dal joistick
-      /*  if (Input.GetKeyDown(joystickButtonName))
-            StartRecording();
-        if (Input.GetKeyUp(joystickButtonName))
-            StopRecordingAndSend();*/
     }
 
     private void StartRecording()
@@ -37,7 +31,7 @@ public class VoiceRecorder : MonoBehaviour
 
         recordedClip = Microphone.Start(null, false, 10, 44100);
         isRecording = true;
-        Debug.Log("Registrazione iniziata...");
+        Debug.Log("🎙️ Registrazione iniziata...");
     }
 
     private async void StopRecordingAndSend()
@@ -46,7 +40,7 @@ public class VoiceRecorder : MonoBehaviour
 
         Microphone.End(null);
         isRecording = false;
-        Debug.Log("Registrazione terminata, invio a Whisper...");
+        Debug.Log("🎙️ Registrazione terminata, invio a Whisper...");
 
         if (recordedClip == null)
         {
@@ -70,19 +64,6 @@ public class VoiceRecorder : MonoBehaviour
         }
     }
 
-
-    public void OnMouseDown()  // clic sul microfono
-    {
-        if (!isRecording)
-            StartRecording();
-        else
-            StopRecordingAndSend();
-    }
-
-    
-
-    
-
     private async Task<string> SendAudioToWhisper(string filePath)
     {
         try
@@ -100,7 +81,6 @@ public class VoiceRecorder : MonoBehaviour
 
                 Debug.Log("Risposta Whisper grezza: " + json);
 
-                // Il server Whisper restituisce {"text": "..."}
                 int start = json.IndexOf(":") + 2;
                 int end = json.LastIndexOf("\"");
                 string testoPulito = json.Substring(start, end - start);
