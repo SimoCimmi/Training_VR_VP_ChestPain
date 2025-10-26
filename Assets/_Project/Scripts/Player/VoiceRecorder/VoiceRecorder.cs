@@ -8,19 +8,33 @@ public class VoiceRecorder : MonoBehaviour
     [Header("Server Whisper")]
     [SerializeField] private string whisperUrl = "http://127.0.0.1:5004/stt";
 
+
+    [Header("Push-To-Talk Setting")]
+    [SerializeField] private KeyCode pushToTalkKey = KeyCode.Space; //tasto tastiera
+    [SerializeField] private string joystickButtonName = "JoystickButton0"; //tasto joistick
+
     private AudioClip recordedClip;
     private bool isRecording = false;
 
-    public void OnMouseDown()  // clic sul microfono
+    void Update()
     {
-        if (!isRecording)
+        if (Input.GetKeyDown(pushToTalkKey))
             StartRecording();
-        else
+
+        if (Input.GetKeyUp(pushToTalkKey))
+            StopRecordingAndSend();
+
+        //Controllo input dal joistick
+        if (Input.GetKeydown(joystickButtonName))
+            StartRecording();
+        if (Input.GetKeyUp(joystickButtonName))
             StopRecordingAndSend();
     }
 
     private void StartRecording()
     {
+        if (isRecording) return;
+
         recordedClip = Microphone.Start(null, false, 10, 44100);
         isRecording = true;
         Debug.Log("Registrazione iniziata...");
@@ -28,6 +42,8 @@ public class VoiceRecorder : MonoBehaviour
 
     private async void StopRecordingAndSend()
     {
+        if (!isRecording) return;
+
         Microphone.End(null);
         isRecording = false;
         Debug.Log("Registrazione terminata, invio a Whisper...");
@@ -53,6 +69,19 @@ public class VoiceRecorder : MonoBehaviour
             Debug.LogWarning("Problema: VirtualPatientManager.Instance nullo o trascrizione vuota.");
         }
     }
+
+
+    public void OnMouseDown()  // clic sul microfono
+    {
+        if (!isRecording)
+            StartRecording();
+        else
+            StopRecordingAndSend();
+    }
+
+    
+
+    
 
     private async Task<string> SendAudioToWhisper(string filePath)
     {
