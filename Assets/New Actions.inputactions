@@ -1,0 +1,34 @@
+{
+    "name": "New Actions",
+    "maps": [
+        {
+            "name": "XRControls",
+            "id": "009107b8-f60c-495e-898d-364fb974e635",
+            "actions": [
+                {
+                    "name": "PushToTalk",
+                    "type": "Button",
+                    "id": "727f4dcb-7a44-4fde-bd1d-3466664e169b",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "66db7890-ed46-4af8-8736-1985be0cce94",
+                    "path": "<XRController>{LeftHand}/{TriggerButton}",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "PushToTalk",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}

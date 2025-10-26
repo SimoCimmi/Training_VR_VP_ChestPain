@@ -11,7 +11,7 @@ public class VoiceRecorder : MonoBehaviour
 
     [Header("Push-To-Talk Setting")]
     [SerializeField] private KeyCode pushToTalkKey = KeyCode.Space; //tasto tastiera
-    [SerializeField] private string joystickButtonName = "JoystickButton0"; //tasto joistick
+    //[SerializeField] private string joystickButtonName = "JoystickButton4"; //tasto joistick
 
     private AudioClip recordedClip;
     private bool isRecording = false;
@@ -25,10 +25,10 @@ public class VoiceRecorder : MonoBehaviour
             StopRecordingAndSend();
 
         //Controllo input dal joistick
-        if (Input.GetKeydown(joystickButtonName))
+      /*  if (Input.GetKeyDown(joystickButtonName))
             StartRecording();
         if (Input.GetKeyUp(joystickButtonName))
-            StopRecordingAndSend();
+            StopRecordingAndSend();*/
     }
 
     private void StartRecording()
