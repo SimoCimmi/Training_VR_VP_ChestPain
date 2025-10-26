@@ -32,11 +32,14 @@ public class VirtualPatientManager : MonoBehaviour
         public MessageToSend[] messages;
     }
 
-     private CartellaClinica cartellaClinicaPazienteCorrente;
+    private CartellaClinica cartellaClinicaPazienteCorrente;
+    private bool pazientePronto = false;
 
     public async void CreaPazienteVirtuale(CartellaClinica cartellaClinica)
     {
+        
         cartellaClinicaPazienteCorrente = cartellaClinica;
+        pazientePronto = true;
         Debug.Log(" Creazione paziente virtuale in corso...");
         Debug.Log($"Paziente generato Cartella Clinica: ID {cartellaClinicaPazienteCorrente.SEQN}, Diabaetico: {cartellaClinicaPazienteCorrente.DIQ010}, Sesso: {cartellaClinicaPazienteCorrente.RIAGENDR}, Età: {cartellaClinicaPazienteCorrente.RIDAGEYR}, BMI: {cartellaClinicaPazienteCorrente.BMXBMI:F1}, Glucosio: {cartellaClinicaPazienteCorrente.LBXGLU} mg/dL, Insulina: {cartellaClinicaPazienteCorrente.LBXIN} µU/mL, Colesterolo Totale: {cartellaClinicaPazienteCorrente.LBXTC} mg/dL, Pressione Arteriosa (PAD680): {cartellaClinicaPazienteCorrente.PAD680} mmHg, Pressione Arteriosa (PAD800): {cartellaClinicaPazienteCorrente.PAD800} mmHg, Pressione Arteriosa (PAD820): {cartellaClinicaPazienteCorrente.PAD820} mmHg, Abitudine al fumo (WHQ070): {cartellaClinicaPazienteCorrente.WHQ070}, Anni di istruzione (DMDEDUC2): {cartellaClinicaPazienteCorrente.DMDEDUC2}, Reddito famigliare (INDFMPIR): {cartellaClinicaPazienteCorrente.INDFMPIR}");
         try
@@ -45,7 +48,7 @@ public class VirtualPatientManager : MonoBehaviour
             //string patientData = EstraiTuplaCasuale();
 
             // Invia al modello
-            string risposta = await InviaPromptALM("Salve, quanti anni ha?");
+            string risposta = await InviaPromptALM("Ciao");
 
             Debug.Log($" LLM Studio: {risposta}");
 
@@ -76,47 +79,57 @@ public class VirtualPatientManager : MonoBehaviour
     {
         StringBuilder sb = new StringBuilder();
 
-        //sb.AppendLine($"Utilizzando i seguenti dati: SEQN: {cartellaClinicaPazienteCorrente.SEQN}, Sesso: {cartellaClinicaPazienteCorrente.RIDAGEYR}, Età: {cartellaClinicaPazienteCorrente.RIDAGEYR}, BMI: {cartellaClinicaPazienteCorrente.BMXBMI:F1}, Glucosio: {cartellaClinicaPazienteCorrente.LBXGLU} mg/dL, Insulina: {cartellaClinicaPazienteCorrente.LBXIN} µU/mL, Colesterolo Totale: {cartellaClinicaPazienteCorrente.LBXTC} mg/dL, Pressione Arteriosa (PAD680): {cartellaClinicaPazienteCorrente.PAD680} mmHg, Pressione Arteriosa (PAD800): {cartellaClinicaPazienteCorrente.PAD800} mmHg, Pressione Arteriosa (PAD820): {cartellaClinicaPazienteCorrente.PAD820} mmHg, Abitudine al fumo (WHQ070): {cartellaClinicaPazienteCorrente.WHQ070}, Anni di istruzione (DMDEDUC2): {cartellaClinicaPazienteCorrente.DMDEDUC2}, Reddito famigliare (INDFMPIR): {cartellaClinicaPazienteCorrente.INDFMPIR}, rispondi alla seguente domanda: ");
-        if (cartellaClinicaPazienteCorrente.RIDAGEYR == "Male")
-        {
-            sb.AppendLine($"Il suo nome è Ferdinand Wunderlich, ");
-        }
-       else
-        {
-            sb.AppendLine("Il suo nome è Sophie Wunderlich.");
-        }
-        sb.AppendLine($"ha {cartellaClinicaPazienteCorrente.RIDAGEYR} anni e di professione è un impiegato amministrativo presso un ospedale comunale, nel reparto finanze. Si presenta allo studio del suo medico di famiglia a causa di nausea,");
-            sb.AppendLine($@"Sei un paziente che interpreta un caso clinico realistico.
-                    Ti comporterai come una persona reale, rispondendo alle domande di un medico.
-                    Non fornire diagnosi, nomi di malattie o piani terapeutici ideali, a meno che non ti vengano chiesti esplicitamente.
-                    Rispondi in modo naturale, con emozioni e linguaggio quotidiano, includendo errori minori di grammatica o punteggiatura.
-                    Se il medico è scortese o ti interrompe, smetti di rispondere finché non si scusa.
-                    Se non capisci termini medici, di’ “Non capisco cosa intende, dottore.”
-                    Non fornire mai informazioni non richieste.
-                    Inizia il caso dicendo 'Salve dottore'. Dopodiché si aprirà un dialogo interattivo. Dovresti rispondere in modo autentico, proprio come risponderebbe un vero paziente. 
-                    Se dico 'Voglio esaminare...' (o qualcosa di simile), allora dimmi i risultati della sezione 'Esami' in base a quanto ho richiesto. Non fornirmi informazioni su regioni del corpo che non richiedo espressamente. Se ritieni che non sia necessario esaminare quella regione, puoi dirlo.
-                    
-                    Esami:
-                    Glucosio a digiuno: {cartellaClinicaPazienteCorrente.LBXGLU} mg/dL,
-                    Livello di insulina: {cartellaClinicaPazienteCorrente.LBXIN} µU/mL,
-                    Peso: {cartellaClinicaPazienteCorrente.BMXWT} kg,
-                    Altezza: {cartellaClinicaPazienteCorrente.BMXHT} cm,
-                    BMI: {cartellaClinicaPazienteCorrente.BMXBMI:F1},
-                    Colesterolo HDL: {cartellaClinicaPazienteCorrente.LBDHDD} mg/dL,
-                    Colesterolo totale: {cartellaClinicaPazienteCorrente.LBXTC} mg/dL,
-                    Calorie totali: {cartellaClinicaPazienteCorrente.DR1TKCAL} kcal,
-                    Proteine: {cartellaClinicaPazienteCorrente.DR1TPROT} g,
-                    Carboidrati: {cartellaClinicaPazienteCorrente.DR1TCARB} g,
-                    Zuccheri totali: {cartellaClinicaPazienteCorrente.DR1TSUGR} g,
-                    Fibre alimentari: {cartellaClinicaPazienteCorrente.DR1TFIBE} g,
-                    Grassi totali: {cartellaClinicaPazienteCorrente.DR1TTFAT} g,
-                    Grassi saturi: {cartellaClinicaPazienteCorrente.DR1TSFAT} g,
-                    Minuti sedentari giornalieri: {cartellaClinicaPazienteCorrente.PAD680} min,
-                    Minuti di attività moderata: {cartellaClinicaPazienteCorrente.PAD800} min,
-                    Minuti di attività intensa: {cartellaClinicaPazienteCorrente.PAD820} min,
-                    Ha cercato di perdere peso nell'ultimo anno: {cartellaClinicaPazienteCorrente.WHQ070}");
+        // Nome del paziente in base al sesso
+        string nomePaziente = cartellaClinicaPazienteCorrente.RIAGENDR == "Male" ? "Ferdinand Wunderlich" : "Sophie Wunderlich";
+        sb.AppendLine($"Sei {nomePaziente}, di seguito assumerai il ruolo di un paziente. ");
 
-       
+        sb.AppendLine($"Non assisterai l'utente, ma risponderai a domande basate sulle seguenti informazioni: ");
+       sb.AppendLine($" Il suo nome è {nomePaziente}, hai {cartellaClinicaPazienteCorrente.RIDAGEYR} anni, e risponderai con un Livello di istruzione pari a {cartellaClinicaPazienteCorrente.DMDEDUC2}");
+ 
+
+        sb.AppendLine("");
+        sb.AppendLine("Comportati come una persona reale, rispondendo alle domande di un medico.");
+        sb.AppendLine("Non fornire diagnosi o piani terapeutici, a meno che non siano richiesti esplicitamente.");
+        sb.AppendLine("Rispondi in modo naturale, con emozioni e linguaggio quotidiano, includendo piccoli errori grammaticali o di punteggiatura.");
+        sb.AppendLine("Se il medico è scortese o ti interrompe, smetti di rispondere finché non si scusa.");
+        sb.AppendLine("Se non capisci termini medici, dì 'Non capisco cosa intende, dottore.'");
+
+        sb.AppendLine("\nI dati clinici del paziente sono i seguenti:");
+
+        // Esami clinici
+        sb.AppendLine($"- Glucosio a digiuno: {cartellaClinicaPazienteCorrente.LBXGLU} mg/dL");
+        sb.AppendLine($"- Livello di insulina: {cartellaClinicaPazienteCorrente.LBXIN} µU/mL");
+        sb.AppendLine($"- Peso: {cartellaClinicaPazienteCorrente.BMXWT} kg");
+        sb.AppendLine($"- Altezza: {cartellaClinicaPazienteCorrente.BMXHT} cm");
+        sb.AppendLine($"- BMI: {cartellaClinicaPazienteCorrente.BMXBMI:F1}");
+        sb.AppendLine($"- Colesterolo HDL: {cartellaClinicaPazienteCorrente.LBDHDD} mg/dL");
+        sb.AppendLine($"- Colesterolo totale: {cartellaClinicaPazienteCorrente.LBXTC} mg/dL");
+
+        // Alimentazione
+        sb.AppendLine($"- Calorie totali: {cartellaClinicaPazienteCorrente.DR1TKCAL} kcal");
+        sb.AppendLine($"- Proteine: {cartellaClinicaPazienteCorrente.DR1TPROT} g");
+        sb.AppendLine($"- Carboidrati: {cartellaClinicaPazienteCorrente.DR1TCARB} g");
+        sb.AppendLine($"- Zuccheri totali: {cartellaClinicaPazienteCorrente.DR1TSUGR} g");
+        sb.AppendLine($"- Fibre alimentari: {cartellaClinicaPazienteCorrente.DR1TFIBE} g");
+        sb.AppendLine($"- Grassi totali: {cartellaClinicaPazienteCorrente.DR1TTFAT} g");
+        sb.AppendLine($"- Grassi saturi: {cartellaClinicaPazienteCorrente.DR1TSFAT} g");
+
+        // Attività fisica
+        sb.AppendLine($"- Minuti sedentari giornalieri: {cartellaClinicaPazienteCorrente.PAD680} min");
+        sb.AppendLine($"- Minuti di attività moderata: {cartellaClinicaPazienteCorrente.PAD800} min");
+        sb.AppendLine($"- Minuti di attività intensa: {cartellaClinicaPazienteCorrente.PAD820} min");
+
+        // Altri dati
+        sb.AppendLine($"- Ha provato a perdere peso nell'ultimo anno: {cartellaClinicaPazienteCorrente.WHQ070}");
+        sb.AppendLine($"- Reddito familiare: {cartellaClinicaPazienteCorrente.INDFMPIR}");
+        sb.AppendLine($"- Origine etnica: {cartellaClinicaPazienteCorrente.RIDRETH1}");
+
+        sb.AppendLine("\nIstruzioni per il ruolo:");
+        sb.AppendLine("- Rispondi come se fossi il paziente descritto sopra.");
+        sb.AppendLine("- Se il medico dice 'Voglio esaminare...', fornisci i risultati della sezione Esami richiesti.");
+        sb.AppendLine("- Non fornire informazioni non richieste su altre parti del corpo.");
+        sb.AppendLine("- Mantieni coerenza con i dati clinici forniti.");
+        sb.AppendLine("- Rispondi sempre in prima persona come il paziente.");
         /*
                 sb.AppendLine("SYSTEM PROMPT:");
                 sb.AppendLine("Sei un paziente virtuale all’interno di una simulazione medica.");
@@ -149,7 +162,7 @@ public class VirtualPatientManager : MonoBehaviour
         using (HttpClient client = new HttpClient())
         {
             string systemPrompt =  CreaSystemPrompt();
-
+            userPrompt = userPrompt + " (La risposta che darai deve essere breve breve breve) ";
             // Creazione oggetti per il JSON
             var requestObj = new ChatCompletionRequest
             {
@@ -207,7 +220,20 @@ public class VirtualPatientManager : MonoBehaviour
     }
 
     public async void ProcessUserSpeech(string userText)
-    {
+    {   
+
+        if (cartellaClinicaPazienteCorrente == null)
+        {
+            Debug.LogError("cartellaClinicaPazienteCorrente è NULL in ProcessUserSpeech!");
+            return;
+        }
+
+        if (!pazientePronto)
+        {
+            Debug.LogWarning("Il paziente non è ancora stato creato! Impossibile processare la richiesta.");
+            return;
+        }
+
         Debug.Log($"[VirtualPatientManager] Testo ricevuto da Whisper: {userText}");
 
         if (string.IsNullOrWhiteSpace(userText))
@@ -216,15 +242,11 @@ public class VirtualPatientManager : MonoBehaviour
             return;
         }
 
-        // Invia il testo dell’utente all’LLM per generare una risposta
         string risposta = await InviaPromptALM(userText);
-
         Debug.Log($"Risposta LLM: {risposta}");
 
         if (ttsClient != null)
             await ttsClient.RiproduciVoce(risposta);
-        else
-            Debug.LogWarning("TTSClient non assegnato in Inspector.");
     }
 
 

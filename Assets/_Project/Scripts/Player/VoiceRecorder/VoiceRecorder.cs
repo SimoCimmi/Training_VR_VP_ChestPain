@@ -41,7 +41,14 @@ public class VoiceRecorder : MonoBehaviour
         string trascrizione = await SendAudioToWhisper(filePath);
 
         if (virtualPatientManager != null && !string.IsNullOrWhiteSpace(trascrizione))
+        {
+            Debug.Log("Chiama ProcessUserSpeech passandogli il testo sintetizzato");
             virtualPatientManager.ProcessUserSpeech(trascrizione);
+        }
+        else
+        {
+            Debug.Log("Problema: Non chiama ProcessUserSpeech ");
+        }
     }
 
     private async Task<string> SendAudioToWhisper(string filePath)

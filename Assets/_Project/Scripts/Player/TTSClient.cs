@@ -23,7 +23,7 @@ public class TTSClient : MonoBehaviour
 
     private static readonly HttpClient client = new HttpClient
     {
-        Timeout = TimeSpan.FromSeconds(100)
+        Timeout = TimeSpan.FromSeconds(300)
     };   // HttpClient statico per riutilizzare la connessione e non aprire più socket
 
     public async Task RiproduciVoce(string testo)   // Metodo principale per inviare testo a XTTS e riprodurre l'audio risultante
