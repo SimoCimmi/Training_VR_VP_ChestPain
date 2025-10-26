@@ -17,8 +17,6 @@ public class SpawnPaziente : MonoBehaviour
 
 
     [Header("Script collegato a LM Studio")]
-    [SerializeField] private VirtualPatientManager virtualPatientManager;
-
     private GameObject pazienteCorrente;
 
 
@@ -102,13 +100,17 @@ public class SpawnPaziente : MonoBehaviour
         Debug.Log($"[SpawnPaziente] Paziente selezionato: SEQN = {dati.SEQN}, RIDAGEYR = {dati.RIDAGEYR}, RIAGENDR = {dati.RIAGENDR}");
 
         //3.1 Avvia paziente virtuale (LLM)    
-        Debug.Log($"[SpawnPaziente] - virtualPatientManager = {virtualPatientManager}");
-        if (virtualPatientManager != null)
+        Debug.Log($"[SpawnPaziente] - Avvia paziente virtuale");
+        if (VirtualPatientManager.Instance != null)
         {
-            Debug.Log("[SpawnPaziente] - Chiamo CreaPazienteVirtuale(dati)");
-            virtualPatientManager.CreaPazienteVirtuale(dati);
-
+            Debug.Log("[SpawnPaziente] - Creo paziente virtuale su VirtualPatientManager.Instance");
+            VirtualPatientManager.Instance.CreaPazienteVirtuale(dati);
         }
+        else
+        {
+            Debug.LogError("[SpawnPaziente] - VirtualPatientManager.Instance è null! Assicurati che esista in scena.");
+        }
+
 
         // 4. Sceglie prefab in base al sesso
         GameObject prefabScelto = null;
@@ -116,14 +118,15 @@ public class SpawnPaziente : MonoBehaviour
         //Gestione dell'età vista come una stringa
         float eta = 0f;
 
-        if (!float.TryParse(dati.RIDAGEYR, NumberStyles.Float, CultureInfo.InvariantCulture, out eta))
+       if (string.IsNullOrEmpty(dati.RIDAGEYR) || 
+        !float.TryParse(dati.RIDAGEYR, NumberStyles.Float, CultureInfo.InvariantCulture, out eta))
         {
-            // Se la conversione fallisce (es. "From 80 and up"), assegni 80
-            if (dati.RIDAGEYR.Contains("80"))
+            if (!string.IsNullOrEmpty(dati.RIDAGEYR) && dati.RIDAGEYR.Contains("80"))
                 eta = 80f;
             else
-                eta = -1f; // valore speciale per "età sconosciuta"
+                eta = -1f;
         }
+
 
 
         if (eta < 16 && pazientiBambiniPrefab.Length > 0)

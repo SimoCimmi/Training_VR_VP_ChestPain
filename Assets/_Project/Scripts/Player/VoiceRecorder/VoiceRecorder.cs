@@ -8,9 +8,6 @@ public class VoiceRecorder : MonoBehaviour
     [Header("Server Whisper")]
     [SerializeField] private string whisperUrl = "http://127.0.0.1:5004/stt";
 
-    [Header("Riferimento al VirtualPatientManager")]
-    [SerializeField] private VirtualPatientManager virtualPatientManager;
-
     private AudioClip recordedClip;
     private bool isRecording = false;
 
@@ -35,19 +32,25 @@ public class VoiceRecorder : MonoBehaviour
         isRecording = false;
         Debug.Log("Registrazione terminata, invio a Whisper...");
 
+        if (recordedClip == null)
+        {
+            Debug.LogError("Registrazione audio non valida. Nessun clip registrato.");
+            return;
+        }
+
         string filePath = Path.Combine(Application.persistentDataPath, "user_recording.wav");
         SavWav.Save(filePath, recordedClip);
 
         string trascrizione = await SendAudioToWhisper(filePath);
 
-        if (virtualPatientManager != null && !string.IsNullOrWhiteSpace(trascrizione))
+        if (VirtualPatientManager.Instance != null && !string.IsNullOrWhiteSpace(trascrizione))
         {
             Debug.Log("Chiama ProcessUserSpeech passandogli il testo sintetizzato");
-            virtualPatientManager.ProcessUserSpeech(trascrizione);
+            VirtualPatientManager.Instance.ProcessUserSpeech(trascrizione);
         }
         else
         {
-            Debug.Log("Problema: Non chiama ProcessUserSpeech ");
+            Debug.LogWarning("Problema: VirtualPatientManager.Instance nullo o trascrizione vuota.");
         }
     }
 
@@ -73,8 +76,8 @@ public class VoiceRecorder : MonoBehaviour
                 int end = json.LastIndexOf("\"");
                 string testoPulito = json.Substring(start, end - start);
 
-                return testoPulito; 
-                Debug.Log("Risposta Whisper con testo pulito: " + json);
+                Debug.Log("Risposta Whisper con testo pulito: " + testoPulito);
+                return testoPulito;
             }
         }
         catch (System.Exception ex)

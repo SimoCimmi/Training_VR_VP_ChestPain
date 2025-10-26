@@ -7,6 +7,19 @@ using UnityEngine;
 
 public class VirtualPatientManager : MonoBehaviour
 {   
+    public static VirtualPatientManager Instance { get; private set; }
+
+    private void Awake()    //Crea un un singleton persistente in scena.
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        Instance = this;
+        DontDestroyOnLoad(gameObject); // resta anche se cambi scena
+    }
 
     [Header("Percorso Dataset CSV")]
     //[SerializeField] private string datasetPath = "Assets/_Project/Resources/Dataset/Clean_filteredDataset.csv";
