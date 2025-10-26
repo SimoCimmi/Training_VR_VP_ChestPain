@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 using UnityEngine;
 
 public class VirtualPatientManager : MonoBehaviour
-{
+{   
+
     [Header("Percorso Dataset CSV")]
     //[SerializeField] private string datasetPath = "Assets/_Project/Resources/Dataset/Clean_filteredDataset.csv";
 
@@ -31,20 +32,20 @@ public class VirtualPatientManager : MonoBehaviour
         public MessageToSend[] messages;
     }
 
+     private CartellaClinica cartellaClinicaPazienteCorrente;
+
     public async void CreaPazienteVirtuale(CartellaClinica cartellaClinica)
     {
+        cartellaClinicaPazienteCorrente = cartellaClinica;
         Debug.Log(" Creazione paziente virtuale in corso...");
-        Debug.Log($"Paziente generato Cartella Clinica: ID {cartellaClinica.SEQN}, Diabaetico: {cartellaClinica.DIQ010}, Sesso: {cartellaClinica.RIAGENDR}, Età: {cartellaClinica.RIDAGEYR}, BMI: {cartellaClinica.BMXBMI:F1}, Glucosio: {cartellaClinica.LBXGLU} mg/dL, Insulina: {cartellaClinica.LBXIN} µU/mL, Colesterolo Totale: {cartellaClinica.LBXTC} mg/dL, Pressione Arteriosa (PAD680): {cartellaClinica.PAD680} mmHg, Pressione Arteriosa (PAD800): {cartellaClinica.PAD800} mmHg, Pressione Arteriosa (PAD820): {cartellaClinica.PAD820} mmHg, Abitudine al fumo (WHQ070): {cartellaClinica.WHQ070}, Anni di istruzione (DMDEDUC2): {cartellaClinica.DMDEDUC2}, Reddito famigliare (INDFMPIR): {cartellaClinica.INDFMPIR}");
+        Debug.Log($"Paziente generato Cartella Clinica: ID {cartellaClinicaPazienteCorrente.SEQN}, Diabaetico: {cartellaClinicaPazienteCorrente.DIQ010}, Sesso: {cartellaClinicaPazienteCorrente.RIAGENDR}, Età: {cartellaClinicaPazienteCorrente.RIDAGEYR}, BMI: {cartellaClinicaPazienteCorrente.BMXBMI:F1}, Glucosio: {cartellaClinicaPazienteCorrente.LBXGLU} mg/dL, Insulina: {cartellaClinicaPazienteCorrente.LBXIN} µU/mL, Colesterolo Totale: {cartellaClinicaPazienteCorrente.LBXTC} mg/dL, Pressione Arteriosa (PAD680): {cartellaClinicaPazienteCorrente.PAD680} mmHg, Pressione Arteriosa (PAD800): {cartellaClinicaPazienteCorrente.PAD800} mmHg, Pressione Arteriosa (PAD820): {cartellaClinicaPazienteCorrente.PAD820} mmHg, Abitudine al fumo (WHQ070): {cartellaClinicaPazienteCorrente.WHQ070}, Anni di istruzione (DMDEDUC2): {cartellaClinicaPazienteCorrente.DMDEDUC2}, Reddito famigliare (INDFMPIR): {cartellaClinicaPazienteCorrente.INDFMPIR}");
         try
         {
             // Estrai tupla casuale dal CSV
             //string patientData = EstraiTuplaCasuale();
 
-            // Crea prompt completo
-            string fullPrompt = CreaPromptCompleto(cartellaClinica);
-
             // Invia al modello
-            string risposta = await InviaPromptALM(fullPrompt);
+            string risposta = await InviaPromptALM("Salve, quanti anni ha?");
 
             Debug.Log($" LLM Studio: {risposta}");
 
@@ -69,43 +70,53 @@ public class VirtualPatientManager : MonoBehaviour
         }
     }
 
-   /* private string EstraiTuplaCasuale()
-    {
-        // Controlla se il file CSV esiste, altrimenti lancia un'eccezione
-        if (!File.Exists(datasetPath))
-            throw new FileNotFoundException($"File non trovato: {datasetPath}");
-
-        // Legge tutte le righe del file CSV in un array di stringhe
-        var lines = File.ReadAllLines(datasetPath);
-
-        // Verifica che il file contenga almeno una riga di intestazioni e una di dati
-        if (lines.Length < 2)
-            throw new Exception("Dataset vuoto o invalido.");
-
-        // Crea un generatore di numeri casuali
-        var random = new System.Random();
-
-        // La prima riga del CSV contiene le intestazioni delle colonne
-        string[] headers = lines[0].Split(',');
-
-        // Seleziona una riga casuale dal dataset (escludendo l'intestazione)
-        string[] values = lines[random.Next(1, lines.Length)].Split(',');
-
-        // Costruisce una stringa leggibile con ogni coppia intestazione-valore
-        StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < headers.Length; i++)
-            sb.AppendLine($"{headers[i]}: {values[i]}");
-
-        // Ritorna la stringa finale formattata
-        return sb.ToString();
-    }*/
 
 
-    private string CreaPromptCompleto(CartellaClinica cartellaClinica)
+    private string CreaSystemPrompt()
     {
         StringBuilder sb = new StringBuilder();
-        
-        sb.AppendLine($"Utilizzando i seguenti dati: SEQN: {cartellaClinica.SEQN}, Sesso: {cartellaClinica.RIDAGEYR}, Età: {cartellaClinica.RIDAGEYR}, BMI: {cartellaClinica.BMXBMI:F1}, Glucosio: {cartellaClinica.LBXGLU} mg/dL, Insulina: {cartellaClinica.LBXIN} µU/mL, Colesterolo Totale: {cartellaClinica.LBXTC} mg/dL, Pressione Arteriosa (PAD680): {cartellaClinica.PAD680} mmHg, Pressione Arteriosa (PAD800): {cartellaClinica.PAD800} mmHg, Pressione Arteriosa (PAD820): {cartellaClinica.PAD820} mmHg, Abitudine al fumo (WHQ070): {cartellaClinica.WHQ070}, Anni di istruzione (DMDEDUC2): {cartellaClinica.DMDEDUC2}, Reddito famigliare (INDFMPIR): {cartellaClinica.INDFMPIR}, rispondi alla seguente domanda: ");
+
+        //sb.AppendLine($"Utilizzando i seguenti dati: SEQN: {cartellaClinicaPazienteCorrente.SEQN}, Sesso: {cartellaClinicaPazienteCorrente.RIDAGEYR}, Età: {cartellaClinicaPazienteCorrente.RIDAGEYR}, BMI: {cartellaClinicaPazienteCorrente.BMXBMI:F1}, Glucosio: {cartellaClinicaPazienteCorrente.LBXGLU} mg/dL, Insulina: {cartellaClinicaPazienteCorrente.LBXIN} µU/mL, Colesterolo Totale: {cartellaClinicaPazienteCorrente.LBXTC} mg/dL, Pressione Arteriosa (PAD680): {cartellaClinicaPazienteCorrente.PAD680} mmHg, Pressione Arteriosa (PAD800): {cartellaClinicaPazienteCorrente.PAD800} mmHg, Pressione Arteriosa (PAD820): {cartellaClinicaPazienteCorrente.PAD820} mmHg, Abitudine al fumo (WHQ070): {cartellaClinicaPazienteCorrente.WHQ070}, Anni di istruzione (DMDEDUC2): {cartellaClinicaPazienteCorrente.DMDEDUC2}, Reddito famigliare (INDFMPIR): {cartellaClinicaPazienteCorrente.INDFMPIR}, rispondi alla seguente domanda: ");
+        if (cartellaClinicaPazienteCorrente.RIDAGEYR == "Male")
+        {
+            sb.AppendLine($"Il suo nome è Ferdinand Wunderlich, ");
+        }
+       else
+        {
+            sb.AppendLine("Il suo nome è Sophie Wunderlich.");
+        }
+        sb.AppendLine($"ha {cartellaClinicaPazienteCorrente.RIDAGEYR} anni e di professione è un impiegato amministrativo presso un ospedale comunale, nel reparto finanze. Si presenta allo studio del suo medico di famiglia a causa di nausea,");
+            sb.AppendLine($@"Sei un paziente che interpreta un caso clinico realistico.
+                    Ti comporterai come una persona reale, rispondendo alle domande di un medico.
+                    Non fornire diagnosi, nomi di malattie o piani terapeutici ideali, a meno che non ti vengano chiesti esplicitamente.
+                    Rispondi in modo naturale, con emozioni e linguaggio quotidiano, includendo errori minori di grammatica o punteggiatura.
+                    Se il medico è scortese o ti interrompe, smetti di rispondere finché non si scusa.
+                    Se non capisci termini medici, di’ “Non capisco cosa intende, dottore.”
+                    Non fornire mai informazioni non richieste.
+                    Inizia il caso dicendo 'Salve dottore'. Dopodiché si aprirà un dialogo interattivo. Dovresti rispondere in modo autentico, proprio come risponderebbe un vero paziente. 
+                    Se dico 'Voglio esaminare...' (o qualcosa di simile), allora dimmi i risultati della sezione 'Esami' in base a quanto ho richiesto. Non fornirmi informazioni su regioni del corpo che non richiedo espressamente. Se ritieni che non sia necessario esaminare quella regione, puoi dirlo.
+                    
+                    Esami:
+                    Glucosio a digiuno: {cartellaClinicaPazienteCorrente.LBXGLU} mg/dL,
+                    Livello di insulina: {cartellaClinicaPazienteCorrente.LBXIN} µU/mL,
+                    Peso: {cartellaClinicaPazienteCorrente.BMXWT} kg,
+                    Altezza: {cartellaClinicaPazienteCorrente.BMXHT} cm,
+                    BMI: {cartellaClinicaPazienteCorrente.BMXBMI:F1},
+                    Colesterolo HDL: {cartellaClinicaPazienteCorrente.LBDHDD} mg/dL,
+                    Colesterolo totale: {cartellaClinicaPazienteCorrente.LBXTC} mg/dL,
+                    Calorie totali: {cartellaClinicaPazienteCorrente.DR1TKCAL} kcal,
+                    Proteine: {cartellaClinicaPazienteCorrente.DR1TPROT} g,
+                    Carboidrati: {cartellaClinicaPazienteCorrente.DR1TCARB} g,
+                    Zuccheri totali: {cartellaClinicaPazienteCorrente.DR1TSUGR} g,
+                    Fibre alimentari: {cartellaClinicaPazienteCorrente.DR1TFIBE} g,
+                    Grassi totali: {cartellaClinicaPazienteCorrente.DR1TTFAT} g,
+                    Grassi saturi: {cartellaClinicaPazienteCorrente.DR1TSFAT} g,
+                    Minuti sedentari giornalieri: {cartellaClinicaPazienteCorrente.PAD680} min,
+                    Minuti di attività moderata: {cartellaClinicaPazienteCorrente.PAD800} min,
+                    Minuti di attività intensa: {cartellaClinicaPazienteCorrente.PAD820} min,
+                    Ha cercato di perdere peso nell'ultimo anno: {cartellaClinicaPazienteCorrente.WHQ070}");
+
+       
         /*
                 sb.AppendLine("SYSTEM PROMPT:");
                 sb.AppendLine("Sei un paziente virtuale all’interno di una simulazione medica.");
@@ -128,17 +139,16 @@ public class VirtualPatientManager : MonoBehaviour
 
                 sb.AppendLine("Alla fine di questo messaggio, rispondi con: \"Sono pronto a rispondere alle domande del medico.\"");
         */
-        sb.AppendLine("Ciao, quale è il tuo valore di Glucosio? (Rispondi con una risposta molto breve)");
         return sb.ToString();
     }
 
-    private async Task<string> InviaPromptALM(string prompt)
+    private async Task<string> InviaPromptALM(string userPrompt)
     {
-        Debug.Log($"Prompt del giocatore inviato all'LLM: {prompt}");
+        Debug.Log($"Prompt del giocatore inviato all'LLM: {userPrompt}");
 
         using (HttpClient client = new HttpClient())
         {
-            string systemPrompt = "Devi simulare un paziente.";
+            string systemPrompt =  CreaSystemPrompt();
 
             // Creazione oggetti per il JSON
             var requestObj = new ChatCompletionRequest
@@ -147,7 +157,7 @@ public class VirtualPatientManager : MonoBehaviour
                 messages = new MessageToSend[]
                 {
                     new MessageToSend { role = "system", content = systemPrompt },
-                    new MessageToSend { role = "user", content = prompt }
+                    new MessageToSend { role = "user", content = userPrompt }
                 }
             };
 
@@ -207,7 +217,7 @@ public class VirtualPatientManager : MonoBehaviour
         }
 
         // Invia il testo dell’utente all’LLM per generare una risposta
-        string risposta = await InviaPromptALM(userText  +  " (Rispondi con una risposta molto breve ed in italiano)");
+        string risposta = await InviaPromptALM(userText);
 
         Debug.Log($"Risposta LLM: {risposta}");
 
