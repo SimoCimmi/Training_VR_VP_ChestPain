@@ -1,6 +1,8 @@
-# 🩺 Training_VR_VP - Setup & Execution Guide
+# (IN AGGIORNAMENTO)
 
-Questo progetto è un fork di una piattaforma di simulazione medica basata su **Unity**, estesa per aumentare il livello di interattività attraverso l’integrazione di moduli di sintesi e riconoscimento vocale (**Whisper** e **XTTS v2**) e di un modello linguistico di grandi dimensioni (**LLM) tramite LM-Studio.
+🩺 Training_VR_VP - Setup & Execution Guide
+
+Questo progetto è un fork di una piattaforma di simulazione medica basata su **Unity**, estesa per aumentare il livello di interattività attraverso l’integrazione di moduli di sintesi e riconoscimento vocale (**Whisper** e **XTTS v2**) e di un modello linguistico di grandi dimensioni (**LLM**) tramite LM-Studio.
 
 Il sistema consente di simulare conversazioni medico–paziente realistiche, fornendo uno strumento avanzato per il training clinico e la formazione professionale.
 
@@ -108,6 +110,7 @@ py -0
     Installa **[PyTorch](pytorch.org/get-started/locally/)** seguendo le istruzioni indicate.
 
 ### 4. Installa le seguenti librerie:
+
     ```bash
     pip install coqui-tts
     pip install simpleaudio
