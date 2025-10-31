@@ -9,6 +9,11 @@ public class VirtualPatientManager : MonoBehaviour
 {   
     public static VirtualPatientManager Instance { get; private set; }
 
+    //è una proprietà pubblica di tipo booleano, è può essere usta in altri script per leggerne il valore
+    public bool IsPatientSpawned { get; private set; } = false; 
+    public bool IsPlayerTurn { get; private set; } = false;
+
+
     private void Awake()    //Crea un un singleton persistente in scena.
     {
         if (Instance != null && Instance != this)
@@ -50,6 +55,8 @@ public class VirtualPatientManager : MonoBehaviour
 
     public async void CreaPazienteVirtuale(CartellaClinica cartellaClinica)
     {
+        IsPatientSpawned = true;
+        IsPlayerTurn = false;
         if (cartellaClinicaPazienteCorrente != null)
         {
             Debug.Log("[VirtualPatientManager] Sovrascrive la cartella clinica precedente con un nuovo paziente.");
@@ -65,7 +72,7 @@ public class VirtualPatientManager : MonoBehaviour
             //string patientData = EstraiTuplaCasuale();
 
             // Invia al modello
-            string risposta = await InviaPromptALM("Ciao (Rispondi con Cia sono il tuo nome)");
+            string risposta = await InviaPromptALM("Ciao (Rispondi con Ciao sono il tuo nome)");
 
             Debug.Log($" LLM Studio: {risposta}");
 
@@ -73,6 +80,7 @@ public class VirtualPatientManager : MonoBehaviour
             if (ttsClient != null)
             {
                 await ttsClient.RiproduciVoce(risposta);
+                OnPazienteFinitoDiParlare();
             }
             else
             {
@@ -192,7 +200,7 @@ public class VirtualPatientManager : MonoBehaviour
     }
 
     public async void ProcessUserSpeech(string userText)
-    {   
+    {
 
         if (cartellaClinicaPazienteCorrente == null)
         {
@@ -218,9 +226,37 @@ public class VirtualPatientManager : MonoBehaviour
         Debug.Log($"Risposta LLM: {risposta}");
 
         if (ttsClient != null)
-            await ttsClient.RiproduciVoce(risposta);
+        {   
+            //await per dire "aspetta che questa operazione asincrona finisca prima di continuare"
+            await ttsClient.RiproduciVoce(risposta); 
+            OnPazienteFinitoDiParlare();
+        }
+            
+        
+        
     }
 
+    
+     // Quando il paziente finisce di parlare (dopo il TTS)
+    public void OnPazienteFinitoDiParlare()
+    {
+        IsPlayerTurn = true;
+        Debug.Log("Turno del giocatore attivo");
+    }
+
+    // Quando il giocatore ha finito di parlare
+    public void OnGiocatoreFinitoDiParlare()
+    {
+        IsPlayerTurn = false;
+        Debug.Log("⏸Turno del giocatore terminato, attendo risposta del paziente...");
+    }
+
+    // Se distruggi il paziente
+    public void ResetPaziente()
+    {
+        IsPatientSpawned = false;
+        IsPlayerTurn = false;
+    }
 
 
 }

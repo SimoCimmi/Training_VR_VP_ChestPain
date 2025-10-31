@@ -16,18 +16,37 @@ public class VoiceRecorder : MonoBehaviour
 
     void Update()
     {
-        // Avvia registrazione quando premi Z
-        if (Input.GetKeyDown(pushToTalkKey))
-            StartRecording();
+        if (VirtualPatientManager.Instance == null)
+        {
+            Debug.Log("Paziente non ancora creato!");
+            return;
+        }
 
-        // Ferma registrazione quando rilasci Z
-        if (Input.GetKeyUp(pushToTalkKey))
+        // Avvia registrazione solo se paziente pronto e turno giocatore
+        if (Input.GetKeyDown(pushToTalkKey))
+        {
+            if (VirtualPatientManager.Instance.IsPatientSpawned && VirtualPatientManager.Instance.IsPlayerTurn)
+                StartRecording();
+            else
+                Debug.Log("Impossibile registrare: paziente non pronto o non è il tuo turno.");
+        }
+
+        // Ferma registrazione sempre se stavi registrando
+        if (Input.GetKeyUp(pushToTalkKey) && isRecording)
+        {
             StopRecordingAndSend();
+        }
     }
+
 
     private void StartRecording()
     {
         if (isRecording) return;
+        if (!VirtualPatientManager.Instance.IsPlayerTurn)
+        {
+            Debug.Log("Non puoi registrare, non è il tuo turno!");
+            return;
+        }
 
         recordedClip = Microphone.Start(null, false, 10, 44100);
         isRecording = true;
@@ -46,6 +65,11 @@ public class VoiceRecorder : MonoBehaviour
         {
             Debug.LogError("Registrazione audio non valida. Nessun clip registrato.");
             return;
+        }
+
+        if(VirtualPatientManager.Instance != null)
+        {
+            VirtualPatientManager.Instance.OnGiocatoreFinitoDiParlare();
         }
 
         string filePath = Path.Combine(Application.persistentDataPath, "user_recording.wav");

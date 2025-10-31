@@ -35,7 +35,7 @@ public class DatasetLoader : MonoBehaviour
 
             if (col.Length < 25)
             {
-                Debug.LogWarning($"Riga {i + 1} ha solo {col.Length} colonne.");
+                //Debug.LogWarning($"Riga {i + 1} ha solo {col.Length} colonne.");
                 indicePazienti++;
                 continue;
             }
@@ -76,7 +76,7 @@ public class DatasetLoader : MonoBehaviour
 
                 pazienti.Add(c);
 
-                Debug.Log($"pazienti.Count={pazienti.Count} - i = {i} - Paziente OK - ID: {c.SEQN}");
+//                Debug.Log($"pazienti.Count={pazienti.Count} - i = {i} - Paziente OK - ID: {c.SEQN}");
                 indicePazienti++;
                 
             }

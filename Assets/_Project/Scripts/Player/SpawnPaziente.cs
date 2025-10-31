@@ -35,11 +35,12 @@ public class SpawnPaziente : MonoBehaviour
             }
             //Mescola la lista
             Shuffle(indiciMescolati);
+            /*
             Debug.Log("Indici mescolati da Shuffle:"); 
             for(int i=0;i<indiciMescolati.Count;i++)
             {
                 Debug.Log($"indiciMescolati[{i}] = {indiciMescolati[i]}");
-            }
+            }*/
         }else
         {
             Debug.LogError("[SpawnPaziente] DatasetLoader non assegnato.");
@@ -65,12 +66,13 @@ public class SpawnPaziente : MonoBehaviour
         // 3. Seleziona dati casuali da lista pazienti
         //int indiceDati = Random.Range(0, datasetLoader.pazienti.Count);
 
-
+        /*
         Debug.Log(" PAZIENTI TRA CUI SCEGLIERE");
         for (int i = 0; i < datasetLoader.pazienti.Count; i++)
         {
             Debug.Log($"datasetLoader.pazienti[{i}] = {datasetLoader.pazienti[i].SEQN}");
         }
+        */
 
         //Problema: i primi 10 pazienti hanno SEQN = 0
         /* Va da:
