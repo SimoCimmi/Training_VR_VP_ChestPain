@@ -59,20 +59,20 @@ pip install torch==2.8.0 torchvision==0.23.0 torchaudio==2.8.0
 
 4. Verifica l’installazione:
 
-- Lanciando il comando
-    ```bash
-    where ffmpeg
-    ```
-    vedrai se correttamente installato, il seguente output:
-    
-    C:\Tirocinio_Utils\ffmpeg-8.0-essentials_build\bin\ffmpeg.exe
+    - Lanciando il comando
+        ```bash
+        where ffmpeg
+        ```
+        vedrai se correttamente installato, il seguente output:
+        
+        C:\Tirocinio_Utils\ffmpeg-8.0-essentials_build\bin\ffmpeg.exe
 
 
-- Lanciando il comando
-    ```bash
-    ffmpeg -version
-    ```
-    dira se è presente o meno ffmpeg
+    - Lanciando il comando
+        ```bash
+        ffmpeg -version
+        ```
+        dira se è presente o meno ffmpeg
 
 5. Esecuzione di Whisper
     ```bash
