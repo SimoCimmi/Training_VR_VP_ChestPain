@@ -119,7 +119,7 @@ public class VirtualPatientManager : MonoBehaviour
         sb.Append("Tutti i tuoi dati:\n");
         sb.Append($"Dati anagrafici: Nome: {nomePaziente}; Età: {cartellaClinicaPazienteCorrente.RIDAGEYR} anni.\n");
         sb.Append($"Dati clinici: Glucosio a digiuno: {cartellaClinicaPazienteCorrente.LBXGLU} mg/dL; Insulina: {cartellaClinicaPazienteCorrente.LBXIN} µU/mL; Peso: {cartellaClinicaPazienteCorrente.BMXWT} kg; Altezza: {cartellaClinicaPazienteCorrente.BMXHT} cm; BMI: {cartellaClinicaPazienteCorrente.BMXBMI:F1}; Colesterolo HDL: {cartellaClinicaPazienteCorrente.LBDHDD} mg/dL; Colesterolo totale: {cartellaClinicaPazienteCorrente.LBXTC} mg/dL.\n");
-        sb.Append($"Dati alimentari: Calorie: {cartellaClinicaPazienteCorrente.DR1TKCAL} kcal; Proteine: {cartellaClinicaPazienteCorrente.DR1TPROT} g; Carboidrati: {cartellaClinicaPazienteCorrente.DR1TCARB} g; Zuccheri: {cartellaClinicaPazienteCorrente.DR1TSUGR} g; Fibre: {cartellaClinicaPazienteCorrente.DR1TFIBE} g; Grassi: {cartellaClinicaPazienteCorrente.DR1TTFAT} g; Saturi: {cartellaClinicaPazienteCorrente.DR1TSFAT} g.\n");
+        sb.Append($"Dati alimentari: Calorie: {cartellaClinicaPazienteCorrente.DR1TKCAL} kcal; Proteine: {cartellaClinicaPazienteCorrente.DR1TPROT} g; Carboidrati: {cartellaClinicaPazienteCorrente.DR1TCARB} g; Zuccheri: {cartellaClinicaPazienteCorrente.DR1TSUGR} g; Fibre: {cartellaClinicaPazienteCorrente.DR1TFIBE} g; Grassi totali: {cartellaClinicaPazienteCorrente.DR1TTFAT} g; Saturi: {cartellaClinicaPazienteCorrente.DR1TSFAT} g.\n");
         sb.Append($"Attività fisica: Sedentario: {cartellaClinicaPazienteCorrente.PAD680} min; Moderata: {cartellaClinicaPazienteCorrente.PAD800} min; Intensa: {cartellaClinicaPazienteCorrente.PAD820} min.\n");
         sb.Append($"Altri dati: Tentativi di perdere peso nell'ultimo anno: {cartellaClinicaPazienteCorrente.WHQ070}; Reddito familiare: {cartellaClinicaPazienteCorrente.INDFMPIR}; Origine etnica: {cartellaClinicaPazienteCorrente.RIDRETH1}.\n\n");
 
@@ -127,7 +127,7 @@ public class VirtualPatientManager : MonoBehaviour
         sb.Append("ISTRUZIONI PER IL RUOLO:\n");
         sb.Append("Rispondi sempre come il paziente sopra descritto.\n");
         sb.Append("Se il medico chiede dati clinici presenti nello script, fornisci le informazioni esatte.\n");
-        sb.Append("Se non trovi una risposta nello script, dì 'Non lo so.'.\n");
+        sb.Append("Se non trovi una risposta nello script o ti viene chiesto se hai il diabete, dì 'Non lo so.'.\n");
         sb.Append("Non aggiungere informazioni non richieste su altre parti del corpo.\n");
         sb.Append("Mantieni coerenza con tutti i dati forniti.\n");
 
