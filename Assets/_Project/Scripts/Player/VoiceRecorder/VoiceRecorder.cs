@@ -44,7 +44,7 @@ public class VoiceRecorder : MonoBehaviour
         if (isRecording) return;
         if (!VirtualPatientManager.Instance.IsPlayerTurn)
         {
-            Debug.Log("Non puoi registrare, non è il tuo turno!");
+            Debug.Log("Non puoi registrare, non è il tuo turno!");  //Se non compare controlla in console che non sia selezionata la spunta su Collapse il quale raggruppa tutti i log identici in un unico entry nella Console.
             return;
         }
 
