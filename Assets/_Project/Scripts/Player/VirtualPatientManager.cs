@@ -79,7 +79,7 @@ public class VirtualPatientManager : MonoBehaviour
             // Se hai assegnato il TTSClient via Inspector
             if (ttsClient != null)
             {
-                await ttsClient.RiproduciVoce(risposta);
+                await ttsClient.RiproduciVoce(risposta, cartellaClinicaPazienteCorrente.RIAGENDR == "Male" ? "Andrew Chipper" : "Daisy Studious");
                 OnPazienteFinitoDiParlare();
             }
             else
@@ -87,9 +87,6 @@ public class VirtualPatientManager : MonoBehaviour
                 Debug.LogWarning("TTSClient non assegnato nell'Inspector. Assegna AudioManager -> TTSClient.");
             }
 
-
-            //PAssa la risposat a XTTS per la sintesi vocale
-            //.3FindObjectOfType<TTSClient>().RiproduciVoce(risposta);
             
         }
         catch (Exception ex)
@@ -228,7 +225,7 @@ public class VirtualPatientManager : MonoBehaviour
         if (ttsClient != null)
         {   
             //await per dire "aspetta che questa operazione asincrona finisca prima di continuare"
-            await ttsClient.RiproduciVoce(risposta); 
+            await ttsClient.RiproduciVoce(risposta, cartellaClinicaPazienteCorrente.RIAGENDR == "Male" ? "Andrew Chipper" : "Daisy Studious"); 
             OnPazienteFinitoDiParlare();
         }
                     

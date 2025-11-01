@@ -141,12 +141,15 @@ python SpeechServerXTTS.py
     xtts_env\Scripts\activate
     tts --model_name tts_models/multilingual/multi-dataset/xtts_v2 --list_speaker_idx
     ```
-  Per tale progetto è stato utilizzato:
-  - Eugenio Mataracı (per l'italiano)
-  - 
-  
-  Per visualizzare i modelli vocali installati:
+  Di default sono stati utilizzati:
+  - Daisy Studious (per l'Inglese femminile)
+  - Andrew Chipper (per l'Inglese maschile)
+
+  Ma se si preferisce interagire in italiano si cosiglia di cambiare gli Speaker con:
+    - Ana Florence (per l'Italiano femminile)
+    - Eugenio Mataracı (per l'italiano maschile)    
     
+    E di modificare nel file "Training_VR_VP\SpeechServerXTTS\SpeechServerXTTS.py" il campo language da "en" ad "it" 
 
 ---
 

@@ -13,7 +13,7 @@ def generate_tts():
     try:
         data = request.get_json()
         text = data.get("text", "") #prova a leggere la chiave "text" dal dizionario data; se "text" non esiste, restituisce il valore di default ""
-        speaker = data.get("speaker", "Eugenio Mataracı")  
+        speaker = data.get("speaker", "Eugenio Mataracı")  #Se non è specificato un'altro Speaker di default usa Eugenio Mataracı
 
         print(f"--- Richiesta ricevuta ---")
         print(f"Testo: {text[:100]}")  # mostra i primi 100 caratteri
@@ -30,7 +30,7 @@ def generate_tts():
         tts.tts_to_file(
             text=text,
             speaker=speaker,
-            language="it",
+            language="en",
             file_path=tmp_wav.name
         )
 
