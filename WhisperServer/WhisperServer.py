@@ -8,7 +8,7 @@ app = Flask(__name__)
 
 # Carica il modello Whisper (scegli tra "tiny", "base", "small", "medium", "large")
 # Modelli più grandi = più precisi ma anche più lenti e pesanti
-model = whisper.load_model("base")
+model = whisper.load_model("medium")
 
 @app.route('/stt', methods=['POST'])
 def stt():
@@ -23,7 +23,7 @@ def stt():
         temp_path = os.path.join(os.getcwd(), "temp.wav")
         audio_file.save(temp_path)
 
-        result = model.transcribe(temp_path, language='it')
+        result = model.transcribe(temp_path, language='en')
         os.remove(temp_path)
         return jsonify({"text": result["text"]})
 

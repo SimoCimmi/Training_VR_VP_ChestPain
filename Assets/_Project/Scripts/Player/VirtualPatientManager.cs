@@ -10,9 +10,11 @@ public class VirtualPatientManager : MonoBehaviour
     public static VirtualPatientManager Instance { get; private set; }
 
     //è una proprietà pubblica di tipo booleano, è può essere usta in altri script per leggerne il valore
-    public bool IsPatientSpawned { get; private set; } = false; 
+    public bool IsPatientSpawned { get; private set; } = false;
     public bool IsPlayerTurn { get; private set; } = false;
 
+    private string MaleSpeaker = "Craig Gutsy";
+    private string FemaleSpeaker = "Daisy Studious";
 
     private void Awake()    //Crea un un singleton persistente in scena.
     {
@@ -79,7 +81,7 @@ public class VirtualPatientManager : MonoBehaviour
             // Se hai assegnato il TTSClient via Inspector
             if (ttsClient != null)
             {
-                await ttsClient.RiproduciVoce(risposta, cartellaClinicaPazienteCorrente.RIAGENDR == "Male" ? "Andrew Chipper" : "Daisy Studious");
+                await ttsClient.RiproduciVoce(risposta, cartellaClinicaPazienteCorrente.RIAGENDR == "Male" ? MaleSpeaker : FemaleSpeaker);
                 OnPazienteFinitoDiParlare();
             }
             else
@@ -225,7 +227,7 @@ public class VirtualPatientManager : MonoBehaviour
         if (ttsClient != null)
         {   
             //await per dire "aspetta che questa operazione asincrona finisca prima di continuare"
-            await ttsClient.RiproduciVoce(risposta, cartellaClinicaPazienteCorrente.RIAGENDR == "Male" ? "Andrew Chipper" : "Daisy Studious"); 
+            await ttsClient.RiproduciVoce(risposta, cartellaClinicaPazienteCorrente.RIAGENDR == "Male" ? MaleSpeaker : FemaleSpeaker); 
             OnPazienteFinitoDiParlare();
         }
                     

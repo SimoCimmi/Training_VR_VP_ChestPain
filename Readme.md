@@ -143,9 +143,9 @@ python SpeechServerXTTS.py
     ```
   Di default sono stati utilizzati:
   - Daisy Studious (per l'Inglese femminile)
-  - Andrew Chipper (per l'Inglese maschile)
+  - Craig Gutsy (per l'Inglese maschile)
 
-  Ma se si preferisce interagire in italiano si cosiglia di cambiare gli Speaker con:
+  Ma se si preferisce interagire in italiano si cosiglia di cambiare gli Speaker nel file "Training_VR_VP\Assets\_Project\Scripts\Player\VirtualPatientManager.cs" con:
     - Ana Florence (per l'Italiano femminile)
     - Eugenio Mataracı (per l'italiano maschile)    
     
