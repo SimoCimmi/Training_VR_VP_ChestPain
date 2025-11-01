@@ -231,9 +231,7 @@ public class VirtualPatientManager : MonoBehaviour
             await ttsClient.RiproduciVoce(risposta); 
             OnPazienteFinitoDiParlare();
         }
-            
-        
-        
+                    
     }
 
     

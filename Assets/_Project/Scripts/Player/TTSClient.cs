@@ -20,7 +20,6 @@ public class TTSClient : MonoBehaviour
         public string speaker;
     }
 
-
     private static readonly HttpClient client = new HttpClient
     {
         Timeout = TimeSpan.FromSeconds(300)
@@ -37,12 +36,6 @@ public class TTSClient : MonoBehaviour
 
         try
         {
-            // Costruzione del JSON da inviare al server XTTS
-            /*
-            var json = "{\"text\":\"" + testo + "\",\"speaker\":\"Eugenio Mataracı\"}";
-            var content = new StringContent(json, Encoding.UTF8, "application/json");
-            */
-
             var payload = new TtsRequest
             {
                 text = testo,
@@ -63,12 +56,24 @@ public class TTSClient : MonoBehaviour
             // Legge i byte dell'audio WAV restituito dal server
             var audioData = await response.Content.ReadAsByteArrayAsync();
             PlayAudioFromBytes(audioData);
+
+            // Aspetta la fine della riproduzine dell'audio
+            while (audioSource.isPlaying)
+            {
+                await Task.Yield(); //Aspetta un frame e poi riprendi da qui nel prossimo frame, senza bloccare Unity
+                /*
+                1. il loop si sospende per un frame,
+                2. Unity continua ad aggiornare la scena normalmente (Update, audio, animazioni, ecc.),
+                3. poi torna a controllare se l’audio è ancora in riproduzione,
+                4. e così via, finché non finisce l’audio.
+                */
+            }
+            Debug.Log("Fine riproduzione voce dell'LLM.");
         }
         catch (Exception ex)
         {
             Debug.LogError("Errore durante la richiesta a XTTS: " + ex.Message);
         }
-        Debug.Log("Fine riproduzione voce dell'LLM.");
     }
 
     // Converte i byte ricevuti in un AudioClip e lo riproduce tramite AudioSource

@@ -135,10 +135,18 @@ python SpeechServerXTTS.py
 
 - XTTS-v2 è utilizzato con licenza non commerciale per fini di ricerca ( **[Licenza ufficiale](https://huggingface.co/coqui/XTTS-v2/blob/main/LICENSE.txt)**)
 
-- Per visualizzare i modelli vocali installati:
+- XTTS offre diversi modelli vocali chiamati Speaker, che sono i seguenti:
     ```bash
+    cd C:\Training_VR_VP\SpeechServerXTTS
+    xtts_env\Scripts\activate
     tts --model_name tts_models/multilingual/multi-dataset/xtts_v2 --list_speaker_idx
     ```
+  Per tale progetto è stato utilizzato:
+  - Eugenio Mataracı (per l'italiano)
+  - 
+  
+  Per visualizzare i modelli vocali installati:
+    
 
 ---
 
