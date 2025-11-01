@@ -74,7 +74,7 @@ public class VirtualPatientManager : MonoBehaviour
             //string patientData = EstraiTuplaCasuale();
 
             // Invia al modello
-            string risposta = await InviaPromptALM("Ciao (Rispondi con Ciao sono il tuo nome)");
+            string risposta = await InviaPromptALM("Hello (Reply with Hi I'm your name)");
 
             Debug.Log($" LLM Studio: {risposta}");
 

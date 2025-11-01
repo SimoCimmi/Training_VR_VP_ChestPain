@@ -74,13 +74,20 @@ pip install torch==2.8.0 torchvision==0.23.0 torchaudio==2.8.0
         ```
         dira se è presente o meno ffmpeg
 
-5. Esecuzione di Whisper
-    ```bash
-    cd C:\Training_VR_VP\WhisperServer
-    whisper_env\Scripts\activate
-    python WhisperServer.py
-    ```
-    Nota: Whisper funzionerà su CPU (più lento) se non è presente GPU compatibile.
+### 3. Esecuzione di Whisper
+
+```bash
+cd C:\Training_VR_VP\WhisperServer
+whisper_env\Scripts\activate
+python WhisperServer.py
+```
+Nota: Whisper funzionerà su CPU (più lento) se non è presente GPU compatibile.
+
+### 4. Whisper (Opzionale) 
+È possibile modificare il modello utilizzato scegliendo tra cinque versioni di Whisper:
+tiny, base, small, medium e large — disposte in ordine crescente di accuratezza e tempo di elaborazione.
+In altre parole, tiny è il modello più veloce ma meno preciso, mentre large è il più accurato, sebbene più lento.
+
 
 ---
 
