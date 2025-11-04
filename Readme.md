@@ -116,7 +116,7 @@ python -m pip install --upgrade pip
 
 ### 3. Installazione dei pacchetti
 
-Installa **[PyTorch](pytorch.org/get-started/locally/)** seguendo le istruzioni indicate.
+Installa **[PyTorch](https://pytorch.org/get-started/locally/)** seguendo le istruzioni indicate.
 
 ### 4. Installa le seguenti librerie:
 Lanciare i seguenti comandi sempre nell'ambiente virtuale di XTTS creato.
