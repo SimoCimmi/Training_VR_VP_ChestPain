@@ -108,6 +108,8 @@ In altre parole, tiny è il modello più veloce ma meno preciso, mentre large è
 ---
 
 ## D. 🔈XTTS v2 – Setup
+### 1. Utilizzare la corretta versione di Python
+Assicurarsi di star utilizzando la versione di **[Python 3.10.10]**
 
 ### 2. Creazione dell’ambiente virtuale python
 ```bash
