@@ -21,7 +21,23 @@ Il sistema consente di simulare conversazioni medico–paziente realistiche, for
 
 ---
 
-## B. 🎙️ Whisper Setup
+## B. 🐍 Python
+Scarica e installa **[Python 3.10.10](https://www.python.org/downloads/windows/)**, 
+assicurandoti di **spuntare “Add to PATH”** durante l’installazione.
+
+Per impostarlo come versione di default:
+```bash
+py -0
+echo [defaults]> "%LOCALAPPDATA%\py.ini"
+echo python=3.10>> "%LOCALAPPDATA%\py.ini"
+py -0
+```
+
+---
+
+
+
+## C. 🎙️ Whisper Setup
 
 ### 1. Creazione dell’ambiente virtuale
 Apri il **Prompt dei comandi (CMD)** ed esegui:
@@ -91,22 +107,9 @@ In altre parole, tiny è il modello più veloce ma meno preciso, mentre large è
 
 ---
 
-## C. 🔈XTTS v2 – Setup
+## D. 🔈XTTS v2 – Setup
 
-### 1. Installazione di Python 3.10.10
-Scarica e installa **[Python 3.10.10](https://www.python.org/downloads/windows/)**, 
-assicurandoti di **spuntare “Add to PATH”** durante l’installazione.
-
-Per impostarlo come versione di default:
-```bash
-py -0
-echo [defaults]> "%LOCALAPPDATA%\py.ini"
-echo python=3.10>> "%LOCALAPPDATA%\py.ini"
-py -0
-```
-
-
-### 2. Creazione dell’ambiente virtuale
+### 2. Creazione dell’ambiente virtuale python
 ```bash
 cd C:\Training_VR_VP\SpeechServerXTTS
 python -m venv xtts_env
@@ -160,7 +163,7 @@ python SpeechServerXTTS.py
 
 ---
 
-## D. 🧠 LM-Studio Setup
+## E. 🧠 LM-Studio Setup
 
 - Scarica e installa **[LM-Studio](https://lmstudio.ai/download)**.
 - Scarica il modello desiderato.
