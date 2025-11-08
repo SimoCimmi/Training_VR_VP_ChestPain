@@ -92,16 +92,16 @@ public class VoiceRecorder : MonoBehaviour
     {
         try
         {
-            using (var client = new HttpClient())
+            using (var client = new HttpClient())   //Crea un oggetto HttpClient (all’interno di un blocco using per essere automaticamente eliminato dopo l’uso).
             {
-                var content = new MultipartFormDataContent();
-                var fileBytes = File.ReadAllBytes(filePath);
-                var fileContent = new ByteArrayContent(fileBytes);
-                fileContent.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("audio/wav");
-                content.Add(fileContent, "file", "user_recording.wav");
+                var content = new MultipartFormDataContent();   //Crea un contenitore multipart/form-data, necessario per inviare file
+                var fileBytes = File.ReadAllBytes(filePath);    //Legge tutto il contenuto del file audio e lo carica in memoria come array di byte.
+                var fileContent = new ByteArrayContent(fileBytes);  //Converte i byte del file in un oggetto HttpContent, che può essere aggiunto al corpo della richiesta HTTP.
+                fileContent.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("audio/wav"); //Imposta il tipo MIME del file, in questo caso audio/wav, per indicare al server che tipo di file sta ricevendo.
+                content.Add(fileContent, "file", "user_recording.wav"); //Aggiunge il file al contenuto multipart, assegnandogli il nome del campo "file" e un nome file fittizio "user_recording.wav".
 
-                var response = await client.PostAsync(whisperUrl, content);
-                string json = await response.Content.ReadAsStringAsync();
+                var response = await client.PostAsync(whisperUrl, content); //Invia la richiesta POST asincrona all’indirizzo whisperUrl
+                string json = await response.Content.ReadAsStringAsync();   //Legge la risposta del server come stringa (presumibilmente in formato JSON).
 
                 Debug.Log("Risposta Whisper grezza: " + json);
 
