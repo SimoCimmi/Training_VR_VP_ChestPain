@@ -200,33 +200,61 @@ for idx in cds[mask_ht_missing].index:
 
     print_imputation(cds.at[idx, "SEQN"], "BMXHT", old, new_cm)
 
-# -----------------------------
+# ================================================
 # Step 4: Imputazione stratificata per età e genere
-# -----------------------------
+# ================================================
+# Questo codice crea una variabile categoriale per gruppi di età e poi
+# imputa i valori mancanti (NaN) di peso, altezza e BMI
+# utilizzando la mediana dei valori stratificata per gruppo di età e genere.
+# Stampa inoltre un messaggio per ogni imputazione effettuata.
+
+# Creazione di una nuova colonna "Age_group" che suddivide l'età in fasce
+# Utilizza pd.cut per trasformare la colonna RIDAGEYR in categorie
 cds["Age_group"] = pd.cut(
-    cds["RIDAGEYR"].astype(float),
-    bins=[0,18,30,45,60,75,1000],
-    labels=["<18","18-29","30-44","45-59","60-74","75+"],
-    right=False
+    cds["RIDAGEYR"].astype(float),          # Converte l'età in float
+    bins=[0,18,30,45,60,75,1000],           # Definisce gli intervalli di età
+    labels=["<18","18-29","30-44","45-59","60-74","75+"],  # Etichette dei gruppi
+    right=False                              # Gli intervalli sono left-closed (esclusivo a destra)
 )
 
+# Funzione per imputare valori mancanti utilizzando la mediana stratificata
 def stratified_fillna(df, col, group_cols):
-    """Riempi NaN con mediana stratificata e stampa imputazioni."""
-    # Risolvo il FutureWarning impostando observed=True
+    """
+    Riempi i valori NaN in una colonna 'col' del DataFrame 'df'
+    utilizzando la mediana calcolata all'interno dei gruppi definiti da 'group_cols'.
+    
+    Parametri:
+    df         - DataFrame su cui lavorare
+    col        - Colonna da imputare
+    group_cols - Lista di colonne per la stratificazione (es. ["Age_group", "RIAGENDR"])
+    
+    Ritorna:
+    DataFrame con valori imputati nella colonna 'col'
+    """
+    # Calcola la mediana di 'col' all'interno dei gruppi definiti da 'group_cols'
+    # observed=True evita il FutureWarning su gruppi categoriali
     median_series = df.groupby(group_cols, observed=True)[col].median()
 
+    # Ciclo sulle righe che hanno NaN nella colonna da imputare
     for idx, row in df[df[col].isna()].iterrows():
+        # Recupera la chiave del gruppo corrente come tupla (es. ("18-29", 1))
         key = tuple(row[g] for g in group_cols)
         if key in median_series.index:
-            old = df.at[idx, col]
-            new_val = round(median_series.loc[key], 2)
-            df.at[idx, col] = new_val
+            old = df.at[idx, col]  # Valore originale (NaN)
+            new_val = round(median_series.loc[key], 2)  # Mediana arrotondata a 2 decimali
+            df.at[idx, col] = new_val  # Sostituisci NaN con la mediana del gruppo
+            # Stampa un messaggio per tracciare l'imputazione
             print(f"Riga SEQN={row['SEQN']} | {col} imputato con mediana stratificata: {new_val}")
     return df
 
+# Definizione delle colonne per la stratificazione: età e genere
 group_cols = ["Age_group", "RIAGENDR"]
+
+# Lista delle colonne da imputare
 for col in ["BMXWT", "BMXHT", "BMXBMI"]:
+    # Applica la funzione di imputazione stratificata
     cds = stratified_fillna(cds, col, group_cols)
+
 
 # -----------------------------
 # Step 5: Fallback mediana globale se ancora NaN
