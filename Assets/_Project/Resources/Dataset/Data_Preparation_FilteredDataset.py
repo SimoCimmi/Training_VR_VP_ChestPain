@@ -3,6 +3,9 @@ import pandas as pd
 import numpy as np
 import random
 
+import matplotlib.pyplot as plt
+import missingno as msno
+
 # Visualizza tutte le colonne
 pd.set_option('display.max_columns', None)
 
@@ -66,9 +69,24 @@ print("Numero di valori mancanti per colonna prima della pulizia:\n", cds.isna()
 # DATA CLEANING: 
 # -----------------------------
 
+# Calcolo dei valori mancanti per ogni feature
+missing_counts = cds.isna().sum()
+
+# Creazione del grafico a barre per contare il numero di valori mancanti per ciascuna feature
+plt.figure(figsize=(10,6))
+plt.bar(missing_counts.index, missing_counts.values, color="blue")
+
+plt.ylabel("Numero di valori mancanti")
+plt.title("Valori mancanti per ciascuna feature")
+plt.xticks(rotation=90)  # ruota le etichette per leggibilità
+plt.tight_layout()       # evita sovrapposizioni
+plt.show()
+
 
 # Rimozione righe con DIQ010 mancante (non deduciibile come positivo o negativo)
 cds = cds.dropna(subset=["DIQ010"])
+
+
 
 #Sostituzione mediana per PAD680, PAD800, PAD820
 for col in ["PAD680", "PAD800", "PAD820"]:
@@ -307,50 +325,85 @@ print("Numero di valori WHQ070 null:", cds["WHQ070"].isna().sum())
 
 
 # -----------------------------
-# IMPUTAZIONE DMDEDUC2 ovvero Education_level (Education_level )
+# IMPUTAZIONE DMDEDUC2 ovvero Education_level (Education_level)
 # -----------------------------
+# ============================================================
+# Questo blocco di codice gestisce l’imputazione dei valori mancanti
+# della variabile “DMDEDUC2” (livello di istruzione).
+# 
+# Il processo avviene in due fasi:
+# 1. Imputazione stratificata: se un valore è mancante, viene scelto casualmente
+#    un valore di istruzione appartenente a persone dello stesso gruppo di età
+#    (“Age_group”) e dello stesso genere (“RIAGENDR”).
+# 2. Fallback globale: se nel gruppo non sono disponibili valori validi,
+#    il valore viene imputato scegliendone uno casualmente da tutto il dataset.
+#
+# Infine, il codice stampa il numero totale di imputazioni effettuate
+# per ciascuna delle due modalità (gruppo e globale).
+# ============================================================
+# Inizializzazione dei contatori che terranno traccia del numero di imputazioni effettuate:
+# - imputazioniGruppo: imputazioni basate su gruppo di età e genere
+# - imputazioniGlobali: imputazioni basate su tutto il dataset (fallback)
 imputazioniGruppo = 0
 imputazioniGlobali = 0
 
+# Definizione della funzione per imputare i valori mancanti di DMDEDUC2 (livello di istruzione)
 def impute_education_age_gender(row):
-    global imputazioniGruppo,   imputazioniGlobali
+    global imputazioniGruppo, imputazioniGlobali  # utilizza le variabili globali per contare le imputazioni
     
+    # Controlla se il valore di DMDEDUC2 (livello di istruzione) nella riga è mancante
     if pd.isna(row["DMDEDUC2"]):
+        
+        # Estrae dal dataset tutte le righe appartenenti allo stesso gruppo di età e genere,
+        # escludendo i valori mancanti in DMDEDUC2
         group = cds[
             (cds["Age_group"] == row["Age_group"]) &
             (cds["RIAGENDR"] == row["RIAGENDR"]) 
         ]["DMDEDUC2"].dropna()
 
-        print(f"Riga SEQN={row['SEQN']}")
-        print(f"Age_group={row['Age_group']}, Gender={row['RIAGENDR']}")
-        print(f"Numero valori disponibili nel gruppo per l'imputazione: {len(group)}")
+        # Stampa informazioni utili per il tracciamento dell'imputazione
+        print(f"Riga SEQN={row['SEQN']}")  # ID univoco della riga
+        print(f"Age_group={row['Age_group']}, Gender={row['RIAGENDR']}")  # gruppo e genere della riga
+        print(f"Numero valori disponibili nel gruppo per l'imputazione: {len(group)}")  # quanti valori nel gruppo
 
+        # Se il gruppo contiene almeno un valore non mancante
         if len(group) > 0:
+            # Seleziona casualmente un valore di DMDEDUC2 da quelli presenti nel gruppo
             chosen_value = np.random.choice(group.values)
             print(f"Imputazione scelta dal gruppo: {chosen_value}")
-            imputazioniGruppo += 1
-            return chosen_value
+            imputazioniGruppo += 1  # incrementa il contatore di imputazioni di gruppo
+            return chosen_value     # restituisce il valore imputato
         else:
-            # Fallback: scegli random da tutto il dataset
+            # Se non ci sono valori disponibili nel gruppo, esegue un fallback globale
+            # scegliendo casualmente un valore valido da tutto il dataset
             chosen_value_global = np.random.choice(cds["DMDEDUC2"].dropna().values)
             print(f"Imputazione scelta globalmente: {chosen_value_global}")
-            imputazioniGlobali += 1
-            return chosen_value_global
+            imputazioniGlobali += 1  # incrementa il contatore di imputazioni globali
+            return chosen_value_global  # restituisce il valore imputato
     else:
+        # Se il valore non è mancante, restituisce semplicemente quello esistente
         return row["DMDEDUC2"]
-    
+
+# Creazione di una colonna categoriale "Age_group" che suddivide le età in fasce
+# per consentire l’imputazione stratificata per età e genere
 cds["Age_group"] = pd.cut(
-        cds["RIDAGEYR"].astype(float),
-        bins=[0,18,30,45,60,75,1000],
-        labels=["<18","18-29","30-44","45-59","60-74","75+"],
-        right=False
-    )  
+    cds["RIDAGEYR"].astype(float),          # converte l’età in float per sicurezza
+    bins=[0,18,30,45,60,75,1000],           # definisce i limiti delle fasce di età
+    labels=["<18","18-29","30-44","45-59","60-74","75+"],  # etichette per ogni fascia
+    right=False                             # include l’estremo sinistro e esclude quello destro
+)  
+
+# Applica la funzione di imputazione riga per riga
+# Ogni riga viene passata a impute_education_age_gender per riempire i NaN
 cds["DMDEDUC2"] = cds.apply(impute_education_age_gender, axis=1)
+
+# Rimuove la colonna temporanea "Age_group" usata per la stratificazione
 cds.drop(columns=["Age_group"], inplace=True)
 
-# Stampa contatori
-print(f"DMDEDUC2(Education_level)- Numero imputazioni dal gruppo stratificato: {imputazioniGruppo}")
+# Stampa il numero totale di imputazioni effettuate per monitoraggio
+print(f"DMDEDUC2(Education_level) - Numero imputazioni dal gruppo stratificato: {imputazioniGruppo}")
 print(f"DMDEDUC2(Education_level) - Numero imputazioni globali: {imputazioniGlobali}")
+
 # -----------------------------
 # CONVERSIONE DATI CATEGORICAL
 # -----------------------------
