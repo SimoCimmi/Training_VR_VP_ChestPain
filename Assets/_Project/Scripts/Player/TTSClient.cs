@@ -25,7 +25,7 @@ public class TTSClient : MonoBehaviour
         Timeout = TimeSpan.FromSeconds(300)
     };   // HttpClient statico per riutilizzare la connessione e non aprire più socket
 
-    public async Task RiproduciVoce(string testo, string NameSpeaker)   // Metodo principale per inviare testo a XTTS e riprodurre l'audio risultante
+    public async Task GenerateAndPlayTTSVoice(string testo, string NameSpeaker)   // Metodo principale per inviare testo a XTTS e riprodurre l'audio risultante
     {   
         Debug.Log("Inizio riproduzione voce dell'LLM.");
         if (string.IsNullOrWhiteSpace(testo))   // Controlla se il testo è vuoto o contiene solo spazi

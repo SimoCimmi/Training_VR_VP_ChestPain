@@ -81,7 +81,7 @@ public class VirtualPatientManager : MonoBehaviour
             // Se hai assegnato il TTSClient via Inspector
             if (ttsClient != null)
             {
-                await ttsClient.RiproduciVoce(risposta, cartellaClinicaPazienteCorrente.RIAGENDR == "Male" ? MaleSpeaker : FemaleSpeaker);
+                await ttsClient.GenerateAndPlayTTSVoice(risposta, cartellaClinicaPazienteCorrente.RIAGENDR == "Male" ? MaleSpeaker : FemaleSpeaker);
                 OnPazienteFinitoDiParlare();
             }
             else
@@ -255,7 +255,7 @@ public class VirtualPatientManager : MonoBehaviour
         if (ttsClient != null)
         {   
             //await per dire "aspetta che questa operazione asincrona finisca prima di continuare"
-            await ttsClient.RiproduciVoce(risposta, cartellaClinicaPazienteCorrente.RIAGENDR == "Male" ? MaleSpeaker : FemaleSpeaker); 
+            await ttsClient.GenerateAndPlayTTSVoice(risposta, cartellaClinicaPazienteCorrente.RIAGENDR == "Male" ? MaleSpeaker : FemaleSpeaker); 
             OnPazienteFinitoDiParlare();
         }
                     

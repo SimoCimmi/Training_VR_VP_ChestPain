@@ -75,7 +75,7 @@ public class VoiceRecorder : MonoBehaviour
         string filePath = Path.Combine(Application.persistentDataPath, "user_recording.wav");
         SavWav.Save(filePath, recordedClip);
 
-        string trascrizione = await SendAudioToWhisper(filePath);
+        string trascrizione = await SendAudioToSTT(filePath);
 
         if (VirtualPatientManager.Instance != null && !string.IsNullOrWhiteSpace(trascrizione))
         {
@@ -88,7 +88,7 @@ public class VoiceRecorder : MonoBehaviour
         }
     }
 
-    private async Task<string> SendAudioToWhisper(string filePath)
+    private async Task<string> SendAudioToSTT(string filePath)
     {
         try
         {
