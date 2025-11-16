@@ -404,6 +404,18 @@ cds.drop(columns=["Age_group"], inplace=True)
 print(f"DMDEDUC2(Education_level) - Numero imputazioni dal gruppo stratificato: {imputazioniGruppo}")
 print(f"DMDEDUC2(Education_level) - Numero imputazioni globali: {imputazioniGlobali}")
 
+
+#Grafico a Torta sui Valori Imputati per Gruppo o Globalmente
+labels = ["Per Gruppo", "Globali"]
+sizes = [imputazioniGruppo, imputazioniGlobali]
+
+plt.figure(figsize=(6,6))
+plt.pie(sizes, labels=labels, autopct="%1.1f%%", startangle=90)
+plt.title("Distribuzione delle Imputazioni per DMDEDUC2")
+plt.tight_layout()
+plt.show()
+
+
 # -----------------------------
 # CONVERSIONE DATI CATEGORICAL
 # -----------------------------
