@@ -102,7 +102,7 @@ public class VirtualPatientManager : MonoBehaviour
         StringBuilder sb = new StringBuilder();
 
         // Nome del paziente in base al sesso
-        string nomePaziente = cartellaClinicaPazienteCorrente.RIAGENDR == "Male" ? "Ferdinand Wunderlich" : "Sophie Wunderlich";
+        string nomePaziente = cartellaClinicaPazienteCorrente.RIAGENDR == "Male" ? "Ferdinand Wilson" : "Sophie Wilson";
         
         /*
         // --- ROLE-PLAY ---
@@ -137,7 +137,7 @@ public class VirtualPatientManager : MonoBehaviour
         sb.Append("You will not assist the user; instead, answer all questions as if you were truly the person described.\n");
         sb.Append("Behave like a real person, responding in the first person.\n");
         sb.Append("Answer naturally, including small grammatical or punctuation mistakes.\n");
-        sb.Append("Express emotions implicitly without stating them. If the doctor is rude or interrupts you, stop responding until they apologize.\n");
+        sb.Append("Express emotions implicitly without stating them. If the doctor is rude, stop responding until they apologize.\n");
         sb.Append($"Use language consistent with the education level: {cartellaClinicaPazienteCorrente.DMDEDUC2}.\n");
         sb.Append("If you do not understand medical terms, say: 'I don't understand what you mean, doctor.'\n\n");
 
@@ -152,7 +152,7 @@ public class VirtualPatientManager : MonoBehaviour
 
         // --- ROLE INSTRUCTIONS ---
         sb.Append("ROLE INSTRUCTIONS:\n");
-        sb.Append("Always respond as the patient described above.\n");
+        sb.Append("Always answer following the instructions described above in ROLE-PLAY.\n");
         sb.Append("If the doctor asks for clinical data from the script, provide the exact information.\n");
         sb.Append("If you can't find an answer in the script or are asked whether you have diabetes, say 'I don't know.'\n");
         sb.Append("Do not add information about other parts of the body unless requested.\n");
