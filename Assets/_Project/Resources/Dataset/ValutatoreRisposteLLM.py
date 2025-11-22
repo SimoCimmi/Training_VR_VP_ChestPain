@@ -1,3 +1,4 @@
+#python "D:\Medica_Vincenzo\Valutazione_LLM\ValutatoreRisposteLLM.py"
 import pandas as pd
 import requests
 import time
@@ -8,9 +9,9 @@ import numpy as np
 # CONFIGURAZIONE
 # ==========================
 
-LM_STUDIO_URL = "http://localhost:1234/v1/chat/completions"   # Endpoint LM-Studio (default)
-PATIENT_MODEL = "meta-llama-3-8b-instruct"                      # modello valutatore
-JUDGE_MODEL = "gemma-2-9b-it"   
+LM_STUDIO_URL = "http://localhost:2345/v1/chat/completions"   # Endpoint LM-Studio (default)
+PATIENT_MODEL = "gemma-3-27b-it"                      # modello valutatore
+JUDGE_MODEL = "deepseek-r1-distill-qwen-32b"   
                  # modello paziente
 
 CSV_PATH = "Clean_filteredDataset.csv"
@@ -153,12 +154,20 @@ def judge_answer(question, answer):
         Evaluate the answer strictly following the instructions in the system prompt.
         Return ONLY a valid JSON object.
     """
-
     result = call_llm(system_prompt, user_prompt, JUDGE_MODEL)
-    try:
-        return json.loads(result["text"])
-    except:
-        return {"error": "Invalid JSON from judge", "raw": result["text"]}
+    text = result["text"]
+
+    # cerca il primo { e l'ultimo } per estrarre il JSON
+    start = text.find("{")
+    end = text.rfind("}")
+    if start != -1 and end != -1:
+        try:
+            return json.loads(text[start:end+1])
+        except json.JSONDecodeError:
+            pass
+
+    # fallback in caso di errore
+    return {"error": "Invalid JSON from judge", "raw": text}
 
 
 
