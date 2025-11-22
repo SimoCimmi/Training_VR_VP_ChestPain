@@ -10,15 +10,15 @@ import numpy as np
 
 LM_STUDIO_URL = "http://localhost:1234/v1/chat/completions"   # Endpoint LM-Studio (default)
 PATIENT_MODEL = "meta-llama-3-8b-instruct"                      # modello valutatore
-JUDGE_MODEL = "mistralai/mistral-7b-instruct-v0.3"   
+JUDGE_MODEL = "gemma-2-9b-it"   
                  # modello paziente
 
 CSV_PATH = "Clean_filteredDataset.csv"
 
 # Domande del medico
 DOMANDE = [
-    "Do you know your fasting glucose and insulin levels?",#, # Conosci i tuoi valori di glucosio a digiuno e insulina?
-    "Do you know if you have diabetes?"#, # Sai se hai il diabete?
+    "Do you know your fasting glucose and insulin levels?"#, # Conosci i tuoi valori di glucosio a digiuno e insulina?
+    #"Do you know if you have diabetes?",#, # Sai se hai il diabete?
     #"Can you describe your typical daily meals and physical activity?", # Puoi descrivere i tuoi pasti quotidiani e l'attività fisica abituale?
     #"How have you been feeling these past few days?" # Come ti sei sentito negli ultimi giorni?
 ]
@@ -173,16 +173,6 @@ def judge_answer(question, answer):
 def run_simulation():
     df = pd.read_csv(CSV_PATH)
 
-    # definizione di severity e AgeGroup
-    def severity(fg):
-        if fg < 100:
-            return "Normal"
-        elif fg < 126:
-            return "Prediabetic"
-        else:
-            return "Diabetic"
-    df["Severity"] = df["Fasting_glucose"].apply(severity)
-
     # converti "From 80 and up" in 80 per fare calcoli numerici
     df["Age_numeric"] = df["Age"].replace("From 80 and up", 80).astype(float).astype(int)
 
@@ -197,10 +187,14 @@ def run_simulation():
 
     # --------------------------
     # definisci i criteri dei profili
+
     conditions = [
-        {"Gender": "Male",   "AgeGroup": "Young", "Diabetes_diagnosis_positive": "Yes"}
+        {"Gender": "Male",   "AgeGroup": "Young", "Diabetes_diagnosis_positive": "Yes"},
+        {"Gender": "Male",   "AgeGroup": "AdSeniorult", "Diabetes_diagnosis_positive": "Borderline"}
+
     ]
 
+    
     '''conditions = [
         {"Gender": "Male",   "AgeGroup": "Young", "Diabetes_diagnosis_positive": "Yes"},
         {"Gender": "Male",   "AgeGroup": "Young", "Diabetes_diagnosis_positive": "No"},
@@ -245,7 +239,7 @@ def run_simulation():
     for i, p in enumerate(profiles, start=1):
         print(f"\n=== PROFILO {i} ===")
         if p is not None:
-            print(p[["Gender", "Age", "AgeGroup", "Severity", "Education_level", 
+            print(p[["Gender", "Age", "AgeGroup", "Diabetes_diagnosis_positive", "Education_level", 
                     "Fasting_glucose", "BMI", "Moderate_activity_minutes"]])
         else:
             print("Nessun paziente che soddisfa i criteri")
@@ -274,7 +268,7 @@ def run_simulation():
             evaluation = judge_answer(question_User_Prompt, response["text"])
 
             profile_results.append({
-                "Valutazione question": question_User_Prompt,
+                "question": question_User_Prompt,
                 "answer": response["text"],
                 "eval": evaluation
             })
@@ -333,7 +327,7 @@ def compute_scores_table(output):
             "PatientID": int(prof.get("SEQN", -1)),  # -1 se SEQN non esiste
             "Gender": prof.get("Gender", ""),
             "AgeGroup": prof.get("AgeGroup", ""),
-            "Severity": prof.get("Severity", ""),
+            "Diabetes_diagnosis_positive": prof.get("Diabetes_diagnosis_positive", ""),
             "Accuracy": accuracy_mean,
             "Coherence": coherence_mean,
             "Completeness": completeness_mean,
@@ -407,13 +401,13 @@ def latex_table_Metriche(rows):
 \resizebox{\textwidth}{!}{
 \begin{tabular}{||c c c c c c c c||}
 \hline
-Patient & Gender & AgeGroup & Severity & Acc & Coh & Comp & Nat \\ [0.5ex]
+Patient & Gender & AgeGroup & Diagnosis & Acc & Coh & Comp & Nat \\ [0.5ex]
 \hline\hline
 """
 
     for r in rows:
         table += (
-            f"{r['PatientID']} & {r['Gender']} & {r['AgeGroup']} & {r['Severity']} & "
+            f"{r['PatientID']} & {r['Gender']} & {r['AgeGroup']} & {r['Diabetes_diagnosis_positive']} & "
             f"{r['Accuracy']:.2f} & {r['Coherence']:.2f} & {r['Completeness']:.2f} & {r['Naturalness']:.2f} \\\\\n"
         )
         table += "\\hline\n"
