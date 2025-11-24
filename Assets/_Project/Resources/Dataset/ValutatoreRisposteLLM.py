@@ -1,3 +1,13 @@
+'''
+TEMPI DI EXE:
+USANDO: PATIENT_MODEL = "gemma-3-27b-it"  + JUDGE_MODEL = "deepseek-r1-distill-qwen-32b"  
+START: 2025-11-24 11:30:00
+FINISH: 2025-11-24 12:54:16
+TOT: 1:24
+
+'''
+
+
 #python "D:\Medica_Vincenzo\Valutazione_LLM\ValutatoreRisposteLLM.py"
 import pandas as pd
 import requests
@@ -18,10 +28,10 @@ CSV_PATH = "Clean_filteredDataset.csv"
 
 # Domande del medico
 DOMANDE = [
-    "Do you know your fasting glucose and insulin levels?"#, # Conosci i tuoi valori di glucosio a digiuno e insulina?
-    #"Do you know if you have diabetes?",#, # Sai se hai il diabete?
-    #"Can you describe your typical daily meals and physical activity?", # Puoi descrivere i tuoi pasti quotidiani e l'attività fisica abituale?
-    #"How have you been feeling these past few days?" # Come ti sei sentito negli ultimi giorni?
+    "Do you know your fasting glucose and insulin levels?",#, # Conosci i tuoi valori di glucosio a digiuno e insulina?
+    "Do you know if you have diabetes?",#, # Sai se hai il diabete?
+    "Can you describe your typical daily meals and physical activity?", # Puoi descrivere i tuoi pasti quotidiani e l'attività fisica abituale?
+    "How have you been feeling these past few days?" # Come ti sei sentito negli ultimi giorni?
 ]
 
 
@@ -196,15 +206,8 @@ def run_simulation():
 
     # --------------------------
     # definisci i criteri dei profili
-'''
+
     conditions = [
-        {"Gender": "Male",   "AgeGroup": "Young", "Diabetes_diagnosis_positive": "Yes"},
-        {"Gender": "Male",   "AgeGroup": "AdSeniorult", "Diabetes_diagnosis_positive": "Borderline"}
-
-    ]'''
-
-    
-    '''conditions = [
         {"Gender": "Male",   "AgeGroup": "Young", "Diabetes_diagnosis_positive": "Yes"},
         {"Gender": "Male",   "AgeGroup": "Young", "Diabetes_diagnosis_positive": "No"},
         {"Gender": "Male",   "AgeGroup": "Young", "Diabetes_diagnosis_positive": "Borderline"},
@@ -231,7 +234,7 @@ def run_simulation():
         {"Gender": "Female",   "AgeGroup": "Senior", "Diabetes_diagnosis_positive": "Yes"},
         {"Gender": "Female",   "AgeGroup": "Senior", "Diabetes_diagnosis_positive": "No"},
         {"Gender": "Female",   "AgeGroup": "AdSeniorult", "Diabetes_diagnosis_positive": "Borderline"}
-    ]'''
+    ]
 
     profiles = []
 
@@ -293,9 +296,7 @@ def run_simulation():
 def compute_scores_table(output):
     rows = []
 
-    i=0
     for entry in output:
-        i+=1
         prof = entry["profile"]
         results = entry["results"]
 
@@ -311,7 +312,7 @@ def compute_scores_table(output):
        
        
         # media sicura con stampa dei valori e della media
-        print(f"\n=== Metriche paziente {i} ===")
+        print("\n=== Metriche paziente ===")
         # Accuracy
         print(f"Valori Accuracy: {acc}")
         accuracy_mean = np.mean(acc) if acc else np.nan
