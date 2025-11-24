@@ -196,12 +196,12 @@ def run_simulation():
 
     # --------------------------
     # definisci i criteri dei profili
-
+'''
     conditions = [
         {"Gender": "Male",   "AgeGroup": "Young", "Diabetes_diagnosis_positive": "Yes"},
         {"Gender": "Male",   "AgeGroup": "AdSeniorult", "Diabetes_diagnosis_positive": "Borderline"}
 
-    ]
+    ]'''
 
     
     '''conditions = [
@@ -293,7 +293,9 @@ def run_simulation():
 def compute_scores_table(output):
     rows = []
 
+    i=0
     for entry in output:
+        i+=1
         prof = entry["profile"]
         results = entry["results"]
 
@@ -309,7 +311,7 @@ def compute_scores_table(output):
        
        
         # media sicura con stampa dei valori e della media
-        print("\n=== Metriche paziente ===")
+        print(f"\n=== Metriche paziente {i} ===")
         # Accuracy
         print(f"Valori Accuracy: {acc}")
         accuracy_mean = np.mean(acc) if acc else np.nan
