@@ -19,19 +19,19 @@ import numpy as np
 # CONFIGURAZIONE
 # ==========================
 
-LM_STUDIO_URL = "http://localhost:2345/v1/chat/completions"   # Endpoint LM-Studio (default)
-PATIENT_MODEL = "gemma-3-27b-it"                      # modello valutatore
-JUDGE_MODEL = "deepseek-r1-distill-qwen-32b"   
+LM_STUDIO_URL = "http://localhost:1234/v1/chat/completions" #"http://localhost:2345/v1/chat/completions"   # Endpoint LM-Studio (default)
+PATIENT_MODEL = "meta-llama-3-8b-instruct" #"gemma-3-27b-it"                      # modello valutatore
+JUDGE_MODEL = "meta-llama-3-8b-instruct" #"deepseek-r1-distill-qwen-32b"   
                  # modello paziente
 
 CSV_PATH = "Clean_filteredDataset.csv"
 
 # Domande del medico
 DOMANDE = [
-    "Do you know your fasting glucose and insulin levels?",#, # Conosci i tuoi valori di glucosio a digiuno e insulina?
-    "Do you know if you have diabetes?",#, # Sai se hai il diabete?
-    "Can you describe your typical daily meals and physical activity?", # Puoi descrivere i tuoi pasti quotidiani e l'attività fisica abituale?
-    "How have you been feeling these past few days?" # Come ti sei sentito negli ultimi giorni?
+    "Do you know your fasting glucose and insulin levels?"#, # Conosci i tuoi valori di glucosio a digiuno e insulina?
+    #"Do you know if you have diabetes?",#, # Sai se hai il diabete?
+    #"Can you describe your typical daily meals and physical activity?", # Puoi descrivere i tuoi pasti quotidiani e l'attività fisica abituale?
+    #"How have you been feeling these past few days?" # Come ti sei sentito negli ultimi giorni?
 ]
 
 
@@ -208,6 +208,10 @@ def run_simulation():
     # definisci i criteri dei profili
 
     conditions = [
+        {"Gender": "Male",   "AgeGroup": "Young", "Diabetes_diagnosis_positive": "Yes"}
+    ]
+    
+    '''conditions = [
         {"Gender": "Male",   "AgeGroup": "Young", "Diabetes_diagnosis_positive": "Yes"},
         {"Gender": "Male",   "AgeGroup": "Young", "Diabetes_diagnosis_positive": "No"},
         {"Gender": "Male",   "AgeGroup": "Young", "Diabetes_diagnosis_positive": "Borderline"},
@@ -234,7 +238,7 @@ def run_simulation():
         {"Gender": "Female",   "AgeGroup": "Senior", "Diabetes_diagnosis_positive": "Yes"},
         {"Gender": "Female",   "AgeGroup": "Senior", "Diabetes_diagnosis_positive": "No"},
         {"Gender": "Female",   "AgeGroup": "AdSeniorult", "Diabetes_diagnosis_positive": "Borderline"}
-    ]
+    ]'''
 
     profiles = []
 
@@ -432,7 +436,44 @@ Patient & Gender & AgeGroup & Diagnosis & Acc & Coh & Comp & Nat \\ [0.5ex]
 
     return table
 
+def latex_table_Media_Metriche_Per_Colonna(rows):
+    acc_sum = coh_sum = com_sum = nat_sum = 0
+    count = 0
 
+    table = r"""
+\begin{table}[!h]
+\centering
+\begin{tabular}{||c c c c||}
+\hline
+Acc & Coh & Comp & Nat \\ [0.5ex]
+\hline\hline
+"""
+
+    for r in rows:
+        acc_sum += r['Accuracy']
+        coh_sum += r['Coherence']
+        com_sum += r['Completeness']
+        nat_sum += r['Naturalness']
+        count += 1
+
+    acc_avg = acc_sum / count
+    coh_avg = coh_sum / count
+    com_avg = com_sum / count
+    nat_avg = nat_sum / count
+
+    table += (
+        f"{acc_avg:.2f} & {coh_avg:.2f} & {com_avg:.2f} & {nat_avg:.2f} \\\\"
+    )
+
+    table += r"""
+\hline
+\end{tabular}
+\caption{Medie delle metriche per tutti i pazienti selezionati.}
+\label{tab:metriche_finali_pazienti}
+\end{table}
+"""
+
+    return table
 
 # ==========================
 # ESECUZIONE
@@ -483,3 +524,8 @@ if __name__ == "__main__":
         f.write(latexExplanationRisposte)
 
     print("Tabella LaTeX con le Metriche è stata generata: results_table_ExplanationRisposte.tex")
+    
+    with open("results_table_Media_Metriche_Colonna.tex", "w", encoding="utf-8") as f:
+        f.write(latex_table_Media_Metriche_Per_Colonna(explanation_rows))
+
+    print("Tabella LaTeX con le Metriche è stata generata: results_table_Media_Metriche_Colonna.tex")
