@@ -28,8 +28,8 @@ CSV_PATH = "Clean_filteredDataset.csv"
 
 # Domande del medico
 DOMANDE = [
-    "Do you know your fasting glucose and insulin levels?"#, # Conosci i tuoi valori di glucosio a digiuno e insulina?
-    #"Do you know if you have diabetes?",#, # Sai se hai il diabete?
+    "Do you know your fasting glucose and insulin levels?", # Conosci i tuoi valori di glucosio a digiuno e insulina?
+    "Do you know if you have diabetes?"#,#, # Sai se hai il diabete?
     #"Can you describe your typical daily meals and physical activity?", # Puoi descrivere i tuoi pasti quotidiani e l'attività fisica abituale?
     #"How have you been feeling these past few days?" # Come ti sei sentito negli ultimi giorni?
 ]
@@ -208,7 +208,8 @@ def run_simulation():
     # definisci i criteri dei profili
 
     conditions = [
-        {"Gender": "Male",   "AgeGroup": "Young", "Diabetes_diagnosis_positive": "Yes"}
+        {"Gender": "Male",   "AgeGroup": "Young", "Diabetes_diagnosis_positive": "Yes"},
+        {"Gender": "Male",   "AgeGroup": "Young", "Diabetes_diagnosis_positive": "No"}    
     ]
     
     '''conditions = [
