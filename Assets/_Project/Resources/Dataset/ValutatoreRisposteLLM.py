@@ -14,14 +14,16 @@ import requests
 import time
 import json
 import numpy as np
+import os
 
+import sys
 # ==========================
 # CONFIGURAZIONE
 # ==========================
 
-LM_STUDIO_URL = "http://localhost:1234/v1/chat/completions" #"http://localhost:2345/v1/chat/completions"   # Endpoint LM-Studio (default)
-PATIENT_MODEL = "meta-llama-3-8b-instruct" #"gemma-3-27b-it"                      # modello valutatore
-JUDGE_MODEL = "meta-llama-3-8b-instruct" #"deepseek-r1-distill-qwen-32b"   
+LM_STUDIO_URL = "http://localhost:2345/v1/chat/completions"   # Endpoint LM-Studio (default)
+PATIENT_MODEL = "mistral-7b-instruct-v0.3"                      # modello valutatore
+JUDGE_MODEL = "deepseek-r1-distill-qwen-32b"   
                  # modello paziente
 
 CSV_PATH = "Clean_filteredDataset.csv"
@@ -29,10 +31,43 @@ CSV_PATH = "Clean_filteredDataset.csv"
 # Domande del medico
 DOMANDE = [
     "Do you know your fasting glucose and insulin levels?", # Conosci i tuoi valori di glucosio a digiuno e insulina?
-    "Do you know if you have diabetes?"#,#, # Sai se hai il diabete?
+    #"Do you know if you have diabetes?",#, # Sai se hai il diabete?
     #"Can you describe your typical daily meals and physical activity?", # Puoi descrivere i tuoi pasti quotidiani e l'attività fisica abituale?
     #"How have you been feeling these past few days?" # Come ti sei sentito negli ultimi giorni?
 ]
+
+
+def make_incremental_file(base_name):
+    """Se base_name esiste, crea base_name_1.txt, base_name_2.txt, ecc."""
+    if not os.path.exists(base_name):
+        return base_name
+
+    name, ext = os.path.splitext(base_name)
+    i = 1
+    while True:
+        new_name = f"{name}_{i}{ext}"
+        if not os.path.exists(new_name):
+            return new_name
+        i += 1
+
+class TeeLogger:
+    """Duplica l'output su console e su file."""
+    def __init__(self, filename):
+        self.terminal = sys.stdout
+        self.log = open(filename, "a", encoding="utf-8")
+
+    def write(self, message):
+        self.terminal.write(message)
+        self.log.write(message)
+
+    def flush(self):
+        self.terminal.flush()
+        self.log.flush()
+
+log_filename = make_incremental_file("report_VP-"+PATIENT_MODEL+"_JUDGE-"+JUDGE_MODEL+".txt")
+sys.stdout = sys.stderr = TeeLogger(log_filename)
+
+print(f"Logging attivo su file: {log_filename}")
 
 
 # ==========================
@@ -85,10 +120,12 @@ def call_llm(system_prompt, user_prompt, model):
     payload = {
         "model": model,
         "messages": [
-            {"role": "system", "content": system_prompt},
-            {"role": "user", "content": user_prompt}
-        ]
-    }
+            #{"role": "system", "content": system_prompt},
+            #{"role": "user", "content": user_prompt}
+        {"role": "user", "content": f"System Prompt: {system_prompt} \n\n User prompt:{user_prompt}"}
+    ]
+}
+
 
     start = time.time()
     print("Richiesta inviata all'LLM:")
@@ -207,12 +244,12 @@ def run_simulation():
     # --------------------------
     # definisci i criteri dei profili
 
-    conditions = [
+    '''conditions = [
         {"Gender": "Male",   "AgeGroup": "Young", "Diabetes_diagnosis_positive": "Yes"},
         {"Gender": "Male",   "AgeGroup": "Young", "Diabetes_diagnosis_positive": "No"}    
-    ]
+    ]'''
     
-    '''conditions = [
+    conditions = [
         {"Gender": "Male",   "AgeGroup": "Young", "Diabetes_diagnosis_positive": "Yes"},
         {"Gender": "Male",   "AgeGroup": "Young", "Diabetes_diagnosis_positive": "No"},
         {"Gender": "Male",   "AgeGroup": "Young", "Diabetes_diagnosis_positive": "Borderline"},
@@ -239,7 +276,7 @@ def run_simulation():
         {"Gender": "Female",   "AgeGroup": "Senior", "Diabetes_diagnosis_positive": "Yes"},
         {"Gender": "Female",   "AgeGroup": "Senior", "Diabetes_diagnosis_positive": "No"},
         {"Gender": "Female",   "AgeGroup": "AdSeniorult", "Diabetes_diagnosis_positive": "Borderline"}
-    ]'''
+    ]
 
     profiles = []
 
