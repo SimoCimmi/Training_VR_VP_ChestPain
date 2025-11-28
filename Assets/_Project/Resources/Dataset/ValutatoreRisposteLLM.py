@@ -21,9 +21,9 @@ import sys
 # CONFIGURAZIONE
 # ==========================
 
-LM_STUDIO_URL = "http://localhost:2345/v1/chat/completions"   # Endpoint LM-Studio (default)
-PATIENT_MODEL = "mistral-7b-instruct-v0.3"                      # modello valutatore
-JUDGE_MODEL = "deepseek-r1-distill-qwen-32b"   
+LM_STUDIO_URL = "http://localhost:1234/v1/chat/completions"   # Endpoint LM-Studio (default)
+PATIENT_MODEL = "meta-llama-3-8b-instruct"                      # modello valutatore
+JUDGE_MODEL = "meta-llama-3-8b-instruct"   
                  # modello paziente
 
 CSV_PATH = "Clean_filteredDataset.csv"
@@ -45,7 +45,7 @@ def make_incremental_file(base_name):
     name, ext = os.path.splitext(base_name)
     i = 1
     while True:
-        new_name = f"{name}_{i}{ext}"
+        new_name = f"{i}_{name}{ext}"
         if not os.path.exists(new_name):
             return new_name
         i += 1
@@ -120,9 +120,9 @@ def call_llm(system_prompt, user_prompt, model):
     payload = {
         "model": model,
         "messages": [
-            #{"role": "system", "content": system_prompt},
-            #{"role": "user", "content": user_prompt}
-        {"role": "user", "content": f"System Prompt: {system_prompt} \n\n User prompt:{user_prompt}"}
+            {"role": "system", "content": system_prompt},
+            {"role": "user", "content": user_prompt}
+        #{"role": "user", "content": f"System Prompt: {system_prompt} \n\n User prompt:{user_prompt}"}
     ]
 }
 
@@ -244,12 +244,11 @@ def run_simulation():
     # --------------------------
     # definisci i criteri dei profili
 
-    '''conditions = [
-        {"Gender": "Male",   "AgeGroup": "Young", "Diabetes_diagnosis_positive": "Yes"},
-        {"Gender": "Male",   "AgeGroup": "Young", "Diabetes_diagnosis_positive": "No"}    
-    ]'''
-    
     conditions = [
+        {"Gender": "Male",   "AgeGroup": "Young", "Diabetes_diagnosis_positive": "Yes"},
+    ]
+    
+    '''conditions = [
         {"Gender": "Male",   "AgeGroup": "Young", "Diabetes_diagnosis_positive": "Yes"},
         {"Gender": "Male",   "AgeGroup": "Young", "Diabetes_diagnosis_positive": "No"},
         {"Gender": "Male",   "AgeGroup": "Young", "Diabetes_diagnosis_positive": "Borderline"},
@@ -276,7 +275,7 @@ def run_simulation():
         {"Gender": "Female",   "AgeGroup": "Senior", "Diabetes_diagnosis_positive": "Yes"},
         {"Gender": "Female",   "AgeGroup": "Senior", "Diabetes_diagnosis_positive": "No"},
         {"Gender": "Female",   "AgeGroup": "AdSeniorult", "Diabetes_diagnosis_positive": "Borderline"}
-    ]
+    ]'''
 
     profiles = []
 
@@ -558,12 +557,20 @@ if __name__ == "__main__":
     latexExplanationRisposte = latex_table_Explanation_Risposte(explanation_rows)
 
     # salva in file
-    with open("results_table_ExplanationRisposte.tex", "w", encoding="utf-8") as f:
+    name_file_exp = make_incremental_file("Exp_Risposte_VP-"+PATIENT_MODEL+"_JUDGE-"+JUDGE_MODEL+".tex")
+    with open(name_file_exp, "w", encoding="utf-8") as f:
         f.write(latexExplanationRisposte)
-
-    print("Tabella LaTeX con le Metriche è stata generata: results_table_ExplanationRisposte.tex")
+    print(f"Tabella LaTeX generata: {name_file_exp}")
     
-    with open("results_table_Media_Metriche_Colonna.tex", "w", encoding="utf-8") as f:
-        f.write(latex_table_Media_Metriche_Per_Colonna(explanation_rows))
+    name_file_exp = make_incremental_file("Exp_Risposte_Media_Metriche_VP-"+PATIENT_MODEL+"_JUDGE-"+JUDGE_MODEL+".tex")
+    with open(name_file_exp, "w", encoding="utf-8") as f:
+        f.write(latexExplanationRisposte)
+    print(f"Tabella LaTeX generata: {name_file_exp}")
+
+
+    name_file_exp = make_incremental_file("Exp_Risposte_Media_Per_Colonne_Metriche_VP-"+PATIENT_MODEL+"_JUDGE-"+JUDGE_MODEL+".tex")
+    with open(name_file_exp, "w", encoding="utf-8") as f:
+        f.write(latexExplanationRisposte)
+    print(f"Tabella LaTeX generata: {name_file_exp}")
 
     print("Tabella LaTeX con le Metriche è stata generata: results_table_Media_Metriche_Colonna.tex")
