@@ -31,24 +31,42 @@ CSV_PATH = "Clean_filteredDataset.csv"
 # Domande del medico
 DOMANDE = [
     "Do you know your fasting glucose and insulin levels?", # Conosci i tuoi valori di glucosio a digiuno e insulina?
-    #"Do you know if you have diabetes?",#, # Sai se hai il diabete?
+    "Do you know if you have diabetes?"#, # Sai se hai il diabete?
     #"Can you describe your typical daily meals and physical activity?", # Puoi descrivere i tuoi pasti quotidiani e l'attività fisica abituale?
     #"How have you been feeling these past few days?" # Come ti sei sentito negli ultimi giorni?
 ]
 
+import os
 
-def make_incremental_file(base_name):
-    """Se base_name esiste, crea base_name_1.txt, base_name_2.txt, ecc."""
-    if not os.path.exists(base_name):
-        return base_name
-
-    name, ext = os.path.splitext(base_name)
+def make_incremental_folder(base_folder):
+    """
+    Crea una cartella.
+    Se esiste, crea base_folder_1, base_folder_2, ...
+    Restituisce il percorso della cartella creata.
+    """
+    if not os.path.exists(base_folder):
+        os.makedirs(base_folder)
+        return base_folder
+    
     i = 1
     while True:
-        new_name = f"{i}_{name}{ext}"
-        if not os.path.exists(new_name):
-            return new_name
+        new_folder = f"{i}_{base_folder}"
+        if not os.path.exists(new_folder):
+            os.makedirs(new_folder)
+            return new_folder
         i += 1
+
+
+# ===== CREA LA CARTELLA OUTPUT =====
+BASE_OUTPUT = "Reports"
+OUTPUT_DIR = make_incremental_folder(BASE_OUTPUT)
+print(f"Cartella per i file generata: {OUTPUT_DIR}")
+
+# ===== LOGGER SENZA FILE INCREMENTALI =====
+log_filename = os.path.join(
+    OUTPUT_DIR, 
+    f"report_VP-{PATIENT_MODEL}_JUDGE-{JUDGE_MODEL}.txt"
+)
 
 class TeeLogger:
     """Duplica l'output su console e su file."""
@@ -64,7 +82,7 @@ class TeeLogger:
         self.terminal.flush()
         self.log.flush()
 
-log_filename = make_incremental_file("report_VP-"+PATIENT_MODEL+"_JUDGE-"+JUDGE_MODEL+".txt")
+# Redirect output
 sys.stdout = sys.stderr = TeeLogger(log_filename)
 
 print(f"Logging attivo su file: {log_filename}")
@@ -390,7 +408,55 @@ def compute_scores_table(output):
 
     return rows
 
-def latex_table_Explanation_Risposte(rows):
+def save_results_to_csv(output, filename):
+    """
+    Salva tutte le domande, risposte e valutazioni in un file CSV.
+    Una riga = una domanda posta al paziente.
+    """
+    rows = []
+
+    for entry in output:
+        profile = entry["profile"]
+        results = entry["results"]
+
+        if profile is None:
+            continue
+
+        patient_id = profile.get("SEQN", None)
+
+        for r in results:
+            eval_data = r["eval"]
+
+            rows.append({
+                "PatientID": patient_id,
+                "Gender": profile.get("Gender", ""),
+                "Age": profile.get("Age", ""),
+                "AgeGroup": profile.get("AgeGroup", ""),
+                "Diagnosis": profile.get("Diabetes_diagnosis_positive", ""),
+
+                "Question": r["question"],
+                "Answer": r["answer"],
+
+                # Metriche singole
+                "Accuracy": eval_data.get("accuracy", None),
+                "Coherence": eval_data.get("coherence", None),
+                "Completeness": eval_data.get("completeness", None),
+                "Naturalness": eval_data.get("naturalness", None),
+
+                # Commento del giudice
+                "Explanation": eval_data.get("explanation", ""),
+
+                # (Opzionale) testo raw in caso di errore:
+                "RawEval": eval_data.get("raw", "")
+            })
+
+    df_out = pd.DataFrame(rows)
+    df_out.to_csv(filename, index=False, encoding="utf-8")
+    print(f"\nCSV salvato correttamente in: {filename}")
+
+
+
+def latex_table_Principali_Risposte(rows):
     """
     Genera una tabella LaTeX ottimizzata:
     - centering
@@ -441,7 +507,7 @@ def latex_table_Explanation_Risposte(rows):
     return table
 
 
-def latex_table_Metriche(rows):
+def latex_table_Tutte_Domande_Metriche(rows):
     """
     Genera una tabella LaTeX ottimizzata:
     - centering
@@ -518,18 +584,20 @@ Acc & Coh & Comp & Nat \\ [0.5ex]
 
 if __name__ == "__main__":
     output = run_simulation()
+    print(f"Cartella per i file generata: {OUTPUT_DIR}")
+
     print("\n\nOutput: ")
     print(json.dumps(output, indent=4, ensure_ascii=False))
 
     rows = compute_scores_table(output)
 
-    latexMetriche = latex_table_Metriche(rows)
+    latexMetriche = latex_table_Tutte_Domande_Metriche(rows)
 
-    # salva in file
-    with open("results_table_Metriche.tex", "w", encoding="utf-8") as f:
+    name_file_exp = "Tutte_Domande_Metriche_VP-"+PATIENT_MODEL+"_JUDGE-"+JUDGE_MODEL+".tex"
+    path = os.path.join(OUTPUT_DIR, name_file_exp)
+    with open(path, "w", encoding="utf-8") as f:
         f.write(latexMetriche)
-
-    print("Tabella LaTeX con le Metriche è stata generata: results_table_Metriche.tex")
+    print(f"Tabella LaTeX generata: {name_file_exp}")
 
 
     # crea lista di dizionari con Question, Answer e Comment
@@ -554,23 +622,30 @@ if __name__ == "__main__":
                         "Naturalness": eval_.get("naturalness", 0),
                         "EvaluatorComment": eval_.get("explanation", "")
                     })
-    latexExplanationRisposte = latex_table_Explanation_Risposte(explanation_rows)
+                   
 
-    # salva in file
-    name_file_exp = make_incremental_file("Exp_Risposte_VP-"+PATIENT_MODEL+"_JUDGE-"+JUDGE_MODEL+".tex")
-    with open(name_file_exp, "w", encoding="utf-8") as f:
+    latexExplanationRisposte = latex_table_Principali_Risposte(explanation_rows)
+    name_file_exp = "Principali_Risposte_VP-"+PATIENT_MODEL+"_JUDGE-"+JUDGE_MODEL+".tex"
+    path = os.path.join(OUTPUT_DIR, name_file_exp)
+    with open(path, "w", encoding="utf-8") as f:
         f.write(latexExplanationRisposte)
     print(f"Tabella LaTeX generata: {name_file_exp}")
+
     
-    name_file_exp = make_incremental_file("Exp_Risposte_Media_Metriche_VP-"+PATIENT_MODEL+"_JUDGE-"+JUDGE_MODEL+".tex")
-    with open(name_file_exp, "w", encoding="utf-8") as f:
-        f.write(latexExplanationRisposte)
-    print(f"Tabella LaTeX generata: {name_file_exp}")
 
-
-    name_file_exp = make_incremental_file("Exp_Risposte_Media_Per_Colonne_Metriche_VP-"+PATIENT_MODEL+"_JUDGE-"+JUDGE_MODEL+".tex")
-    with open(name_file_exp, "w", encoding="utf-8") as f:
+    latexExplanationRisposte = latex_table_Media_Metriche_Per_Colonna(explanation_rows)
+    name_file_exp = "Exp_Risposte_Media_Per_Colonne_Metriche_VP-"+PATIENT_MODEL+"_JUDGE-"+JUDGE_MODEL+".tex"
+    path = os.path.join(OUTPUT_DIR, name_file_exp)
+    with open(path, "w", encoding="utf-8") as f:
         f.write(latexExplanationRisposte)
     print(f"Tabella LaTeX generata: {name_file_exp}")
 
     print("Tabella LaTeX con le Metriche è stata generata: results_table_Media_Metriche_Colonna.tex")
+
+     # Salva TUTTO in un CSV domanda-per-riga
+    name_file_exp = "CSV_Risultati_domande_VP-"+PATIENT_MODEL+"_JUDGE-"+JUDGE_MODEL+".csv"
+    path = os.path.join(OUTPUT_DIR, name_file_exp)
+    save_results_to_csv(output, path)
+
+    print("\n\nOutput: ")
+    print(json.dumps(output, indent=4, ensure_ascii=False))
