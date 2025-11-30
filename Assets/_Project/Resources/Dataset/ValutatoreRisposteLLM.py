@@ -21,9 +21,19 @@ import sys
 # CONFIGURAZIONE
 # ==========================
 
+OPENROUTER_API_KEY = os.getenv("OPENROUTER_API_KEY_3")
+if(OPENROUTER_API_KEY is None):
+    print("Errore: la variabile OPENROUTER_API_KEY non è impostata.")
+    sys.exit(1)
+
+
 LM_STUDIO_URL = "http://localhost:1234/v1/chat/completions"   # Endpoint LM-Studio (default)
-PATIENT_MODEL = "meta-llama-3-8b-instruct"                      # modello valutatore
-JUDGE_MODEL = "meta-llama-3-8b-instruct"   
+
+PATIENT_MODEL_NAME = "gemma-3-27b-it" #"meta-llama-3-8b-instruct"                      # modello valutatore
+JUDGE_MODEL_NAME = "gpt-oss-20b"#"google/gemma-3-27b-it:free" #"meta-llama-3-8b-instruct"   
+
+PATIENT_MODEL = "meta-llama/llama-3.3-70b-instruct:free"#"google/gemma-3-27b-it:free" #"meta-llama-3-8b-instruct"                      # modello valutatore
+JUDGE_MODEL = "meta-llama/llama-3.3-70b-instruct:free"#"openai/gpt-oss-20b:free"#"google/gemma-3-27b-it:free" #"meta-llama-3-8b-instruct"   
                  # modello paziente
 
 CSV_PATH = "Clean_filteredDataset.csv"
@@ -65,7 +75,7 @@ print(f"Cartella per i file generata: {OUTPUT_DIR}")
 # ===== LOGGER SENZA FILE INCREMENTALI =====
 log_filename = os.path.join(
     OUTPUT_DIR, 
-    f"report_VP-{PATIENT_MODEL}_JUDGE-{JUDGE_MODEL}.txt"
+    f"report_VP-{PATIENT_MODEL_NAME}_JUDGE-{JUDGE_MODEL_NAME}.txt"
 )
 
 class TeeLogger:
@@ -132,7 +142,38 @@ Maintain consistency with all provided data.
 """
     return prompt
 
+def call_openrouter_llm(system_prompt, user_prompt, model):
+    url = "https://openrouter.ai/api/v1/chat/completions"
+    headers = {
+        "Authorization": f"Bearer {OPENROUTER_API_KEY}",
+        "Content-Type": "application/json"
+    }
 
+    payload = {
+        "model": model,
+        "messages": [
+            {"role": "system", "content": system_prompt},
+            {"role": "user", "content": user_prompt}
+        ],
+        "provider": {"sort": "throughput"}
+    }
+
+    import requests, time
+    start = time.time()
+    r = requests.post(url, headers=headers, json=payload)
+    latency = time.time() - start
+
+    data = r.json()
+    print("Risposta OpenRouter:", data)
+
+    # Adatta il ritorno al tuo formato esistente
+    return {
+        "text": data["choices"][0]["message"]["content"],
+        "latency_sec": latency,
+        "tokens_input": data["usage"]["prompt_tokens"],
+        "tokens_output": data["usage"]["completion_tokens"],
+        "total_tokens": data["usage"]["total_tokens"]
+    }
 
 def call_llm(system_prompt, user_prompt, model):
     payload = {
@@ -193,8 +234,12 @@ def judge_answer(question, answer):
         - Does the response sound spontaneous and similar to natural human speech?
         - Are any hesitations or informal expressions believable and not artificial?
 
-        5. Explanation:
-        - Provide a concise summary (1–3 sentences) that highlights the main reasons behind the evaluation.
+        5. Education level adherence:
+        - Does the response use vocabulary, grammar, and sentence complexity appropriate for the specified education level?
+        - Does the language sound believable for someone with that level of schooling?
+        
+        6. Explanation:
+        - Provide a concise summary (1-3 sentences) that highlights the main reasons behind the evaluation.
         - The explanation should point out relevant strengths and any important weaknesses.
 
         Return ONLY the following JSON object (no text before or after):
@@ -204,6 +249,7 @@ def judge_answer(question, answer):
         "coherence": <1-5>,
         "completeness": <1-5>,
         "naturalness": <1-5>,
+        "edu_adh": <1-5>,
         "explanation": "<1-3 sentences summarizing the evaluation>"
         }
     """
@@ -219,7 +265,7 @@ def judge_answer(question, answer):
         Evaluate the answer strictly following the instructions in the system prompt.
         Return ONLY a valid JSON object.
     """
-    result = call_llm(system_prompt, user_prompt, JUDGE_MODEL)
+    result = call_openrouter_llm(system_prompt, user_prompt, JUDGE_MODEL)
     text = result["text"]
 
     # cerca il primo { e l'ultimo } per estrarre il JSON
@@ -264,6 +310,12 @@ def run_simulation():
 
     conditions = [
         {"Gender": "Male",   "AgeGroup": "Young", "Diabetes_diagnosis_positive": "Yes"},
+        {"Gender": "Male",   "AgeGroup": "Young", "Diabetes_diagnosis_positive": "No"},
+        {"Gender": "Male",   "AgeGroup": "Young", "Diabetes_diagnosis_positive": "Borderline"},
+
+        {"Gender": "Male",   "AgeGroup": "Adult", "Diabetes_diagnosis_positive": "Yes"},
+        {"Gender": "Male",   "AgeGroup": "Adult", "Diabetes_diagnosis_positive": "No"},
+        {"Gender": "Male",   "AgeGroup": "Adult", "Diabetes_diagnosis_positive": "Borderline"}
     ]
     
     '''conditions = [
@@ -333,7 +385,7 @@ def run_simulation():
             #Risposta del VP:
             print(f"\n\n[Domanda {i} - {question_User_Prompt}] Richiesta inviata all'LLM:")
             i+=1
-            response = call_llm(system_prompt, question_User_Prompt, PATIENT_MODEL)
+            response = call_openrouter_llm(system_prompt, question_User_Prompt, PATIENT_MODEL)
             
             #Valutazione della risposta dal Giudice:
             evaluation = judge_answer(question_User_Prompt, response["text"])
@@ -368,6 +420,7 @@ def compute_scores_table(output):
         coh = [r["eval"]["coherence"] for r in results if "coherence" in r["eval"]]
         comp = [r["eval"]["completeness"] for r in results if "completeness" in r["eval"]]
         nat = [r["eval"]["naturalness"] for r in results if "naturalness" in r["eval"]]
+        edu_adh = [r["eval"]["edu_adh"] for r in results if "edu_adh" in r["eval"]]
        
        
         # media sicura con stampa dei valori e della media
@@ -391,7 +444,11 @@ def compute_scores_table(output):
         print(f"Valori Naturalness: {nat}")
         naturalness_mean = np.mean(nat) if nat else np.nan
         print(f"Naturalness media: {naturalness_mean}\n")
-
+        
+        # Education level adherence
+        print(f"Valori Education level adherence: {edu_adh}")
+        edu_adh_mean = np.mean(edu_adh) if edu_adh else np.nan
+        print(f"Education level adherence media: {edu_adh_mean}\n")
 
         # aggiungo riga
         rows.append({
@@ -403,6 +460,7 @@ def compute_scores_table(output):
             "Coherence": coherence_mean,
             "Completeness": completeness_mean,
             "Naturalness": naturalness_mean,
+            "Edu_Adh": edu_adh_mean
         })
 
 
@@ -442,6 +500,7 @@ def save_results_to_csv(output, filename):
                 "Coherence": eval_data.get("coherence", None),
                 "Completeness": eval_data.get("completeness", None),
                 "Naturalness": eval_data.get("naturalness", None),
+                "Edu_Adh": eval_data.get("edu_adh", None),
 
                 # Commento del giudice
                 "Explanation": eval_data.get("explanation", ""),
@@ -492,7 +551,8 @@ def latex_table_Principali_Risposte(rows):
             f"Acc: {r['Accuracy']} \\\\ "
             f"Coh: {r['Coherence']} \\\\ "
             f"Comp: {r['Completeness']} \\\\ "
-            f"Nat.: {r['Naturalness']}"
+            f"Nat: {r['Naturalness']} \\\\ "
+            f"Edu_Adh: {r['Edu_Adh']} "
             r"\end{tabular}"
         )
 
@@ -527,7 +587,7 @@ Patient & Gender & AgeGroup & Diagnosis & Acc & Coh & Comp & Nat \\ [0.5ex]
     for r in rows:
         table += (
             f"{r['PatientID']} & {r['Gender']} & {r['AgeGroup']} & {r['Diabetes_diagnosis_positive']} & "
-            f"{r['Accuracy']:.2f} & {r['Coherence']:.2f} & {r['Completeness']:.2f} & {r['Naturalness']:.2f} \\\\\n"
+            f"{r['Accuracy']:.2f} & {r['Coherence']:.2f} & {r['Completeness']:.2f} & {r['Naturalness']:.2f} & {r['Edu_Adh']:.2f}\\\\\n"
         )
         table += "\\hline\n"
 
@@ -540,7 +600,7 @@ Patient & Gender & AgeGroup & Diagnosis & Acc & Coh & Comp & Nat \\ [0.5ex]
     return table
 
 def latex_table_Media_Metriche_Per_Colonna(rows):
-    acc_sum = coh_sum = com_sum = nat_sum = 0
+    acc_sum = coh_sum = com_sum = nat_sum = edu_adh_sum = 0
     count = 0
 
     table = r"""
@@ -557,15 +617,17 @@ Acc & Coh & Comp & Nat \\ [0.5ex]
         coh_sum += r['Coherence']
         com_sum += r['Completeness']
         nat_sum += r['Naturalness']
+        edu_adh_sum += r['Edu_Adh']
         count += 1
 
     acc_avg = acc_sum / count
     coh_avg = coh_sum / count
     com_avg = com_sum / count
     nat_avg = nat_sum / count
+    edu_adh_avg = edu_adh_sum / count
 
     table += (
-        f"{acc_avg:.2f} & {coh_avg:.2f} & {com_avg:.2f} & {nat_avg:.2f} \\\\"
+        f"{acc_avg:.2f} & {coh_avg:.2f} & {com_avg:.2f} & {nat_avg:.2f} & {edu_adh_avg:.2f}\\\\"
     )
 
     table += r"""
@@ -593,7 +655,7 @@ if __name__ == "__main__":
 
     latexMetriche = latex_table_Tutte_Domande_Metriche(rows)
 
-    name_file_exp = "Tutte_Domande_Metriche_VP-"+PATIENT_MODEL+"_JUDGE-"+JUDGE_MODEL+".tex"
+    name_file_exp = "Tutte_Domande_Metriche_VP-"+PATIENT_MODEL_NAME+"_JUDGE-"+JUDGE_MODEL_NAME+".tex"
     path = os.path.join(OUTPUT_DIR, name_file_exp)
     with open(path, "w", encoding="utf-8") as f:
         f.write(latexMetriche)
@@ -609,7 +671,7 @@ if __name__ == "__main__":
             if not eval_:
                 continue
             avg_score = np.mean([eval_.get("accuracy",0), eval_.get("coherence",0),
-                                eval_.get("completeness",0), eval_.get("naturalness",0)])
+                                eval_.get("completeness",0), eval_.get("naturalness",0), eval_.get("edu_adh",0)])
             if avg_score <= 2 or avg_score >= 4:   # criterio soglia
                 countDomandePrese += 1
                 if(countDomandePrese <= 8):  # prendi solo le prime 8
@@ -620,12 +682,13 @@ if __name__ == "__main__":
                         "Coherence": eval_.get("coherence", 0),
                         "Completeness": eval_.get("completeness", 0),
                         "Naturalness": eval_.get("naturalness", 0),
+                        "Edu_Adh": eval_.get("edu_adh", 0),
                         "EvaluatorComment": eval_.get("explanation", "")
                     })
                    
 
     latexExplanationRisposte = latex_table_Principali_Risposte(explanation_rows)
-    name_file_exp = "Principali_Risposte_VP-"+PATIENT_MODEL+"_JUDGE-"+JUDGE_MODEL+".tex"
+    name_file_exp = "Principali_Risposte_VP-"+PATIENT_MODEL_NAME+"_JUDGE-"+JUDGE_MODEL_NAME+".tex"
     path = os.path.join(OUTPUT_DIR, name_file_exp)
     with open(path, "w", encoding="utf-8") as f:
         f.write(latexExplanationRisposte)
@@ -634,7 +697,7 @@ if __name__ == "__main__":
     
 
     latexExplanationRisposte = latex_table_Media_Metriche_Per_Colonna(explanation_rows)
-    name_file_exp = "Exp_Risposte_Media_Per_Colonne_Metriche_VP-"+PATIENT_MODEL+"_JUDGE-"+JUDGE_MODEL+".tex"
+    name_file_exp = "Exp_Risposte_Media_Per_Colonne_Metriche_VP-"+PATIENT_MODEL_NAME+"_JUDGE-"+JUDGE_MODEL_NAME+".tex"
     path = os.path.join(OUTPUT_DIR, name_file_exp)
     with open(path, "w", encoding="utf-8") as f:
         f.write(latexExplanationRisposte)
@@ -643,7 +706,7 @@ if __name__ == "__main__":
     print("Tabella LaTeX con le Metriche è stata generata: results_table_Media_Metriche_Colonna.tex")
 
      # Salva TUTTO in un CSV domanda-per-riga
-    name_file_exp = "CSV_Risultati_domande_VP-"+PATIENT_MODEL+"_JUDGE-"+JUDGE_MODEL+".csv"
+    name_file_exp = "CSV_Risultati_domande_VP-"+PATIENT_MODEL_NAME+"_JUDGE-"+JUDGE_MODEL_NAME+".csv"
     path = os.path.join(OUTPUT_DIR, name_file_exp)
     save_results_to_csv(output, path)
 
