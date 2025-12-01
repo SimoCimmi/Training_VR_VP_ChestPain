@@ -1,0 +1,256 @@
+PatientID,Gender,Age,AgeGroup,Diagnosis,Question,Answer,Accuracy,Coherence,Completeness,Naturalness,Explanation,RawEval
+135140.0,Male,27.0,Young,Yes,Do you know your fasting glucose and insulin levels?,"Uh, yeah, I think so. The nurse went over some numbers with me before you came in. My fasting glucose was... 191 mg/dL, I believe. And my insulin was 35.49 µU/mL. Does that sound right, doctor? It all kinda blurred together, to be honest.",5,5,5,4,"The response is accurate with realistic medical values, coherent as it stays focused on the question, and complete by providing both glucose and insulin levels. The language feels natural with hesitations typical of a patient.",
+135140.0,Male,27.0,Young,Yes,Do you know if you have diabetes?,"Uh, honestly doc, I don’t know. They *said* somethin’ at the last place… somethin’ about my sugar bein' high, but they talked real fast and used a lot of words I didn't get. It was kinda confusing, ya know? Never really stuck with me what they told me.",5,4,5,4,"The response accurately reflects confusion about a diabetes diagnosis, uses natural language, and is contextually appropriate.",
+135140.0,Male,27.0,Young,Yes,Can you describe your typical daily meals and physical activity?,"Uh, well, it’s kinda hard to talk about a *typical* day, doc. Things ain't always… regular. But I guess most days I don't really eat much 'til later in the afternoon. Sometimes just a little something for breakfast, like maybe toast if there's anything around. Lunch is usually nothin'. Then dinner... depends. If my mom makes somethin', it’s good, you know? Rice and beans mostly, sometimes with chicken. Other days… honestly, whatever I can grab quick. Fast food sometimes, when I work late. 
+
+As for activity… I walk a bit at work, I stock shelves at the grocery store. That's probably the moderate part, I guess. And I try to go for a jog every now and then, maybe three times a week? It ain’t much, but it gets me outta the house. Mostly though, I'm on my feet at work, then just kinda… sit around when I get home. Thirty-six minutes is probably right about how long I sit each day.
+
+
+
+",5,5,5,5,"The patient provides a detailed and realistic account of their daily meals and physical activity. The response is coherent, comprehensive, and naturally phrased, making it fully credible as a real patient's answer.",
+135140.0,Male,27.0,Young,Yes,How have you been feeling these past few days?,"Uh, not great, doc. Just…tired, mostly. Real tired. And thirsty, I guess. Been drinkin' a lot more water than usual. It’s kinda hard to explain, just feelin' off, ya know? Like somethin' ain't right but can't put my finger on it. Been tryin' to push through it, honestly. Work keeps me pretty busy. 
+
+
+
+",5,5,5,5,"The response is accurate, coherent, complete, and naturally expressed. It effectively conveys the patient's symptoms in a believable manner.",
+135998.0,Male,23.0,Young,No,Do you know your fasting glucose and insulin levels?,"Uh, yeah, I think so. The nurse went over some numbers with me before you came in. My fasting glucose was 93.0 mg/dL, and my insulin was… let me see if I remember right… 6.79 µU/mL. Is that what you needed? It all felt like a lot of numbers, honestly.",5,5,4,5,"The response accurately provides realistic medical numbers, is coherent and relevant, complete with both glucose and insulin levels, uses natural language, and only slightly exceeds completeness by adding a personal touch.",
+135998.0,Male,23.0,Young,No,Do you know if you have diabetes?,"Uh, no, I don’t *think* so. Not that I know of, anyway. Never been told I do. Why are you asking? Is something wrong?",5,5,4,5,"The response accurately reflects a patient's perspective on diabetes knowledge. It is coherent and complete, though slightly brief. The language is natural.",
+135998.0,Male,23.0,Young,No,Can you describe your typical daily meals and physical activity?,"Well, um, breakfast is usually just coffee, honestly. Sometimes I’ll grab a pastry from the corner store if I have time, but not every day. Lunch… it varies. Usually something quick, like a sandwich or leftovers if there *are* any. Dinner's the biggest meal, my mom usually cooks – rice and beans are pretty common, maybe some chicken or pork. 
+
+I don’t really do much exercise. I work at a desk all day, so mostly just… sitting. After work, I kinda just relax. Maybe watch TV. I try to walk around a little more, but it doesn't happen as often as I'd like. Probably sit for about eight hours a day at work, give or take. It’s not very much, I guess.
+
+
+
+",5,4,5,5,"The response accurately describes realistic meal patterns and physical activity levels. It is coherent, complete, and naturally expressed.",
+135998.0,Male,23.0,Young,No,How have you been feeling these past few days?,"Well, honestly, kinda just…tired. More tired than usual, I guess. It’s hard to explain. Like, I sleep alright, usually get about seven or eight hours, but then I wake up and still feel like I didn't get enough. And a little sluggish all day, you know? Not *sick* sick, just…off. Been drinkin' more coffee than I should probably admit too, tryin’ to keep goin’. 
+
+It hasn't been awful or anything, just not my best.
+
+
+
+",4,5,4,5,"The response accurately describes realistic symptoms of fatigue. It is coherent and naturally expressed, though slightly lacking in completeness.",
+132602.0,Male,15.0,Young,Borderline,Do you know your fasting glucose and insulin levels?,"Yes, I do. My fasting glucose is 104.0 mg/dL and my insulin level is 30.02 µU/mL. It was… a bit surprising to hear those numbers, honestly. I wasn't really expecting anything specific, though.",4,5,4,5,"The response accurately provides realistic medical numbers and adds a believable personal touch, though the glucose level is slightly elevated.",
+132602.0,Male,15.0,Young,Borderline,Do you know if you have diabetes?,"I… honestly, I don’t know. The doctor mentioned something about it being borderline, but I wasn’t really sure what that meant, exactly. They sent me here for more tests, I think. It was a bit of a whirlwind, to be frank.
+
+
+
+",5,5,4,5,"The response accurately reflects a patient's uncertainty about diabetes diagnosis. It is coherent, complete, and naturally phrased.",
+132602.0,Male,15.0,Young,Borderline,Can you describe your typical daily meals and physical activity?,"Well, um, it’s…not great, honestly. For breakfast, I usually just grab something quick – maybe toast with a little peanut butter, or if there's time, cereal. Lunch is often whatever the school cafeteria has, which isn’t always the healthiest. Pizza day is popular, naturally. Dinner varies; my mom tries to cook balanced meals most nights - chicken and vegetables sometimes, pasta other times. I do have a bit of a sweet tooth though, so there's usually dessert involved, like cookies or ice cream. 
+
+As for physical activity… not much. School gets me walking around a little, but that’s about it. I don’t really *do* any sports or anything. I sit quite a lot, to be honest. I try to walk more, but it's hard when you have homework and stuff.
+
+
+
+",4,5,5,4,"The response accurately describes daily meals and physical activity without unrealistic info. It is coherent, complete, and naturally expressed. A minor weakness is the lack of health implications depth.",
+132602.0,Male,15.0,Young,Borderline,How have you been feeling these past few days?,"Oh, um, honestly? Just…tired. Really tired. It’s hard to describe, it’s not like a *sick* tired, more just…dragged out. I've been trying to push through things at school and with some extracurriculars, but even getting up in the morning feels like a lot. And thirsty, actually. I seem to be drinking a lot more water than usual, which is odd because I usually have to *remind* myself to drink enough. 
+
+It's nothing debilitating or anything, just…off.
+
+
+
+",4,5,4,5,The response accurately and coherently describes symptoms with natural language. It's complete but slightly less comprehensive.,
+139089.0,Male,52.0,Adult,Yes,Do you know your fasting glucose and insulin levels?,"Uh, yeah, I think so. The nurse went over some numbers with me last time. My fasting glucose was 162 mg/dL, and my insulin was… let me see… 33.4 µU/mL. Is that right? It all kinda blurred together, to be honest.",4,4,5,4,"The response accurately provides medical numbers, is relevant, complete, and naturally phrased. A minor uncertainty about insulin levels slightly impacts accuracy.",
+139089.0,Male,52.0,Adult,Yes,Do you know if you have diabetes?,"Uh, honestly doctor, I don’t know. They… they *said* something when I was here last time, but it was a lot to take in and I kinda glazed over some of it. Something about my sugar being high, I think? It's all a bit fuzzy, to be honest with you.",5,4,4,5,"The response is accurate and naturally phrased, capturing typical patient uncertainty about a diabetes diagnosis. It's complete in addressing the question but could include more details on follow-up actions.",
+139089.0,Male,52.0,Adult,Yes,Can you describe your typical daily meals and physical activity?,"Well, um, let me think. Breakfast is usually just toast – two slices – with maybe some peanut butter. And coffee, black. Lunch… it varies. Sometimes a sandwich, like ham and cheese on white bread. Other times I grab something quick from the deli down the street, you know? A hero or somethin'. Dinner’s what gets me, honestly. My wife usually cooks, and she makes good food, real comfort food. Lots of potatoes, meatloaf, things like that. Not a lot of salad, if I'm bein' honest. 
+
+As for activity… not much, really. I sit at a desk all day for work – I’m an accountant – so it’s mostly sittin'. I *try* to walk around a bit during my lunch break, maybe for fifteen, twenty minutes? And sometimes, on the weekends, I'll do some yardwork, but that ain't every weekend. Maybe ten minutes of somethin' more strenuous if I really push myself. Mostly just… sedentary, I guess you could say. I been tryin’ to get better about it though, really I have.
+
+
+
+",5,4,5,5,"The response accurately describes typical daily habits, with natural language that's realistic and thorough.",
+139089.0,Male,52.0,Adult,Yes,How have you been feeling these past few days?,"Well, to be honest, kinda tired mostly. Just…dragged out. I’ve been drinkin’ more water than usual too, which is weird 'cause I usually don't care for it much. It's just...not like a really *sick* feeling, y'know? More just not myself. And my vision seems a little blurry sometimes, but I figured it was just needing new glasses or somethin'. 
+
+I been tryin’ to get more sleep, but even then I wake up feelin’ kinda blah.
+
+
+
+",4,4,4,5,"The response is accurate, describing realistic patient symptoms. It's coherent and complete, addressing all aspects of the question. The language feels natural and spontaneous.",
+137423.0,Male,44.0,Adult,No,Do you know your fasting glucose and insulin levels?,"Uh, yeah, kinda. The nurse went over some numbers with me before you came in. My fasting glucose was... 104, I think she said. And my insulin was 5.5. Does that make sense? I don't really remember much else about it, to be honest. It was a lot of numbers flying around.",5,4,4,5,The response accurately reports realistic medical numbers and naturally conveys uncertainty about remembering details.,
+137423.0,Male,44.0,Adult,No,Do you know if you have diabetes?,"Uh, no, I don’t *think* so. Never been told, anyway. Why are you askin', doc? Is somethin' wrong?",4,5,4,5,"The response accurately reflects a patient's perspective on diabetes awareness, maintaining coherence and natural language. It is sufficiently complete for the question, with minor brevity.",
+137423.0,Male,44.0,Adult,No,Can you describe your typical daily meals and physical activity?,"Uh, yeah, sure. Well, breakfast is usually just coffee, black. Sometimes I’ll grab a pastry from the corner store if I'm rushin', like a donut or somethin'. Lunch… it depends. If I’m workin’, which is most days, it’s probably a sandwich – ham and cheese on white bread, maybe chips. Not real healthy, I guess. 
+
+Dinner... my wife tries to cook, bless her heart. Usually some kinda meat, like chicken or pork chops, with rice and beans. She makes good rice and beans. Sometimes we get takeout, pizza mostly. 
+
+As for activity… not much, really. I sit a lot at work, doin' paperwork. I try to walk around a bit during my breaks, maybe ten minutes if I can. And on the weekends, sometimes I’ll mow the lawn or somethin', takes about an hour and a half, two hours. But that ain’t every weekend, ya know? It depends on the weather mostly.
+
+
+
+",5,5,4,5,"The response accurately describes typical daily meals and activities with realistic scenarios. The language is natural, using colloquial expressions that make it sound authentic.",
+137423.0,Male,44.0,Adult,No,How have you been feeling these past few days?,"Well, doc, honestly? Just kinda tired, I guess. More tired than usual. Been draggin’ a bit, ya know? Not *sick* tired, just…low energy. And thirsty, actually. I've been drinkin' more water lately, but it don't seem to help much. Everything else feels alright, though. No pains or nothin'. Just feelin' blah, mostly. 
+
+
+
+",5,4,5,5,"The response accurately describes realistic symptoms without unrealistic claims. It is relevant and complete, with natural language use.",
+137216.0,Male,53.0,Adult,Borderline,Do you know your fasting glucose and insulin levels?,"Yeah, I do now...the nurse went over some numbers with me before you came in. My fasting glucose was 101 milligrams per deciliter, and my insulin was… uh… 23.75 micro units per milliliter. Is that right? Seems like a lot of numbers to keep track of, honestly.",4,5,4,5,"The answer is accurate with realistic medical numbers, coherent in context, complete in addressing both glucose and insulin levels, and uses natural language with hesitations.",
+137216.0,Male,53.0,Adult,Borderline,Do you know if you have diabetes?,"Well, the doctor told me somethin’ about it bein’ borderline last time I was in. But honestly, I don't really *know*, ya know? It wasn't a straight yes or no kinda thing, more like… watch what you eat and try to get movin’. That’s all I remember for sure.",5,5,4,4,"The response accurately reflects a realistic patient experience with borderline diabetes, coherently addresses the question, and uses natural language. Completeness is slightly less due to limited depth on current actions.",
+137216.0,Male,53.0,Adult,Borderline,Can you describe your typical daily meals and physical activity?,"Well, doc, it’s…not great, to be honest. Meals are kinda all over the place. I usually skip breakfast – don't really feel hungry that early. Lunch is often a sandwich from the deli down the street, maybe chips with it. And dinner...that depends. Sometimes my wife cooks something good, like meatloaf or chicken, but other times it’s just grabbing something quick on the way home if we're both working late. I really don't pay attention to *what* I eat, just that I'm not hungry anymore.
+
+As for activity…I sit a lot. My job is at a desk, and then I usually come home and watch TV. I try to walk around a bit during the day, maybe for about two hours total, but it’s nothing serious. Sometimes I'll mow the lawn on weekends, that takes like twenty minutes or so? But yeah, mostly sitting. It's bad, I know.
+
+
+
+",4,5,4,5,"The response is realistic and relevant, covers all aspects of the question with natural language but could include more details on diet.",
+137216.0,Male,53.0,Adult,Borderline,How have you been feeling these past few days?,"Well, doc, honestly? Just…tired. Real tired. It’s kinda hard to explain. Not sick *tired*, just like I don't have much energy, ya know? Been draggin' a bit. And thirsty, I guess. Drinkin' more water than usual, but it doesn't seem to help much. Everything feels…slow, if that makes sense. 
+
+It’s been goin’ on for a little while now, not just the past few days, really. Just figured it was from work and stuff. But it ain't gettin' better.",5,5,4,5,"The response is realistic and relevant, with natural language but somewhat brief.",
+131073.0,Male,63.0,Senior,Yes,Do you know your fasting glucose and insulin levels?,"Uh, yeah, I think so. The nurse went over some numbers with me last time. My fasting glucose was 125 mg/dL, and my insulin... let me see if I remember right… it was 201.58 µU/mL. It felt like a lot of numbers, honestly.",5,5,4,5,"The response accurately provides specific medical values, is coherent and relevant, complete with both glucose and insulin levels. The language feels natural with realistic hesitations.",
+131073.0,Male,63.0,Senior,Yes,Do you know if you have diabetes?,"I... I don't know. The doctor told me somethin’ a while back, but honestly, it was a lot to take in and I didn't really… fully listen, ya know? It was just kinda thrown at me with all sorts of numbers and stuff. I mostly remember him sayin’ I needed to change things.",5,5,4,5,"The response is accurate and coherent, capturing the uncertainty of someone who may have been told about diabetes but did not fully grasp it. It feels natural with hesitations and informal expressions.",
+131073.0,Male,63.0,Senior,Yes,Can you describe your typical daily meals and physical activity?,"Well, doc, it’s…it’s kinda hard to talk about sometimes, honestly. I try to eat regular, ya know? Breakfast is usually toast – two slices – with maybe some peanut butter. And coffee, black. Lunch is often a sandwich, ham or turkey mostly, and chips. Not the healthiest, I guess. Dinner varies. My wife does most of the cooking when she’s feeling up to it, but it's things like meatloaf, mashed potatoes…comfort food, really. 
+
+I try to watch my portions, I do. Been trying to lose weight for a while now. As for activity... I sit a lot. A *lot*. My job is at a desk, and then I come home and usually just relax in front of the TV. I walk some, maybe around the yard, but not much more than that. Probably about 720 minutes sedentary a day, if you wanna know exactly. And I guess I do get about 120 minutes of moderate activity in there somewhere, mostly walking. It's hard to say for sure though.
+
+
+
+",4,5,4,4,"The response is accurate and coherent, providing realistic details about meals and activity. It's complete but could elaborate more on physical activity specifics. The language sounds natural.",
+131073.0,Male,63.0,Senior,Yes,How have you been feeling these past few days?,"Well, doc, honestly? Just…tired. Real tired. More than usual, I guess. It’s kinda hard to explain. Like dragging myself through mud all day, even when I haven't *done* much. And thirsty. Always thirsty, no matter how much water I drink. Been going to the bathroom a lot too, especially at night. It's been goin' on for a bit now, not just these few days, but it feels worse lately. 
+
+I try to keep busy, ya know? But even little things feel like a big effort.
+
+
+
+",5,5,4,5,"The response is accurate and coherent, providing clear details about symptoms. It's complete enough for the question but could have explored more areas. The language is very natural.",
+134064.0,Male,78.0,Senior,No,Do you know your fasting glucose and insulin levels?,"Yes, I do. My fasting glucose is 95.0 mg/dL and my insulin level is 6.91 µU/mL. Though, honestly, doctor, numbers aren't really *my* thing. I just try to listen to what you tell me they mean.",5,5,5,5,"The response accurately provides realistic medical values, coherently answers the question with context-appropriate informality, and is naturally phrased.",
+134064.0,Male,78.0,Senior,No,Do you know if you have diabetes?,"I don’t know. I haven’t been specifically told that I do, but honestly, doctor, keeping track of all this… it slips my mind sometimes what exactly they *have* told me. It's a lot to remember at my age, you understand.
+
+
+
+",4,5,4,5,"The response accurately reflects uncertainty about diabetes diagnosis and age-related memory challenges. It is coherent, complete, and naturally phrased.",
+134064.0,Male,78.0,Senior,No,Can you describe your typical daily meals and physical activity?,"Well, doctor, let me see if I can recall… Breakfast is usually oatmeal, sometimes with a bit of fruit – blueberries mostly, if they’re in season. And toast, whole wheat, one slice. Coffee, black. Lunch tends to be a sandwich, turkey or ham on rye bread, and maybe a small side salad. Nothing too extravagant, you understand. 
+
+Dinner… that varies more. My wife does most of the cooking, thankfully. Often it’s baked chicken with roasted vegetables – broccoli, carrots, potatoes. Or fish, salmon usually. I do enjoy a glass of wine with dinner, if you must know.
+
+As for activity... honestly, not as much as I should. I try to walk around the garden a bit most days, maybe thirty minutes or so. But mostly I’m… sedentary. Reading, watching the news, things like that. It's hard getting out and about these days, you know? My knees aren’t what they used to be.
+
+
+
+",5,5,4,5,"The response is accurate and coherent, providing a detailed account of meals and activity. It is slightly brief in some areas but overall very natural.",
+134064.0,Male,78.0,Senior,No,How have you been feeling these past few days?,"Oh, you know…about my age, I suppose. A little stiff when I get up in the mornings, takes a bit to loosen up. Nothing truly *bad*, just…old. I've been trying to watch what I eat, honestly. It’s harder than it looks these days, with everything so readily available. And getting out for a proper walk? Well, that doesn’t happen as often as it should. Just generally feeling a bit sluggish, if that makes sense.
+
+
+
+",4,4,4,5,"The response is realistic and coherent, covering physical symptoms, diet, and exercise issues. It's complete and naturally expressed.",
+137112.0,Female,26.0,Young,Yes,Do you know your fasting glucose and insulin levels?,"Um, yeah, I think so. The nurse went over some numbers with me last time... my fasting glucose was 111 mg/dL, and my insulin was… let me see if I remember right… 58.45 µU/mL. Is that what you needed? It all felt like a lot of numbers, honestly.",5,5,4,5,"The answer is accurate with realistic medical values. It stays relevant and coherent to the question, uses natural language hesitations, but could be slightly more detailed.",
+137112.0,Female,26.0,Young,Yes,Do you know if you have diabetes?,"Um, I don’t know. The doctor *did* mention something when I was here last time…something about my blood sugar being a little high, but honestly, it was a lot to take in and I didn't really follow up on all of it. It felt kinda fast, you know?",4,5,4,5,The response accurately reflects possible prediabetes with natural language and coherence. It's complete but could be more detailed.,
+137112.0,Female,26.0,Young,Yes,Can you describe your typical daily meals and physical activity?,"Um, okay. Well, breakfast is usually just a granola bar and coffee – I’m not much of a morning person, honestly. Lunch… it varies. Sometimes leftovers from dinner, sometimes a sandwich, maybe soup if I have time to make it. Dinner's the biggest meal, usually something like pasta or chicken with rice and a veggie. I *try* to keep portions reasonable, but it doesn’t always happen.
+
+As for activity... I work at a desk all day, so mostly sedentary, I guess? I try to walk on my lunch break when the weather's nice, maybe for about an hour a couple times a week. And then I go to a Zumba class twice a week for an hour each time. It’s fun, but… it doesn’t feel like enough sometimes.
+
+
+
+",5,5,4,5,"The response accurately describes typical meals and physical activity with realistic details. It's coherent, covering all aspects of the question. While complete, it could include more specifics on portions or exercise intensity. The language is natural and spontaneous.",
+137112.0,Female,26.0,Young,Yes,How have you been feeling these past few days?,"Oh, um, honestly? Pretty tired. Just… really dragging myself through things. I’ve been trying to drink more water, but it doesn't seem to be helping much. It feels like I could sleep for a week and still be exhausted. And just generally kinda blah, you know? Not *sick* sick, just...off.
+
+
+
+",5,4,4,5,"The response accurately describes realistic symptoms, is coherent and relevant, complete in addressing key points, and uses natural language effectively.",
+136305.0,Female,20.0,Young,No,Do you know your fasting glucose and insulin levels?,"Uh, yeah, I think so. The nurse went over some stuff with me before you came in. My fasting glucose was 94.0 mg/dL, and my insulin was… let me see if I remember right… 18.61 µU/mL. Is that what you needed? It felt like a lot of numbers, honestly.",5,5,5,5,"The response provides accurate and relevant numerical information about glucose and insulin levels, uses natural language with hesitations typical of a patient, and is complete in addressing the question.",
+136305.0,Female,20.0,Young,No,Do you know if you have diabetes?,"Um, I don’t know. Nobody ever *told* me I did, but… honestly, I haven’t really been to the doctor much lately. Just for check-ups and stuff when I was a kid, mostly. Why are you asking? Is something wrong?",5,5,5,5,"The response accurately reflects a patient's uncertainty about diabetes, is coherent and complete, uses natural language with hesitations, making it realistic.",
+136305.0,Female,20.0,Young,No,Can you describe your typical daily meals and physical activity?,"Um, well, it’s kinda embarrassing actually. I don’t really *have* a typical day when it comes to food. Some days I'll eat pretty good, like a sandwich or something for lunch…and then other days I just grab whatever’s easiest. Like chips or ramen, you know? I haven’t been tracking anything, if that makes sense. 
+
+As for activity... not much. I work from home doing data entry so I sit a lot. Probably around three hours sitting, maybe more some days. I really should get out more, but honestly, after work I just kinda…don't. I don’t do any regular exercise or anything. Just walking around the house, I guess?",4,4,3,4,"The response accurately describes a typical patient's eating habits and physical activity with realistic variability. It coheres well, staying on topic without contradictions. However, it could be more detailed for completeness, though it remains natural and spontaneous.",
+136305.0,Female,20.0,Young,No,How have you been feeling these past few days?,"Um, okay. Honestly? Just…tired. Really tired. Like, I could sleep for a week and still feel like I need more. And kinda just blah, y'know? Not *sick* sick, but not good either. It’s hard to explain. Everything feels like it takes a lot of effort, even stuff I usually don't think about. 
+
+I haven't really been eating much lately, which probably isn't helping the tired part. Just…not hungry, I guess.
+
+
+
+",5,5,5,5,"The response is accurate, coherent, complete, and naturally expressed, effectively conveying the patient's feelings.",
+138576.0,Female,20.0,Young,Borderline,Do you know your fasting glucose and insulin levels?,"Um, yeah, I think so. The nurse went over some numbers with me last time. My fasting glucose was 91 mg/dL, and my insulin was… let me see if I remember right… 11.18 µU/mL. Is that what you needed? It all felt like a lot to take in, honestly.",5,4,5,4,The response accurately provides specific fasting glucose and insulin levels. It is coherent as it addresses the question while adding a personal touch. Completeness is high as both values are provided. Language sounds natural with hesitation markers.,
+138576.0,Female,20.0,Young,Borderline,Do you know if you have diabetes?,"Um, no, I don’t *think* so? The doctor said something about it being… borderline, last time I was in. But they didn't really explain it super well, honestly. It was a quick appointment and I kinda just left feeling confused. 
+
+
+
+",4,5,4,5,"The response is accurate with 'borderline' diabetes, coherent, complete in expressing uncertainty and confusion, and naturally phrased.",
+138576.0,Female,20.0,Young,Borderline,Can you describe your typical daily meals and physical activity?,"Um, sure. Well, for breakfast I usually just grab something quick – like toast with maybe some peanut butter, or a yogurt. Sometimes cereal if there's time. Lunch is…it varies. Usually leftovers from dinner, or a sandwich. Nothing too fancy, honestly. 
+
+Dinner’s the biggest meal. My mom does most of the cooking, it's usually rice and beans with some kind of meat, like chicken or pork. We eat pretty good, I think. Lots of tortillas too, we're Hispanic, you know?
+
+As for activity…I work at a desk job, so mostly I’m sitting. I try to walk around during my breaks, but it’s not much. I go to the gym sometimes with friends, maybe twice a week for an hour or so each time. It's usually just walking on the treadmill or using the elliptical. Nothing too strenuous. I sit a lot more than I move, if that makes sense. About 60 minutes sedentary and 120 moderate activity per day.
+
+
+
+",5,4,5,4,"The response is accurate, complete, and coherent. It naturally describes typical meals and activities without being overly formal.",
+138576.0,Female,20.0,Young,Borderline,How have you been feeling these past few days?,"Oh, um, pretty much the same as always, I guess. A little tired, maybe? It’s hard to say, honestly. Work's been kinda stressful lately, so that could be it. Just…blah, you know? Not *sick* sick, just not really with a lot of energy. And thirsty, actually. I have been drinking a lot more water than usual. 
+
+
+
+",4,5,4,5,"The response is accurate with realistic symptoms, coherent, complete enough, and naturally phrased.",
+142157.0,Female,44.0,Adult,Yes,Do you know your fasting glucose and insulin levels?,"Um, yeah, I think so. The nurse went over some numbers with me last time... my fasting glucose was 100 mg/dL, and my insulin was… let me see if I remember right… 37.46 µU/mL. Is that what you needed to know? It all kinda sounded like a bunch of letters and numbers, honestly.",5,4,5,4,"The answer is accurate with realistic medical information, coherent as it addresses the question directly, complete by providing specific values, and naturally phrased with casual language. Minor weakness: slight informality.",
+142157.0,Female,44.0,Adult,Yes,Do you know if you have diabetes?,"Um, I don’t know. The doctor told me somethin’ last time…about my sugar bein’ high, maybe? It was a lot to take in, and honestly, I kinda just nodded along. I wasn't really listenin', if I'm bein' honest. Things have been...a lot lately.",4,5,4,5,"The response accurately describes uncertainty about diabetes with realistic hesitation. It is coherent and natural, though slightly brief.",
+142157.0,Female,44.0,Adult,Yes,Can you describe your typical daily meals and physical activity?,"Um, well, it’s kinda hard to explain. I usually just…grab something quick in the mornings, like a pastry from the corner store with coffee. Sometimes not even that, honestly. Lunch is usually leftovers if there *are* any, or maybe a sandwich. Dinner... depends. My husband works late sometimes so it's often frozen dinners or takeout. 
+
+I try to walk when I can, you know? Like around the block after work some days. And I go to this exercise class twice a week for an hour, and then on weekends I’ll do something more…intense with my daughter, like hiking if the weather's good, maybe for about two hours. But most of the time, I'm just sitting at my desk at work or watching TV when I get home. It's probably not enough, to be honest.
+",5,5,5,5,"The response accurately and coherently describes the patient's daily meals and physical activity. It is complete, covering all aspects asked for, and uses natural language that sounds spontaneous.",
+142157.0,Female,44.0,Adult,Yes,How have you been feeling these past few days?,"Uh, okay. Honestly? Just…tired. Really tired. Like, more than usual, and I’m *always* tired. It's hard to get going in the mornings, even after sleeping. And kinda thirsty all the time, which is weird. Everything just feels a little off, you know? Not sick exactly, just...blah. 
+
+I haven't been eating much either, not really hungry. Which isn’t good, I guess.
+
+
+
+",5,5,4,5,"The response accurately reflects common patient symptoms, is relevant and concise, uses natural language effectively.",
+132699.0,Female,37.0,Adult,No,Do you know your fasting glucose and insulin levels?,"Um, yeah, kinda. The nurse went over some numbers with me before you came in. My fasting glucose was 107, I think...and my insulin was…42 point oh four. Something like that. It felt like a lot of numbers, honestly.
+
+
+
+",5,5,4,5,"The response accurately provides realistic medical numbers, is coherent to the question, and uses natural language. It's slightly brief but still complete.",
+132699.0,Female,37.0,Adult,No,Do you know if you have diabetes?,"Um, no, I don’t *think* so. Nobody ever told me I did, but honestly, I haven't really been to the doctor much in a while. Why are you asking? Is something wrong?",4,5,4,5,"The response accurately reflects a patient's lack of diabetes diagnosis and infrequent doctor visits. It is coherent, complete, and naturally expressed.",
+132699.0,Female,37.0,Adult,No,Can you describe your typical daily meals and physical activity?,"Um, yeah sure. Well, breakfast is usually just toast...sometimes with peanut butter if we have it. It's quick, ya know? Lunch is kinda whatever I can grab – leftovers from dinner sometimes, or a sandwich. Nothing fancy. Dinner… my husband usually cooks, he likes to make things like fried chicken, mac and cheese, stuff like that. We don’t really eat a lot of salad, if I’m being honest. 
+
+As for activity... not much. I work at the front desk at a doctor's office – mostly sitting all day. After work, I usually just relax. I try to walk around a little bit when I can, but honestly, most days I'm pretty tired. I sit for about 1020 minutes a day, I think? Something like that. We don’t really do much exercise.
+
+
+
+",5,5,5,4,"The response accurately describes typical meals and activity levels, is relevant and complete. The language feels natural with realistic conversational elements.",
+132699.0,Female,37.0,Adult,No,How have you been feeling these past few days?,"Uh, okay. Honestly? Just…tired. Really tired. Like, more than usual, and I’m *always* tired. It's hard to get going in the mornings, even after a full night's sleep – which isn’t always a full night, you know? And kinda thirsty all the time, too. Not like, crazy thirsty, but just…needing a drink more often than I used to. 
+
+I don't really feel *sick*, sick, if that makes sense. Just sluggish and worn out. It's been going on for a little while now, maybe a couple weeks? Hard to say exactly. Things have been kinda hectic.",5,4,5,5,"The response provides realistic symptoms like fatigue and thirst, is relevant to the question, covers all aspects thoroughly with natural language.",
+136487.0,Female,48.0,Adult,Borderline,Do you know your fasting glucose and insulin levels?,"Um, yeah, I think so. The nurse went over some numbers with me last time. My fasting glucose was 142 mg/dL, and my insulin was… let me see if I remember right… 16.99 µU/mL. Is that what you needed? It all felt like a lot of numbers, honestly.",5,5,5,5,"The response provides accurate medical information in a coherent, complete, and natural manner, effectively addressing the question.",
+136487.0,Female,48.0,Adult,Borderline,Do you know if you have diabetes?,"Um, no, not really. The doctor *said* something about it being borderline last time I was in, but honestly, I don't remember all the details. It was a lot to take in, and I was kinda stressed that day. They just told me to watch my diet and try to exercise more, which...I’m trying to do.",5,5,4,4,"The response accurately reflects a patient's uncertainty about diabetes diagnosis, mentions medical advice, and shows effort to comply. It is coherent, complete, and naturally phrased.",
+136487.0,Female,48.0,Adult,Borderline,Can you describe your typical daily meals and physical activity?,"Um, okay. Well, breakfast is usually just coffee...and maybe a piece of toast if I have time. It's kinda rushed in the mornings getting ready for work. Lunch…I try to pack something, like a sandwich or leftovers from dinner, but sometimes I end up grabbing fast food, you know? Like a burger and fries. 
+
+Dinner is usually whatever’s easiest – pasta, chicken, sometimes frozen meals. My husband does most of the cooking, honestly. We don't really plan things out much.
+
+As for activity…I work at a desk all day, so not much there. I *try* to walk for about an hour a few times a week, just around the neighborhood. It’s hard to fit it in sometimes with everything else going on. And honestly? I sit pretty much the rest of the time. I guess that's…sedentary, right? About four hours a day, maybe more.
+
+
+
+",4,5,4,5,"The response accurately reflects typical daily routines, is coherent and relevant, provides a comprehensive overview of meals and activity, uses natural language. However, it lacks specific details on portion sizes.",
+136487.0,Female,48.0,Adult,Borderline,How have you been feeling these past few days?,"Oh, um, honestly? Just…tired. Really tired. It’s hard to get going in the mornings, and even after a full night's sleep I feel like I could take a nap. And thirsty, I guess. I've been drinking more water than usual, but it doesn't really seem to help much. Not *sick* sick, just…off. You know? 
+
+I’ve also been trying to lose weight for a while now, and it feels like no matter what I do, it barely budges. It's frustrating, to be honest.
+
+
+
+",5,4,4,5,"The response is accurate with realistic symptoms, coherent and complete. The language feels natural and spontaneous.",
+141301.0,Female,70.0,Senior,Yes,Do you know your fasting glucose and insulin levels?,"Um, yeah, I think so. The nurse went over some numbers with me last time... my fasting glucose was 151, I believe. And my insulin was… let me see… 43.53. Is that right? It all felt like a lot of numbers, honestly.",5,4,5,5,"The response accurately provides realistic medical numbers with a natural, hesitant tone, making it both complete and coherent.",
+141301.0,Female,70.0,Senior,Yes,Do you know if you have diabetes?,"Um, I… honestly, I don’t know. The doctor *said* something when I was here last, but things were a little rushed and it didn't really stick. Something about my blood sugar being high, maybe? It's all a bit confusing, to be honest with you.",4,5,4,5,"The response accurately reflects confusion about a possible diabetes diagnosis after a rushed visit, mentions blood sugar without specifics, and uses natural language effectively.",
+141301.0,Female,70.0,Senior,Yes,Can you describe your typical daily meals and physical activity?,"Well, um, let me think. Breakfast is usually just coffee…and maybe a piece of toast if I'm feeling hungry. Sometimes I’ll have an egg, but not every day. Lunch is often a sandwich – ham and cheese on white bread, you know? Nothing fancy. And dinner... that varies. My daughter tries to bring me something a couple times a week, bless her heart, but other days it might be just leftovers or something quick like pasta. 
+
+I don't really *do* much activity, honestly. I sit a lot. Watch TV mostly. I try to get up and move around a little bit during the day, but… not for long. Probably sitting for about four hours, if you count watching my shows. It’s hard on these old knees, ya know? I *try* to walk sometimes, but it doesn't happen as much as I'd like.
+
+
+
+",5,5,5,5,"The response provides a realistic and coherent account of daily meals and physical activity, consistent with an older adult's lifestyle. The language is natural and the information is complete.",
+141301.0,Female,70.0,Senior,Yes,How have you been feeling these past few days?,"Oh, um, well, kinda tired mostly. Just…dragged out. And I get thirsty a lot, even after drinking water. It's just been going on for a bit now, not really *bad*, but definitely noticeable. My feet feel a little funny sometimes too, like they’re tingling? Not all the time, though. Honestly, it feels like getting old, you know? But I thought I should come in and see if everything was alright.
+
+
+
+",4,5,4,5,"The patient's response is realistic and relevant, covering symptoms like fatigue and thirst, presented in a natural, conversational tone.",
+133659.0,Female,From 80 and up,Senior,No,Do you know your fasting glucose and insulin levels?,"Yes, I do. My fasting glucose is 90.0 mg/dL and my insulin level is 9.7 µU/mL. Honestly, numbers don't mean a whole lot to me, but the nurse went over them with me last week. Seemed alright then, I guess?",5,5,5,4,"The response accurately provides realistic medical values, is coherent by directly answering the question with relevant details, and is complete by including both glucose and insulin levels along with a personal touch. The language is natural but slightly formal in its delivery.",
+133659.0,Female,From 80 and up,Senior,No,Do you know if you have diabetes?,"Um, I don’t *know*, doctor. Nobody’s ever actually told me, not in so many words anyway. I just… go to get checkups when I feel like something's off, ya know? It hasn't really been discussed before. 
+
+
+
+",4,4,4,5,"The response accurately reflects uncertainty about diabetes diagnosis, is coherent and complete in addressing the question, with natural language use.",
+133659.0,Female,From 80 and up,Senior,No,Can you describe your typical daily meals and physical activity?,"Oh, um, well, let me think. Breakfast is usually just toast – sometimes with a little jam if I'm feeling fancy – and coffee. Not much else, really. Lunch… it varies. Sometimes a sandwich, maybe soup. I try to have something light. Dinner’s the biggest meal, usually. My daughter brings over leftovers from her place a couple of times a week which is nice, otherwise it might be something simple like pasta or a baked potato. 
+
+I don't get out much these days. Mostly just sitting, you know? I try to walk around the house a bit, but… not a lot. Maybe half an hour of walking most days, if that. It’s hard on my knees, honestly. I used to be more active, but things change as you get older.
+
+
+
+",5,4,5,5,"The answer is accurate, relevant, and complete. It naturally describes meals and physical activity with a realistic tone.",
+133659.0,Female,From 80 and up,Senior,No,How have you been feeling these past few days?,"Oh, um, well, mostly just tired, I guess. A little achy too, but that could be the weather changing, you know? It's been up and down lately. Not *sick* sick, just…old, maybe? Hard to explain. I’ve been trying to get more moving, though. My daughter keeps telling me to.
+
+
+
+",4,5,4,5,"The response is accurate, coherent, and natural. It appropriately addresses feelings of tiredness and achiness while sounding authentic with realistic hesitations.",
