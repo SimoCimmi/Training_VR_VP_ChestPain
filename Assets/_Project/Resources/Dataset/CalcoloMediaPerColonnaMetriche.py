@@ -2,6 +2,7 @@ import re
 import numpy as np
 
 latex_table = r"""
+
 \begin{table}[!h]
 \centering
 \resizebox{\textwidth}{!}{
@@ -9,42 +10,44 @@ latex_table = r"""
 \hline
 Patient & Gender & AgeGroup & Diagnosis & Acc & Coh & Comp & Nat \\ [0.5ex]
 \hline\hline
-135140 & Male & Young & Yes & 4.25 & 4.75 & 4.00 & 5.00 \\
+132231 & Male & Young & Yes & 4.75 & 4.50 & 3.75 & 4.25 \\
 \hline
-136641 & Male & Young & No & 4.75 & 4.75 & 3.75 & 4.75 \\
+138315 & Male & Young & No & 4.50 & 5.00 & 4.00 & 5.00 \\
 \hline
-132602 & Male & Young & Borderline & 4.50 & 4.75 & 4.50 & 5.00 \\
+132602 & Male & Young & Borderline & 4.25 & 4.75 & 4.50 & 4.50 \\
 \hline
-137037 & Male & Adult & Yes & 4.50 & 4.50 & 4.00 & 4.50 \\
+139614 & Male & Adult & Yes & 5.00 & 5.00 & 4.25 & 4.75 \\
 \hline
-137870 & Male & Adult & No & 4.75 & 4.75 & 4.75 & 5.00 \\
+135098 & Male & Adult & No & 5.00 & 4.50 & 4.25 & 4.50 \\
 \hline
-131546 & Male & Adult & Borderline & 4.25 & 4.50 & 3.75 & 5.00 \\
+133230 & Male & Adult & Borderline & 4.75 & 5.00 & 4.50 & 4.75 \\
 \hline
-136691 & Male & Senior & Yes & 4.75 & 4.75 & 4.25 & 5.00 \\
+140143 & Male & Senior & Yes & 4.50 & 4.50 & 4.25 & 5.00 \\
 \hline
-138563 & Male & Senior & No & 4.75 & 4.75 & 4.00 & 5.00 \\
+139780 & Male & Senior & No & 4.75 & 5.00 & 4.00 & 5.00 \\
 \hline
-137112 & Female & Young & Yes & 4.50 & 4.75 & 4.50 & 4.75 \\
+137112 & Female & Young & Yes & 4.75 & 5.00 & 4.50 & 4.75 \\
 \hline
-137856 & Female & Young & No & 4.75 & 4.50 & 4.00 & 4.50 \\
+137891 & Female & Young & No & 4.75 & 5.00 & 4.50 & 4.75 \\
 \hline
-136670 & Female & Young & Borderline & 4.75 & 4.75 & 4.00 & 5.00 \\
+139153 & Female & Young & Borderline & 4.75 & 5.00 & 4.50 & 4.75 \\
 \hline
-138374 & Female & Adult & Yes & 4.25 & 4.50 & 3.75 & 5.00 \\
+141949 & Female & Adult & Yes & 5.00 & 4.75 & 4.50 & 4.50 \\
 \hline
-139172 & Female & Adult & No & 4.50 & 5.00 & 4.00 & 5.00 \\
+135427 & Female & Adult & No & 4.75 & 4.50 & 4.25 & 4.25 \\
 \hline
-133751 & Female & Adult & Borderline & 4.50 & 4.75 & 4.25 & 5.00 \\
+138383 & Female & Adult & Borderline & 4.75 & 5.00 & 4.75 & 4.75 \\
 \hline
-138162 & Female & Senior & Yes & 4.25 & 5.00 & 4.25 & 4.50 \\
+135302 & Female & Senior & Yes & 4.50 & 4.75 & 4.50 & 4.75 \\
 \hline
-137302 & Female & Senior & No & 4.25 & 4.75 & 4.50 & 4.75 \\
+141885 & Female & Senior & No & 4.75 & 4.75 & 4.00 & 4.75 \\
 \hline
 \end{tabular}
 }
 \caption{Valutazione media LLM-as-a-judge per ciascun paziente simulato.}
 \end{table}
+
+
 """
 
 # Estrai le righe della tabella con valori
