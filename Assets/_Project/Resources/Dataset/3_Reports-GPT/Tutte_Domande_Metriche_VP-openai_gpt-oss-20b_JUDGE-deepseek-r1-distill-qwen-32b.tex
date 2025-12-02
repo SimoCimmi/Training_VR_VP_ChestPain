@@ -1,7 +1,3 @@
-import re
-import numpy as np
-
-latex_table = r"""
 
 \begin{table}[!h]
 \centering
@@ -46,28 +42,3 @@ Patient & Gender & AgeGroup & Diagnosis & Acc & Coh & Comp & Nat \\ [0.5ex]
 }
 \caption{Valutazione media LLM-as-a-judge per ciascun paziente simulato.}
 \end{table}
-
-"""
-
-# Estrai le righe della tabella con valori
-pattern = re.compile(r'^\s*\d+ & .*? & ([-+]?\d*\.\d+) & ([-+]?\d*\.\d+) & ([-+]?\d*\.\d+) & ([-+]?\d*\.\d+)\s*\\\\', re.MULTILINE)
-matches = pattern.findall(latex_table)
-
-# Converti in float e metti in array numpy
-data = np.array(matches, dtype=float)
-
-# Calcola la media per colonna
-medie = np.mean(data, axis=0)
-
-# Stampa tabella LaTeX con medie
-print(r"\begin{table}[!h]")
-print(r"\centering")
-print(r"\begin{tabular}{||c c c c||}")
-print(r"\hline")
-print("Acc & Coh & Comp & Nat \\\\ [0.5ex]")
-print(r"\hline\hline")
-print(f"{medie[0]:.2f} & {medie[1]:.2f} & {medie[2]:.2f} & {medie[3]:.2f} \\\\")
-print(r"\hline")
-print(r"\end{tabular}")
-print(r"\caption{Medie delle metriche per tutti i pazienti.}")
-print(r"\end{table}")

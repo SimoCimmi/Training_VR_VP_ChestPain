@@ -3,7 +3,7 @@ import csv
 # Nome del file CSV
 
 #csv_file = r"1_Reports-Gemma-27b\CSV_Valutazione_Umana_Risultati_domande_VP-gemma-3-27b-it_JUDGE-deepseek-r1-distill-qwen-32b.csv"
-csv_file = r"2_Reports_Gemma-12b\CSV_Risultati_domande_VP-google_gemma-3-12b_JUDGE-deepseek-r1-distill-qwen-32b.csv"
+csv_file = r"3_Reports-GPT\CSV_Valutazione_Umana_Risultati_domande_VP-openai_gpt-oss-20b_JUDGE-deepseek-r1-distill-qwen-32b.csv"
 # Liste per accumulare i valori delle metriche
 
 accuracy_list = []
@@ -18,10 +18,10 @@ with open(csv_file, newline='', encoding='utf-8') as f:
     for row in reader:
         # Conversione in float (gestisce eventuali spazi)
         try:
-            accuracy_list.append(float(row['Accuracy'].strip()))
-            coherence_list.append(float(row['Coherence'].strip()))
-            completeness_list.append(float(row['Completeness'].strip()))
-            naturalness_list.append(float(row['Naturalness'].strip()))
+            accuracy_list.append(float(row['AccuracyValuUmana'].strip()))
+            coherence_list.append(float(row['CoherenceValuUmana'].strip()))
+            completeness_list.append(float(row['CompletenessValuUmana'].strip()))
+            naturalness_list.append(float(row['NaturalnessValuUmana'].strip()))
         except ValueError:
             continue  # ignora righe con dati non validi
 
@@ -50,7 +50,7 @@ latex_table = f"""
 \centering
 \begin{{tabular}}{{||c c c c||}}
 \hline
-Acc & Coh & Comp & Nat \\ [0.5ex]
+AccValuUmana & CohValuUmana & CompValuUmana & NatValuUmana \\ [0.5ex]
 \hline\hline
 {acc_mean:.2f} & {coh_mean:.2f} & {com_mean:.2f} & {nat_mean:.2f} \\
 \hline

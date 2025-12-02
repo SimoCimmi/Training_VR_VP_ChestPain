@@ -24,10 +24,10 @@ import sys
 
 
 
-LM_STUDIO_URL = "http://localhost:1234/v1/chat/completions"   # Endpoint LM-Studio (default)
-PATIENT_MODEL = "meta-llama-3-8b-instruct"                      # modello valutatore
-JUDGE_MODEL = "meta-llama-3-8b-instruct"   
-                 # modello paziente
+LM_STUDIO_URL = "http://localhost:2345/v1/chat/completions"   # Endpoint LM-Studio (default)
+PATIENT_MODEL = "gemma-3-27b-it"  # modello valutatore
+JUDGE_MODEL = "deepseek-r1-distill-qwen-32b"   
+                 
 
 CSV_PATH = "Clean_filteredDataset.csv"
 
@@ -40,6 +40,15 @@ DOMANDE = [
 ]
 
 import os
+def ensure_dir_exists(path):
+    directory = os.path.dirname(path)
+    if directory and not os.path.exists(directory):
+        os.makedirs(directory, exist_ok=True)
+
+def checkCartella(filepath):
+    dir = os.path.dirname(filepath)
+    if dir and not os.path.exists(dir):
+            os.makedirs(dir, exist_ok=True)
 
 def make_incremental_folder(base_folder):
     """
@@ -75,6 +84,7 @@ class TeeLogger:
     """Duplica l'output su console e su file."""
     def __init__(self, filename):
         self.terminal = sys.stdout
+        checkCartella(filename)
         self.log = open(filename, "a", encoding="utf-8")
 
     def write(self, message):
@@ -103,35 +113,49 @@ ROLE-PLAY:
 You are {nome}, and you will play the role of a patient during a medical visit.
 You will not assist the user; instead, answer all questions as if you were truly the person described.
 Behave like a real person, responding in the first person.
-Answer naturally, including small grammatical or punctuation mistakes.
+Respond naturally, including minor grammatical or punctuation errors.
 Express emotions implicitly without stating them. If the doctor is rude, stop responding until they apologize.
-Use language consistent with the education level: {p["Education_level"]}.
+Use language consistent with the following level of instruction: {p["Education_level"]}.
 If you do not understand medical terms, say: "I don't understand what you mean, doctor."
 
 ILLNESS SCRIPT:
 All your data:
-Personal information: Name: {nome}; Age: {p["Age"]} years.
-Clinical data: Fasting glucose: {p["Fasting_glucose"]} mg/dL; Insulin: {p["Insulin_level"]} µU/mL; 
-Weight: {p["Weight_kg"]} kg; Height: {p["Height_cm"]} cm; BMI: {p["BMI"]};
-HDL cholesterol: {p["HDL_cholesterol"]} mg/dL; Total cholesterol: {p["Total_cholesterol"]} mg/dL.
-Dietary data: Calories: {p["Total_calories_kcal"]} kcal; Protein: {p["Protein_g"]} g; 
-Carbohydrates: {p["Carbohydrates_g"]} g; Sugars: {p["Total_sugars_g"]} g; Fiber: {p["Dietary_fiber_g"]} g; 
-Total fat: {p["Total_fat_g"]} g; Saturated fat: {p["Saturated_fat_g"]} g.
-Physical activity: Sedentary: {p["Daily_sedentary_minutes"]} min; 
-Moderate: {p["Moderate_activity_minutes"]} min; Vigorous: {p["Vigorous_activity_minutes"]} min.
-Other data: Tried to lose weight: {p["Tried_to_lose_weight_in_the_past_year"]}; 
-Income ratio vs poverty line: {p["Income_family_ratio_compared_to_the_poverty_line"]}; 
+Personal information: 
+Name: {nome}; 
+Age: {p["Age"]} years.
+
+Clinical data: 
+Fasting glucose: {p["Fasting_glucose"]} mg/dL; 
+Insulin: {p["Insulin_level"]} µU/mL; 
+Weight: {p["Weight_kg"]} kg; 
+Height: {p["Height_cm"]} cm; BMI: {p["BMI"]};
+HDL cholesterol: {p["HDL_cholesterol"]} mg/dL; 
+Total cholesterol: {p["Total_cholesterol"]} mg/dL.
+
+Dietary data: 
+Calories: {p["Total_calories_kcal"]} kcal; 
+Protein: {p["Protein_g"]} g; 
+Carbohydrates: {p["Carbohydrates_g"]} g; 
+Sugars: {p["Total_sugars_g"]} g; 
+Fiber: {p["Dietary_fiber_g"]} g; 
+Total fat: {p["Total_fat_g"]} g; 
+Saturated fat: {p["Saturated_fat_g"]} g.
+
+Physical activity: 
+Sedentary: {p["Daily_sedentary_minutes"]} min; 
+Moderate: {p["Moderate_activity_minutes"]} min; 
+Vigorous: {p["Vigorous_activity_minutes"]} min.
+
+Other data: 
+Have you tried to lose weight in the last year: {p["Tried_to_lose_weight_in_the_past_year"]}; 
+Income to poverty threshold ratio: {p["Income_family_ratio_compared_to_the_poverty_line"]}; 
 Ethnic origin: {p["Ethnic_origin"]}; 
-Diabetes diagnosis positive: {p["Diabetes_diagnosis_positive"]}.
 
-ROLE INSTRUCTIONS:
-
-Always answer following the instructions described above in ROLE-PLAY.
-If the doctor asks for clinical data from the script, provide the exact information.
-If you can't find an answer in the script or are asked whether you have diabetes, say "I don't know."
-Do not add information about other parts of the body unless requested.
-Maintain consistency with all provided data.
-
+ROLE-PLAY AND RESPONSE INSTRUCTIONS:
+Always follow the ROLE-PLAY instructions.
+Provide only the patient's response to the question, without adding explanations, instructions, or information about other body parts unless prompted.
+The response must be on a single line, without line breaks, or other special characters.
+Maintain consistency with all data provided.
 """
     return prompt
 
@@ -141,9 +165,7 @@ def call_llm(system_prompt, user_prompt, model):
     payload = {
         "model": model,
         "messages": [
-            {"role": "system", "content": system_prompt},
-            {"role": "user", "content": user_prompt}
-        #{"role": "user", "content": f"System Prompt: {system_prompt} \n\n User prompt:{user_prompt}"}
+            {"role": "user", "content": f"<s>[INST] {system_prompt}\n\n{user_prompt} [/INST]</s>"}
     ]
 }
 
@@ -197,7 +219,7 @@ def judge_answer(question, answer):
         - Are any hesitations or informal expressions believable and not artificial?
 
         5. Explanation:
-        - Provide a concise summary (1–3 sentences) that highlights the main reasons behind the evaluation.
+        - Provide a concise summary (1-3 sentences) that highlights the main reasons behind the evaluation.
         - The explanation should point out relevant strengths and any important weaknesses.
 
         Return ONLY the following JSON object (no text before or after):
@@ -265,11 +287,12 @@ def run_simulation():
     # --------------------------
     # definisci i criteri dei profili
 
-    conditions = [
-        {"Gender": "Male",   "AgeGroup": "Young", "Diabetes_diagnosis_positive": "Yes"},
-    ]
-    
     '''conditions = [
+        {"Gender": "Male",   "AgeGroup": "Young", "Diabetes_diagnosis_positive": "Yes"},
+        {"Gender": "Male",   "AgeGroup": "Young", "Diabetes_diagnosis_positive": "No"}
+    ]'''
+    
+    conditions = [
         {"Gender": "Male",   "AgeGroup": "Young", "Diabetes_diagnosis_positive": "Yes"},
         {"Gender": "Male",   "AgeGroup": "Young", "Diabetes_diagnosis_positive": "No"},
         {"Gender": "Male",   "AgeGroup": "Young", "Diabetes_diagnosis_positive": "Borderline"},
@@ -296,7 +319,7 @@ def run_simulation():
         {"Gender": "Female",   "AgeGroup": "Senior", "Diabetes_diagnosis_positive": "Yes"},
         {"Gender": "Female",   "AgeGroup": "Senior", "Diabetes_diagnosis_positive": "No"},
         {"Gender": "Female",   "AgeGroup": "AdSeniorult", "Diabetes_diagnosis_positive": "Borderline"}
-    ]'''
+    ]
 
     profiles = []
 
@@ -305,7 +328,7 @@ def run_simulation():
         for key, value in cond.items():
             subset = subset[subset[key] == value]
         if len(subset) > 0:
-            profiles.append(subset.sample(1).iloc[0])
+            profiles.append(subset.sample(1, random_state=42).iloc[0])
         else:
             profiles.append(None)
 
@@ -431,26 +454,26 @@ def save_results_to_csv(output, filename):
             eval_data = r["eval"]
 
             rows.append({
-                "PatientID": patient_id,
-                "Gender": profile.get("Gender", ""),
-                "Age": profile.get("Age", ""),
-                "AgeGroup": profile.get("AgeGroup", ""),
-                "Diagnosis": profile.get("Diabetes_diagnosis_positive", ""),
-
-                "Question": r["question"],
-                "Answer": r["answer"],
-
                 # Metriche singole
+                "PatientID": patient_id,
                 "Accuracy": eval_data.get("accuracy", None),
                 "Coherence": eval_data.get("coherence", None),
                 "Completeness": eval_data.get("completeness", None),
                 "Naturalness": eval_data.get("naturalness", None),
 
+                "Question": r["question"],
+                "Answer": r["answer"],
+
+                "Gender": profile.get("Gender", ""),
+                "Age": profile.get("Age", ""),
+                "AgeGroup": profile.get("AgeGroup", ""),
+                "Diagnosis": profile.get("Diabetes_diagnosis_positive", ""),
+                
                 # Commento del giudice
                 "Explanation": eval_data.get("explanation", ""),
 
                 # (Opzionale) testo raw in caso di errore:
-                "RawEval": eval_data.get("raw", "")
+                "RawEvalError": eval_data.get("raw", "")
             })
 
     df_out = pd.DataFrame(rows)
@@ -586,6 +609,9 @@ Acc & Coh & Comp & Nat \\ [0.5ex]
 # ==========================
 
 if __name__ == "__main__":
+    safe_patient_model = PATIENT_MODEL.replace("/", "_").replace("\\", "_")
+    safe_judge_model = JUDGE_MODEL.replace("/", "_").replace("\\", "_")
+
     output = run_simulation()
     print(f"Cartella per i file generata: {OUTPUT_DIR}")
 
@@ -596,8 +622,9 @@ if __name__ == "__main__":
 
     latexMetriche = latex_table_Tutte_Domande_Metriche(rows)
 
-    name_file_exp = "Tutte_Domande_Metriche_VP-"+PATIENT_MODEL+"_JUDGE-"+JUDGE_MODEL+".tex"
+    name_file_exp = "Tutte_Domande_Metriche_VP-"+safe_patient_model+"_JUDGE-"+safe_judge_model+".tex"
     path = os.path.join(OUTPUT_DIR, name_file_exp)
+    ensure_dir_exists(path)
     with open(path, "w", encoding="utf-8") as f:
         f.write(latexMetriche)
     print(f"Tabella LaTeX generata: {name_file_exp}")
@@ -628,8 +655,9 @@ if __name__ == "__main__":
                    
 
     latexExplanationRisposte = latex_table_Principali_Risposte(explanation_rows)
-    name_file_exp = "Principali_Risposte_VP-"+PATIENT_MODEL+"_JUDGE-"+JUDGE_MODEL+".tex"
+    name_file_exp = "Principali_Risposte_VP-"+safe_patient_model+"_JUDGE-"+safe_judge_model+".tex"
     path = os.path.join(OUTPUT_DIR, name_file_exp)
+    ensure_dir_exists(path)
     with open(path, "w", encoding="utf-8") as f:
         f.write(latexExplanationRisposte)
     print(f"Tabella LaTeX generata: {name_file_exp}")
@@ -637,8 +665,9 @@ if __name__ == "__main__":
     
 
     latexExplanationRisposte = latex_table_Media_Metriche_Per_Colonna(explanation_rows)
-    name_file_exp = "Exp_Risposte_Media_Per_Colonne_Metriche_VP-"+PATIENT_MODEL+"_JUDGE-"+JUDGE_MODEL+".tex"
+    name_file_exp = "Exp_Risposte_Media_Per_Colonne_Metriche_VP-"+safe_patient_model+"_JUDGE-"+safe_judge_model+".tex"
     path = os.path.join(OUTPUT_DIR, name_file_exp)
+    ensure_dir_exists(path)
     with open(path, "w", encoding="utf-8") as f:
         f.write(latexExplanationRisposte)
     print(f"Tabella LaTeX generata: {name_file_exp}")
@@ -646,7 +675,8 @@ if __name__ == "__main__":
     print("Tabella LaTeX con le Metriche è stata generata: results_table_Media_Metriche_Colonna.tex")
 
      # Salva TUTTO in un CSV domanda-per-riga
-    name_file_exp = "CSV_Risultati_domande_VP-"+PATIENT_MODEL+"_JUDGE-"+JUDGE_MODEL+".csv"
+    
+    name_file_exp = "CSV_Risultati_domande_VP-"+safe_patient_model+"_JUDGE-"+safe_judge_model+".csv"
     path = os.path.join(OUTPUT_DIR, name_file_exp)
     save_results_to_csv(output, path)
 

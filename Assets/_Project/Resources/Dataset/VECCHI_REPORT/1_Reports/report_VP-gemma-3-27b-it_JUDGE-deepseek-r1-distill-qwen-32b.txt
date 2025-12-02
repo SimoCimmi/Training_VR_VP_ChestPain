@@ -1,0 +1,194 @@
+Logging attivo su file: 1_Reports\report_VP-gemma-3-27b-it_JUDGE-deepseek-r1-distill-qwen-32b.txt
+
+=== PROFILO 1 ===
+Gender                                                             Male
+Age                                                                22.0
+AgeGroup                                                          Young
+Diabetes_diagnosis_positive                                         Yes
+Education_level                High school graduate / GED or equivalent
+Fasting_glucose                                                   385.0
+BMI                                                                24.4
+Moderate_activity_minutes                                          60.0
+Name: 370, dtype: object
+
+=== PROFILO 2 ===
+Gender                                              Male
+Age                                                 24.0
+AgeGroup                                           Young
+Diabetes_diagnosis_positive                           No
+Education_level                Some college or AA degree
+Fasting_glucose                                     97.0
+BMI                                                 32.3
+Moderate_activity_minutes                            0.0
+Name: 2006, dtype: object
+
+=== PROFILO 3 ===
+Gender                                        Male
+Age                                           14.0
+AgeGroup                                     Young
+Diabetes_diagnosis_positive             Borderline
+Education_level                Less than 9th grade
+Fasting_glucose                               95.0
+BMI                                           36.5
+Moderate_activity_minutes                      0.0
+Name: 2542, dtype: object
+
+=== PROFILO 4 ===
+Gender                                                             Male
+Age                                                                55.0
+AgeGroup                                                          Adult
+Diabetes_diagnosis_positive                                         Yes
+Education_level                High school graduate / GED or equivalent
+Fasting_glucose                                                   110.0
+BMI                                                                32.8
+Moderate_activity_minutes                                          60.0
+Name: 1926, dtype: object
+
+=== PROFILO 5 ===
+Gender                                              Male
+Age                                                 45.0
+AgeGroup                                           Adult
+Diabetes_diagnosis_positive                           No
+Education_level                College graduate or above
+Fasting_glucose                                    104.0
+BMI                                                 26.1
+Moderate_activity_minutes                           45.0
+Name: 3051, dtype: object
+
+=== PROFILO 6 ===
+Gender                                                             Male
+Age                                                                53.0
+AgeGroup                                                          Adult
+Diabetes_diagnosis_positive                                  Borderline
+Education_level                High school graduate / GED or equivalent
+Fasting_glucose                                                   101.0
+BMI                                                                40.0
+Moderate_activity_minutes                                          20.0
+Name: 1982, dtype: object
+
+=== PROFILO 7 ===
+Gender                                              Male
+Age                                                 57.0
+AgeGroup                                          Senior
+Diabetes_diagnosis_positive                          Yes
+Education_level                Some college or AA degree
+Fasting_glucose                                    123.0
+BMI                                                 37.6
+Moderate_activity_minutes                           60.0
+Name: 1360, dtype: object
+
+=== PROFILO 8 ===
+Gender                                              Male
+Age                                                 75.0
+AgeGroup                                          Senior
+Diabetes_diagnosis_positive                           No
+Education_level                College graduate or above
+Fasting_glucose                                     91.0
+BMI                                                 24.0
+Moderate_activity_minutes                           45.0
+Name: 2545, dtype: object
+
+=== PROFILO 9 ===
+Nessun paziente che soddisfa i criteri
+
+=== PROFILO 10 ===
+Gender                                            Female
+Age                                                 26.0
+AgeGroup                                           Young
+Diabetes_diagnosis_positive                          Yes
+Education_level                Some college or AA degree
+Fasting_glucose                                    111.0
+BMI                                                 52.6
+Moderate_activity_minutes                           60.0
+Name: 1952, dtype: object
+
+=== PROFILO 11 ===
+Gender                                            Female
+Age                                                 23.0
+AgeGroup                                           Young
+Diabetes_diagnosis_positive                           No
+Education_level                Some college or AA degree
+Fasting_glucose                                    115.0
+BMI                                                 32.1
+Moderate_activity_minutes                           60.0
+Name: 3012, dtype: object
+
+=== PROFILO 12 ===
+Gender                                            Female
+Age                                                 20.0
+AgeGroup                                           Young
+Diabetes_diagnosis_positive                   Borderline
+Education_level                Some college or AA degree
+Fasting_glucose                                     91.0
+BMI                                                 26.8
+Moderate_activity_minutes                          120.0
+Name: 2377, dtype: object
+
+=== PROFILO 13 ===
+Gender                                                           Female
+Age                                                                45.0
+AgeGroup                                                          Adult
+Diabetes_diagnosis_positive                                         Yes
+Education_level                High school graduate / GED or equivalent
+Fasting_glucose                                                   263.0
+BMI                                                                45.2
+Moderate_activity_minutes                                           0.0
+Name: 1196, dtype: object
+
+=== PROFILO 14 ===
+Gender                                            Female
+Age                                                 37.0
+AgeGroup                                           Adult
+Diabetes_diagnosis_positive                           No
+Education_level                College graduate or above
+Fasting_glucose                                     92.0
+BMI                                                 44.1
+Moderate_activity_minutes                           60.0
+Name: 1688, dtype: object
+
+=== PROFILO 15 ===
+Gender                                            Female
+Age                                                 40.0
+AgeGroup                                           Adult
+Diabetes_diagnosis_positive                   Borderline
+Education_level                College graduate or above
+Fasting_glucose                                     89.0
+BMI                                                 31.8
+Moderate_activity_minutes                           30.0
+Name: 2315, dtype: object
+
+=== PROFILO 16 ===
+Gender                                            Female
+Age                                                 74.0
+AgeGroup                                          Senior
+Diabetes_diagnosis_positive                          Yes
+Education_level                College graduate or above
+Fasting_glucose                                    108.0
+BMI                                                 34.1
+Moderate_activity_minutes                           60.0
+Name: 3229, dtype: object
+
+=== PROFILO 17 ===
+Gender                                            Female
+Age                                       From 80 and up
+AgeGroup                                          Senior
+Diabetes_diagnosis_positive                           No
+Education_level                College graduate or above
+Fasting_glucose                                    101.0
+BMI                                                 25.5
+Moderate_activity_minutes                           90.0
+Name: 1344, dtype: object
+
+=== PROFILO 18 ===
+Nessun paziente che soddisfa i criteri
+Cartella per i file generata: 1_Reports
+
+
+Output: 
+null
+Traceback (most recent call last):
+  File "C:\Training_VR_VP\Assets\_Project\Resources\Dataset\LM-Studio_Valutazione_Risposte_LLM.py", line 605, in <module>
+    rows = compute_scores_table(output)
+  File "C:\Training_VR_VP\Assets\_Project\Resources\Dataset\LM-Studio_Valutazione_Risposte_LLM.py", line 368, in compute_scores_table
+    for entry in output:
+TypeError: 'NoneType' object is not iterable

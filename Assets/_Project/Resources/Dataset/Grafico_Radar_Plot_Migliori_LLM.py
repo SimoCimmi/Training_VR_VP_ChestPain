@@ -5,11 +5,20 @@ import re
 # ==============================
 # TAB DELLA TABELLA LATEX
 # ==============================
+#Mistral-7b-instruct-v0.3 & 4.80 & 4.84 & 4.47 & 4.86 \\
+'''VECCHIO:
 latex_table = r"""
-Mistral-7b-instruct-v0.3 & 4.80 & 4.84 & 4.47 & 4.86 \\
 Qwen2.5-coder-14b & 4.47 & 4.67 & 3.95 & 4.72 \\
 Gpt-oss-20b & 4.72 & 4.81 & 4.31 & 4.69 \\
 Gemma-3-27b-it & 4.64 & 4.70 & 4.36 & 4.80 \\
+Gemma-3-12b & 4.50 & 4.71 & 4.00 & 4.92 \\
+"""'''
+
+latex_table = r"""
+Qwen2.5-coder-14b &  \\
+Gpt-oss-20b & 4.55 & 4.88 & 4.17 & 4.81 \\
+Gemma-3-27b-it & 4.61 & 4.84 & 3.98 & 4.91 \\
+Gemma-3-12b & 4.42 & 4.80 & 3.55 & 4.88 \\
 """
 
 # ==============================
@@ -74,7 +83,7 @@ print(latex_output)
 # ==============================
 # GRAFICO RADAR
 # ==============================
-labels = ['Acc', 'Coh', 'Comp', 'Nat']
+labels = ['Acc', 'Coh', 'Comp ', 'Nat']
 
 angles = np.linspace(0, 2 * np.pi, len(labels), endpoint=False)
 angles = np.concatenate((angles, [angles[0]]))  # chiusura poligono
