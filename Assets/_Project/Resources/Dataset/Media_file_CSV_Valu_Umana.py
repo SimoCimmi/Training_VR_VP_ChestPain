@@ -2,8 +2,8 @@ import csv
 
 # --- FILE DEI DUE MODELLI ---
 files = {
-    "Gemma-3-27b-it": r"1_Reports-Gemma-27b\CSV_Valutazione_Umana_Risultati_domande_VP-gemma-3-27b-it_JUDGE-deepseek-r1-distill-qwen-32b.csv",
-    "Gpt-oss-20b": r"3_Reports-GPT\CSV_Valutazione_Umana_Risultati_domande_VP-openai_gpt-oss-20b_JUDGE-deepseek-r1-distill-qwen-32b.csv"
+    "Gemma-3-27b-it": r"1_Reports-Gemma-27b\CSV_Finale_Valutazione_Umana_Risultati_domande_VP-gemma-3-27b-it_JUDGE-deepseek-r1-distill-qwen-32b.csv",
+    "Gpt-oss-20b": r"3_Reports-GPT\CSV_Finale_Valutazione_Umana_Risultati_domande_VP-openai_gpt-oss-20b_JUDGE-deepseek-r1-distill-qwen-32b.csv"
 }
 
 # --- FUNZIONE PER CALCOLARE LE MEDIE ---
