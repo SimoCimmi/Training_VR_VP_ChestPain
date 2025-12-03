@@ -10,37 +10,37 @@ latex_table = r"""
 \hline
 Patient & Gender & AgeGroup & Diagnosis & Acc & Coh & Comp & Nat \\ [0.5ex]
 \hline\hline
-132231 & Male & Young & Yes & 3.75 & 5.00 & 3.50 & 4.75 \\
+132231 & Male & Young & Yes & 4.25 & 4.50 & 4.00 & 4.25 \\
 \hline
-138763 & Male & Young & No & 4.25 & 4.50 & 3.25 & 4.75 \\
+138763 & Male & Young & No & 4.00 & 3.75 & 3.75 & 4.50 \\
 \hline
-139147 & Male & Young & Borderline & 4.75 & 4.75 & 4.00 & 4.50 \\
+139147 & Male & Young & Borderline & 4.25 & 4.50 & 4.00 & 4.75 \\
 \hline
-141381 & Male & Adult & Yes & 4.00 & 5.00 & 4.00 & 5.00 \\
+141381 & Male & Adult & Yes & 4.25 & 4.50 & 4.25 & 4.50 \\
 \hline
-134858 & Male & Adult & No & 4.25 & 4.75 & 4.50 & 4.25 \\
+134858 & Male & Adult & No & 4.00 & 4.50 & 4.00 & 4.25 \\
 \hline
-137216 & Male & Adult & Borderline & 5.00 & 4.75 & 4.50 & 4.75 \\
+137216 & Male & Adult & Borderline & 4.50 & 4.75 & 4.50 & 4.75 \\
 \hline
-141395 & Male & Senior & Yes & 4.50 & 5.00 & 4.25 & 5.00 \\
+141395 & Male & Senior & Yes & 4.25 & 4.25 & 4.00 & 4.25 \\
 \hline
-135588 & Male & Senior & No & 4.50 & 5.00 & 3.75 & 5.00 \\
+135588 & Male & Senior & No & 4.50 & 4.25 & 4.25 & 4.75 \\
 \hline
-137112 & Female & Young & Yes & 4.50 & 5.00 & 4.75 & 4.75 \\
+137112 & Female & Young & Yes & 4.25 & 4.75 & 4.00 & 5.00 \\
 \hline
-132554 & Female & Young & No & 4.25 & 4.75 & 4.00 & 4.75 \\
+132554 & Female & Young & No & 4.25 & 4.50 & 4.25 & 4.50 \\
 \hline
-136670 & Female & Young & Borderline & 5.00 & 5.00 & 4.50 & 5.00 \\
+136670 & Female & Young & Borderline & 4.25 & 4.75 & 4.25 & 4.50 \\
 \hline
-141507 & Female & Adult & Yes & 4.25 & 5.00 & 4.00 & 4.75 \\
+141507 & Female & Adult & Yes & 4.75 & 4.75 & 4.50 & 5.00 \\
 \hline
-140942 & Female & Adult & No & 5.00 & 4.50 & 4.25 & 4.75 \\
+140942 & Female & Adult & No & 4.50 & 4.75 & 4.25 & 4.50 \\
 \hline
-130818 & Female & Adult & Borderline & 5.00 & 5.00 & 4.75 & 5.00 \\
+130818 & Female & Adult & Borderline & 4.00 & 4.25 & 4.25 & 4.50 \\
 \hline
-141538 & Female & Senior & Yes & 4.75 & 5.00 & 4.50 & 5.00 \\
+141538 & Female & Senior & Yes & 4.25 & 4.25 & 3.75 & 4.50 \\
 \hline
-141847 & Female & Senior & No & 5.00 & 5.00 & 4.25 & 5.00 \\
+141847 & Female & Senior & No & 4.00 & 4.00 & 3.75 & 4.25 \\
 \hline
 \end{tabular}
 }

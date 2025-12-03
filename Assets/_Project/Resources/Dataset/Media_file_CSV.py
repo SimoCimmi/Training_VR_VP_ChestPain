@@ -3,7 +3,8 @@ import csv
 # Nome del file CSV
 
 #csv_file = r"1_Reports-Gemma-27b\CSV_Valutazione_Umana_Risultati_domande_VP-gemma-3-27b-it_JUDGE-deepseek-r1-distill-qwen-32b.csv"
-csv_file = r"2_Reports_Gemma-12b\CSV_Risultati_domande_VP-google_gemma-3-12b_JUDGE-deepseek-r1-distill-qwen-32b.csv"
+#csv_file = r"2_Reports_Gemma-12b\CSV_Risultati_domande_VP-google_gemma-3-12b_JUDGE-deepseek-r1-distill-qwen-32b.csv"
+csv_file = r"4_Reports_Qwen_14b\CSV_Risultati_domande_VP-qwen_qwen2.5-coder-14b_JUDGE-deepseek-r1-distill-qwen-32b-abliterated.csv"
 # Liste per accumulare i valori delle metriche
 
 accuracy_list = []
