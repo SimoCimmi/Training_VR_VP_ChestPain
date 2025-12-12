@@ -179,7 +179,7 @@ python SpeechServerXTTS.py
 
 ### 1. LM-Studio:
   - Avvia LM-Studio.
-  - Seleziona il modello e imposta Status: Running nella sezione Develop.
+  - Seleziona il modello e imposta lo Status su Running nella sezione Develop.
 
 ### 2. Whisper:
 ```bash

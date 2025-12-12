@@ -10,7 +10,7 @@ path = r"C:\Users\vince\Documents\Vincenzo Medica\UNISA Google Drive\Tesi\Schemi
 os.makedirs(path, exist_ok=True)
 
 # === LETTURA CSV ===
-csv_file = "input.csv"  # sostituisci con il percorso reale del tuo CSV
+csv_file = "CSV_Finale_Valutazione_Umana_Risultati_domande_VP-openai_gpt-oss-20b_JUDGE-deepseek-r1-distill-qwen-32b.csv" 
 
 df_csv = pd.read_csv(csv_file)
 
