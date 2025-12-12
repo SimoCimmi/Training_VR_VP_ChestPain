@@ -1,4 +1,6 @@
 '''
+FILE NON USATO PER FARE LA VALUTAZIONE DEGLI LLM
+
 Problema: La media non è calcolata correttamente
 '''
 

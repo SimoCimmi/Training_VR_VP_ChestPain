@@ -1,4 +1,6 @@
 '''
+FILE USATO PER LA VALUTAZIONE DELLE RISPOSTE DEI MODELLI LLM
+
 Utilizzato per la generazione dei Report di valutazione delle risposte 
 generate dai modelli LLM per la valutazione tramite LLm-as-Judge
 
