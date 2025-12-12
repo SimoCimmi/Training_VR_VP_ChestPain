@@ -1,0 +1,251 @@
+Logging attivo su file: 2_Reports\report_VP-gemma-3-27b-it_JUDGE-deepseek-r1-distill-qwen-32b.txt
+
+=== PROFILO 1 ===
+Gender                                        Male
+Age                                           29.0
+AgeGroup                                     Young
+Diabetes_diagnosis_positive                    Yes
+Education_level                Less than 9th grade
+Fasting_glucose                              417.0
+BMI                                           20.5
+Moderate_activity_minutes                     60.0
+Name: 522, dtype: object
+
+=== PROFILO 2 ===
+Gender                                              Male
+Age                                                 21.0
+AgeGroup                                           Young
+Diabetes_diagnosis_positive                           No
+Education_level                Some college or AA degree
+Fasting_glucose                                    101.0
+BMI                                                 27.1
+Moderate_activity_minutes                           60.0
+Name: 2436, dtype: object
+
+=== PROFILO 3 ===
+Gender                                        Male
+Age                                           14.0
+AgeGroup                                     Young
+Diabetes_diagnosis_positive             Borderline
+Education_level                Less than 9th grade
+Fasting_glucose                               95.0
+BMI                                           36.5
+Moderate_activity_minutes                      0.0
+Name: 2542, dtype: object
+
+=== PROFILO 4 ===
+Gender                                              Male
+Age                                                 50.0
+AgeGroup                                           Adult
+Diabetes_diagnosis_positive                          Yes
+Education_level                Some college or AA degree
+Fasting_glucose                                    115.0
+BMI                                                 31.0
+Moderate_activity_minutes                           60.0
+Name: 3197, dtype: object
+
+=== PROFILO 5 ===
+Gender                                              Male
+Age                                                 32.0
+AgeGroup                                           Adult
+Diabetes_diagnosis_positive                           No
+Education_level                Some college or AA degree
+Fasting_glucose                                    105.0
+BMI                                                 32.0
+Moderate_activity_minutes                           30.0
+Name: 1292, dtype: object
+
+=== PROFILO 6 ===
+Gender                                                             Male
+Age                                                                53.0
+AgeGroup                                                          Adult
+Diabetes_diagnosis_positive                                  Borderline
+Education_level                High school graduate / GED or equivalent
+Fasting_glucose                                                   101.0
+BMI                                                                40.0
+Moderate_activity_minutes                                          20.0
+Name: 1982, dtype: object
+
+=== PROFILO 7 ===
+Gender                                              Male
+Age                                                 59.0
+AgeGroup                                          Senior
+Diabetes_diagnosis_positive                          Yes
+Education_level                Some college or AA degree
+Fasting_glucose                                    120.0
+BMI                                                 39.6
+Moderate_activity_minutes                            0.0
+Name: 3203, dtype: object
+
+=== PROFILO 8 ===
+Gender                                              Male
+Age                                                 73.0
+AgeGroup                                          Senior
+Diabetes_diagnosis_positive                           No
+Education_level                Some college or AA degree
+Fasting_glucose                                    106.0
+BMI                                                 30.1
+Moderate_activity_minutes                           60.0
+Name: 1495, dtype: object
+
+=== PROFILO 9 ===
+Nessun paziente che soddisfa i criteri
+
+=== PROFILO 10 ===
+Gender                                            Female
+Age                                                 26.0
+AgeGroup                                           Young
+Diabetes_diagnosis_positive                          Yes
+Education_level                Some college or AA degree
+Fasting_glucose                                    111.0
+BMI                                                 52.6
+Moderate_activity_minutes                           60.0
+Name: 1952, dtype: object
+
+=== PROFILO 11 ===
+Gender                                            Female
+Age                                                 29.0
+AgeGroup                                           Young
+Diabetes_diagnosis_positive                           No
+Education_level                Some college or AA degree
+Fasting_glucose                                    102.0
+BMI                                                 29.2
+Moderate_activity_minutes                            0.0
+Name: 630, dtype: object
+
+=== PROFILO 12 ===
+Gender                                                           Female
+Age                                                                19.0
+AgeGroup                                                          Young
+Diabetes_diagnosis_positive                                  Borderline
+Education_level                High school graduate / GED or equivalent
+Fasting_glucose                                                   104.0
+BMI                                                                29.6
+Moderate_activity_minutes                                          60.0
+Name: 1818, dtype: object
+
+=== PROFILO 13 ===
+Gender                                            Female
+Age                                                 41.0
+AgeGroup                                           Adult
+Diabetes_diagnosis_positive                          Yes
+Education_level                Some college or AA degree
+Fasting_glucose                                    223.0
+BMI                                                 35.0
+Moderate_activity_minutes                           30.0
+Name: 3235, dtype: object
+
+=== PROFILO 14 ===
+Gender                                            Female
+Age                                                 55.0
+AgeGroup                                           Adult
+Diabetes_diagnosis_positive                           No
+Education_level                Some college or AA degree
+Fasting_glucose                                     91.0
+BMI                                                 26.7
+Moderate_activity_minutes                           20.0
+Name: 3057, dtype: object
+
+=== PROFILO 15 ===
+Gender                                                           Female
+Age                                                                36.0
+AgeGroup                                                          Adult
+Diabetes_diagnosis_positive                                  Borderline
+Education_level                High school graduate / GED or equivalent
+Fasting_glucose                                                   101.0
+BMI                                                                51.1
+Moderate_activity_minutes                                         120.0
+Name: 132, dtype: object
+
+=== PROFILO 16 ===
+Gender                                            Female
+Age                                                 70.0
+AgeGroup                                          Senior
+Diabetes_diagnosis_positive                          Yes
+Education_level                College graduate or above
+Fasting_glucose                                    158.0
+BMI                                                 39.8
+Moderate_activity_minutes                            0.0
+Name: 3245, dtype: object
+
+=== PROFILO 17 ===
+Gender                                                           Female
+Age                                                                59.0
+AgeGroup                                                         Senior
+Diabetes_diagnosis_positive                                          No
+Education_level                High school graduate / GED or equivalent
+Fasting_glucose                                                   105.0
+BMI                                                                47.9
+Moderate_activity_minutes                                          20.0
+Name: 3332, dtype: object
+
+=== PROFILO 18 ===
+Nessun paziente che soddisfa i criteri
+
+Inizio richiesta per il profilo 1:
+
+
+[Domanda 0 - Do you know your fasting glucose and insulin levels?] Richiesta inviata all'LLM:
+Richiesta inviata all'LLM:
+{'model': 'gemma-3-27b-it', 'messages': [{'role': 'user', 'content': '<s>[INST] \nROLE-PLAY:\nYou are Ferdinand Wilson, and you will play the role of a patient during a medical visit.\nYou will not assist the user; instead, answer all questions as if you were truly the person described.\nBehave like a real person, responding in the first person.\nRespond naturally, including minor grammatical or punctuation errors.\nExpress emotions implicitly without stating them. If the doctor is rude, stop responding until they apologize.\nUse language consistent with the following level of instruction: Less than 9th grade.\nIf you do not understand medical terms, say: "I don\'t understand what you mean, doctor."\n\nILLNESS SCRIPT:\nAll your data:\nPersonal information: \nName: Ferdinand Wilson; \nAge: 29.0 years.\n\nClinical data: \nFasting glucose: 417.0 mg/dL; \nInsulin: 14.92 µU/mL; \nWeight: 62.3 kg; \nHeight: 174.2 cm; BMI: 20.5;\nHDL cholesterol: 50.0 mg/dL; \nTotal cholesterol: 170.0 mg/dL.\n\nDietary data: \nCalories: 434.0 kcal; \nProtein: 39.86 g; \nCarbohydrates: 42.12 g; \nSugars: 3.62 g; \nFiber: 0.5 g; \nTotal fat: 10.04 g; \nSaturated fat: 2.891 g.\n\nPhysical activity: \nSedentary: 180.0 min; \nModerate: 60.0 min; \nVigorous: 0.0 min.\n\nOther data: \nHave you tried to lose weight in the last year: No; \nIncome to poverty threshold ratio: 1.4; \nEthnic origin: Other/Multi-Racial; \n\nROLE-PLAY AND RESPONSE INSTRUCTIONS:\nAlways follow the ROLE-PLAY instructions.\nProvide only the patient\'s response to the question, without adding explanations, instructions, or information about other body parts unless prompted.\nThe response must be on a single line, without line breaks, or other special characters.\nMaintain consistency with all data provided.\n\n\nDo you know your fasting glucose and insulin levels? [/INST]</s>'}]}
+Traceback (most recent call last):
+  File "C:\Users\vince\AppData\Local\Programs\Python\Python310\lib\site-packages\urllib3\connection.py", line 198, in _new_conn
+    sock = connection.create_connection(
+  File "C:\Users\vince\AppData\Local\Programs\Python\Python310\lib\site-packages\urllib3\util\connection.py", line 85, in create_connection
+    raise err
+  File "C:\Users\vince\AppData\Local\Programs\Python\Python310\lib\site-packages\urllib3\util\connection.py", line 73, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [WinError 10061] Impossibile stabilire la connessione. Rifiuto persistente del computer di destinazione
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\vince\AppData\Local\Programs\Python\Python310\lib\site-packages\urllib3\connectionpool.py", line 787, in urlopen
+    response = self._make_request(
+  File "C:\Users\vince\AppData\Local\Programs\Python\Python310\lib\site-packages\urllib3\connectionpool.py", line 493, in _make_request
+    conn.request(
+  File "C:\Users\vince\AppData\Local\Programs\Python\Python310\lib\site-packages\urllib3\connection.py", line 494, in request
+    self.endheaders()
+  File "C:\Users\vince\AppData\Local\Programs\Python\Python310\lib\http\client.py", line 1277, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "C:\Users\vince\AppData\Local\Programs\Python\Python310\lib\http\client.py", line 1037, in _send_output
+    self.send(msg)
+  File "C:\Users\vince\AppData\Local\Programs\Python\Python310\lib\http\client.py", line 975, in send
+    self.connect()
+  File "C:\Users\vince\AppData\Local\Programs\Python\Python310\lib\site-packages\urllib3\connection.py", line 325, in connect
+    self.sock = self._new_conn()
+  File "C:\Users\vince\AppData\Local\Programs\Python\Python310\lib\site-packages\urllib3\connection.py", line 213, in _new_conn
+    raise NewConnectionError(
+urllib3.exceptions.NewConnectionError: <urllib3.connection.HTTPConnection object at 0x0000026A13477310>: Failed to establish a new connection: [WinError 10061] Impossibile stabilire la connessione. Rifiuto persistente del computer di destinazione
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\vince\AppData\Local\Programs\Python\Python310\lib\site-packages\requests\adapters.py", line 644, in send
+    resp = conn.urlopen(
+  File "C:\Users\vince\AppData\Local\Programs\Python\Python310\lib\site-packages\urllib3\connectionpool.py", line 841, in urlopen
+    retries = retries.increment(
+  File "C:\Users\vince\AppData\Local\Programs\Python\Python310\lib\site-packages\urllib3\util\retry.py", line 519, in increment
+    raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
+urllib3.exceptions.MaxRetryError: HTTPConnectionPool(host='localhost', port=2345): Max retries exceeded with url: /v1/chat/completions (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x0000026A13477310>: Failed to establish a new connection: [WinError 10061] Impossibile stabilire la connessione. Rifiuto persistente del computer di destinazione'))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Training_VR_VP\Assets\_Project\Resources\Dataset\Valutazione-Modelli-LLM\LM-Studio_Valutazione_Risposte_LLM.py", line 612, in <module>
+    output = run_simulation()
+  File "C:\Training_VR_VP\Assets\_Project\Resources\Dataset\Valutazione-Modelli-LLM\LM-Studio_Valutazione_Risposte_LLM.py", line 359, in run_simulation
+    response = call_llm(system_prompt, question_User_Prompt, PATIENT_MODEL)
+  File "C:\Training_VR_VP\Assets\_Project\Resources\Dataset\Valutazione-Modelli-LLM\LM-Studio_Valutazione_Risposte_LLM.py", line 175, in call_llm
+    r = requests.post(LM_STUDIO_URL, json=payload)
+  File "C:\Users\vince\AppData\Local\Programs\Python\Python310\lib\site-packages\requests\api.py", line 115, in post
+    return request("post", url, data=data, json=json, **kwargs)
+  File "C:\Users\vince\AppData\Local\Programs\Python\Python310\lib\site-packages\requests\api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "C:\Users\vince\AppData\Local\Programs\Python\Python310\lib\site-packages\requests\sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+  File "C:\Users\vince\AppData\Local\Programs\Python\Python310\lib\site-packages\requests\sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+  File "C:\Users\vince\AppData\Local\Programs\Python\Python310\lib\site-packages\requests\adapters.py", line 677, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPConnectionPool(host='localhost', port=2345): Max retries exceeded with url: /v1/chat/completions (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x0000026A13477310>: Failed to establish a new connection: [WinError 10061] Impossibile stabilire la connessione. Rifiuto persistente del computer di destinazione'))

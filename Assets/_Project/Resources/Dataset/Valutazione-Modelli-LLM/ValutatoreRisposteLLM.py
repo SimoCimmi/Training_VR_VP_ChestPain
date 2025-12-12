@@ -46,9 +46,10 @@ JUDGE_MODEL_NAME = "hermes-3-llama-405B"#"google/gemma-3-27b-it:free" #"meta-lla
 
 PATIENT_MODEL = "meta-llama/llama-3.3-70b-instruct:free"                   # modello valutatore
 JUDGE_MODEL = "nousresearch/hermes-3-llama-3.1-405b:free"
-                
 
-CSV_PATH = "Clean_filteredDataset.csv"
+current_dir = os.path.dirname(__file__)                
+CSV_PATH = os.path.join(current_dir, "..", "Clean_filteredDataset.csv")
+CSV_PATH = os.path.normpath(CSV_PATH)
 
 # Domande del medico
 DOMANDE = [

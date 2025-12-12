@@ -24,7 +24,9 @@ PATIENT_MODEL = "gemma-3-27b-it"  # modello valutatore
 JUDGE_MODEL = "deepseek-r1-distill-qwen-32b"   
                  
 
-CSV_PATH = "Clean_filteredDataset.csv"
+current_dir = os.path.dirname(__file__)                
+CSV_PATH = os.path.join(current_dir, "..", "Clean_filteredDataset.csv")
+CSV_PATH = os.path.normpath(CSV_PATH)
 
 # Domande del medico
 DOMANDE = [
