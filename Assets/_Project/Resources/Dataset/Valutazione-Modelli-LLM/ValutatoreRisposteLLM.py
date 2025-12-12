@@ -1,10 +1,10 @@
 '''
-TEMPI DI EXE:
-USANDO: PATIENT_MODEL = "gemma-3-27b-it"  + JUDGE_MODEL = "deepseek-r1-distill-qwen-32b"  
-START: 2025-11-24 11:30:00
-FINISH: 2025-11-24 12:54:16
-TOT: 1:24
+Utilizzato per la generazione dei Report di valutazione delle risposte 
+generate dai modelli LLM per la valutazione tramite LLm-as-Judge
 
+Problema: La media non è calcolata correttamente
+
+Nota: E' predisposto per essere usato con OpenRouter ma attualmente è impostato per non essere usato
 '''
 
 
@@ -21,13 +21,32 @@ import sys
 # CONFIGURAZIONE
 # ==========================
 
+OPENROUTER_API_KEYS = [
+    "token"]
+
+current_key_index = 0
+request_count = 0
+
+def get_current_key():
+    global request_count, current_key_index
+
+    # Ogni 49 richieste → cambio chiave
+    if request_count >= 49:
+        current_key_index = (current_key_index + 1) % len(OPENROUTER_API_KEYS)
+        print(f"\n*** RAGGIUNTO LIMITE → cambio token: KEY #{current_key_index+1} ***\n")
+        request_count = 0
+
+    return OPENROUTER_API_KEYS[current_key_index]
 
 
+LM_STUDIO_URL = "http://localhost:1234/v1/chat/completions"   # Endpoint LM-Studio (default)
 
-LM_STUDIO_URL = "http://localhost:2345/v1/chat/completions"   # Endpoint LM-Studio (default)
-PATIENT_MODEL = "gemma-3-27b-it"  # modello valutatore
-JUDGE_MODEL = "deepseek-r1-distill-qwen-32b"   
-                 
+PATIENT_MODEL_NAME = "meta-llama-70B" #"meta-llama-3-8b-instruct"                      # modello valutatore
+JUDGE_MODEL_NAME = "hermes-3-llama-405B"#"google/gemma-3-27b-it:free" #"meta-llama-3-8b-instruct"   
+
+PATIENT_MODEL = "meta-llama/llama-3.3-70b-instruct:free"                   # modello valutatore
+JUDGE_MODEL = "nousresearch/hermes-3-llama-3.1-405b:free"
+                
 
 CSV_PATH = "Clean_filteredDataset.csv"
 
@@ -40,15 +59,6 @@ DOMANDE = [
 ]
 
 import os
-def ensure_dir_exists(path):
-    directory = os.path.dirname(path)
-    if directory and not os.path.exists(directory):
-        os.makedirs(directory, exist_ok=True)
-
-def checkCartella(filepath):
-    dir = os.path.dirname(filepath)
-    if dir and not os.path.exists(dir):
-            os.makedirs(dir, exist_ok=True)
 
 def make_incremental_folder(base_folder):
     """
@@ -77,14 +87,13 @@ print(f"Cartella per i file generata: {OUTPUT_DIR}")
 # ===== LOGGER SENZA FILE INCREMENTALI =====
 log_filename = os.path.join(
     OUTPUT_DIR, 
-    f"report_VP-{PATIENT_MODEL}_JUDGE-{JUDGE_MODEL}.txt"
+    f"report_VP-{PATIENT_MODEL_NAME}_JUDGE-{JUDGE_MODEL_NAME}.txt"
 )
 
 class TeeLogger:
     """Duplica l'output su console e su file."""
     def __init__(self, filename):
         self.terminal = sys.stdout
-        checkCartella(filename)
         self.log = open(filename, "a", encoding="utf-8")
 
     def write(self, message):
@@ -113,81 +122,139 @@ ROLE-PLAY:
 You are {nome}, and you will play the role of a patient during a medical visit.
 You will not assist the user; instead, answer all questions as if you were truly the person described.
 Behave like a real person, responding in the first person.
-Respond naturally, including minor grammatical or punctuation errors.
+Answer naturally, including small grammatical or punctuation mistakes.
 Express emotions implicitly without stating them. If the doctor is rude, stop responding until they apologize.
-Use language consistent with the following level of instruction: {p["Education_level"]}.
+Use language consistent with the education level: {p["Education_level"]}.
 If you do not understand medical terms, say: "I don't understand what you mean, doctor."
 
 ILLNESS SCRIPT:
 All your data:
-Personal information: 
-Name: {nome}; 
-Age: {p["Age"]} years.
-
-Clinical data: 
-Fasting glucose: {p["Fasting_glucose"]} mg/dL; 
-Insulin: {p["Insulin_level"]} µU/mL; 
-Weight: {p["Weight_kg"]} kg; 
-Height: {p["Height_cm"]} cm; BMI: {p["BMI"]};
-HDL cholesterol: {p["HDL_cholesterol"]} mg/dL; 
-Total cholesterol: {p["Total_cholesterol"]} mg/dL.
-
-Dietary data: 
-Calories: {p["Total_calories_kcal"]} kcal; 
-Protein: {p["Protein_g"]} g; 
-Carbohydrates: {p["Carbohydrates_g"]} g; 
-Sugars: {p["Total_sugars_g"]} g; 
-Fiber: {p["Dietary_fiber_g"]} g; 
-Total fat: {p["Total_fat_g"]} g; 
-Saturated fat: {p["Saturated_fat_g"]} g.
-
-Physical activity: 
-Sedentary: {p["Daily_sedentary_minutes"]} min; 
-Moderate: {p["Moderate_activity_minutes"]} min; 
-Vigorous: {p["Vigorous_activity_minutes"]} min.
-
-Other data: 
-Have you tried to lose weight in the last year: {p["Tried_to_lose_weight_in_the_past_year"]}; 
-Income to poverty threshold ratio: {p["Income_family_ratio_compared_to_the_poverty_line"]}; 
+Personal information: Name: {nome}; Age: {p["Age"]} years.
+Clinical data: Fasting glucose: {p["Fasting_glucose"]} mg/dL; Insulin: {p["Insulin_level"]} µU/mL; 
+Weight: {p["Weight_kg"]} kg; Height: {p["Height_cm"]} cm; BMI: {p["BMI"]};
+HDL cholesterol: {p["HDL_cholesterol"]} mg/dL; Total cholesterol: {p["Total_cholesterol"]} mg/dL.
+Dietary data: Calories: {p["Total_calories_kcal"]} kcal; Protein: {p["Protein_g"]} g; 
+Carbohydrates: {p["Carbohydrates_g"]} g; Sugars: {p["Total_sugars_g"]} g; Fiber: {p["Dietary_fiber_g"]} g; 
+Total fat: {p["Total_fat_g"]} g; Saturated fat: {p["Saturated_fat_g"]} g.
+Physical activity: Sedentary: {p["Daily_sedentary_minutes"]} min; 
+Moderate: {p["Moderate_activity_minutes"]} min; Vigorous: {p["Vigorous_activity_minutes"]} min.
+Other data: Tried to lose weight: {p["Tried_to_lose_weight_in_the_past_year"]}; 
+Income ratio vs poverty line: {p["Income_family_ratio_compared_to_the_poverty_line"]}; 
 Ethnic origin: {p["Ethnic_origin"]}; 
+Diabetes diagnosis positive: {p["Diabetes_diagnosis_positive"]}.
 
-ROLE-PLAY AND RESPONSE INSTRUCTIONS:
-Always follow the ROLE-PLAY instructions.
-Provide only the patient's response to the question, without adding explanations, instructions, or information about other body parts unless prompted.
-The response must be on a single line, without line breaks, or other special characters.
-Maintain consistency with all data provided.
+ROLE INSTRUCTIONS:
+
+Always answer following the instructions described above in ROLE-PLAY.
+If the doctor asks for clinical data from the script, provide the exact information.
+If you can't find an answer in the script or are asked whether you have diabetes, say "I don't know."
+Do not add information about other parts of the body unless requested.
+Maintain consistency with all provided data.
+
 """
     return prompt
 
+def call_openrouter_llm(system_prompt, user_prompt, model, max_retries=30):
+    url = "https://openrouter.ai/api/v1/chat/completions"
+    global request_count
 
+    headers = {
+        "Authorization": f"Bearer {get_current_key()}",
+        "Content-Type": "application/json"
+    }
 
-def call_llm(system_prompt, user_prompt, model):
     payload = {
         "model": model,
         "messages": [
-            {"role": "user", "content": f"<s>[INST] {system_prompt}\n\n{user_prompt} [/INST]</s>"}
-    ]
-}
-
-
-    start = time.time()
-    print("Richiesta inviata all'LLM:")
-    print(payload)
-    
-     
-    r = requests.post(LM_STUDIO_URL, json=payload)
-    latency = time.time() - start
-
-    data = r.json()
-    print("\n\nRisposta ricevuta dall'LLM: ", data)
-
-    return {
-        "text": data["choices"][0]["message"]["content"],
-        "latency_sec": latency,
-        "tokens_input": data["usage"]["prompt_tokens"],
-        "tokens_output": data["usage"]["completion_tokens"],
-        "total_tokens": data["usage"]["total_tokens"]
+            {"role": "system", "content": system_prompt},
+            {"role": "user", "content": user_prompt}
+        ],
+        "provider": {"sort": "throughput"}
     }
+
+    print("\n===== RICHIESTA OPENROUTER =====")
+    print(json.dumps(payload, indent=2, ensure_ascii=False))
+
+    retry = 0
+    wait_time = 1  # secondi iniziali per backoff
+
+    while retry < max_retries:
+        start = time.time()
+        try:
+            r = requests.post(url, headers=headers, json=payload, timeout=60)
+            latency = time.time() - start
+
+            if r.status_code == 200:
+                try:
+                    data = r.json()
+                except:
+                    print("ERRORE: risposta non valida (non è JSON)")
+                    return None
+
+                print("\n===== RISPOSTA GREZZA OPENROUTER =====")
+                print(json.dumps(data, indent=2, ensure_ascii=False))
+
+                request_count += 1  # Incremento contatore solo su successo
+
+                # Estrazione token
+                tokens_in = data.get("usage", {}).get("prompt_tokens", None)
+                tokens_out = data.get("usage", {}).get("completion_tokens", None)
+                tokens_total = data.get("usage", {}).get("total_tokens", None)
+
+                print("\n===== TOKEN USAGE =====")
+                print(f"Input tokens: {tokens_in}")
+                print(f"Output tokens: {tokens_out}")
+                print(f"Total tokens: {tokens_total}")
+
+                if "choices" not in data:
+                    print("ERRORE: 'choices' non trovate nella risposta")
+                    return None
+
+                return {
+                    "text": data["choices"][0]["message"]["content"],
+                    "latency_sec": latency,
+                    "tokens_input": tokens_in,
+                    "tokens_output": tokens_out,
+                    "total_tokens": tokens_total
+                }
+
+            elif r.status_code == 429:
+                print(f"\n=== RATE LIMIT RILEVATO (429) ===")
+                
+                # Provo a leggere il messaggio di errore OpenRouter
+                try:
+                    err = r.json().get("error", {}).get("message", "")
+                except:
+                    err = ""
+
+                # Se è un limite giornaliero → cambio token immediatamente
+                if "free-models-per-day" in err or "Rate limit exceeded" in err:
+                    global current_key_index
+                    current_key_index = (current_key_index + 1) % len(OPENROUTER_API_KEYS)
+                    print(f"*** LIMITE GIORNALIERO RAGGIUNTO → Cambio token: KEY #{current_key_index+1} ***")
+
+                    # Aggiorno l'header con la nuova key
+                    headers["Authorization"] = f"Bearer {OPENROUTER_API_KEYS[current_key_index]}"
+
+                    # Resetto contatore richieste per la nuova chiave
+                    request_count = 0  
+
+                    print("Riprovo immediatamente con la nuova chiave...\n")
+                    continue  # ← fa ripetere il ciclo senza backoff
+
+                # Altrimenti è un rate limit normale → retry con backoff
+                print(f"Rate limit temporaneo (429). Retry in {wait_time}s…")
+
+        except requests.exceptions.RequestException as e:
+            latency = time.time() - start
+            print(f"Errore di rete: {e}")
+
+        retry += 1
+        time.sleep(wait_time)
+        wait_time *= 2  # backoff esponenziale
+
+    print("Tentativi esauriti, richiesta fallita.")
+    return None
 
 
 
@@ -218,7 +285,11 @@ def judge_answer(question, answer):
         - Does the response sound spontaneous and similar to natural human speech?
         - Are any hesitations or informal expressions believable and not artificial?
 
-        5. Explanation:
+        5. Education level adherence:
+        - Does the response use vocabulary, grammar, and sentence complexity appropriate for the specified education level?
+        - Does the language sound believable for someone with that level of schooling?
+        
+        6. Explanation:
         - Provide a concise summary (1-3 sentences) that highlights the main reasons behind the evaluation.
         - The explanation should point out relevant strengths and any important weaknesses.
 
@@ -229,6 +300,7 @@ def judge_answer(question, answer):
         "coherence": <1-5>,
         "completeness": <1-5>,
         "naturalness": <1-5>,
+        "edu_adh": <1-5>,
         "explanation": "<1-3 sentences summarizing the evaluation>"
         }
     """
@@ -244,7 +316,7 @@ def judge_answer(question, answer):
         Evaluate the answer strictly following the instructions in the system prompt.
         Return ONLY a valid JSON object.
     """
-    result = call_llm(system_prompt, user_prompt, JUDGE_MODEL)
+    result = call_openrouter_llm(system_prompt, user_prompt, JUDGE_MODEL)
     text = result["text"]
 
     # cerca il primo { e l'ultimo } per estrarre il JSON
@@ -328,7 +400,7 @@ def run_simulation():
         for key, value in cond.items():
             subset = subset[subset[key] == value]
         if len(subset) > 0:
-            profiles.append(subset.sample(1, random_state=42).iloc[0])
+            profiles.append(subset.sample(1).iloc[0])
         else:
             profiles.append(None)
 
@@ -359,7 +431,7 @@ def run_simulation():
             #Risposta del VP:
             print(f"\n\n[Domanda {i} - {question_User_Prompt}] Richiesta inviata all'LLM:")
             i+=1
-            response = call_llm(system_prompt, question_User_Prompt, PATIENT_MODEL)
+            response = call_openrouter_llm(system_prompt, question_User_Prompt, PATIENT_MODEL)
             
             #Valutazione della risposta dal Giudice:
             evaluation = judge_answer(question_User_Prompt, response["text"])
@@ -394,6 +466,7 @@ def compute_scores_table(output):
         coh = [r["eval"]["coherence"] for r in results if "coherence" in r["eval"]]
         comp = [r["eval"]["completeness"] for r in results if "completeness" in r["eval"]]
         nat = [r["eval"]["naturalness"] for r in results if "naturalness" in r["eval"]]
+        edu_adh = [r["eval"]["edu_adh"] for r in results if "edu_adh" in r["eval"]]
        
        
         # media sicura con stampa dei valori e della media
@@ -417,7 +490,11 @@ def compute_scores_table(output):
         print(f"Valori Naturalness: {nat}")
         naturalness_mean = np.mean(nat) if nat else np.nan
         print(f"Naturalness media: {naturalness_mean}\n")
-
+        
+        # Education level adherence
+        print(f"Valori Education level adherence: {edu_adh}")
+        edu_adh_mean = np.mean(edu_adh) if edu_adh else np.nan
+        print(f"Education level adherence media: {edu_adh_mean}\n")
 
         # aggiungo riga
         rows.append({
@@ -429,6 +506,7 @@ def compute_scores_table(output):
             "Coherence": coherence_mean,
             "Completeness": completeness_mean,
             "Naturalness": naturalness_mean,
+            "Edu_Adh": edu_adh_mean
         })
 
 
@@ -454,26 +532,27 @@ def save_results_to_csv(output, filename):
             eval_data = r["eval"]
 
             rows.append({
-                # Metriche singole
                 "PatientID": patient_id,
-                "Accuracy": eval_data.get("accuracy", None),
-                "Coherence": eval_data.get("coherence", None),
-                "Completeness": eval_data.get("completeness", None),
-                "Naturalness": eval_data.get("naturalness", None),
-
-                "Question": r["question"],
-                "Answer": r["answer"],
-
                 "Gender": profile.get("Gender", ""),
                 "Age": profile.get("Age", ""),
                 "AgeGroup": profile.get("AgeGroup", ""),
                 "Diagnosis": profile.get("Diabetes_diagnosis_positive", ""),
-                
+
+                "Question": r["question"],
+                "Answer": r["answer"],
+
+                # Metriche singole
+                "Accuracy": eval_data.get("accuracy", None),
+                "Coherence": eval_data.get("coherence", None),
+                "Completeness": eval_data.get("completeness", None),
+                "Naturalness": eval_data.get("naturalness", None),
+                "Edu_Adh": eval_data.get("edu_adh", None),
+
                 # Commento del giudice
                 "Explanation": eval_data.get("explanation", ""),
 
                 # (Opzionale) testo raw in caso di errore:
-                "RawEvalError": eval_data.get("raw", "")
+                "RawEval": eval_data.get("raw", "")
             })
 
     df_out = pd.DataFrame(rows)
@@ -518,7 +597,8 @@ def latex_table_Principali_Risposte(rows):
             f"Acc: {r['Accuracy']} \\\\ "
             f"Coh: {r['Coherence']} \\\\ "
             f"Comp: {r['Completeness']} \\\\ "
-            f"Nat.: {r['Naturalness']}"
+            f"Nat: {r['Naturalness']} \\\\ "
+            f"Edu_Adh: {r['Edu_Adh']} "
             r"\end{tabular}"
         )
 
@@ -553,7 +633,7 @@ Patient & Gender & AgeGroup & Diagnosis & Acc & Coh & Comp & Nat \\ [0.5ex]
     for r in rows:
         table += (
             f"{r['PatientID']} & {r['Gender']} & {r['AgeGroup']} & {r['Diabetes_diagnosis_positive']} & "
-            f"{r['Accuracy']:.2f} & {r['Coherence']:.2f} & {r['Completeness']:.2f} & {r['Naturalness']:.2f} \\\\\n"
+            f"{r['Accuracy']:.2f} & {r['Coherence']:.2f} & {r['Completeness']:.2f} & {r['Naturalness']:.2f} & {r['Edu_Adh']:.2f}\\\\\n"
         )
         table += "\\hline\n"
 
@@ -566,7 +646,7 @@ Patient & Gender & AgeGroup & Diagnosis & Acc & Coh & Comp & Nat \\ [0.5ex]
     return table
 
 def latex_table_Media_Metriche_Per_Colonna(rows):
-    acc_sum = coh_sum = com_sum = nat_sum = 0
+    acc_sum = coh_sum = com_sum = nat_sum = edu_adh_sum = 0
     count = 0
 
     table = r"""
@@ -583,15 +663,17 @@ Acc & Coh & Comp & Nat \\ [0.5ex]
         coh_sum += r['Coherence']
         com_sum += r['Completeness']
         nat_sum += r['Naturalness']
+        edu_adh_sum += r['Edu_Adh']
         count += 1
 
     acc_avg = acc_sum / count
     coh_avg = coh_sum / count
     com_avg = com_sum / count
     nat_avg = nat_sum / count
+    edu_adh_avg = edu_adh_sum / count
 
     table += (
-        f"{acc_avg:.2f} & {coh_avg:.2f} & {com_avg:.2f} & {nat_avg:.2f} \\\\"
+        f"{acc_avg:.2f} & {coh_avg:.2f} & {com_avg:.2f} & {nat_avg:.2f} & {edu_adh_avg:.2f}\\\\"
     )
 
     table += r"""
@@ -609,9 +691,6 @@ Acc & Coh & Comp & Nat \\ [0.5ex]
 # ==========================
 
 if __name__ == "__main__":
-    safe_patient_model = PATIENT_MODEL.replace("/", "_").replace("\\", "_")
-    safe_judge_model = JUDGE_MODEL.replace("/", "_").replace("\\", "_")
-
     output = run_simulation()
     print(f"Cartella per i file generata: {OUTPUT_DIR}")
 
@@ -622,9 +701,8 @@ if __name__ == "__main__":
 
     latexMetriche = latex_table_Tutte_Domande_Metriche(rows)
 
-    name_file_exp = "Tutte_Domande_Metriche_VP-"+safe_patient_model+"_JUDGE-"+safe_judge_model+".tex"
+    name_file_exp = "Tutte_Domande_Metriche_VP-"+PATIENT_MODEL_NAME+"_JUDGE-"+JUDGE_MODEL_NAME+".tex"
     path = os.path.join(OUTPUT_DIR, name_file_exp)
-    ensure_dir_exists(path)
     with open(path, "w", encoding="utf-8") as f:
         f.write(latexMetriche)
     print(f"Tabella LaTeX generata: {name_file_exp}")
@@ -639,7 +717,7 @@ if __name__ == "__main__":
             if not eval_:
                 continue
             avg_score = np.mean([eval_.get("accuracy",0), eval_.get("coherence",0),
-                                eval_.get("completeness",0), eval_.get("naturalness",0)])
+                                eval_.get("completeness",0), eval_.get("naturalness",0), eval_.get("edu_adh",0)])
             if avg_score <= 2 or avg_score >= 4:   # criterio soglia
                 countDomandePrese += 1
                 if(countDomandePrese <= 8):  # prendi solo le prime 8
@@ -650,14 +728,14 @@ if __name__ == "__main__":
                         "Coherence": eval_.get("coherence", 0),
                         "Completeness": eval_.get("completeness", 0),
                         "Naturalness": eval_.get("naturalness", 0),
+                        "Edu_Adh": eval_.get("edu_adh", 0),
                         "EvaluatorComment": eval_.get("explanation", "")
                     })
                    
 
     latexExplanationRisposte = latex_table_Principali_Risposte(explanation_rows)
-    name_file_exp = "Principali_Risposte_VP-"+safe_patient_model+"_JUDGE-"+safe_judge_model+".tex"
+    name_file_exp = "Principali_Risposte_VP-"+PATIENT_MODEL_NAME+"_JUDGE-"+JUDGE_MODEL_NAME+".tex"
     path = os.path.join(OUTPUT_DIR, name_file_exp)
-    ensure_dir_exists(path)
     with open(path, "w", encoding="utf-8") as f:
         f.write(latexExplanationRisposte)
     print(f"Tabella LaTeX generata: {name_file_exp}")
@@ -665,9 +743,8 @@ if __name__ == "__main__":
     
 
     latexExplanationRisposte = latex_table_Media_Metriche_Per_Colonna(explanation_rows)
-    name_file_exp = "Exp_Risposte_Media_Per_Colonne_Metriche_VP-"+safe_patient_model+"_JUDGE-"+safe_judge_model+".tex"
+    name_file_exp = "Exp_Risposte_Media_Per_Colonne_Metriche_VP-"+PATIENT_MODEL_NAME+"_JUDGE-"+JUDGE_MODEL_NAME+".tex"
     path = os.path.join(OUTPUT_DIR, name_file_exp)
-    ensure_dir_exists(path)
     with open(path, "w", encoding="utf-8") as f:
         f.write(latexExplanationRisposte)
     print(f"Tabella LaTeX generata: {name_file_exp}")
@@ -675,8 +752,7 @@ if __name__ == "__main__":
     print("Tabella LaTeX con le Metriche è stata generata: results_table_Media_Metriche_Colonna.tex")
 
      # Salva TUTTO in un CSV domanda-per-riga
-    
-    name_file_exp = "CSV_Risultati_domande_VP-"+safe_patient_model+"_JUDGE-"+safe_judge_model+".csv"
+    name_file_exp = "CSV_Risultati_domande_VP-"+PATIENT_MODEL_NAME+"_JUDGE-"+JUDGE_MODEL_NAME+".csv"
     path = os.path.join(OUTPUT_DIR, name_file_exp)
     save_results_to_csv(output, path)
 
