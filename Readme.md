@@ -207,3 +207,13 @@ python SpeechServerXTTS.py
 - Whisper: OpenAI Whisper
 - XTTS v2: Coqui TTS
 - LM-Studio: lmstudio.ai
+
+---
+
+## Nota: 📊 Valutazione dei Modelli LLM
+Il sistema è stato valutato su diversi modelli di LLM, in particolare, su 4 domande cliniche con metodi di analisi e generazione di grafici. I report generati sono disponibili nel seguente percorso:
+
+```bash
+cd C:\Training_VR_VP\Assets\_Project\Resources\Dataset\Valutazione-Modelli-LLM
+```
+
