@@ -1,8 +1,7 @@
 # 🩺 Training_VR_VP
 
-Questo progetto è un fork di una piattaforma di simulazione medica basata su **Unity**, estesa per aumentare il livello di interattività attraverso l’integrazione di moduli di sintesi e riconoscimento vocale (**Whisper** e **XTTS v2**) e di un modello linguistico di grandi dimensioni (**LLM**) tramite LM-Studio.
-
-Il sistema consente di simulare conversazioni medico–paziente realistiche, fornendo uno strumento avanzato per il training clinico e la formazione.
+Questo progetto è un fork di una piattaforma di simulazione medica basata su **Unity**, estesa per aumentare il livello di interattività attraverso l’integrazione di moduli di sintesi e riconoscimento vocale (**Whisper** e **XTTS v2**) e di un modello linguistico (**LLM**) tramite LM-Studio. 
+Lo scopo del progetto consiste nella simulazione di conversazioni medico–paziente realistiche, fornendo uno strumento avanzato per il training clinico e la formazione degli studenti, concentrandosi su casi in cui i pazienti avvertono un dolore toracico e richiedono una visita all'utente, che dovrà eseguire una vera e propria diagnosi differenziale.
 
 ---
 ## ⚙️ Setup:
