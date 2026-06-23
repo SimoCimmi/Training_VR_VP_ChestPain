@@ -1,0 +1,4 @@
+QUESTION: {question}
+PATIENT ANSWER: {answer}
+Evaluate the answer strictly following the instructions in the system prompt.
+Return ONLY a valid JSON object.
