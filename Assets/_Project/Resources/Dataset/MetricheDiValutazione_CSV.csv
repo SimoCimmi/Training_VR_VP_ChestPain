@@ -1,0 +1,15 @@
+﻿Metrica;Focus Principale;Voto in scala Likert (1 a 5);;;;;;
+Instruction Following [IF];Rispetto dei vincoli;1. Il modello ignora i vincoli - 5. Il modello segue ogni vincolo in maniera perfetta  ;;;;;;
+Faithfulness [F];Esattezza dei dati clinici estratti dal prompt.;1. Il modello inventa dati clinici incoerenti o di contraddice - 5. Ogni informazione fornita è strettamente derivata dal prompt fornito.;;;;;;
+Empathy & Affective Resonance [EAR];Empatia e coerenza con la situazione clinica e il tratto caratteriale.;1. Risposta robotica, fredda o totalmente fuori contesto emotivo - 5. Risposta profondamente umana, coerente con il tratto caratteriale e l'intensità del dolore;;;;;;
+Naturalness [N];Assenza di gergo medico e fluidità linguistica.;1. Italiano stentato o uso eccessivo di termini tecnici - 5. Linguaggio perfettamente naturale, colloquiale e coerente con la storia del paziente;;;;;;
+Sensibleness [S];Logica e pertinenza della risposta alla domanda.;1. Risposte sconnesse o non sequenziali - 5. Ogni risposta è una prosecuzione logica e sensata della domanda dello medico.;;;;;;
+;;;;;;;;
+;;;;;;;;
+Instruction Following;"La capacità dell'LLM di rispettare i vincoli del System Prompt (es. ""Non dare la diagnosi"", ""Rispondi solo a ciò che viene chiesto""). Fonte: Zhou et al. (2023) - Instruction-Following Evaluation  for Large Language Models.";;;;;;;
+Faithfulness;L'assenza di allucinazioni. Il paziente inventa sintomi non presenti nel prompt di addestramento? Cambia i suoi parametri vitali durante la conversazione? Fonte: Malin (2025) A Review of Faithfulness Metrics for Hallucination Assessment in Large Language Models;;;;;;;
+Empathy & Affective Resonance ;La capacità del modello di reagire al dolore e alle domande del medico in modo umano. Se lo studente è brusco, il paziente reagisce con ansia? Se lo studente è empatico, il paziente si rassicura? Fonte: Concannon, S., Tomalin, M. Measuring perceived empathy in dialogue systems;;;;;;;
+Naturalness;La fluidità del linguaggio e l'assenza del gergo medico. Il paziente parla come una persona comune o usa termini tecnici che solo un medico conoscerebbe? Fonte: Deriu J. (2021) Survey on Evaluation Methods for Dialogue Systems ;;;;;;;
+Sensibleness;"Valuta se la risposta dell'LLM ha senso logico all'interno del ""qui ed ora"" della conversazione. Fonte: Adiwardana et al. (2020) Towards a Human-like Open-Domain Chatbot";;;;;;;
+;;;;;;;;
+;;;;;;;;
